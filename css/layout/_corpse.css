@@ -1,0 +1,41 @@
+/* =====================================================
+   CORPSE LAYOUT — slide alignment rules
+   ===================================================== */
+
+.corpse {
+   width: 100%;
+}
+
+/* dvh fallback pattern */
+.corpse__item {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   /* fallback */
+   height: 100dvh;
+   scroll-snap-align: start;
+   padding-block: 8dvh;
+
+   @media (orientation: portrait) {
+      overflow-x: hidden;
+   }
+}
+
+@supports (scroll-snap-stop: always) {
+   .corpse__item {
+      scroll-snap-stop: always;
+   }
+}
+
+/* Upper body part anchors to bottom so neck meets trunk */
+.corpse__item--upper {
+   justify-content: flex-end;
+}
+
+/* Legs section — anchors to top so thigh meets trunk waist */
+.corpse__item--lower {
+   justify-content: flex-start;
+}

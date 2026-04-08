@@ -1,0 +1,712 @@
+{   
+    "meta.title": "Design System or Disaster System?",
+    "meta.description": "The exquisite corpse between design and development.",
+    "timer.label": "// time_remaining",
+    "timer.fab.hint": "Timer",
+    "timer.fab.start": "Start timer",
+    "timer.fab.stop": "Stop timer",
+    "modal.close.aria": "Close panel",
+    "modal.tools.title": "Recommended tools",
+    "intro.title.q": "",
+    "intro.title.or": "or",
+    "intro.sub.the": "The",
+    "intro.sub.cadaver": "exquisite corpse",
+    "intro.sub.between": "between",
+    "intro.sub.design": "design",
+    "intro.sub.and": "and",
+    "intro.sub.dev": "development",
+    "intro.rules.btn.open": "How to play",
+    "intro.rules.btn.close": "Close instructions",
+    "intro.rules.close": "Close",
+    "intro.rule.1": "Volunteers draw each body part blindly in 3 turns",
+    "intro.rule.2": "30 s per turn — press the timer to start",
+    "intro.rule.3": "Fold the paper and pass it to the next volunteer without looking",
+    "intro.rule.4": "Is the result a Design System or a Disaster System?",
+    "hint.head": "Press the brain, eyes, ears or mouth",
+    "hint.trunk": "Press the torso, heart, arms or hands",
+    "hint.legs": "Press the legs, feet or tail",
+    "slide4.state.disaster": "// state: DISASTER",
+    "slide4.state.design": "// status: DESIGN_SYSTEM",
+    "slide4.title.pre": "This is a",
+    "slide4.subtitle.1": "// TypeError: design.tokens → undefined",
+    "slide4.subtitle.2": "How do we turn it into a system?",
+    "slide4.btn": "system.reanimate()",
+    "slide4.btn.done": "Share the experiment",
+    "slide4.cta.label": "Share the disaster before bringing it to life:",
+    "cta.phi.title": "With technic <span class=\"highlight\">empathy</span>",
+    "cta.phi.text": "Not a Figma deliverable. It's a <strong>social contract</strong> between design, development and product.",
+    "closing.title": "Create <span class=\"highlight\">systems</span><br>with soul",
+    "closing.p1": "The difference between a <strong>Design System</strong> and a <strong>Disaster System</strong> is not in the tools. It is in whether the team treats it as a <strong>product with an owner</strong> or a project that \"gets finished\".",
+    "closing.p2": "<strong>Don't work blindly</strong>. Create systems with soul and, above all... <strong class=\"highlight\">talk to each other</strong>.",
+    "closing.tools.section.label": "Tools:",
+    "closing.tools.brain": "Brain — Design Tokens",
+    "closing.tools.eyes": "Eyes — Visual Accessibility",
+    "closing.tools.ears": "Ears — Semantics & Screen Readers",
+    "closing.tools.mouth": "Mouth — Internationalization",
+    "closing.tools.heart": "Heart — Living Components",
+    "closing.tools.torso": "Torso — CSS Architecture",
+    "closing.tools.arms": "Arms — Z-index & Layers",
+    "closing.tools.hands": "Hands — Touch & Events",
+    "closing.tools.legs": "Legs — Responsive",
+    "closing.tools.feet": "Feet — Scalable Foundation",
+    "closing.tools.tail": "Tail — Legacy & Technical Debt",
+    "closing.tool.tokens-studio.desc": "Synchronized design token management between Figma and code.",
+    "closing.tool.style-dictionary.desc": "Automated token generation for multiple platforms.",
+    "closing.tool.axe-devtools.desc": "Automated accessibility audit in the browser.",
+    "closing.tool.stark.desc": "Contrast verification and color blindness simulation.",
+    "closing.tool.lighthouse.desc": "Integrated performance, accessibility and SEO audit.",
+    "closing.tool.nvda.desc": "Screen readers for testing the non-visual experience.",
+    "closing.tool.a11y-insights.desc": "Microsoft extension for step-by-step WCAG audits.",
+    "closing.tool.i18next.desc": "i18n framework with plural and context support.",
+    "closing.tool.pseudoloc.desc": "Technique to detect hardcoded text and length issues.",
+    "closing.tool.chromatic.desc": "Visual review of component changes with Storybook.",
+    "closing.tool.figma-tokens.desc": "Token synchronization between Figma and Git repositories.",
+    "closing.tool.css-grid.desc": "Grid visualization in Firefox/Chrome DevTools.",
+    "closing.tool.visbug.desc": "Extension to visually edit layout in the browser.",
+    "closing.tool.stacking.desc": "Extension to debug stacking contexts.",
+    "closing.tool.touch-checker.desc": "Verification of minimum touch target sizes.",
+    "closing.tool.chrome-device.desc": "Mobile device and touch event emulation.",
+    "closing.tool.responsively.desc": "Browser for testing multiple viewports simultaneously.",
+    "closing.tool.polypane.desc": "Specialized browser for responsive and accessible development.",
+    "closing.tool.storybook.desc": "Isolated component documentation and development.",
+    "closing.tool.stylelint.desc": "CSS linter to maintain conventions and detect errors.",
+    "closing.tool.bundlephobia.desc": "npm dependency size analysis before installing.",
+    "closing.tool.knip.desc": "Detection of dead code, unused exports and orphan dependencies.",
+    "closing.cta": "Your Design System standing or does it need a jolt of electricity?",
+    "closing.cta.text": "Publish your <strong>exquisite corpse</strong> and connect with other teams to understand how they're bringing their own creatures to life.",
+    "closing.hashtags.label": "git push --tags // share the experiment:",
+    "closing.share.btn": "Share on LinkedIn",
+    "closing.share.by": "Created by",
+    "corpse.upper": "Upper part of the exquisite corpse",
+    "corpse.middle": "Middle part of the exquisite corpse",
+    "corpse.lower": "Lower part of the exquisite corpse",
+    "footer.license": "© 2026 — CC BY-NC-SA 4.0 License",
+    "lang.btn.text": "ES",
+    "lang.btn.title": "Translate to Spanish",
+    "lang.btn.aria": "Translate to Spanish",
+    "modal.content": {
+        "brain": {
+            "title": "🧠 Brain",
+            "subtitle": "Design Tokens without neurons",
+            "concept": "Logic, consistency and “single source of truth”.",
+            "errors": [
+                {
+                    "error": "No naming strategy",
+                    "errorCode": "--color1: #ff0000;\n--color2: #00ff00;\n--btnBg: #333;",
+                    "solution": "Semantic and scalable naming",
+                    "solutionCode": "--color-error-base: #d32f2f;\n--color-success-base: #2e7d32;\n--color-action-primary: #1565c0;",
+                    "desc": "Tokens without semantic naming are impossible to maintain at scale. Design must define the naming convention before development implements it.",
+                    "visual": "tokens"
+                },
+                {
+                    "error": "Desynchronized light/dark themes",
+                    "errorCode": ".dark { --bg: black; }\n.light { /* forgotten */ }",
+                    "solution": "Tokens with abstraction layers",
+                    "solutionCode": ":root { --surface-1: var(--gray-100); }\n.dark { --surface-1: var(--gray-900); }",
+                    "desc": "Each token must have its counterpart in both themes, mapped from primitives.",
+                    "visual": "themes"
+                },
+                {
+                    "error": "Measurements outside base-8",
+                    "errorCode": "padding: 13px;\nmargin: 7px;\ngap: 11px;",
+                    "solution": "Consistent base-8 scale",
+                    "solutionCode": "padding: 16px; /* 8×2 */\nmargin: 8px;   /* 8×1 */\ngap: 8px;      /* 8×1 */",
+                    "desc": "Base-8 maintains vertical rhythm and alignment between components.",
+                    "visual": "spacing"
+                },
+                {
+                    "error": "rem / em confusion",
+                    "errorCode": "font-size: 14px;\npadding: 1.2rem;\nmargin: 0.8em; /* in which context? */",
+                    "solution": "Clear rem/em convention",
+                    "solutionCode": "font-size: 0.875rem; /* 14/16 */\npadding: 1rem;       /* relative to root */\nmargin: 0.5em;       /* relative to local font-size */",
+                    "desc": "rem for global spacing, em for relation with the component.",
+                    "visual": "units"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Tokens Studio",
+                    "desc": "Synchronized design token management between Figma and code."
+                },
+                {
+                    "name": "Style Dictionary",
+                    "desc": "Automated token generation for multiple platforms."
+                }
+            ]
+        },
+        "eyes": {
+            "title": "👁️ Eyes",
+            "subtitle": "Myopia and blindness in the interface",
+            "concept": "Visual accessibility and sharpness. How the user perceives the product.",
+            "errors": [
+                {
+                    "error": "Insufficient color contrast",
+                    "errorCode": ".btn { color: #777; background: #999; }\n/* Ratio: 1.8:1 — NOT WCAG compliant */",
+                    "solution": "Minimum WCAG AA contrast",
+                    "solutionCode": ".btn { color: #fff; background: #1565c0; }\n/* Ratio: 7:1 — Passes WCAG AAA */",
+                    "desc": "WCAG AA requires 4.5:1 for normal text, 3:1 for large text. Design must verify contrast before delivery.",
+                    "visual": "contrast"
+                },
+                {
+                    "error": "No visible focus states",
+                    "errorCode": ":focus { outline: none; }\n/* Broken accessibility for keyboard */",
+                    "solution": "Visible and clear focus ring",
+                    "solutionCode": ":focus-visible {\n  outline: 3px solid #1565c0;\n  outline-offset: 2px;\n}",
+                    "desc": "Keyboard users need clear focus indicators. Design must define the :focus state in the state matrix.",
+                    "visual": "focus"
+                },
+                {
+                    "error": "Blurry images (no srcset/dpr)",
+                    "errorCode": "<img src=\"hero.jpg\" width=\"800\">\n<!-- Pixelated on Retina -->",
+                    "solution": "Responsive images with srcset",
+                    "solutionCode": "<img src=\"hero.jpg\"\n  srcset=\"hero-1x.jpg 1x,\n         hero-2x.jpg 2x\"\n  width=\"800\">",
+                    "desc": "Without srcset, Retina screens show pixelated images. Design must export assets at @1x, @2x and @3x.",
+                    "visual": "srcset"
+                },
+                {
+                    "error": "Decimal pixels",
+                    "errorCode": "width: 100.5px;\nborder: 0.7px solid #ccc;\n/* Sub-pixels do not exist */",
+                    "solution": "Integer pixel values",
+                    "solutionCode": "width: 100px;\nborder: 1px solid #ccc;\n/* Always integers */",
+                    "desc": "Sub-pixels cause inconsistent rendering across browsers. Decimals in Figma must not reach code.",
+                    "visual": "decimals"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "axe DevTools",
+                    "desc": "Automated accessibility audit in the browser."
+                },
+                {
+                    "name": "Stark (Figma)",
+                    "desc": "Contrast verification and color blindness simulation in design."
+                },
+                {
+                    "name": "Lighthouse",
+                    "desc": "Integrated performance, accessibility and SEO audit in Chrome."
+                }
+            ]
+        },
+        "ears": {
+            "title": "👂 Ears",
+            "subtitle": "Semantic deafness",
+            "concept": "Auditory/semantic accessibility. Screen readers and non-visual navigation. The system is deaf to those who cannot see.",
+            "errors": [
+                {
+                    "error": "Identical buttons without aria-label",
+                    "errorCode": "<button>View more</button>\n<button>View more</button>\n<button>View more</button>\n<!-- Which one is which? -->",
+                    "solution": "Descriptive aria-label",
+                    "solutionCode": "<button aria-label=\"View more offers\">\n  View more\n</button>\n<button aria-label=\"View more news\">\n  View more\n</button>",
+                    "desc": "Screen readers cannot distinguish buttons with identical text. Design must specify the accessible text for each component.",
+                    "visual": "aria"
+                },
+                {
+                    "error": "Broken heading hierarchy",
+                    "errorCode": "<h1>Home</h1>\n<h4>Section</h4>\n<!-- Jump from h1 to h4 -->",
+                    "solution": "Sequential hierarchy",
+                    "solutionCode": "<h1>Home</h1>\n<h2>Section</h2>\n<h3>Subsection</h3>",
+                    "desc": "Heading jumps break screen reader navigation. Design must number heading levels in mockups.",
+                    "visual": "heading"
+                },
+                {
+                    "error": "No live regions for announcements",
+                    "errorCode": "<div class=\"toast\">\n  Successfully saved\n</div>\n<!-- Invisible to screen readers -->",
+                    "solution": "aria-live for notifications",
+                    "solutionCode": "<div class=\"toast\"\n  role=\"status\"\n  aria-live=\"polite\">\n  Successfully saved\n</div>",
+                    "desc": "Without aria-live, dynamic changes are invisible to screen readers.",
+                    "visual": "liveregion"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "NVDA / VoiceOver",
+                    "desc": "Screen readers for testing the non-visual experience."
+                },
+                {
+                    "name": "axe-core",
+                    "desc": "Automated accessibility rules engine."
+                },
+                {
+                    "name": "Accessibility Insights",
+                    "desc": "Microsoft extension for step-by-step WCAG audits."
+                }
+            ]
+        },
+        "mouth": {
+            "title": "👄 Mouth",
+            "subtitle": "Storytelling and internationalization",
+            "concept": "Language switching. Communication. Dictionary strategy / dynamic content.",
+            "errors": [
+                {
+                    "error": "Text overflows fixed containers",
+                    "errorCode": ".label {\n  width: 120px; /* fixed */\n  white-space: nowrap;\n}\n/* \"Konfigurationseinstellungen\" doesn't fit */",
+                    "solution": "Flexible containers",
+                    "solutionCode": ".label {\n  min-width: 80px;\n  max-width: 100%;\n  white-space: normal;\n  overflow-wrap: break-word;\n}",
+                    "desc": "German and other languages produce words up to 3× longer. Design must test with long texts.",
+                    "visual": "overflow"
+                },
+                {
+                    "error": "Ellipsis without respecting lines",
+                    "errorCode": ".text {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  /* Only works on 1 line */\n}",
+                    "solution": "Line-clamp for multiline",
+                    "solutionCode": ".text {\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n}",
+                    "desc": "text-overflow: ellipsis only works with white-space: nowrap. For multiline, use line-clamp.",
+                    "visual": "lineclamp"
+                },
+                {
+                    "error": "No RTL support",
+                    "errorCode": ".card {\n  margin-left: 16px;\n  padding-right: 24px;\n  text-align: left;\n}",
+                    "solution": "CSS logical properties",
+                    "solutionCode": ".card {\n  margin-inline-start: 16px;\n  padding-inline-end: 24px;\n  text-align: start;\n}",
+                    "desc": "Logical properties (inline/block) adapt automatically to RTL. Design must review layouts in both directions.",
+                    "visual": "rtl"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "i18next",
+                    "desc": "Internationalization framework with plural and context support."
+                },
+                {
+                    "name": "Pseudolocalization",
+                    "desc": "Technique to detect hardcoded text and length issues."
+                }
+            ]
+        },
+        "heart": {
+            "title": "❤️ Heart",
+            "subtitle": "A heart without a soul",
+            "concept": "Detached component instances that do not pump blood and do not keep a system alive.",
+            "errors": [
+                {
+                    "error": "Detached component instances",
+                    "errorCode": "/* Figma: \"detached\" component */\n/* Dev: HTML copy-paste */\n/* Result: 15 manual variants */",
+                    "solution": "Single source of truth",
+                    "solutionCode": "/* Figma: Linked instance */\n/* Dev: <Button variant=\"primary\"> */\n/* Result: 1 component, N variants */",
+                    "desc": "Detaching a component is like organ trafficking. The connection with the system is lost and it no longer receives updates.",
+                    "visual": "detach"
+                },
+                {
+                    "error": "DS updates not propagated",
+                    "errorCode": "/* DS v2.3: border-radius: 8px */\n/* Product: border-radius: 4px */\n/* 6 months without updating */",
+                    "solution": "Update pipeline",
+                    "solutionCode": "/* package.json */\n\"@ds/components\": \"^2.3.0\"\n/* CI: check DS version freshness */\n/* Alert if > 1 minor behind */",
+                    "desc": "Without an update pipeline, the DS becomes dead code. When the DS is updated but not the pages, an obsolete organ remains.",
+                    "visual": "version"
+                },
+                {
+                    "error": "Inconsistent Design ↔ Development naming",
+                    "errorCode": "/* Figma: \"Card/Featured\" */\n/* Code: <FeaturedTile /> */\n/* QA: \"the box at the top\" */",
+                    "solution": "Shared vocabulary",
+                    "solutionCode": "/* Figma: \"Card/Featured\" */\n/* Code: <CardFeatured /> */\n/* QA: \"Card Featured\" */\n/* Documented in the DS */",
+                    "desc": "A shared glossary eliminates handoff friction. Lack of evangelism = chaos.",
+                    "visual": "naming"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Chromatic",
+                    "desc": "Visual review of component changes with Storybook."
+                },
+                {
+                    "name": "Figma Tokens Plugin",
+                    "desc": "Token synchronization between Figma and Git repositories."
+                }
+            ]
+        },
+        "torso": {
+            "title": "🦴 Torso",
+            "subtitle": "Component scoliosis",
+            "concept": "Bent architecture, the core that keeps our organs inside.",
+            "errors": [
+                {
+                    "error": "Negative margins as a solution",
+                    "errorCode": ".component {\n  margin-top: -32px;\n  margin-left: -16px;\n  /* \"it works, don't touch it\" */\n}",
+                    "solution": "Correct layout from parent",
+                    "solutionCode": ".parent {\n  display: grid;\n  gap: 0;\n}\n.component {\n  /* No negative margins */\n}",
+                    "desc": "Negative margins are patches that break in other contexts.",
+                    "visual": "negative"
+                },
+                {
+                    "error": "Carousel with overflow hidden clipping shadows",
+                    "errorCode": ".carousel {\n  overflow: hidden;\n}\n.card {\n  box-shadow: 0 8px 24px rgba(0,0,0,.2);\n  /* Shadow clipped top and bottom */\n}",
+                    "solution": "overflow-clip-margin or padding",
+                    "solutionCode": ".carousel {\n  overflow: clip;\n  overflow-clip-margin: 24px;\n}\n/* OR: internal padding */\n.carousel__inner {\n  padding: 24px 0;\n}",
+                    "desc": "overflow:hidden clips everything, leave a safety padding.",
+                    "visual": "shadow"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "CSS Grid Inspector",
+                    "desc": "Grid visualization in Firefox/Chrome DevTools."
+                },
+                {
+                    "name": "VisBug",
+                    "desc": "Extension to visually edit layout in the browser."
+                }
+            ]
+        },
+        "arms": {
+            "title": "💪 Arms",
+            "subtitle": "Z-index chaos",
+            "concept": "The force that moves the system into the real world.",
+            "errors": [
+                {
+                    "error": "Inconsistent z-index",
+                    "errorCode": ".header  { z-index: 999; }\n.modal   { z-index: 9999; }\n.tooltip { z-index: 99999; }\n.dropdown{ z-index: 999999; }",
+                    "solution": "Tokenized z-index scale",
+                    "solutionCode": ":root {\n  --z-base: 1;\n  --z-dropdown: 100;\n  --z-sticky: 200;\n  --z-modal: 300;\n  --z-tooltip: 400;\n}",
+                    "desc": "Without a scale, an infinite z-index war begins. Design must document the stacking layers.",
+                    "visual": "zindex"
+                },
+                {
+                    "error": "Forced overlap ignoring layout padding",
+                    "errorCode": ".floating-btn {\n  position: absolute;\n  right: 0;\n  /* Covers parent content */\n}",
+                    "solution": "Respect parent layout",
+                    "solutionCode": ".parent {\n  display: grid;\n  grid-template-columns: 1fr auto;\n}\n.floating-btn {\n  /* Integrated into flow */\n}",
+                    "desc": "Absolute positioning ignores flow and creates overlaps. Design must think about the layout system.",
+                    "visual": "overlap"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "z-index Manager",
+                    "desc": "Stacking context layer visualization in DevTools."
+                },
+                {
+                    "name": "CSS Stacking Context Inspector",
+                    "desc": "Extension to debug stacking contexts."
+                }
+            ]
+        },
+        "hands": {
+            "title": "🤚 Hands",
+            "subtitle": "Touch problems",
+            "concept": "Touch — the interface between the user and the product.",
+            "errors": [
+                {
+                    "error": "Tiny touch targets",
+                    "errorCode": ".icon-btn {\n  width: 24px;\n  height: 24px;\n  /* Human finger: ~44px minimum */\n}",
+                    "solution": "Minimum 44×44px touch area",
+                    "solutionCode": ".icon-btn {\n  width: 24px;\n  height: 24px;\n  padding: 10px;\n  /* Total area: 44×44px */\n}",
+                    "desc": "WCAG 2.5.5 requires minimum 44×44 CSS px of touch area. Design must respect minimums in the spec.",
+                    "visual": "touch"
+                },
+                {
+                    "error": "Pseudo-elements blocking scroll",
+                    "errorCode": ".overlay::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  /* Blocks all scroll */\n}",
+                    "solution": "pointer-events: none if decorative",
+                    "solutionCode": ".overlay::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  pointer-events: none;\n}",
+                    "desc": "Decorative pseudo-elements should let interaction events pass through.",
+                    "visual": "pointerevents"
+                },
+                {
+                    "error": "Modals not blocking body scroll",
+                    "errorCode": "/* Modal open but body\n   still scrolls behind */",
+                    "solution": "Block body scroll",
+                    "solutionCode": "// On open:\ndocument.documentElement\n  .style.overflow = \"hidden\";\n// On close:\ndocument.documentElement\n  .style.overflow = \"\";",
+                    "desc": "Scrolling behind the modal is disorienting and breaks the user experience.",
+                    "visual": "scroll"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Touch Target Checker",
+                    "desc": "Verification of minimum touch target sizes."
+                },
+                {
+                    "name": "Chrome Device Mode",
+                    "desc": "Mobile device and touch event emulation."
+                }
+            ]
+        },
+        "legs": {
+            "title": "🦿 Legs",
+            "subtitle": "Non-existent flexibility",
+            "concept": "Scalability and flexibility. Responsive, flexible measurements, minimum and maximum sizes.",
+            "errors": [
+                {
+                    "error": "Fixed sizes",
+                    "errorCode": ".container {\n  width: 1200px;\n  height: 800px;\n}",
+                    "solution": "Fluid sizes with limits",
+                    "solutionCode": ".container {\n  width: min(100%, 1200px);\n  min-height: 100dvh;\n}",
+                    "desc": "Fixed sizes break on any different screen. Design must deliver layouts with min/max.",
+                    "visual": "responsive"
+                },
+                {
+                    "error": "Non-dynamic viewport",
+                    "errorCode": ".hero {\n  height: 100vh;\n  /* On mobile, browser bar\n     hides content */\n}",
+                    "solution": "dvh with fallback",
+                    "solutionCode": ".hero {\n  height: 100vh; /* fallback */\n  height: 100dvh;\n}",
+                    "desc": "100vh does not account for the mobile browser bar. dvh does. Always include a fallback.",
+                    "visual": "viewport"
+                },
+                {
+                    "error": "No safe-area-inset",
+                    "errorCode": ".bottom-bar {\n  position: fixed;\n  bottom: 0;\n  /* Hidden on iPhone with notch */\n}",
+                    "solution": "env(safe-area-inset-*)",
+                    "solutionCode": ".bottom-bar {\n  position: fixed;\n  bottom: 0;\n  padding-bottom:\n    env(safe-area-inset-bottom);\n}",
+                    "desc": "Without safe-area, content ends up behind the notch or home indicator.",
+                    "visual": "safearea"
+                },
+                {
+                    "error": "No grid/flexbox, floats only",
+                    "errorCode": ".col { float: left; width: 33.33%; }\n.clearfix::after { clear: both; }",
+                    "solution": "Modern CSS Grid",
+                    "solutionCode": ".grid {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(250px, 1fr));\n  gap: 1rem;\n}",
+                    "desc": "Floats for layout is a 2010 technique. Grid and Flex are the standard.",
+                    "visual": "grid"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Responsively",
+                    "desc": "Browser for testing multiple viewports simultaneously."
+                },
+                {
+                    "name": "Polypane",
+                    "desc": "Specialized browser for responsive and accessible development."
+                }
+            ]
+        },
+        "feet": {
+            "title": "🦶 Feet",
+            "subtitle": "Scalable product foundation",
+            "concept": "A non-scalable design in the long term is slower and more costly to adapt to new markets.",
+            "errors": [
+                {
+                    "error": "Non-modular methodology",
+                    "errorCode": "#page .content div.box > span {\n  color: red !important;\n}\n/* Specificity: 1-2-3 */",
+                    "solution": "BEM + low coupling",
+                    "solutionCode": ".card__title {\n  color: var(--color-error-base);\n}\n/* Specificity: 0-1-0 */",
+                    "desc": "Deep selectors create coupling and specificity wars.",
+                    "visual": "specificity"
+                },
+                {
+                    "error": "Difficult to maintain code",
+                    "errorCode": "/* 4000 lines in a single file */\n/* No comments */\n/* Magic variables */\nmargin-top: 37px; /* why 37? */",
+                    "solution": "Documented modular architecture",
+                    "solutionCode": "/* tokens/_spacing.css */\n--space-lg: 2rem; /* 32px - base×4 */\n\n/* components/_card.css */\n.card { margin-top: var(--space-lg); }",
+                    "desc": "Small, well-named files with centralized tokens.",
+                    "visual": "maintainability"
+                },
+                {
+                    "error": "Obsolete technologies",
+                    "errorCode": "/* jQuery UI datepicker */\n/* Bootstrap 3.x grid */\n/* Compass mixins for Sass */",
+                    "solution": "Modern and auditable stack",
+                    "solutionCode": "/* Native <input type=\"date\"> */\n/* Native CSS Grid */\n/* Native CSS custom properties */\n/* Lighthouse CI in pipeline */",
+                    "desc": "Outdated dependencies are security holes and dead weight.",
+                    "visual": "obsolete"
+                },
+                {
+                    "error": "No periodic audits",
+                    "errorCode": "/* Last accessibility analysis:\n   \"don't remember\" */\n/* Last performance check:\n   \"in v1\" */",
+                    "solution": "Quarterly audits",
+                    "solutionCode": "/* Quarterly:\n   - Lighthouse performance\n   - axe-core accessibility\n   - Bundle size analysis\n   - DS coverage report */",
+                    "desc": "What is not measured cannot be improved. Regular audits = product health.",
+                    "visual": "audits"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Storybook",
+                    "desc": "Isolated component documentation and development."
+                },
+                {
+                    "name": "Stylelint",
+                    "desc": "CSS linter to maintain conventions and detect errors."
+                },
+                {
+                    "name": "BEM Linter",
+                    "desc": "BEM naming convention validation in stylesheets."
+                }
+            ]
+        },
+        "tail": {
+            "title": "🦎 Tail",
+            "subtitle": "The legacy burden",
+            "concept": "The lizard's tail that falls off due to technical debt.",
+            "errors": [
+                {
+                    "error": "External libraries for a single element",
+                    "errorCode": "/* moment.js (73KB) only to\n   format a date */\n/* lodash (72KB) only for\n   one _.debounce */\nimport moment from \"moment\";",
+                    "solution": "Native or micro-utilities",
+                    "solutionCode": "/* Native Intl.DateTimeFormat */\nnew Intl.DateTimeFormat(\"en\",\n  { dateStyle: \"long\" })\n  .format(date);\n\n/* Debounce in 5 lines */",
+                    "desc": "Every KB of JS has a parse cost. Use native APIs first.",
+                    "visual": "bundle"
+                },
+                {
+                    "error": "Obsolete components not removed",
+                    "errorCode": "/* OldCarousel.jsx — unused since 2022 */\n/* LegacyModal.css — 400 dead lines */\n/* \"don't delete just in case\" */",
+                    "solution": "Dead code elimination",
+                    "solutionCode": "/* git log shows unused > 6 months */\n/* Coverage report: 0% */\n/* Action: remove + git saves it */\n/* CI: alert for unused exports */",
+                    "desc": "Dead code confuses, weighs and gives a false sense of complexity.",
+                    "visual": "deadcode"
+                },
+                {
+                    "error": "Long-term scalability impossible",
+                    "errorCode": "/* 50 undocumented components */\n/* 0 tests */\n/* 3 developers who \"know\" */\n/* Turnover = catastrophe */",
+                    "solution": "Documentation + tests + onboarding",
+                    "solutionCode": "/* Storybook with all components */\n/* Visual regression tests */\n/* Clear contribution guide */\n/* Bus factor > 1 */",
+                    "desc": "A DS without documentation or tests depends on people, not processes.",
+                    "visual": "scalability"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Bundlephobia",
+                    "desc": "npm dependency size analysis before installing."
+                },
+                {
+                    "name": "Knip",
+                    "desc": "Detection of dead code, unused exports and orphan dependencies."
+                },
+                {
+                    "name": "Depcheck",
+                    "desc": "Detection of unused dependencies in the project."
+                }
+            ]
+        }
+    },
+    "slide4.subtitle.post.1": "Like any living body, it needs <strong>constant care</strong> — <em>communication, documentation and periodic reviews</em> — to avoid becoming another corpse.",
+    "slide4.subtitle.post.2": "// system.online() → OK\nnow keep it alive →",
+    "visual.demo.tokens.error": "Hardcoded hex",
+    "visual.demo.tokens.solution": "Semantic tokens",
+    "visual.demo.themes.error": "Broken themes",
+    "visual.demo.themes.solution": "Tokens per layer",
+    "visual.demo.spacing.error": "Random values",
+    "visual.demo.spacing.solution": "Base-8 scale",
+    "visual.demo.units.error": "Mixed units",
+    "visual.demo.units.solution": "Clear convention",
+    "visual.demo.contrast.error": "Low contrast",
+    "visual.demo.contrast.solution": "High contrast",
+    "visual.demo.touch.error": "Tiny touch target",
+    "visual.demo.touch.solution": "Correct target",
+    "visual.demo.focus.error": "No visible focus",
+    "visual.demo.focus.solution": "Clear focus ring",
+    "visual.demo.srcset.error": "1x on 2x screen",
+    "visual.demo.srcset.solution": "2x with srcset",
+    "visual.demo.heading.error": "Broken hierarchy",
+    "visual.demo.heading.solution": "Correct hierarchy",
+    "visual.demo.overflow.error": "Fixed container",
+    "visual.demo.overflow.solution": "Flexible container",
+    "visual.demo.rtl.error": "Fixed margin-left",
+    "visual.demo.rtl.solution": "Logical properties",
+    "visual.demo.detach.error": "Detached instances",
+    "visual.demo.detach.solution": "Linked instances",
+    "visual.demo.zindex.error": "Z-index war",
+    "visual.demo.zindex.solution": "Tokenized scale",
+    "visual.demo.bundle.error": "Heavy libraries",
+    "visual.demo.bundle.solution": "Native / micro",
+    "visual.demo.responsive.error": "Fixed width",
+    "visual.demo.responsive.solution": "Fluid",
+    "visual.demo.aria.error": "Identical buttons",
+    "visual.demo.aria.solution": "Descriptive aria-label",
+    "visual.demo.liveregion.error": "No aria-live",
+    "visual.demo.liveregion.solution": "aria-live=\"polite\"",
+    "visual.demo.version.error": "Out of sync",
+    "visual.demo.version.solution": "In sync",
+    "visual.demo.negative.error": "Negative margins",
+    "visual.demo.negative.solution": "Correct layout",
+    "visual.demo.shadow.error": "Shadows clipped",
+    "visual.demo.shadow.solution": "Safety padding",
+    "visual.demo.specificity.error": "Deep selectors",
+    "visual.demo.specificity.solution": "BEM flat",
+    "visual.demo.deadcode.error": "Dead code",
+    "visual.demo.deadcode.solution": "Clean",
+    "visual.demo.decimals.error": "Sub-pixels",
+    "visual.demo.decimals.solution": "Always integers",
+    "visual.demo.lineclamp.error": "Only 1 line",
+    "visual.demo.lineclamp.solution": "3 lines with clamp",
+    "visual.demo.naming.error": "Different vocabularies",
+    "visual.demo.naming.solution": "Unique vocabulary",
+    "visual.demo.overlap.error": "Absolute covers content",
+    "visual.demo.overlap.solution": "Integrated in flow",
+    "visual.demo.pointerevents.error": "Overlay blocks clicks",
+    "visual.demo.pointerevents.solution": "pointer-events: none",
+    "visual.demo.viewport.error": "100vh hides content",
+    "visual.demo.viewport.solution": "100dvh adapts",
+    "visual.demo.safearea.error": "No safe-area",
+    "visual.demo.safearea.solution": "env(safe-area-inset)",
+    "visual.demo.grid.error": "Float layout broken",
+    "visual.demo.grid.solution": "Modern CSS Grid",
+    "visual.demo.maintainability.error": "Monolith without order",
+    "visual.demo.maintainability.solution": "Modular + tokens",
+    "visual.demo.obsolete.error": "Obsolete stack",
+    "visual.demo.obsolete.solution": "Modern native",
+    "visual.demo.audits.error": "No metrics",
+    "visual.demo.audits.solution": "Quarterly audits",
+    "visual.demo.scalability.error": "Centralized knowledge",
+    "visual.demo.scalability.solution": "Documented process",
+    "visual.demo.scroll.error": "Body scrolls",
+    "visual.demo.scroll.solution": "Body blocked",
+    "visual.demo.tokens.label.error": "--color1, --color2... meaningless",
+    "visual.demo.tokens.label.solution": "--color-{semantic}-base ✓",
+    "visual.demo.themes.label.error": "Dark text on dark bg = invisible",
+    "visual.demo.themes.label.solution": "Both themes readable ✓",
+    "visual.demo.spacing.label.error": "No visual rhythm",
+    "visual.demo.spacing.label.solution": "Consistent rhythm ✓",
+    "visual.demo.units.label.error": "px + rem + em = chaos",
+    "visual.demo.units.label.solution": "rem global, em local ✓",
+    "visual.demo.contrast.label.error": "Gray on gray = illegible",
+    "visual.demo.contrast.label.solution": "White on blue = clear",
+    "visual.demo.touch.label.error": "Finger doesn't fit in target",
+    "visual.demo.touch.label.solution": "Target = finger size ✓",
+    "visual.demo.srcset.label.error": "1x on Retina display",
+    "visual.demo.srcset.label.solution": "srcset 1x, 2x, 3x ✓",
+    "visual.demo.heading.label.error": "Screen reader lost",
+    "visual.demo.heading.label.solution": "Sequential and logical ✓",
+    "visual.demo.overflow.label.error": "width: 120px fixed = overflow",
+    "visual.demo.overflow.label.solution": "min/max-width flexible ✓",
+    "visual.demo.rtl.label.error": "RTL completely broken",
+    "visual.demo.rtl.label.solution": "Adapts to any direction ✓",
+    "visual.demo.detach.label.error": "3 manual variants no connection",
+    "visual.demo.detach.label.solution": "1 component, 3 instances ✓",
+    "visual.demo.zindex.label.error": "Infinite number race",
+    "visual.demo.zindex.label.solution": "Predictable scale ✓",
+    "visual.demo.bundle.label.error": "145KB for 2 functions",
+    "visual.demo.bundle.label.solution": "0.3KB — 99.8% less ✓",
+    "visual.demo.responsive.label.error": "← horizontal scroll on mobile",
+    "visual.demo.responsive.label.solution": "Adapts to any screen ✓",
+    "visual.demo.aria.label.error": "Which is which?",
+    "visual.demo.aria.label.solution": "Each button is unique ✓",
+    "visual.demo.liveregion.label.error": "Invisible to screen reader",
+    "visual.demo.liveregion.label.solution": "Reader announces change ✓",
+    "visual.demo.version.label.error": "6 months without updating",
+    "visual.demo.version.label.solution": "Update pipeline ✓",
+    "visual.demo.negative.label.error": "Patch that breaks in another context",
+    "visual.demo.negative.label.solution": "Clean layout from parent ✓",
+    "visual.demo.shadow.label.error": "overflow:hidden cuts box-shadow ✂",
+    "visual.demo.shadow.label.solution": "overflow-clip-margin ✓",
+    "visual.demo.specificity.label.error": "Impossible to override",
+    "visual.demo.specificity.label.solution": "Predictable and maintainable ✓",
+    "visual.demo.deadcode.label.error": "100+ dead lines",
+    "visual.demo.deadcode.label.solution": "-3 files = -1200 lines ✓",
+    "visual.demo.decimals.label.error": "Inconsistent rendering",
+    "visual.demo.decimals.label.solution": "Pixel-perfect in all browsers",
+    "visual.demo.lineclamp.label.error": "Abrupt cut in middle of sentence",
+    "visual.demo.lineclamp.label.solution": "Elegant cut at 3 lines ✓",
+    "visual.demo.naming.label.error": "3 teams, 3 different names",
+    "visual.demo.naming.label.solution": "1 name in the DS ✓",
+    "visual.demo.overlap.label.error": "Button floats and covers text",
+    "visual.demo.overlap.label.solution": "Grid layout, no overlap ✓",
+    "visual.demo.pointerevents.label.error": "Click doesn't reach button",
+    "visual.demo.pointerevents.label.solution": "pointer-events: none ✓",
+    "visual.demo.viewport.label.error": "100vh hides keyboard/nav",
+    "visual.demo.viewport.label.solution": "100dvh adapts to viewport ✓",
+    "visual.demo.safearea.label.error": "Content behind notch",
+    "visual.demo.safearea.label.solution": "env(safe-area-inset) ✓",
+    "visual.demo.grid.label.error": "Fragile float layout",
+    "visual.demo.grid.label.solution": "Flexible grid system ✓",
+    "visual.demo.maintainability.label.error": "4000 lines, no structure",
+    "visual.demo.maintainability.label.solution": "Modular and documented ✓",
+    "visual.demo.obsolete.label.error": "jQuery 1.x, Bootstrap 3, Compass",
+    "visual.demo.obsolete.label.solution": "Modern native APIs ✓",
+    "visual.demo.audits.label.error": "Never measured",
+    "visual.demo.audits.label.solution": "Quarterly audits ✓",
+    "visual.demo.scalability.label.error": "Only 3 people know",
+    "visual.demo.scalability.label.solution": "Documented and tested ✓",
+    "visual.demo.scroll.label.error": "Page scrolls behind modal",
+    "visual.demo.scroll.label.solution": "Body overflow locked ✓"
+}

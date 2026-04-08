@@ -1,0 +1,6 @@
+/* =====================================================
+   TRANSITIONS
+   Typed @property color tokens now live in base/_themes.css
+   (they're token metadata, not transitions). This file is
+   reserved for future transition rules.
+   ===================================================== */

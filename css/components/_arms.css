@@ -1,0 +1,144 @@
+/* =====================================================
+   ARMS & HANDS — Tin Man 
+   ===================================================== */
+
+.arm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    position: absolute;
+    width: var(--arm-width);
+    top: var(--arm-position-y);
+    gap: var(--arm-gap);
+    transform-origin: top center;
+    cursor: pointer;
+}
+
+.arm--left {
+    rotate: var(--arm-rotation);
+    inset-inline-end: var(--arm-position-x);
+}
+
+.arm--right {
+    rotate: calc(var(--arm-rotation) * -1);    
+    inset-inline-start: var(--arm-position-x);
+    /* transform-origin: top left; */
+}
+
+/* Shoulder — articulated sphere */
+.arm__shoulder {
+    width: var(--arm-shoulder-width);
+    height: var(--arm-shoulder-height);
+    aspect-ratio: var(--arm-shoulder-aspect-ratio);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 28%, var(--trunk-c1), var(--trunk-dark));
+    box-shadow:
+        3px 3px 9px rgba(0,0,0,.55),
+        inset -2px -2px 6px rgba(0,0,0,.3);
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+/* Upper arm */
+.arm__upper {
+    width: var(--arm-upper-width);
+    height: var(--arm-upper-height);
+    aspect-ratio: var(--arm-upper-aspect-ratio);
+    background: linear-gradient(to bottom,
+        var(--collar-c1) 0%, var(--trunk-c3) 40%, var(--trunk-c4) 62%, var(--trunk-c5) 100%
+    );
+    border-radius: 2%;
+    box-shadow: 0 4px 10px rgba(0,0,0,.42);
+    flex-shrink: 0;
+}
+
+/* Elbow — articulated sphere */
+.arm__elbow {
+    width: var(--arm-elbow-width);
+    aspect-ratio: var(--arm-elbow-aspect-ratio);
+    height: var(--arm-elbow-height);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 28%, var(--trunk-c1), var(--trunk-dark));
+    box-shadow:
+        3px 3px 7px rgba(0,0,0,.5),
+        inset -2px -2px 5px rgba(0,0,0,.25);
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+/* Forearm */
+.arm__lower {
+    width: var(--arm-lower-width);
+    height: var(--arm-lower-height);
+    aspect-ratio: var(--arm-lower-aspect-ratio);
+    background: linear-gradient(to bottom,
+        var(--collar-c1) 0%, var(--trunk-c3) 40%, var(--trunk-c4) 62%, var(--trunk-c5) 100%
+    );
+    border-radius: 2%;
+    box-shadow: 0 3px 8px rgba(0,0,0,.38);
+    flex-shrink: 0;
+    margin-block-start: var(--arm-lower-margin-block-start);
+    margin-inline-start: var(--arm-lower-margin-inline-start);
+    rotate: 90deg;
+    transform-origin: top left;
+}
+
+.arm--left .arm__lower {
+    margin-inline-start: calc(var(--arm-lower-margin-inline-start) * -1);
+    rotate: -90deg;
+    transform-origin: top right;
+}
+
+/* =====================================================
+   HANDS
+   ===================================================== */
+
+.hand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
+    gap: var(--hand-gap);
+    width: var(--hand-width);
+    margin-inline-start: var(--hand-margin-inline-start);
+    margin-block-start: var(--hand-margin-block-start);
+    rotate: 90deg;
+    transform-origin: top left;
+}
+
+.arm--left .hand {
+    margin-inline-start: calc(var(--hand-margin-inline-start) * -1);
+    rotate: -90deg;
+    transform-origin: top right;
+}
+
+.hand__palm {
+    width: var(--hand-palm-width);
+    height: var(--hand-palm-height);
+    aspect-ratio: var(--hand-palm-aspect-ratio);
+    background: linear-gradient(160deg,
+        var(--hand-c1) 0%, var(--hand-c2) 50%, var(--hand-c3) 100%
+    );
+    border-radius: 2%;
+    box-shadow: 0 3px 8px rgba(0,0,0,.48);
+}
+
+.hand__fingers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--hand-fingers-gap);
+    width: var(--hand-fingers-width);
+    height: var(--hand-fingers-height);
+    aspect-ratio: var(--hand-fingers-aspect-ratio);
+}
+
+.finger {
+    background: linear-gradient(to bottom,
+        var(--hand-c1) 0%, var(--hand-c2) 50%, var(--hand-c3) 100%
+    );
+    border-radius: 20% 20% 40% 40%;
+    box-shadow: 0 2px 5px rgba(0,0,0,.38);
+}

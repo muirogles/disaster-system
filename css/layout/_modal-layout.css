@@ -1,0 +1,135 @@
+/* =====================================================
+   MODAL LAYOUT — body shrink behavior when modal is open
+   ===================================================== */
+
+/* Modal open: body shrinks and shifts left, stays FULLY visible */
+.corpse.has-modal .corpse__item {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scale(var(--modal-shrink-scale)) translateX(var(--modal-shift-x));
+    transform-origin: left center;
+}
+
+/* ── Dim ALL non-data-part visual elements when modal open ── */
+.corpse.has-modal .head,
+.corpse.has-modal .hair {
+    filter: grayscale(1) brightness(0.4);
+    transition: filter 0.5s ease;
+}
+
+/* Dim all [data-part] elements (stops their animations too) */
+.corpse.has-modal [data-part] {
+    filter: grayscale(1) brightness(0.4) !important;
+    animation: none !important;
+    transition: filter 0.5s ease, transform 0.35s ease;
+}
+
+/* ── Ancestor of active part: not dimmed, but not full bright ── */
+.corpse.has-modal [data-part].part-has-active-child {
+    filter: none !important;
+    animation: none !important;
+}
+
+.trunk__body.part-has-active-child:has(.arm.part-active),
+.trunk__body.part-has-active-child:has(.hand.part-active),
+.arm.part-has-active-child:has(.hand.part-active),
+.trunk__body.part-has-active-child:has(.heart-window.part-active) {
+    background: transparent;
+}
+
+.arm.part-has-active-child:has(.hand.part-active) .arm__shoulder,
+.arm.part-has-active-child:has(.hand.part-active) .arm__upper,
+.arm.part-has-active-child:has(.hand.part-active) .arm__elbow,
+.arm.part-has-active-child:has(.hand.part-active) .arm__lower,
+.trunk__body.part-has-active-child:has(.arm.part-active) .trunk__collar,
+.trunk__body.part-has-active-child:has(.arm.part-active) .trunk__belly,
+.trunk__body.part-has-active-child:has(.arm.part-active) .trunk__waist,
+.trunk__body.part-has-active-child:has(.hand.part-active) .trunk__collar,
+.trunk__body.part-has-active-child:has(.hand.part-active) .trunk__belly,
+.trunk__body.part-has-active-child:has(.hand.part-active) .trunk__waist,
+.trunk__body.part-has-active-child:has(.heart-window.part-active) .trunk__collar,
+.trunk__body.part-has-active-child:has(.heart-window.part-active) .trunk__belly,
+.trunk__body.part-has-active-child:has(.heart-window.part-active) .trunk__waist,
+.legs:has(.foot.part-active) .pubis,
+.leg.part-has-active-child:has(.foot.part-active) .leg__thigh,
+.leg.part-has-active-child:has(.foot.part-active) .leg__joint,
+.leg.part-has-active-child:has(.foot.part-active) .leg__shin {
+    filter: grayscale(1) brightness(0.4) !important;
+    animation: none !important;
+}
+
+/* ── Active part: bright, colorful, slightly scaled up ── */
+.corpse.has-modal [data-part].part-active {
+    filter: grayscale(0) brightness(1.25) drop-shadow(0 0 24px rgba(255,255,255,0.4)) !important;
+    animation: none !important;
+}
+
+/* Decorative elements dim by default when modal open */
+.corpse.has-modal .nose,
+.corpse.has-modal .blush,
+.corpse.has-modal .glasses,
+.corpse.has-modal .neck {
+    filter: grayscale(1) brightness(0.4);
+    transition: filter 0.5s ease;
+}
+
+/* When head section is active: hide part-hint */
+.corpse.has-modal .section-active .part-hint {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* When head section is active: keep face decorations visible */
+.corpse.has-modal .section-active .head,
+.corpse.has-modal .section-active .hair {
+    filter: grayscale(0) brightness(0.7);
+}
+.corpse.has-modal .section-active .nose,
+.corpse.has-modal .section-active .blush,
+.corpse.has-modal .section-active .glasses,
+.corpse.has-modal .section-active .neck {
+    filter: grayscale(0) brightness(0.7);
+}
+
+/* ── Hover: only affect the direct interactive element ── */
+[data-part] {
+    cursor: pointer;
+    transition: filter 0.4s ease, transform 0.3s ease;
+}
+
+[data-part]:hover {
+    filter: brightness(1.15);
+}
+
+/* Legs: hover only highlights the leg segments, NOT the nested foot */
+[data-part="legs"]:hover {
+    filter: none; /* prevent leg wrapper filter from dimming foot visually */
+}
+[data-part="legs"]:hover .leg__thigh,
+[data-part="legs"]:hover .leg__joint,
+[data-part="legs"]:hover .leg__shin,
+[data-part="legs"]:hover .leg__ankle {
+    filter: brightness(1.2);
+}
+/* Explicit: foot is unaffected when hovering leg wrapper */
+[data-part="legs"]:hover [data-part="feet"] {
+    filter: none;
+    transform: none;
+}
+
+/* ── Active part (global, no modal) — subtle scale, no z-index hack ── */
+.part-active {
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.3)) !important;
+}
+
+/* Modal body transition for smooth content swap */
+.modal__body--transitioning {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.modal__body {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+}

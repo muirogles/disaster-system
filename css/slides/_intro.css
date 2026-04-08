@@ -1,0 +1,780 @@
+/* =====================================================
+   INTRO SLIDE — Title + creative subtitle + decorative tokens
+   Left half = structured DS grid. Right half = broken chaos.
+   ===================================================== */
+
+.corpse__item--intro {
+    background: #0a0a0f;
+    justify-content: center !important;
+    text-align: center;
+    color: #f5f5f5;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ---- SPLIT BACKGROUND HALVES ---- */
+.intro__half {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* LEFT: clean 8px grid — design tool canvas */
+.intro__half--order {
+    left: 0;
+    background:
+        linear-gradient(rgba(155,93,229,0.04) 1px, transparent 1px) 0 0 / 8px 8px,
+        linear-gradient(90deg, rgba(155,93,229,0.04) 1px, transparent 1px) 0 0 / 8px 8px,
+        linear-gradient(rgba(155,93,229,0.07) 1px, transparent 1px) 0 0 / 64px 64px,
+        linear-gradient(90deg, rgba(155,93,229,0.07) 1px, transparent 1px) 0 0 / 64px 64px;
+}
+
+/* Ruler marks */
+.intro__half--order::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    background:
+        repeating-linear-gradient(to bottom,
+            rgba(155,93,229,0.15) 0, rgba(155,93,229,0.15) 1px,
+            transparent 1px, transparent 8px);
+    border-right: 1px solid rgba(155,93,229,0.08);
+}
+
+/* Alignment guides */
+.intro__half--order::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to right, transparent 49.8%, rgba(155,93,229,0.06) 49.8%, rgba(155,93,229,0.06) 50.2%, transparent 50.2%),
+        linear-gradient(to bottom, transparent 49.8%, rgba(155,93,229,0.06) 49.8%, rgba(155,93,229,0.06) 50.2%, transparent 50.2%);
+}
+
+/* RIGHT: chaotic — broken grid, noise */
+.intro__half--chaos {
+    right: 0;
+    background:
+        linear-gradient(3deg, rgba(233,30,99,0.04) 1px, transparent 1px) 5px 0 / 13px 17px,
+        linear-gradient(87deg, rgba(255,87,34,0.03) 1px, transparent 1px) 0 3px / 21px 11px,
+        radial-gradient(circle 1px at 20% 30%, rgba(255,68,68,0.12) 100%, transparent 100%),
+        radial-gradient(circle 1px at 60% 15%, rgba(233,30,99,0.1) 100%, transparent 100%),
+        radial-gradient(circle 1px at 80% 70%, rgba(255,179,0,0.08) 100%, transparent 100%),
+        radial-gradient(circle 1.5px at 35% 80%, rgba(255,68,68,0.1) 100%, transparent 100%),
+        radial-gradient(circle 1px at 90% 45%, rgba(233,30,99,0.12) 100%, transparent 100%);
+}
+
+.intro__half--chaos::before {
+    content: '× × × ×  ×   ×';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(3rem, 8vw, 8rem);
+    color: rgba(255,68,68,0.03);
+    letter-spacing: 0.5em;
+    transform: rotate(-12deg);
+    overflow: hidden;
+}
+
+.intro__half--chaos::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    mix-blend-mode: overlay;
+}
+
+/* ---- CENTER DIVIDER ---- */
+.intro__divider {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    z-index: 1;
+    background: linear-gradient(to bottom,
+        transparent 5%, var(--color-purple) 20%,
+        rgba(255,255,255,0.15) 50%,
+        var(--color-magenta) 80%, transparent 95%);
+    transform: translateX(-50%);
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* =====================================================
+   FLOATING DECORATIVE TOKENS — scattered CSS/DS words
+   Left side (1-4): ordered teal, right side (5-8): chaotic red
+   ===================================================== */
+.intro__deco {
+    position: absolute;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.7rem, 1.05vw, 1.15rem);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 5px;
+    padding: 0.28em 0.65em;
+    opacity: 0;
+    animation: decoFloat 6s ease-in-out infinite;
+}
+
+/* LEFT — ordered, purple-ish, clean */
+.intro__deco--1 {
+    top: 18%; left: 6%;
+    color: var(--color-purple);
+    border: 1px solid rgba(155,93,229,0.2);
+    background: rgba(155,93,229,0.06);
+    animation-delay: 0s;
+}
+.intro__deco--2 {
+    top: 72%; left: 12%;
+    color: var(--color-blue);
+    border: 1px solid rgba(30,136,229,0.2);
+    background: rgba(30,136,229,0.06);
+    animation-delay: 1.5s;
+}
+.intro__deco--3 {
+    top: 35%; left: 3%;
+    color: var(--color-purple);
+    border: 1px solid rgba(155,93,229,0.2);
+    background: rgba(155,93,229,0.06);
+    animation-delay: 3s;
+}
+.intro__deco--4 {
+    bottom: 18%; left: 18%;
+    color: var(--color-blue);
+    border: 1px solid rgba(30,136,229,0.15);
+    background: rgba(30,136,229,0.04);
+    animation-delay: 4.5s;
+}
+
+/* RIGHT — chaotic, red/magenta, some tilted */
+.intro__deco--5 {
+    top: 20%; right: 5%;
+    color: var(--error-red);
+    border: 1px solid rgba(255,68,68,0.25);
+    background: rgba(255,68,68,0.06);
+    transform: rotate(4deg);
+    animation-delay: 0.8s;
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,68,68,0.4);
+}
+.intro__deco--6 {
+    top: 68%; right: 8%;
+    color: var(--color-magenta);
+    border: 1px solid rgba(233,30,99,0.2);
+    background: rgba(233,30,99,0.06);
+    transform: rotate(-3deg);
+    animation-delay: 2.2s;
+}
+.intro__deco--7 {
+    top: 40%; right: 14%;
+    color: var(--color-gold);
+    border: 1px solid rgba(255,179,0,0.2);
+    background: rgba(255,179,0,0.05);
+    animation-delay: 3.8s;
+}
+.intro__deco--8 {
+    bottom: 22%; right: 4%;
+    color: var(--color-coral);
+    border: 1px solid rgba(255,87,34,0.2);
+    background: rgba(255,87,34,0.05);
+    transform: rotate(2deg);
+    animation-delay: 5s;
+}
+
+@keyframes decoFloat {
+    0%, 100% { opacity: 0.35; transform: translateY(0); }
+    50% { opacity: 0.7; transform: translateY(-6px); }
+}
+
+/* Preserve rotation on tilted ones */
+.intro__deco--5 { animation-name: decoFloatTilted5; }
+.intro__deco--6 { animation-name: decoFloatTilted6; }
+.intro__deco--8 { animation-name: decoFloatTilted8; }
+
+@keyframes decoFloatTilted5 {
+    0%, 100% { opacity: 0.35; transform: rotate(4deg) translateY(0); }
+    50% { opacity: 0.7; transform: rotate(4deg) translateY(-6px); }
+}
+@keyframes decoFloatTilted6 {
+    0%, 100% { opacity: 0.35; transform: rotate(-3deg) translateY(0); }
+    50% { opacity: 0.7; transform: rotate(-3deg) translateY(-6px); }
+}
+@keyframes decoFloatTilted8 {
+    0%, 100% { opacity: 0.35; transform: rotate(2deg) translateY(0); }
+    50% { opacity: 0.7; transform: rotate(2deg) translateY(-6px); }
+}
+
+/* =====================================================
+   MAIN CONTENT — vertically centered
+   ===================================================== */
+.intro__content {
+    position: relative;
+    z-index: 2;
+    max-width: 90vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---- TITLE ---- */
+.intro__title {
+    font-size: clamp(2.4rem, 6.5vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 0.35em;
+    color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Line 1 wrapper — Design o Disaster? */
+.intro__title-dd {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* "SYSTEM" — matrix code rain effect, tech cohesion */
+.intro__title-system {
+    display: block;
+    font-size: 0.75em;
+    font-weight: 900;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    text-transform: uppercase;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    color: var(--color-green);
+    text-shadow:
+        0 0 20px var(--color-green),
+        0 0 40px rgba(0,255,85,0.4),
+        0 0 60px rgba(0,220,60,0.2);
+    margin-top: 0.25em;
+    position: relative;
+    animation: matrixGlow 3s ease-in-out infinite alternate;
+    overflow: hidden;
+}
+
+.intro__title-system::before {
+    content: 'S Y S T E M';
+    position: absolute;
+    inset: 0;
+    color: rgba(0,255,85,0.15);
+    font-size: 0.75em;
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+    animation: matrixFall 4s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes matrixGlow {
+    0% { 
+        text-shadow:
+            0 0 20px var(--color-green),
+            0 0 40px rgba(0,255,85,0.4),
+            0 0 60px rgba(0,220,60,0.2);
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    100% {
+        text-shadow:
+            0 0 30px var(--color-green),
+            0 0 60px rgba(0,255,85,0.6),
+            0 0 80px rgba(0,220,60,0.3);
+        filter: hue-rotate(120deg) brightness(1.1);
+    }
+}
+
+@keyframes matrixFall {
+    0% { transform: translateY(-100%) rotateX(15deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100%) rotateX(-15deg); opacity: 0; }
+}
+
+/* Gradient line spanning "System" — Design purple left, Disaster gold right */
+.intro__title-system::after {
+    content: '';
+    position: absolute;
+    bottom: -0.25em;
+    left: 0.35em;   /* align with text-indent offset */
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        rgba(155,93,229,0.5) 0%,
+        rgba(255,255,255,0.12) 50%,
+        rgba(255,179,0,0.5) 100%);
+    pointer-events: none;
+}
+
+/* Punctuation — subtle */
+.intro__title-q {
+    color: rgba(255,255,255,0.15);
+    font-weight: 300;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.intro__title-q:first-child {
+    right: 100%;
+}
+
+.intro__title-q:last-child {
+    left: 100%;
+}
+
+/* ---- DESIGN SYSTEM — clean, systematic, grid-framed ---- */
+.intro__title-ds {
+    position: relative;
+    display: inline-block;
+    color: var(--color-purple);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0 0 30px rgba(155,93,229,0.25);
+    padding: 0.06em 0.3em;
+}
+
+/* Figma-style selection box */
+.intro__title-ds::before {
+    content: '';
+    position: absolute;
+    inset: -4px -10px;
+    border: 1px solid rgba(155,93,229,0.3);
+    border-radius: 3px;
+    background:
+        linear-gradient(rgba(155,93,229,0.05) 1px, transparent 1px) 0 0 / 8px 8px,
+        linear-gradient(90deg, rgba(155,93,229,0.05) 1px, transparent 1px) 0 0 / 8px 8px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Corner resize handles */
+.intro__title-ds::after {
+    content: '';
+    position: absolute;
+    inset: -8px -14px;
+    pointer-events: none;
+    background:
+        linear-gradient(var(--color-purple), var(--color-purple)) 0 0 / 5px 5px no-repeat,
+        linear-gradient(var(--color-purple), var(--color-purple)) 100% 0 / 5px 5px no-repeat,
+        linear-gradient(var(--color-purple), var(--color-purple)) 0 100% / 5px 5px no-repeat,
+        linear-gradient(var(--color-purple), var(--color-purple)) 100% 100% / 5px 5px no-repeat;
+}
+
+/* ---- "o" connector ---- */
+.intro__title-o {
+    display: inline-block;
+    font-size: 0.5em;
+    font-weight: 500;
+    color: rgba(255,255,255,0.22);
+    vertical-align: middle;
+    font-style: italic;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/* ---- DISASTER SYSTEM — chaotic, glitchy ---- */
+.intro__title-disaster {
+    position: relative;
+    display: inline-block;
+    font-family: 'Courier New', 'Cascadia Code', monospace;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: var(--color-gold);
+    text-shadow:
+        3px -2px 0 var(--color-coral),
+        -2px 3px 0 var(--color-magenta),
+        -1px -1px 0 var(--color-teal),
+        4px 4px 10px rgba(233,30,99,0.6),
+        -3px -3px 20px rgba(255,87,34,0.3),
+        0 0 50px rgba(233,30,99,0.35);
+    transform: rotate(-1.8deg) skewX(-3deg);
+    animation: disasterGlitch 4s ease-in-out infinite;
+    padding: 0.05em 0.15em;
+}
+
+/* Red squiggly underline — IDE error */
+.intro__title-disaster::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    right: -4px;
+    height: 6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Cpath d='M0 3 Q2 0 4 3 Q6 6 8 3' fill='none' stroke='%23ff4444' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+@keyframes disasterGlitch {
+    0%, 88%, 100% {
+        transform: rotate(-1.8deg) skewX(-3deg);
+        text-shadow:
+            3px -2px 0 var(--color-coral), -2px 3px 0 var(--color-magenta),
+            -1px -1px 0 var(--color-teal), 4px 4px 10px rgba(233,30,99,0.6),
+            -3px -3px 20px rgba(255,87,34,0.3), 0 0 50px rgba(233,30,99,0.35);
+    }
+    89% {
+        transform: rotate(-1.8deg) skewX(-3deg) translateX(-4px);
+        text-shadow: 6px -2px 0 var(--color-coral), -4px 3px 0 cyan, 0 0 40px rgba(233,30,99,0.7);
+    }
+    90% {
+        transform: rotate(0deg) skewX(2deg) translateX(3px);
+        text-shadow: -3px 2px 0 var(--color-magenta), 4px -3px 0 var(--color-gold), 0 0 30px rgba(255,87,34,0.5);
+    }
+    91% {
+        transform: rotate(-2.5deg) skewX(-4deg) translateX(-2px) translateY(1px);
+        text-shadow: 2px -4px 0 var(--color-coral), -2px 5px 0 var(--color-teal), 0 0 50px rgba(233,30,99,0.5);
+    }
+    92% { transform: rotate(-1.8deg) skewX(-3deg); }
+}
+
+/* =====================================================
+   SUBTITLE — Terminal / DEV gamification console card
+   Mirrors SYSTEM neon treatment: matrix glow + window chrome
+   ===================================================== */
+.intro__subtitle {
+    display: block;
+    font-size: clamp(1rem, 1.55vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-indent: 0;
+    text-transform: uppercase;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    color: var(--color-green);
+    text-shadow:
+        0 0 20px var(--color-green),
+        0 0 40px rgba(0,255,85,0.4),
+        0 0 60px rgba(0,220,60,0.2);
+    margin: clamp(1.2rem, 2vw, 2.8rem) 0 0;
+    line-height: 2;
+    position: relative;
+    animation: matrixGlow 3s ease-in-out infinite alternate;
+    overflow: hidden;
+
+    /* Terminal window card */
+    padding: 2.5em 1.8em 1em;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0,255,85,0.013) 3px,
+            rgba(0,255,85,0.013) 4px
+        ),
+        rgba(0,8,3,0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0,255,85,0.35);
+    border-radius: 8px;
+    text-align: center;
+    max-width: 88%;
+    margin-inline: auto;
+    box-shadow:
+        0 0 40px rgba(0,255,85,0.07),
+        0 0 80px rgba(0,255,85,0.03),
+        inset 0 0 50px rgba(0,255,85,0.02);
+}
+
+/* Terminal title bar — "window chrome" matching SYSTEM */
+.intro__subtitle::before {
+    content: '● ○ ○   system.init()   ▶   LVL ∞';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.9em;
+    line-height: 1.9em;
+    padding: 0 0.8em;
+    font-size: 0.62em;
+    letter-spacing: 0.1em;
+    text-indent: 0;
+    text-transform: none;
+    font-weight: 400;
+    color: rgba(0,255,85,0.65);
+    background: rgba(0,255,85,0.07);
+    border-bottom: 1px solid rgba(0,255,85,0.22);
+    text-align: left;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Scan-line sweep — CRT gamification cue */
+.intro__subtitle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -3em;
+    height: 3em;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0,255,85,0.09) 50%,
+        transparent
+    );
+    animation: scanSweep 5s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+@keyframes scanSweep {
+    0%   { top: -3em; }
+    100% { top: calc(100% + 3em); }
+}
+
+/* Connector words — dim, comment-style secondary tokens */
+.intro__sub-el {
+    font-weight: 300;
+    color: rgba(0,220,60,0.45);
+    font-size: 0.85em;
+    letter-spacing: 0.08em;
+    position: relative;
+}
+
+/* "cadáver exquisito" — rendered as a function call: fn CADÁVER_EXQUISITO() */
+.intro__sub-cadaver {
+    font-weight: 900;
+    color: var(--color-green);
+    text-shadow:
+        0 0 20px var(--color-green),
+        0 0 40px rgba(0,255,85,0.4),
+        0 0 60px rgba(0,220,60,0.2);
+    position: relative;
+    animation: matrixGlow 3s ease-in-out infinite alternate;
+    font-family: 'Cascadia Code', monospace;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+}
+
+.intro__sub-cadaver::before {
+    content: 'fn ';
+    text-transform: none;
+    font-weight: 300;
+    color: rgba(0,255,85,0.45);
+    font-size: 0.78em;
+    letter-spacing: 0.04em;
+    text-shadow: none;
+    animation: none;
+}
+
+.intro__sub-cadaver::after {
+    content: '()';
+    font-weight: 300;
+    color: rgba(0,255,85,0.5);
+    letter-spacing: 0.04em;
+    text-shadow: none;
+    animation: none;
+}
+
+/* "diseño" — JSX / component tag: <diseño/> */
+.intro__sub-design {
+    color: var(--color-purple);
+    font-weight: 600;
+    position: relative;
+    padding: 0.1em 0.3em;
+    text-shadow: 0 0 12px rgba(155,93,229,0.4);
+    border: 1px solid rgba(155,93,229,0.35);
+    border-radius: 4px;
+    background: rgba(155,93,229,0.08);
+    font-family: 'Cascadia Code', monospace;
+}
+
+.intro__sub-design::before {
+    content: '<';
+    color: rgba(155,93,229,0.55);
+    font-weight: 300;
+    text-shadow: none;
+}
+
+.intro__sub-design::after {
+    content: '/>';
+    color: rgba(155,93,229,0.55);
+    font-weight: 300;
+    text-shadow: none;
+}
+
+/* "desarrollo" — const declaration with block cursor */
+.intro__sub-dev {
+    font-weight: 600;
+    color: var(--color-gold);
+    position: relative;
+    letter-spacing: -0.015em;
+    text-shadow:
+        0 0 10px rgba(255,179,0,0.6),
+        0 0 18px rgba(255,255,85,0.4);
+    padding: 0.12em 0.35em 0.12em 0.45em;
+    border-left: 2px solid rgba(255,179,0,0.6);
+    background: rgba(255,179,0,0.08);
+    border-radius: 0 6px 6px 0;
+    font-family: 'Cascadia Code', monospace;
+}
+
+.intro__sub-dev::before {
+    content: 'const ';
+    text-transform: none;
+    font-weight: 300;
+    color: rgba(255,179,0,0.45);
+    font-size: 0.78em;
+    letter-spacing: 0.04em;
+    text-shadow: none;
+}
+
+/* Block cursor blink after "desarrollo" */
+.intro__sub-dev::after {
+    content: '█';
+    font-size: 0.7em;
+    font-weight: 300;
+    color: var(--color-gold);
+    animation: cursorBlink 1s steps(2) infinite;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* =====================================================
+   SCROLL HINT (Visual hint, no interaction)
+   ===================================================== */
+.intro__scroll-hint {
+    position: absolute;
+    top: calc(100% + 1.5dvh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    opacity: 0.85;
+    animation: scrollHintPulse 2.5s ease-in-out infinite;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.9rem, 1.4vw, 1.6rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(0,255,85,1);
+    text-shadow: 0 0 20px rgba(0,255,85,0.55), 0 0 50px rgba(0,255,85,0.2);
+}
+
+.intro__scroll-arrow {
+    font-size: clamp(3rem, 4.5vw, 6rem);
+    display: inline-block;
+    animation: scrollArrowBounce 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 0 14px rgba(0,255,85,0.65));
+}
+
+@keyframes scrollHintPulse {
+    0%, 100% { opacity: 0.65; }
+    50% { opacity: 1; }
+}
+
+@keyframes scrollArrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+/* =====================================================
+   LIGHTNING BOLTS
+   ===================================================== */
+.intro__bolt {
+    position: absolute;
+    width: clamp(4px, 0.35vw, 7px);
+    height: clamp(28vh, 38vh, 45vh);
+    z-index: 1;
+    opacity: 0;
+    animation: lightningFlash 4s ease-in-out infinite;
+}
+
+.intro__bolt::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        transparent, var(--color-gold) 30%, var(--color-magenta) 50%,
+        var(--color-gold) 70%, transparent);
+    clip-path: polygon(
+        40% 0%, 60% 0%, 70% 20%, 90% 22%,
+        55% 35%, 75% 38%, 52% 50%, 68% 52%,
+        48% 65%, 62% 68%, 45% 80%, 55% 100%,
+        45% 100%, 42% 85%, 50% 80%, 38% 70%,
+        52% 65%, 35% 55%, 48% 50%, 30% 35%,
+        48% 25%, 20% 18%, 42% 15%, 45% 0%
+    );
+}
+
+.intro__bolt::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(ellipse at 50% 50%,
+        rgba(255,179,0,0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.intro__bolt--l {
+    left: 10%;
+    top: 8%;
+    animation-delay: 0s;
+}
+
+.intro__bolt--r {
+    right: 10%;
+    top: 5%;
+    animation-delay: 2s;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 500px) {
+    .intro__half,
+    .intro__divider {
+        display: none;
+    }
+
+    .intro__title {
+        font-size: clamp(1.5rem, 9vw, 2.6rem);
+    }
+
+    .intro__title-dd {
+        white-space: normal;
+        text-align: center;
+        flex-direction: column;
+        gap: 0.125em;
+    }
+
+    .intro__subtitle {
+        font-size: clamp(0.85rem, 3.2vw, 1.1rem);
+        padding: 2.2em 0.8em 0.8em;
+        max-width: 94%;
+    }
+
+    .intro__sub-cadaver {
+        font-size: 1em;
+    }
+
+    .intro__deco {
+        display: none;
+    }
+}

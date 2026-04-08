@@ -1,0 +1,234 @@
+/* =====================================================
+   HEAD — Bride of Frankenstein 
+   ===================================================== */
+
+.head-wrap {
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    justify-content: flex-end;
+}
+
+/* ---- MAIN HEAD — organic oval/egg shape ---- */
+.head {
+    position: relative;
+    width: var(--head-width);
+    aspect-ratio: var(--head-aspect-ratio);
+    max-width: var(--head-max-width);
+    height: var(--head-height);
+    background:
+        /* Forehead highlight */
+        radial-gradient(ellipse 55% 35% at 42% 18%, rgba(180,200,160,0.2) 0%, transparent 60%),
+        /* Cheekbone highlights */
+        radial-gradient(ellipse 30% 20% at 25% 48%, rgba(160,185,145,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 20% at 75% 48%, rgba(120,145,105,0.1) 0%, transparent 60%),
+        /* Under-eye dark circles */
+        radial-gradient(ellipse 18% 8% at 33% 38%, rgba(50,20,60,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 18% 8% at 67% 38%, rgba(50,20,60,0.25) 0%, transparent 70%),
+        /* Veins showing through thin skin — temples and forehead */
+        radial-gradient(ellipse 8% 25% at 15% 25%, rgba(60,30,80,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 6% 20% at 85% 22%, rgba(50,25,70,0.1) 0%, transparent 70%),
+        radial-gradient(ellipse 12% 4% at 28% 18%, rgba(55,28,75,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 10% 3% at 70% 15%, rgba(45,22,65,0.08) 0%, transparent 70%),
+        /* Jaw shadow — narrowing at bottom */
+        radial-gradient(ellipse 50% 30% at 50% 88%, rgba(40,50,30,0.35) 0%, transparent 70%),
+        /* Main skin tone layers */
+        radial-gradient(ellipse 65% 45% at 32% 28%, var(--head-skin-light) 0%, transparent 52%),
+        radial-gradient(ellipse 40% 35% at 75% 72%, var(--head-skin-shadow) 0%, transparent 55%),
+        linear-gradient(168deg, var(--head-skin-light) 0%, var(--head-bg) 28%, var(--head-skin-dark) 58%, var(--head-bg) 85%, var(--head-skin-light) 100%);
+    /* Oval/egg shape — wider forehead, narrower jaw */
+    border-radius: var(--head-border-radius);
+    box-shadow:
+        inset 6px 0 24px rgba(255,255,255,0.06),
+        inset -6px 0 24px rgba(0,0,0,0.3),
+        inset 0 10px 25px rgba(100,140,80,0.08),
+        inset 0 -16px 35px rgba(0,0,0,0.45),
+        8px 18px 50px rgba(0,0,0,0.75),
+        0 0 80px rgba(60,100,40,0.10);
+    z-index: 2;
+}
+
+/* Skin texture: micro imperfections, pores, tiny veins */
+.head::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+        /* Tiny pore-like dots */
+        radial-gradient(circle 1px at 18% 22%, rgba(0,0,0,0.08) 0%, transparent 100%),
+        radial-gradient(circle 1px at 42% 16%, rgba(0,0,0,0.06) 0%, transparent 100%),
+        radial-gradient(circle 1px at 72% 28%, rgba(0,0,0,0.07) 0%, transparent 100%),
+        radial-gradient(circle 1px at 55% 62%, rgba(0,0,0,0.05) 0%, transparent 100%),
+        radial-gradient(circle 1px at 28% 72%, rgba(0,0,0,0.06) 0%, transparent 100%),
+        /* Slight specular highlights */
+        radial-gradient(circle 2px at 22% 18%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 79% 24%, rgba(255,255,255,0.08) 0%, transparent 100%),
+        /* Fine skin texture lines */
+        repeating-linear-gradient(
+            172deg,
+            transparent 0px, transparent 18px,
+            rgba(0,0,0,0.018) 18px, rgba(0,0,0,0.018) 19px
+        ),
+        repeating-linear-gradient(
+            82deg,
+            transparent 0px, transparent 22px,
+            rgba(0,0,0,0.012) 22px, rgba(0,0,0,0.012) 23px
+        );
+    pointer-events: none;
+}
+
+/* Electric flash on skin */
+.head::after {
+    content: '';
+    position: absolute;
+    inset: -0.3vmax;
+    border-radius: inherit;
+    animation: headElectric 4.5s ease-in-out infinite 0.8s;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* ---- CHEEK SCARS — terrifying sutured wounds ---- */
+.blush {
+    position: absolute;
+    top: 60%;
+    width: 20%;
+    height: 0.8vh;
+    z-index: 9;
+    /* Raised scar tissue — puffy, inflamed */
+    background:
+        linear-gradient(to bottom,
+            color-mix(in srgb, var(--scar-dark) 60%, transparent) 0%,
+            var(--scar-dark) 30%,
+            color-mix(in srgb, var(--scar-dark) 80%, transparent) 50%,
+            var(--scar-dark) 70%,
+            color-mix(in srgb, var(--scar-dark) 40%, transparent) 100%);
+    border-radius: 3px;
+    box-shadow:
+        /* Raised puffy edges */
+        0 -2px 3px rgba(140,80,90,0.3),
+        0 2px 3px rgba(140,80,90,0.3),
+        0 0 8px rgba(80,20,30,0.2),
+        /* Inner depth */
+        inset 0 1px 2px rgba(0,0,0,0.5);
+    left: 6%;
+    transform: rotate(-16deg);
+}
+
+/* Cross-stitch marks over the scar — realistic suture pattern */
+.blush::before {
+    content: '';
+    position: absolute;
+    inset: -1vh -0.2%;
+    background:
+        /* Individual stitch dots — top row */
+        radial-gradient(circle 2px at 10% 15%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 25% 15%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 40% 15%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 55% 15%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 70% 15%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 85% 15%, #0e200e 70%, transparent 71%),
+        /* Bottom row */
+        radial-gradient(circle 2px at 10% 85%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 25% 85%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 40% 85%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 55% 85%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 70% 85%, #0e200e 70%, transparent 71%),
+        radial-gradient(circle 2px at 85% 85%, #0e200e 70%, transparent 71%),
+        /* Cross threads connecting top-bottom */
+        repeating-linear-gradient(
+            65deg,
+            transparent 0px, transparent 3px,
+            rgba(14,32,14,0.5) 3px, rgba(14,32,14,0.5) 4px,
+            transparent 4px, transparent 9px
+        );
+}
+
+/* =====================================================
+   HAIR — Frankenstein female hair
+   ===================================================== */
+
+.hair {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 118%;
+    height: 80%;
+    z-index: 3;
+    pointer-events: none;
+    transition: filter 1.8s ease;
+}
+
+/* ── Top wild mass ── */
+.hair__top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82%;
+    height: 70%;
+    z-index: 3;
+    background:
+        /* Grease and matting patches */
+        radial-gradient(ellipse 28% 22% at 22% 38%, rgba(70,40,12,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse 20% 28% at 78% 28%, rgba(50,28,8,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 50% 65%, rgba(25,12,3,0.7) 0%, transparent 65%),
+        /* Dark brownish-black tangled base */
+        linear-gradient(165deg,
+            #1e0d04 0%, #2e1808 18%,
+            #1a0c04 35%, #3a2210 52%,
+            #1a0c04 68%, #2a1608 85%, #1e0d04 100%);
+    /* Jagged, wild, irregular top — Frankenstein spikes */
+    clip-path: polygon(
+        12% 100%, 5%  90%,  0%  70%,  2%  50%,  0%  34%,  3%  20%,
+        8%   8%, 12%  0%,  16% 10%, 14% 22%, 20%  8%, 26%  0%,
+        30%  12%, 28% 24%, 34%  8%, 40%  0%,  44% 14%, 42% 26%,
+        48%  10%, 52%  2%,  56% 16%, 54% 28%, 60%  6%, 66%  0%,
+        70%  12%, 68% 24%, 74%  4%, 80%  14%, 78% 26%, 84%  8%,
+        88%  0%,  94% 14%, 98% 32%, 100% 52%, 98% 70%, 95% 90%, 88% 100%
+    );
+    filter: drop-shadow(0 -0.3vmax 1vmax rgba(0,0,0,0.9));
+    transition: clip-path 1.8s ease, background 1.8s ease, filter 1.8s ease;
+}
+
+/* ── Wispy tangled side falls ── */
+.hair__side {
+    position: absolute;
+    top: 42%;
+    width: 24%;
+    height: 72%;
+    z-index: 2;
+    transition: clip-path 1.8s ease, background 1.8s ease, height 1.8s ease;
+}
+
+.hair__side--l {
+    inset-inline-start: -10%;
+    background: linear-gradient(to bottom right,
+    #2e1808 0%, #1a0c04 30%, #241206 58%, transparent 100%);
+    clip-path: polygon(
+        25%  0%,  68%  4%,  92% 16%,
+        100% 32%,  96% 50%, 100% 66%,
+        88%  82%,  72% 92%,  50% 100%,
+        22%  94%,   8% 76%,   2% 55%,
+        8%   35%,   2% 18%
+    );
+}
+    
+.hair__side--r {
+    inset-inline-end: -10%;
+    background: linear-gradient(to bottom left,
+        #2e1808 0%, #1a0c04 30%, #241206 58%, transparent 100%);
+    clip-path: polygon(
+        32%  0%,  75%  4%,  98% 18%,
+        92%  35%, 98%  55%,  92% 76%,
+        78%  92%,  50% 100%,  28% 94%,
+        12%  82%,   0% 66%,   4% 50%,
+        0%   32%,   8% 16%
+    );
+}

@@ -1,0 +1,245 @@
+/* =====================================================
+   ROOT CUSTOM PROPERTIES
+   ===================================================== */
+:root {
+    --bg: #000;
+    /* Bride of Frankenstein skin — pale green-grey */
+    --head-bg: #8a9a7a;
+    --head-skin-light: #a8b898;
+    --head-skin-dark: #5a6a4e;
+    --head-skin-shadow: #3e4a34;
+    /* Green eyes */
+    --iris-green: #00cc44;
+    --iris-dark: #006622;
+    --eye-glow: rgba(0,220,60,0.85);
+    --eye-glow-mid: rgba(0,180,40,0.65);
+    --eye-glow-outer: rgba(0,140,30,0.35);
+    /* Glasses */
+    --glasses-color-base: #6a1b9a;
+    --glasses-color-dark: #4a0e6e;
+    --glasses-color-highlight: #9c4dcc;
+    /* Mustard triangles */
+    --mustard: #d4a017;
+    --mustard-light: #f0c040;
+    /* Lips */
+    --lip-color-base: #6a1b9a;
+    --lip-color-dark: #3e0e5e;
+    --lip-color-highlight: #9040c0;
+    /* Brain */
+    --brain-dark: #121f2f;
+    --brain-red: #ea293d;
+    --brain-blue: #35a5ea;
+    --brain-purple: #9030ea;
+    --brain-teal: #1cb5ea;
+    /* Modal */
+    --modal-bg: #1a1a2e;
+    --modal-text: #e0e0e0;
+    --error-red: #ff4444;
+    --solution-green: #44cc66;
+    --card-bg: #0f0f23;
+    /* Scale tile for legs */
+    --scale-tile:
+        radial-gradient(ellipse 78% 55% at 50% 0%, rgba(90,220,40,.38) 0%, transparent 70%) 0 0 / 20px 14px,
+        radial-gradient(ellipse 78% 55% at 50% 0%, rgba(90,220,40,.38) 0%, transparent 70%) 10px 7px / 20px 14px;
+
+    /* Modal shrink behavior */
+    --modal-width: 58vw;
+    --modal-shrink-scale: 0.52;
+    --modal-shift-x: 2vw;
+
+    /* Vibrant palette */
+    --color-magenta: #E91E63;
+    --color-teal: #00897B;
+    --color-gold: #FFB300;
+    --color-blue: #1E88E5;
+    --color-coral: #FF5722;
+    --color-purple: #9B5DE5;
+    --color-green: #2E7D32;
+
+    /* ─── Iris gradient stops ─── */
+    --iris-bright: #00ff55;
+    --iris-mid:    #008830;
+    --iris-deep:   #005520;
+    --iris-abyss:  #001a08;
+
+    /* ─── Mouth cavity ─── */
+    --mouth-bg: #0a0015;
+
+    /* ─── Sclera (eye white) ─── */
+    --sclera-c1: #e8e0d0;
+    --sclera-c2: #d8d0b8;
+    --sclera-c3: #c8b8a0;
+    --sclera-c4: #b0a088;
+
+    /* ─── Eyelid ─── */
+    --lid-c1: #2e3828;
+    --lid-c2: #3e4a34;
+    --lid-c3: #4a5840;
+
+    /* ─── Teeth ─── */
+    --tooth-c1: #ddd8e8;
+    --tooth-c2: #c8c0d8;
+    --tooth-c3: #b0a8c4;
+    --tooth-c4: #988cb0;
+    --tooth-c5: #7a6e98;
+
+    /* ─── Scar / cheek ─── */
+    --scar-dark: #2a1820;
+
+    /* ─── Brain shell ─── */
+    --brain-border-c: #2a3828;
+    --brain-bg-c: #150530;
+    
+    /* ─── Head ─── */
+    --head-aspect-ratio: 3/4;
+    --head-max-width: 70%;
+    --head-height: 60%;
+    --head-width: auto;
+    --head-border-radius: 45% 45% 42% 42% / 48% 48% 40% 40%;
+
+    /* ─── Glasses ─── */
+    --glasses-color-base:    #6a1b9a;
+    --glasses-height: 20%;
+    --glasses-polygon-color: #d4a017;
+    --glasses-border-width: 1vmin;
+    --glasses-width: 90%;
+    --glasses-height: 25%;
+    --glasses-lens-width: calc(50% - var(--glasses-border-width));
+    --glasses-lens-height: 100%;
+    --glasses-lens-l-border-radius: 80% 40% 40% 40% / 0% 60% 60% 100%;
+    --glasses-bridge-width: calc(var(--glasses-border-width) * 3);
+    --glasses-bridge-height: var(--glasses-border-width);
+    --glasses-polygon-width: calc(var(--glasses-border-width) * 5);
+    --glasses-polygon-position-x: calc(var(--glasses-border-width) * -2);
+    --glasses-polygon-height: calc(var(--glasses-border-width) * 3);
+    --glasses-lens-l-polygon: polygon(100% 0%,
+        0% 0%,
+        0% 100%,
+        45% 100%,
+        45% 60%,
+        60% 25%,
+        100% 0%);
+    --glasses-lens-r-border-radius: 40% 80% 40% 40% / 60% 0% 100% 60%;
+    --glasses-lens-r-polygon: polygon(0% 0%,
+        100% 0%,
+        100% 100%,
+        55% 100%,
+        55% 60%,
+        40% 25%,
+        0% 0%);
+    --glasses-z-index: 9;   
+
+    /* ─── Trunk ─── */
+    --trunk-width: 30%;
+    --trunk-height: auto;
+    --trunk-min-height: 40dvh;
+    --trunk-max-height: 80dvh;
+    --trunk-aspect-ratio: 1/2;
+    --trunk-collar-width: 40%;
+    --trunk-collar-height: 5%;
+    --trunk-waist-width: 80%;
+    --trunk-waist-height: 10%;
+    
+    /* ─── Trunk colors (Tin Man metallic) ─── */
+    --trunk-c1: #edf2f5;
+    --trunk-c2: #c8d8e2;
+    --trunk-c3: #96adb8;
+    --trunk-c4: #627a88;
+    --trunk-c5: #8fa8b6;
+    --trunk-c6: #c4d2dc;
+    --trunk-dark: #3e5060;
+    --trunk-deep: #4a6878;
+    --collar-c1: #d8e4ea;
+    --collar-c2: #7a9aaa;
+
+    /* ─── Arms ─── */
+    --arm-position-x: calc(100% - (var(--arm-width) * 0.75));
+    --arm-position-y: 0;
+    --arm-width: 30%;
+    --arm-shoulder-width: 100%;
+    --arm-shoulder-height: auto;
+    --arm-shoulder-aspect-ratio: 1/1;
+    --arm-upper-width: 100%;
+    --arm-upper-height: auto;
+    --arm-upper-aspect-ratio: 3/5;
+    --arm-elbow-width: 80%;
+    --arm-elbow-height: auto;
+    --arm-elbow-aspect-ratio: 1/1;
+    --arm-lower-width: 80%;
+    --arm-lower-height: auto;
+    --arm-lower-aspect-ratio: 3/5;
+    --arm-lower-margin-block-start: calc(var(--arm-lower-width) * -1.15);
+    --arm-lower-margin-inline-start: calc(var(--arm-gap) * -2);
+    --arm-gap: 1vmax;
+    --arm-rotation: 45deg;
+
+    /* ─── Hands ─── */
+    --hand-width: 100%;
+    --hand-margin-inline-start: calc((var(--hand-width) * -3) + var(--hand-gap));
+    --hand-margin-block-start: calc((var(--hand-width) * -1.5) - var(--hand-gap));
+    --hand-gap: 0.5vmax;
+    --hand-fingers-width: 80%;
+    --hand-fingers-height: auto;
+    --hand-fingers-gap: 0.25vmax;
+    --hand-fingers-aspect-ratio: 2/1;
+    --hand-palm-width: 100%;
+    --hand-palm-height: auto;
+    --hand-palm-aspect-ratio: 4/3;
+
+    /* ─── Hands colors ─── */
+    --hand-c1: #d8e4ea;
+    --hand-c2: #8fa8b6;
+    --hand-c3: #4a6878;
+
+    /* ─── Legs ─── */
+    --legs-width: 100%;
+    --legs-height: 90dvh;
+    --leg-width: 12%;
+    --leg-height: 100%;
+    --leg-thigh-width: 100%;
+    --leg-thigh-height: 30%;
+    --leg-joint-width: auto;
+    --leg-joint-height: 10%;
+    --leg-joint-aspect-ratio: 3/2;
+    --leg-shin-width: 70%;
+    --leg-shin-height: 30%;
+    --leg-ankle-width: 80%;
+    --leg-ankle-height: 5%;
+
+    --foot-width: 100%;
+    --foot-height: 25%;
+    --foot-heel-width: 100%;
+    --foot-heel-height: 40%;
+    --foot-toes-width: 100%;
+    --foot-toes-height: 60%;
+
+    /* ─── Legs colors (Lizard) ─── */
+    --leg-c1: #56a01e;
+    --leg-c2: #4a8c18;
+    --leg-c3: #2e6010;
+    --leg-c4: #1a4208;
+    --leg-c5: #2c6e14;
+    --leg-c6: #3a8018;
+    --leg-ridge: #3a7010;
+    --leg-crest-c1: #a0e040;
+    --leg-crest-c2: #5aaa1c;
+    --leg-crest-c3: #266008;
+    --joint-c1: #5aaa20;
+    --joint-c2: #286008;
+    --joint-c3: #3c8c14;
+    --joint-bump-c1: #6ac026;
+    --joint-bump-c2: #2c6408;
+    --ankle-c: #2c6010;
+    --heel-c1: #346014;
+    --heel-c2: #1c3c08;
+    --heel-c3: #254e0a;
+    --toe-c1: #4a9018;
+    --toe-c2: #234808;
+    --toe-c3: #2e6010;
+    --claw-c: #1a2408;
+    --claw-hl: rgba(90,130,20,.55);
+
+    /* Pubis */
+    --pubis-width: 25%;
+    --pubis-height: 20%;
+}

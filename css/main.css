@@ -1,0 +1,46 @@
+/* =====================================================
+   MAIN CSS — Design System o Disaster System
+   Import order follows the cascade:
+   1. Base (reset, variables, typography)
+   2. Layout (corpse grid, modal layout)
+   3. Components (body parts)
+   4. Slides (intro, timer)
+   5. Modal (panel, cards, demos)
+   6. DS Elements (badges, swatches, buttons, inputs, toggles, tooltips, grids)
+   7. Animations (all keyframes)
+   8. Responsive (media queries)
+   ===================================================== */
+
+@import 'base/_variables.css';
+@import 'base/_themes.css';
+@import 'base/_reset.css';
+@import 'base/_typography.css';
+@import 'base/_buttons.css';
+
+@import 'layout/_corpse.css';
+@import 'layout/_modal-layout.css';
+@import 'layout/_site-header.css';
+
+@import 'components/_brain.css';
+@import 'components/_ear.css';
+@import 'components/_head.css';
+@import 'components/_neck.css';
+@import 'components/_face.css';
+@import 'components/_glasses.css';
+@import 'components/_trunk.css';
+@import 'components/_arms.css';
+@import 'components/_legs.css';
+@import 'components/_full-corpse.css';
+@import 'components/_part-cta.css';
+
+@import 'slides/_intro.css';
+@import 'slides/_timer.css';
+
+@import 'modal/_modal.css';
+@import 'modal/_error-cards.css';
+@import 'modal/_demo-boxes.css';
+
+@import 'animations/_keyframes.css';
+@import 'animations/_transitions.css';
+
+@import '_responsive.css';

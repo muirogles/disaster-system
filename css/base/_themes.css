@@ -1,0 +1,408 @@
+/* =====================================================
+   THEMES — All theme-variant tokens + overrides
+   -----------------------------------------------------
+   Architecture:
+     _variables.css → Primitive + layout tokens (theme-agnostic)
+     _themes.css    → THIS FILE. Typed @property registrations +
+                      theme variants (dark default, design, light).
+     Component CSS  → Uses var(--token) directly, never declares
+                      component-scoped :root blocks.
+
+   Themes:
+     :root                      → Dark "DISASTER" (default)
+     [data-theme="light"]       → Light mode (WCAG AA text contrast)
+     [data-theme="design"]      → Reanimated "human" variant
+                                  (scoped to .corpse__item--full)
+
+   Light theme is applied on <html data-theme="light"> via the
+   theme toggle FAB and persisted to localStorage.
+   ===================================================== */
+
+   /* TODO: light theme and tokens configuration */
+
+/* =====================================================
+   @property — Typed custom props for gradient interpolation.
+   Required so color tokens animate smoothly on theme change.
+   Registered tokens use computed-value-time substitution: any
+   custom property that references them must use them DIRECTLY
+   in the final property (never through an unregistered
+   intermediate custom property declared at :root).
+   ===================================================== */
+@property --iris-bright     { syntax: '<color>'; inherits: true; initial-value: #00ff55; }
+@property --iris-mid        { syntax: '<color>'; inherits: true; initial-value: #008830; }
+@property --iris-deep       { syntax: '<color>'; inherits: true; initial-value: #005520; }
+@property --iris-abyss      { syntax: '<color>'; inherits: true; initial-value: #001a08; }
+@property --mouth-bg        { syntax: '<color>'; inherits: true; initial-value: #0a0015; }
+@property --head-bg         { syntax: '<color>'; inherits: true; initial-value: #8a9a7a; }
+@property --head-skin-light { syntax: '<color>'; inherits: true; initial-value: #a8b898; }
+@property --head-skin-dark  { syntax: '<color>'; inherits: true; initial-value: #5a6a4e; }
+@property --head-skin-shadow{ syntax: '<color>'; inherits: true; initial-value: #3e4a34; }
+@property --iris-green      { syntax: '<color>'; inherits: true; initial-value: #00cc44; }
+@property --iris-dark       { syntax: '<color>'; inherits: true; initial-value: #006622; }
+@property --lip-color-base       { syntax: '<color>'; inherits: true; initial-value: #6a1b9a; }
+@property --lip-color-dark       { syntax: '<color>'; inherits: true; initial-value: #3e0e5e; }
+@property --lip-color-highlight  { syntax: '<color>'; inherits: true; initial-value: #9040c0; }
+@property --glasses-color-base        { syntax: '<color>'; inherits: true; initial-value: #6a1b9a; }
+@property --glasses-color-dark        { syntax: '<color>'; inherits: true; initial-value: #4a0e6e; }
+@property --glasses-color-highlight   { syntax: '<color>'; inherits: true; initial-value: #9c4dcc; }
+@property --mustard         { syntax: '<color>'; inherits: true; initial-value: #d4a017; }
+@property --sclera-c1       { syntax: '<color>'; inherits: true; initial-value: #e8e0d0; }
+@property --sclera-c2       { syntax: '<color>'; inherits: true; initial-value: #d8d0b8; }
+@property --sclera-c3       { syntax: '<color>'; inherits: true; initial-value: #c8b8a0; }
+@property --sclera-c4       { syntax: '<color>'; inherits: true; initial-value: #b0a088; }
+@property --lid-c1          { syntax: '<color>'; inherits: true; initial-value: #2e3828; }
+@property --lid-c2          { syntax: '<color>'; inherits: true; initial-value: #3e4a34; }
+@property --lid-c3          { syntax: '<color>'; inherits: true; initial-value: #4a5840; }
+@property --tooth-c1        { syntax: '<color>'; inherits: true; initial-value: #ddd8e8; }
+@property --tooth-c2        { syntax: '<color>'; inherits: true; initial-value: #c8c0d8; }
+@property --tooth-c3        { syntax: '<color>'; inherits: true; initial-value: #b0a8c4; }
+@property --tooth-c4        { syntax: '<color>'; inherits: true; initial-value: #988cb0; }
+@property --tooth-c5        { syntax: '<color>'; inherits: true; initial-value: #7a6e98; }
+@property --scar-dark       { syntax: '<color>'; inherits: true; initial-value: #2a1820; }
+@property --brain-border-c  { syntax: '<color>'; inherits: true; initial-value: #2a3828; }
+@property --brain-bg-c      { syntax: '<color>'; inherits: true; initial-value: #150530; }
+@property --trunk-c1        { syntax: '<color>'; inherits: true; initial-value: #edf2f5; }
+@property --trunk-c2        { syntax: '<color>'; inherits: true; initial-value: #c8d8e2; }
+@property --trunk-c3        { syntax: '<color>'; inherits: true; initial-value: #96adb8; }
+@property --trunk-c4        { syntax: '<color>'; inherits: true; initial-value: #627a88; }
+@property --trunk-c5        { syntax: '<color>'; inherits: true; initial-value: #8fa8b6; }
+@property --trunk-c6        { syntax: '<color>'; inherits: true; initial-value: #c4d2dc; }
+@property --trunk-dark      { syntax: '<color>'; inherits: true; initial-value: #3e5060; }
+@property --trunk-deep      { syntax: '<color>'; inherits: true; initial-value: #4a6878; }
+@property --collar-c1       { syntax: '<color>'; inherits: true; initial-value: #d8e4ea; }
+@property --collar-c2       { syntax: '<color>'; inherits: true; initial-value: #7a9aaa; }
+@property --hand-c1         { syntax: '<color>'; inherits: true; initial-value: #d8e4ea; }
+@property --hand-c2         { syntax: '<color>'; inherits: true; initial-value: #8fa8b6; }
+@property --hand-c3         { syntax: '<color>'; inherits: true; initial-value: #4a6878; }
+@property --leg-c1          { syntax: '<color>'; inherits: true; initial-value: #56a01e; }
+@property --leg-c2          { syntax: '<color>'; inherits: true; initial-value: #4a8c18; }
+@property --leg-c3          { syntax: '<color>'; inherits: true; initial-value: #2e6010; }
+@property --leg-c4          { syntax: '<color>'; inherits: true; initial-value: #1a4208; }
+@property --leg-c5          { syntax: '<color>'; inherits: true; initial-value: #2c6e14; }
+@property --leg-c6          { syntax: '<color>'; inherits: true; initial-value: #3a8018; }
+@property --leg-ridge       { syntax: '<color>'; inherits: true; initial-value: #3a7010; }
+@property --leg-crest-c1    { syntax: '<color>'; inherits: true; initial-value: #a0e040; }
+@property --leg-crest-c2    { syntax: '<color>'; inherits: true; initial-value: #5aaa1c; }
+@property --leg-crest-c3    { syntax: '<color>'; inherits: true; initial-value: #266008; }
+@property --joint-c1        { syntax: '<color>'; inherits: true; initial-value: #5aaa20; }
+@property --joint-c2        { syntax: '<color>'; inherits: true; initial-value: #286008; }
+@property --joint-c3        { syntax: '<color>'; inherits: true; initial-value: #3c8c14; }
+@property --joint-bump-c1   { syntax: '<color>'; inherits: true; initial-value: #6ac026; }
+@property --joint-bump-c2   { syntax: '<color>'; inherits: true; initial-value: #2c6408; }
+@property --ankle-c         { syntax: '<color>'; inherits: true; initial-value: #2c6010; }
+@property --heel-c1         { syntax: '<color>'; inherits: true; initial-value: #346014; }
+@property --heel-c2         { syntax: '<color>'; inherits: true; initial-value: #1c3c08; }
+@property --heel-c3         { syntax: '<color>'; inherits: true; initial-value: #254e0a; }
+@property --toe-c1          { syntax: '<color>'; inherits: true; initial-value: #4a9018; }
+@property --toe-c2          { syntax: '<color>'; inherits: true; initial-value: #234808; }
+@property --toe-c3          { syntax: '<color>'; inherits: true; initial-value: #2e6010; }
+@property --claw-c          { syntax: '<color>'; inherits: true; initial-value: #1a2408; }
+
+
+/* =====================================================
+   SEMANTIC PAGE-CHROME TOKENS — used by modal, footer, body.
+   Dark defaults here; [data-theme="light"] overrides below.
+   WCAG AA target: body text ≥ 4.5:1, large text ≥ 3:1.
+   ===================================================== */
+:root {
+    /* Page surfaces */
+    --page-bg:         #000;
+    --page-text-hi:    rgba(255, 255, 255, 0.92);   /* ~18:1 on #000 */
+    --page-text-mid:   rgba(255, 255, 255, 0.70);   /* ~13:1 */
+    --page-text-dim:   rgba(255, 255, 255, 0.50);   /* ~9:1  */
+    --page-surface:    rgba(255, 255, 255, 0.03);
+    --page-surface-em: rgba(255, 255, 255, 0.055);
+    --page-border:     rgba(255, 255, 255, 0.06);
+    --page-border-em:  rgba(255, 255, 255, 0.10);
+    --page-code-bg:    rgba(0, 0, 0, 0.42);
+
+    /* Footer */
+    --footer-bg:       rgba(8, 6, 18, 0.88);
+    --footer-border:   rgba(155, 93, 229, 0.20);
+    --footer-name:     rgba(255, 255, 255, 0.88);
+    --footer-icon:     rgba(255, 255, 255, 0.50);
+
+    color-scheme: dark;
+}
+
+
+/* =====================================================
+   LIGHT THEME — set on <html data-theme="light">
+   Warm cream surface, deep espresso text. Preserves the
+   magenta/purple/gold accent palette.
+   Contrast:
+     #1a1410 on #f5f1e8 ≈ 15.2:1   (hi)
+     rgba(26,20,16,.78) on #f5f1e8 ≈ 11.1:1  (mid)
+     rgba(26,20,16,.58) on #f5f1e8 ≈ 6.9:1   (dim)
+   ===================================================== */
+:root[data-theme="light"],
+[data-theme="light"] {
+    /* Page surfaces */
+    --page-bg:         #f5f1e8;
+    --page-text-hi:    rgba(26, 20, 16, 0.95);
+    --page-text-mid:   rgba(26, 20, 16, 0.78);
+    --page-text-dim:   rgba(26, 20, 16, 0.58);
+    --page-surface:    rgba(26, 20, 16, 0.025);
+    --page-surface-em: rgba(26, 20, 16, 0.055);
+    --page-border:     rgba(26, 20, 16, 0.10);
+    --page-border-em:  rgba(26, 20, 16, 0.18);
+    --page-code-bg:    rgba(26, 20, 16, 0.06);
+
+    /* Footer */
+    --footer-bg:       rgba(255, 252, 245, 0.94);
+    --footer-border:   rgba(155, 93, 229, 0.35);
+    --footer-name:     rgba(26, 20, 16, 0.92);
+    --footer-icon:     rgba(26, 20, 16, 0.55);
+
+    /* Legacy flat tokens used by modal/cards */
+    --bg:              #f5f1e8;
+    --modal-bg:        #ffffff;
+    --modal-text:      #1a1410;
+    --card-bg:         #ffffff;
+    --error-red:       #b91c1c;   /* 5.9:1 on cream */
+    --solution-green:  #15803d;   /* 5.2:1 on cream */
+
+    color-scheme: light;
+}
+
+
+/* =====================================================
+   DESIGN THEME — "Reanimated" human variant
+   Scoped to the .corpse__item--full slide. Does NOT apply
+   to document chrome. Moved from _full-corpse.css so all
+   theme tokens live in one place.
+   ===================================================== */
+.corpse__item--full[data-theme="design"] {
+
+    /* ── Skin: warm Mediterranean human ── */
+    --head-bg:          #c8855c;
+    --head-skin-light:  #e8a880;
+    --head-skin-dark:   #9a5535;
+    --head-skin-shadow: #7a3820;
+
+    /* ── Eyes: warm brown / hazel ── */
+    --iris-green:      #8B5E3C;
+    --iris-dark:       #5C3D28;
+    --eye-glow:        rgba(139,94,60,0.12);
+    --eye-glow-mid:    rgba(139,94,60,0.06);
+    --eye-glow-outer:  rgba(139,94,60,0.03);
+    --sclera-c1:       #f8f4f0;
+    --sclera-c2:       #f0ece4;
+    --sclera-c3:       #e8e0d8;
+    --sclera-c4:       #e0d8cc;
+    --lid-c1:          #c08060;
+    --lid-c2:          #a87050;
+    --lid-c3:          #bc7858;
+
+    /* ── Lips: natural rose ── */
+    --lip-color-base:      #c0607a;
+    --lip-color-dark:      #903045;
+    --lip-color-highlight: #e090a0;
+
+    /* ── Teeth: clean white ── */
+    --tooth-c1: #f0ede8;
+    --tooth-c2: #e8e2da;
+    --tooth-c3: #e0d8cc;
+    --tooth-c4: #d8d0c0;
+    --tooth-c5: #d0c8b4;
+
+    /* ── Scar → natural blush ── */
+    --scar-dark: #e8a8b8;
+
+    /* ── Brain: dark hair / skull ── */
+    --brain-border-c: #1a0e08;
+    --brain-bg-c:     #160c06;
+
+    /* ── Trunk: navy fabric shirt/jacket ── */
+    --trunk-c1:   #2a4a7c;
+    --trunk-c2:   #1e3868;
+    --trunk-c3:   #162e58;
+    --trunk-c4:   #102448;
+    --trunk-c5:   #1a3464;
+    --trunk-c6:   #243878;
+    --trunk-dark: #0a1428;
+    --trunk-deep: #061020;
+    --collar-c1:  #0d1e38;
+    --collar-c2:  #07111e;
+
+    /* ── Hands: human skin ── */
+    --hand-c1: #e8a880;
+    --hand-c2: #c8855c;
+    --hand-c3: #9a5535;
+
+    /* ── Legs: dark denim jeans ── */
+    --leg-c1:         #2a3a58;
+    --leg-c2:         #243454;
+    --leg-c3:         #1e2e4a;
+    --leg-c4:         #162238;
+    --leg-c5:         #1e3050;
+    --leg-c6:         #243454;
+    --leg-ridge:      #1e2e4a;
+    --leg-crest-c1:   #2a3a58;
+    --leg-crest-c2:   #1e2e48;
+    --leg-crest-c3:   #162238;
+    --joint-c1:       #2c4060;
+    --joint-c2:       #1e3050;
+    --joint-c3:       #243858;
+    --joint-bump-c1:  #344870;
+    --joint-bump-c2:  #1e3050;
+    --ankle-c:        #1e2e4a;
+    --heel-c1:        #22385e;
+    --heel-c2:        #1a2c4a;
+    --heel-c3:        #1e3058;
+    --toe-c1:         #243860;
+    --toe-c2:         #1a2a3e;
+    --toe-c3:         #1c3050;
+    --claw-c:         #060810;
+    --claw-hl:        rgba(20,30,60,.3);
+
+    /* ── Remove lizard scale texture ── */
+    --scale-tile: linear-gradient(transparent, transparent);
+
+    /* ── Iris: warm brown ── */
+    --iris-bright: #d4944a;
+    --iris-mid:    #6b3e20;
+    --iris-deep:   #3d2210;
+    --iris-abyss:  #1e0e06;
+    --mouth-bg:    #080008;
+}
+
+
+/* =====================================================
+   LIGHT THEME — component overrides for hardcoded colors
+   These target components that hardcode rgba(255,255,255,…)
+   or dark literals instead of using page-chrome tokens.
+   Kept minimal; most modal styles already use --md-* which
+   we remap below.
+   ===================================================== */
+
+[data-theme="light"] body {
+    background: var(--page-bg);
+    color: var(--page-text-hi);
+}
+
+/* Modal internal tokens (defined in _modal.css) — flip to dark-on-light */
+[data-theme="light"] {
+    --md-code-bg:    var(--page-code-bg);
+    --md-surface:    var(--page-surface);
+    --md-surface-em: var(--page-surface-em);
+    --md-border:     var(--page-border);
+    --md-border-em:  var(--page-border-em);
+    --md-text-dim:   var(--page-text-dim);
+    --md-text-mid:   var(--page-text-mid);
+    --md-text-hi:    var(--page-text-hi);
+}
+
+/* Modal body text that hardcodes rgba(255,255,255,…) */
+[data-theme="light"] .modal__text {
+    color: var(--page-text-mid);
+}
+
+[data-theme="light"] .modal__close {
+    background: rgba(233, 30, 99, 0.06);
+    color: #b81c4a;
+}
+[data-theme="light"] .modal__close::before {
+    color: rgba(184, 28, 74, 0.55);
+}
+[data-theme="light"] .modal__close:hover {
+    background: rgba(233, 30, 99, 0.14);
+    color: #8a1538;
+}
+
+/* Modal scrollbar thumb */
+[data-theme="light"] .modal::-webkit-scrollbar-thumb {
+    background: rgba(26, 20, 16, 0.14);
+}
+
+/* Footer — swaps to light card */
+[data-theme="light"] .site-footer {
+    background: var(--footer-bg);
+    border-color: var(--footer-border);
+}
+[data-theme="light"] .site-footer__name {
+    color: var(--footer-name);
+    text-shadow: 0 0 20px rgba(155, 93, 229, 0.15);
+}
+[data-theme="light"] .site-footer__social-link {
+    color: var(--footer-icon);
+}
+[data-theme="light"] .site-footer__social-link:hover {
+    color: #6a1b9a;
+    background: rgba(155, 93, 229, 0.12);
+    border-color: rgba(155, 93, 229, 0.35);
+}
+[data-theme="light"] .site-footer__license {
+    color: rgba(106, 27, 154, 0.55);
+}
+[data-theme="light"] .site-footer__year {
+    color: rgba(106, 27, 154, 0.40);
+}
+
+
+/* =====================================================
+   THEME TOGGLE FAB — sits next to .lang-btn (bottom-left).
+   Mirrors lang-btn sizing + styling so they read as a pair.
+   ===================================================== */
+.theme-fab {
+    position: fixed;
+    bottom: 1.5rem;
+    /* Sits to the right of .lang-btn. lang-btn is ~3.5rem wide
+       ("EN" text + padding); gap of 0.5rem between the two. */
+    left: calc(1.5rem + 3.75rem + 0.5rem);
+    z-index: 10005;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border-radius: 10px;
+
+    background: rgba(8, 6, 18, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(155, 93, 229, 0.3);
+    color: rgba(196, 160, 245, 0.85);
+    cursor: pointer;
+
+    transition: background 0.25s, color 0.25s, border-color 0.25s,
+                transform 0.25s, box-shadow 0.25s;
+}
+
+.theme-fab:hover {
+    background: rgba(155, 93, 229, 0.1);
+    border-color: rgba(155, 93, 229, 0.55);
+    color: rgba(196, 160, 245, 0.98);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(155, 93, 229, 0.2);
+}
+
+.theme-fab:focus-visible {
+    outline: 3px solid rgba(155, 93, 229, 0.8);
+    outline-offset: 4px;
+}
+
+.theme-fab__icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    display: block;
+}
+.theme-fab .theme-fab__sun  { display: none; }
+.theme-fab .theme-fab__moon { display: block; }
+
+/* Light mode styling — warm cream pill with purple accent */
+[data-theme="light"] .theme-fab {
+    background: rgba(255, 252, 245, 0.92);
+    border-color: rgba(106, 27, 154, 0.35);
+    color: #6a1b9a;
+}
+[data-theme="light"] .theme-fab:hover {
+    background: rgba(155, 93, 229, 0.12);
+    border-color: rgba(106, 27, 154, 0.6);
+    color: #4a0e6e;
+    box-shadow: 0 8px 28px rgba(106, 27, 154, 0.18);
+}
+[data-theme="light"] .theme-fab .theme-fab__sun  { display: block; }
+[data-theme="light"] .theme-fab .theme-fab__moon { display: none; }

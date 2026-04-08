@@ -1,0 +1,120 @@
+/* =====================================================
+    GLASSES — Tin
+    ===================================================== */
+
+:root {
+    @media (orientation: portrait) {
+        --glasses-border-width: 1vmax;
+    }
+}
+
+.glasses {
+    width: var(--glasses-width);
+    height: var(--glasses-height);
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: var(--glasses-z-index);
+}
+
+.glasses__lens {
+    position: absolute;
+    width: var(--glasses-lens-width);
+    height: var(--glasses-lens-height);
+    border: var(--glasses-border-width) solid var(--glasses-color-base);
+    box-shadow:
+    0 0 10px rgba(106,27,154,0.45),
+    0 0 25px rgba(106,27,154,0.15),
+    inset 0 0 15px rgba(106,27,154,0.12),
+    inset 0 2px 4px rgba(255,255,255,0.05);
+
+}
+.glasses__lens::after {
+    content: "";
+    position: absolute;
+    width: var(--glasses-polygon-width);
+    height: var(--glasses-polygon-height);
+    background: var(--glasses-polygon-color);
+}
+
+.glasses__lens--l {
+    inset-inline-start: 0;
+    border-radius: var(--glasses-lens-l-border-radius);
+
+    /* Broken lens */
+    opacity: 0.8;
+    background-image: linear-gradient(200deg, transparent 49.5%, rgba(240, 248, 255, 0.9) 50%, transparent 50.5%), linear-gradient(110deg, transparent 49.5%, rgba(240, 248, 255, 0.9) 50%, transparent 50.5%), linear-gradient(160deg, transparent 49.5%, rgba(240, 248, 255, 0.9) 50%, transparent 50.5%), radial-gradient(circle at 30% 40%, rgba(240, 248, 255, 0.9) 1px, transparent 2px);
+    background-color: rgba(173, 216, 230, 0.7);
+    backdrop-filter: blur(5px);
+    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 15px inset;
+}
+
+.glasses__lens--l::after {
+    inset-inline-start: var(--glasses-polygon-position-x);
+    clip-path: var(--glasses-lens-l-polygon);
+    
+    /* Broken lens */
+    transform: rotate(-45deg);
+}
+
+.glasses__lens--r {
+    inset-inline-end: 0;
+    border-radius: var(--glasses-lens-r-border-radius);
+}
+
+.glasses__lens--r::after {
+    inset-inline-end: var(--glasses-polygon-position-x);
+    clip-path: var(--glasses-lens-r-polygon);
+}
+
+/* Glasses bridge — soft arc */
+.glasses__bridge {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--glasses-bridge-width);
+    height: var(--glasses-bridge-height);
+    background: linear-gradient(to bottom, var(--glasses-color-highlight), var(--glasses-color-base));
+    border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+}
+
+/* Glasses arms (temples) */
+.glasses__arm {
+    position: absolute;
+    top: 38%;
+    width: 5vw;
+    height: 0.5vh;
+    background: linear-gradient(to right, var(--glasses-color-base), var(--glasses-color-dark));
+    border-radius: 2px;
+}
+
+.glasses__arm--l {
+    left: -4.5vw;
+    transform: rotate(5deg);
+    background: linear-gradient(to left, var(--glasses-color-base), var(--glasses-color-dark));
+}
+
+.glasses__arm--r {
+    right: -4.5vw;
+    transform: rotate(-5deg);
+}
+
+/* Restore Broken lens in reanimated system */
+.corpse__item--full[data-theme="design"] .glasses__lens--l {
+    opacity: 0.8;
+    background-image: none;
+    background-color: transparent;
+    backdrop-filter: none;
+    box-shadow:
+    0 0 10px rgba(106,27,154,0.45),
+    0 0 25px rgba(106,27,154,0.15),
+    inset 0 0 15px rgba(106,27,154,0.12),
+    inset 0 2px 4px rgba(255,255,255,0.05);
+}
+
+.corpse__item--full[data-theme="design"] .glasses__lens--l::after {
+    transform: none;
+}

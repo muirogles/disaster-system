@@ -1,0 +1,190 @@
+/* =====================================================
+   ALL @KEYFRAMES — consolidated animations
+   ===================================================== */
+
+/* Removed: introGlow, ctaPulse, blink, starsFloat (unused after intro redesign) */
+
+@keyframes lightningFlash {
+    0%, 85%, 100% { opacity: 0; }
+    87% { opacity: 1; }
+    89% { opacity: 0; }
+    91% { opacity: 0.8; }
+    93% { opacity: 0; }
+    95% { opacity: 1; }
+    97% { opacity: 0; }
+}
+
+@keyframes heartbeatPulse {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.08); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.04); }
+    60% { transform: scale(1); }
+}
+
+@keyframes alarmFlash {
+    0%, 100% { background: rgba(0,0,0,0.92); }
+    50% { background: rgba(180,0,0,0.6); }
+}
+
+@keyframes alarmShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes headElectric {
+    0%, 87%, 100% { box-shadow: none; opacity: 0; }
+    89%  { box-shadow: 0 0 20px 5px rgba(0,220,60,0.5), 0 0 55px 14px rgba(0,180,40,0.25); opacity: 1; }
+    92%  { box-shadow: none; opacity: 0; }
+    95%  { box-shadow: 0 0 28px 8px rgba(0,255,80,0.7), 0 0 70px 20px rgba(0,200,50,0.4); opacity: 1; }
+    97%  { box-shadow: none; opacity: 0; }
+}
+
+@keyframes brainPulseGlow {
+    0%, 100% {
+        box-shadow: 0 -8px 35px rgba(255,0,200,0.4), 0 -5px 25px rgba(0,200,255,0.3), inset 0 0 30px rgba(0,0,0,0.6), inset 0 0 60px rgba(120,20,180,0.2);
+    }
+    50% {
+        box-shadow: 0 -10px 50px rgba(255,0,200,0.6), 0 -8px 40px rgba(0,255,150,0.4), inset 0 0 30px rgba(0,0,0,0.5), inset 0 0 80px rgba(160,40,220,0.4);
+    }
+}
+
+@keyframes lobePulse {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50%      { transform: scale(1.03); filter: brightness(1.15); }
+}
+
+@keyframes veinPulse {
+    0%, 100% { opacity: 0.6; width: 2px; filter: drop-shadow(0 0 4px rgba(0,255,255,0.5)); }
+    50%      { opacity: 1;   width: 3px; filter: drop-shadow(0 0 10px rgba(255,0,255,0.9)); }
+}
+
+@keyframes gyrusPulse {
+    0%, 100% { border-color: rgba(0,255,255,0.35); box-shadow: inset 0 0 8px rgba(0,229,255,0.15); }
+    35% { border-color: rgba(255,0,255,0.6); box-shadow: inset 0 0 16px rgba(255,20,147,0.35), 0 0 10px rgba(0,255,255,0.25); }
+    65% { border-color: rgba(118,255,3,0.45); box-shadow: inset 0 0 12px rgba(118,255,3,0.25); }
+}
+
+@keyframes stemPulse {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.25); }
+}
+
+@keyframes brainSpark {
+    0%, 82%, 100% { opacity: 0; filter: blur(0px); }
+    85%           { opacity: 1; filter: blur(0px); }
+    87%           { opacity: 0; }
+    90%           { opacity: 1; filter: blur(1px); }
+    93%           { opacity: 0.3; }
+    96%           { opacity: 1; filter: blur(0px); }
+    98%           { opacity: 0; }
+}
+
+@keyframes eyeGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px var(--eye-glow), 0 0 28px var(--eye-glow-mid), 0 0 52px var(--eye-glow-outer), inset 0 2px 9px rgba(255,255,255,0.22);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0,255,80,1.0), 0 0 50px rgba(0,220,50,0.9), 0 0 85px rgba(0,180,40,0.55), inset 0 2px 9px rgba(255,255,255,0.35);
+    }
+}
+
+@keyframes boltGlow {
+    0%, 100% {
+        box-shadow: 0 2px 9px rgba(0,0,0,0.6), 0 0 14px rgba(180,100,255,0.6), 0 0 34px rgba(140,58,255,0.38);
+    }
+    50% {
+        box-shadow: 0 2px 9px rgba(0,0,0,0.6), 0 0 28px rgba(225,140,255,1.0), 0 0 65px rgba(170,80,255,0.8), 0 0 100px rgba(120,38,255,0.45);
+    }
+}
+
+@keyframes heartBeating {
+    0%   { transform: scale(1); }
+    15%  { transform: scale(1.22); }
+    30%  { transform: scale(1); }
+    45%  { transform: scale(1.14); }
+    65%  { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Horizontal knee swing — right leg rotates outward (clockwise) */
+@keyframes legSwayR {
+    0%, 100% { transform: rotate(0deg);  }
+    28%       { transform: rotate(8deg); }   /* knee swings right / outward */
+    56%       { transform: rotate(-4deg); }  /* rebound inward */
+    80%       { transform: rotate(1deg);  }
+}
+
+/* Horizontal knee swing — left leg mirrors (counter-clockwise) */
+@keyframes legSwayL {
+    0%, 100% { transform: rotate(0deg);   }
+    28%       { transform: rotate(-8deg); }  /* knee swings left / outward */
+    56%       { transform: rotate(4deg);  }
+    80%       { transform: rotate(-1deg); }
+}
+
+/* Knee joint swells outward when leg is at max extension */
+@keyframes kneePop {
+    0%, 100% { transform: scale(1); }
+    28%       { transform: scale(1.14); }
+    56%       { transform: scale(0.93); }
+    80%       { transform: scale(1.03); }
+}
+
+@keyframes scaleShimmer {
+    0%, 100% { filter: brightness(1)    saturate(1);   }
+    50%       { filter: brightness(1.12) saturate(1.2); }
+}
+
+@keyframes tailSway {
+    0% { transform: rotate(90deg);   }
+    50%       { transform: rotate(80deg);  }
+    100%       { transform: rotate(90deg);  }
+}
+
+@keyframes badgePulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; box-shadow: 0 0 12px rgba(68,204,102,0.3); }
+}
+
+@keyframes boltPulse {
+    0%, 100% { opacity: 1; text-shadow: none; }
+    50% { opacity: 0.6; text-shadow: 0 0 8px #00ff88; }
+}
+
+@keyframes arcFlicker {
+    0%   { opacity: 1; transform-origin: top; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes corpseShock {
+    0%   { filter: none; }
+    5%   { filter: brightness(4) saturate(0) contrast(3); }
+    10%  { filter: none; }
+    18%  { filter: brightness(5) hue-rotate(90deg) saturate(4) contrast(2); }
+    22%  { filter: none; }
+    30%  { filter: brightness(3) hue-rotate(150deg) saturate(3); }
+    35%  { filter: none; }
+    45%  { filter: brightness(4) hue-rotate(100deg) saturate(5); }
+    50%  { filter: none; }
+    60%  { filter: brightness(2.5) hue-rotate(60deg) saturate(2); }
+    65%  { filter: none; }
+    80%  { filter: brightness(1.8) saturate(1.5) hue-rotate(30deg); }
+    85%  { filter: none; }
+    95%  { filter: brightness(1.2) saturate(1.2); }
+    100% { filter: none; }
+}
+
+@keyframes humanBlink {
+    0%, 88%, 100% { transform: scaleY(0); }
+    90%, 94%      { transform: scaleY(1); }
+    92%           { transform: scaleY(0.85); }
+}
+
+@keyframes designReveal {
+    0%   { filter: none; }
+    30%  { filter: brightness(1.25) saturate(1.6); }
+    100% { filter: none; }
+}

@@ -1,0 +1,73 @@
+/* =====================================================
+   EAR
+   Layout tokens live in base/_variables.css under "Ear".
+   The background gradient is INLINED here (not stored in a
+   :root-level --ear-bg) so the nested var(--head-*) refs
+   resolve at the .ear element, where the [data-theme]
+   cascade applies. Storing it at :root freezes the inner
+   registered color tokens at the root origin and breaks
+   theme switching.
+   ===================================================== */
+
+.ear {
+    /* Component-scoped layout tokens */
+    --ear-width: 20%;
+    --ear-height: 15%;
+    --ear-overlapping: 2vmax;
+    --ear-position-x: calc((var(--ear-width) * -1) + var(--ear-overlapping));
+    --ear-position-y: 40%;
+    --ear-l-border-radius: 50% 15% 15% 50% / 45% 12% 12% 45%;
+    --ear-r-border-radius: 15% 50% 50% 15% / 12% 45% 45% 12%;
+
+    position: absolute;
+    width: var(--ear-width);
+    height: var(--ear-height);
+    top: var(--ear-position-y);
+    background:
+        /* Outer ear shading — highlight */
+        radial-gradient(ellipse 60% 50% at 50% 35%, var(--head-skin-light) 0%, transparent 65%),
+        /* Lower lobe shadow */
+        radial-gradient(ellipse 40% 30% at 50% 70%, var(--head-skin-shadow) 0%, transparent 60%),
+        /* Base skin tone */
+        linear-gradient(to bottom, var(--head-bg) 0%, var(--head-skin-dark) 60%, var(--head-skin-shadow) 100%);
+    box-shadow:
+        inset 0 2px 8px rgba(255, 255, 255, 0.06),
+        inset 0 -4px 10px rgba(0, 0, 0, 0.35),
+        3px 5px 14px rgba(0, 0, 0, 0.55);
+    z-index: 4;
+}
+
+/* Inner ear detail — helix/anti-helix ridge */
+.ear::before {
+    content: '';
+    position: absolute;
+    top: 12%;
+    width: 65%;
+    height: 70%;
+    border-radius: 50% 50% 45% 45% / 50% 50% 50% 50%;
+    border: clamp(1px, 0.18vmax, 2.5px) solid rgba(0, 0, 0, 0.18);
+    background:
+        /* Anti-helix inner shadow */
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(0, 0, 0, 0.2) 0%, transparent 55%),
+        /* Concha depression */
+        radial-gradient(ellipse 40% 35% at 50% 55%, rgba(0, 0, 0, 0.25) 0%, transparent 50%),
+        /* Tragus bump highlight */
+        radial-gradient(circle 20% at 75% 48%, rgba(160, 180, 150, 0.3) 0%, transparent 60%);
+    box-shadow:
+        inset 2px 2px 6px rgba(0, 0, 0, 0.2),
+        inset -1px -1px 4px rgba(255, 255, 255, 0.05);
+}
+
+.ear--l {
+    inset-inline-start: var(--ear-position-x);
+    border-radius: var(--ear-l-border-radius);
+}
+
+.ear--l::before { inset-inline-start: 20%; }
+
+.ear--r {
+    inset-inline-end: var(--ear-position-x);
+    border-radius: var(--ear-r-border-radius);
+}
+
+.ear--r::before { inset-inline-end: 20%; }

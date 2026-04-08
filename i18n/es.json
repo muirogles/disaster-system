@@ -1,0 +1,712 @@
+{
+    "meta.title": "¿Design System o Disaster System?",
+    "meta.description": "El cadáver exquisito entre diseño y desarrollo.",
+    "timer.label": "// time_remaining",
+    "timer.fab.hint": "Cronómetro",
+    "timer.fab.start": "Iniciar cronómetro",
+    "timer.fab.stop": "Detener cronómetro",
+    "modal.close.aria": "Cerrar panel",
+    "modal.tools.title": "Herramientas recomendadas",
+    "intro.title.q": "¿",
+    "intro.title.or": "o",
+    "intro.sub.the": "El",
+    "intro.sub.cadaver": "cadáver exquisito",
+    "intro.sub.between": "entre",
+    "intro.sub.design": "diseño",
+    "intro.sub.and": "y",
+    "intro.sub.dev": "desarrollo",
+    "intro.rules.btn.open": "Cómo jugar",
+    "intro.rules.btn.close": "Cerrar instrucciones",
+    "intro.rules.close": "Cerrar",
+    "intro.rule.1": "Los voluntarios dibujan a ciegas cada parte del cuerpo en 3 turnos",
+    "intro.rule.2": "30 s por turno — pulsa el cronómetro para empezar",
+    "intro.rule.3": "Dobla el papel y pásalo al siguiente voluntario sin mirar",
+    "intro.rule.4": "¿El resultado es un Design System o un Disaster System?",
+    "hint.head": "Pulsa en el cerebro, los ojos, las orejas o la boca",
+    "hint.trunk": "Pulsa en el tronco, el corazón, los brazos o las manos",
+    "hint.legs": "Pulsa en las piernas, los pies o la cola",
+    "slide4.state.disaster": "// estado: DISASTER",
+    "slide4.state.design": "// status: DESIGN_SYSTEM",
+    "slide4.title.pre": "Esto es un",
+    "slide4.subtitle.1": "// TypeError: design.tokens → undefined",
+    "slide4.subtitle.2": "¿Cómo lo convertimos en sistema?",
+    "slide4.btn": "system.reanimate()",
+    "slide4.btn.done": "Compartir experimento",
+    "slide4.cta.label": "Comparte el desastre antes de reanimarlo:",
+    "cta.phi.title": "Con <span class=\"highlight\">empatía</span> técnica",
+    "cta.phi.text": "No es un entregable de Figma. Es un <strong>contrato social</strong> entre diseño, desarrollo y producto.",
+    "closing.title": "Cread <span class=\"highlight\">sistemas</span><br>con alma",
+    "closing.p1": "La diferencia entre un <strong>Design System</strong> y un <strong>Disaster System</strong> no está en las herramientas. Está en si el equipo lo trata como un <strong>producto con dueño</strong> o como un proyecto que \"se termina\".",
+    "closing.p2": "<strong>No trabajéis a ciegas</strong>. Cread sistemas con alma y, sobre todo... <strong class=\"highlight\">hablad entre vosotros</strong>.",
+    "closing.tools.section.label": "Herramientas:",
+    "closing.tools.brain": "Cerebro — Design Tokens",
+    "closing.tools.eyes": "Ojos — Accesibilidad visual",
+    "closing.tools.ears": "Orejas — Audición y semántica",
+    "closing.tools.mouth": "Boca — Internacionalización",
+    "closing.tools.heart": "Corazón — Componentes vivos",
+    "closing.tools.torso": "Torso — Arquitectura CSS",
+    "closing.tools.arms": "Brazos — Z-index y capas",
+    "closing.tools.hands": "Manos — Touch y eventos",
+    "closing.tools.legs": "Piernas — Responsive",
+    "closing.tools.feet": "Pies — Base escalable",
+    "closing.tools.tail": "Cola — Legacy y deuda técnica",
+    "closing.tool.tokens-studio.desc": "Gestión de design tokens sincronizados entre Figma y código.",
+    "closing.tool.style-dictionary.desc": "Generación automatizada de tokens para múltiples plataformas.",
+    "closing.tool.axe-devtools.desc": "Auditoría de accesibilidad automatizada en el navegador.",
+    "closing.tool.stark.desc": "Verificación de contraste y simulación de daltonismo.",
+    "closing.tool.lighthouse.desc": "Auditoría de rendimiento, accesibilidad y SEO integrada.",
+    "closing.tool.nvda.desc": "Screen readers para testear la experiencia no visual.",
+    "closing.tool.a11y-insights.desc": "Extensión de Microsoft para auditorías WCAG paso a paso.",
+    "closing.tool.i18next.desc": "Framework de i18n con soporte a plurales y contexto.",
+    "closing.tool.pseudoloc.desc": "Técnica para detectar textos hardcoded y problemas de longitud.",
+    "closing.tool.chromatic.desc": "Revisión visual de cambios en componentes con Storybook.",
+    "closing.tool.figma-tokens.desc": "Sincronización de tokens entre Figma y repositorios Git.",
+    "closing.tool.css-grid.desc": "Visualización del grid en DevTools de Firefox/Chrome.",
+    "closing.tool.visbug.desc": "Extensión para editar layout visualmente en el navegador.",
+    "closing.tool.stacking.desc": "Extensión para debuggear contextos de apilamiento.",
+    "closing.tool.touch-checker.desc": "Verificación de tamaños mínimos de áreas táctiles.",
+    "closing.tool.chrome-device.desc": "Emulación de dispositivos móviles y touch events.",
+    "closing.tool.responsively.desc": "Navegador para testear múltiples viewports simultáneamente.",
+    "closing.tool.polypane.desc": "Navegador especializado para desarrollo responsive y accesible.",
+    "closing.tool.storybook.desc": "Documentación y desarrollo aislado de componentes.",
+    "closing.tool.stylelint.desc": "CSS linter para mantener convenciones y detectar errores.",
+    "closing.tool.bundlephobia.desc": "Análisis del peso de dependencias npm antes de instalar.",
+    "closing.tool.knip.desc": "Detección de código muerto, exports no usados y dependencias huérfanas.",
+    "closing.cta": "¿Tu Design System se mantiene en pie o necesita una descarga eléctrica?",
+    "closing.cta.text": "Publica tu <strong>cadáver exquisito</strong> y conecta con otros equipos para entender cómo están dando vida a sus propias criaturas.",
+    "closing.hashtags.label": "git push --tags // comparte el experimento:",
+    "closing.share.btn": "Compartir en LinkedIn",
+    "closing.share.by": "Creado por",
+    "corpse.upper": "Parte superior del cadáver exquisito",
+    "corpse.middle": "Parte media del cadáver exquisito",
+    "corpse.lower": "Parte inferior del cadáver exquisito",
+    "footer.license": "© 2026 — Licencia CC BY-NC-SA 4.0",
+    "lang.btn.text": "EN",
+    "lang.btn.title": "Traducir al Inglés",
+    "lang.btn.aria": "Traducir al Inglés",
+    "modal.content": {
+        "brain": {
+            "title": "🧠 Cerebro",
+            "subtitle": "Design Tokens sin neuronas",
+            "concept": "Lógica, consistencia y \"fuente única de la verdad\".",
+            "errors": [
+                {
+                    "error": "Sin estrategia de nomenclatura",
+                    "errorCode": "--color1: #ff0000;\n--color2: #00ff00;\n--btnBg: #333;",
+                    "solution": "Naming semántico y escalable",
+                    "solutionCode": "--color-error-base: #d32f2f;\n--color-success-base: #2e7d32;\n--color-action-primary: #1565c0;",
+                    "desc": "Los tokens sin naming semántico son imposibles de mantener a escala. Diseño debe definir la nomenclatura antes de que desarrollo la implemente.",
+                    "visual": "tokens"
+                },
+                {
+                    "error": "Temas light/dark desincronizados",
+                    "errorCode": ".dark { --bg: black; }\n.light { /* olvidado */ }",
+                    "solution": "Tokens con capas de abstracción",
+                    "solutionCode": ":root { --surface-1: var(--gray-100); }\n.dark { --surface-1: var(--gray-900); }",
+                    "desc": "Cada token debe tener su par en ambos temas, mapeado desde primitivos.",
+                    "visual": "themes"
+                },
+                {
+                    "error": "Medidas fuera de base-8",
+                    "errorCode": "padding: 13px;\nmargin: 7px;\ngap: 11px;",
+                    "solution": "Escala base-8 consistente",
+                    "solutionCode": "padding: 16px; /* 8×2 */\nmargin: 8px;   /* 8×1 */\ngap: 8px;      /* 8×1 */",
+                    "desc": "Base-8 mantiene ritmo vertical y alineación entre componentes.",
+                    "visual": "spacing"
+                },
+                {
+                    "error": "Confusión rem / em",
+                    "errorCode": "font-size: 14px;\npadding: 1.2rem;\nmargin: 0.8em; /* ¿en qué contexto? */",
+                    "solution": "Convención clara rem/em",
+                    "solutionCode": "font-size: 0.875rem; /* 14/16 */\npadding: 1rem;       /* relativo a root */\nmargin: 0.5em;       /* relativo al font-size local */",
+                    "desc": "rem para spacing global, em para relación con el componente.",
+                    "visual": "units"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Tokens Studio",
+                    "desc": "Gestión de design tokens sincronizados entre Figma y código."
+                },
+                {
+                    "name": "Style Dictionary",
+                    "desc": "Generación automatizada de tokens para múltiples plataformas."
+                }
+            ]
+        },
+        "eyes": {
+            "title": "👁️ Ojos",
+            "subtitle": "Miopía y ceguera en la interfaz",
+            "concept": "Accesibilidad visual y nitidez. Cómo el usuario percibe el producto.",
+            "errors": [
+                {
+                    "error": "Contraste de color insuficiente",
+                    "errorCode": ".btn { color: #777; background: #999; }\n/* Ratio: 1.8:1 — NO pasa WCAG */",
+                    "solution": "Contraste WCAG AA mínimo",
+                    "solutionCode": ".btn { color: #fff; background: #1565c0; }\n/* Ratio: 7:1 — Pasa WCAG AAA */",
+                    "desc": "WCAG AA requiere 4.5:1 para texto normal, 3:1 para texto grande. Diseño debe verificar el contraste antes de entregar.",
+                    "visual": "contrast"
+                },
+                {
+                    "error": "Sin estados de foco visibles",
+                    "errorCode": ":focus { outline: none; }\n/* Accesibilidad rota para teclado */",
+                    "solution": "Focus ring visible y claro",
+                    "solutionCode": ":focus-visible {\n  outline: 3px solid #1565c0;\n  outline-offset: 2px;\n}",
+                    "desc": "Los usuarios de teclado necesitan indicadores de foco claros. Diseño debe definir el estado :focus en la matriz de estados.",
+                    "visual": "focus"
+                },
+                {
+                    "error": "Imágenes borrosas (sin srcset/dpr)",
+                    "errorCode": "<img src=\"hero.jpg\" width=\"800\">\n<!-- En Retina se ve pixelado -->",
+                    "solution": "Responsive images con srcset",
+                    "solutionCode": "<img src=\"hero.jpg\"\n  srcset=\"hero-1x.jpg 1x,\n         hero-2x.jpg 2x\"\n  width=\"800\">",
+                    "desc": "Sin srcset, pantallas Retina muestran imágenes pixeladas. Diseño debe exportar assets en @1x, @2x y @3x.",
+                    "visual": "srcset"
+                },
+                {
+                    "error": "Píxeles decimales",
+                    "errorCode": "width: 100.5px;\nborder: 0.7px solid #ccc;\n/* No existen los sub-píxeles */",
+                    "solution": "Valores enteros de píxel",
+                    "solutionCode": "width: 100px;\nborder: 1px solid #ccc;\n/* Siempre enteros */",
+                    "desc": "Los sub-píxeles causan rendering inconsistente entre navegadores. Los decimales en Figma no deben llegar a código.",
+                    "visual": "decimals"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "axe DevTools",
+                    "desc": "Auditoría de accesibilidad automatizada en el navegador."
+                },
+                {
+                    "name": "Stark (Figma)",
+                    "desc": "Verificación de contraste y simulación de daltonismo en diseño."
+                },
+                {
+                    "name": "Lighthouse",
+                    "desc": "Auditoría de rendimiento, accesibilidad y SEO integrada en Chrome."
+                }
+            ]
+        },
+        "ears": {
+            "title": "👂 Orejas",
+            "subtitle": "Sordera semántica",
+            "concept": "Accesibilidad auditiva/semántica. Screen readers y navegación no visual. El sistema es sordo para quien no ve.",
+            "errors": [
+                {
+                    "error": "Botones iguales sin aria-label",
+                    "errorCode": "<button>Ver más</button>\n<button>Ver más</button>\n<button>Ver más</button>\n<!-- ¿Cuál es cuál? -->",
+                    "solution": "aria-label descriptivo",
+                    "solutionCode": "<button aria-label=\"Ver más ofertas\">\n  Ver más\n</button>\n<button aria-label=\"Ver más noticias\">\n  Ver más\n</button>",
+                    "desc": "Screen readers no pueden distinguir botones con texto idéntico. Diseño debe especificar el texto accesible en cada componente.",
+                    "visual": "aria"
+                },
+                {
+                    "error": "Jerarquía de headings rota",
+                    "errorCode": "<h1>Inicio</h1>\n<h4>Sección</h4>\n<!-- Salto de h1 a h4 -->",
+                    "solution": "Jerarquía secuencial",
+                    "solutionCode": "<h1>Inicio</h1>\n<h2>Sección</h2>\n<h3>Subsección</h3>",
+                    "desc": "Los saltos de heading rompen la navegación por screen reader. Diseño debe numerar los niveles de heading en los mockups.",
+                    "visual": "heading"
+                },
+                {
+                    "error": "Sin live regions para anuncios",
+                    "errorCode": "<div class=\"toast\">\n  Guardado con éxito\n</div>\n<!-- Invisible para lectores -->",
+                    "solution": "aria-live para notificaciones",
+                    "solutionCode": "<div class=\"toast\"\n  role=\"status\"\n  aria-live=\"polite\">\n  Guardado con éxito\n</div>",
+                    "desc": "Sin aria-live, los cambios dinámicos son invisibles para lectores de pantalla.",
+                    "visual": "liveregion"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "NVDA / VoiceOver",
+                    "desc": "Screen readers para testear la experiencia no visual."
+                },
+                {
+                    "name": "axe-core",
+                    "desc": "Motor de reglas de accesibilidad automatizadas."
+                },
+                {
+                    "name": "Accessibility Insights",
+                    "desc": "Extensión de Microsoft para auditorías WCAG paso a paso."
+                }
+            ]
+        },
+        "mouth": {
+            "title": "👄 Boca",
+            "subtitle": "Storytelling e internacionalización",
+            "concept": "Cambios de idiomas. Comunicación. Estrategia diccionario / contenido dinámico.",
+            "errors": [
+                {
+                    "error": "Texto desborda contenedores fijos",
+                    "errorCode": ".label {\n  width: 120px; /* fijo */\n  white-space: nowrap;\n}\n/* \"Konfigurationseinstellungen\" no cabe */",
+                    "solution": "Contenedores flexibles",
+                    "solutionCode": ".label {\n  min-width: 80px;\n  max-width: 100%;\n  white-space: normal;\n  overflow-wrap: break-word;\n}",
+                    "desc": "El alemán y otros idiomas producen palabras hasta 3× más largas. Diseño debe testear con textos largos.",
+                    "visual": "overflow"
+                },
+                {
+                    "error": "Ellipsis sin respetar líneas",
+                    "errorCode": ".text {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  /* Solo funciona en 1 línea */\n}",
+                    "solution": "Line-clamp para multilínea",
+                    "solutionCode": ".text {\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n}",
+                    "desc": "text-overflow: ellipsis solo funciona con white-space: nowrap. Para multilínea, usar line-clamp.",
+                    "visual": "lineclamp"
+                },
+                {
+                    "error": "Sin soporte RTL",
+                    "errorCode": ".card {\n  margin-left: 16px;\n  padding-right: 24px;\n  text-align: left;\n}",
+                    "solution": "Propiedades lógicas CSS",
+                    "solutionCode": ".card {\n  margin-inline-start: 16px;\n  padding-inline-end: 24px;\n  text-align: start;\n}",
+                    "desc": "Las propiedades lógicas (inline/block) se adaptan automáticamente a RTL. Diseño debe revisar layouts en ambas direcciones.",
+                    "visual": "rtl"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "i18next",
+                    "desc": "Framework de internacionalización con soporte a plurales y contexto."
+                },
+                {
+                    "name": "Pseudolocalization",
+                    "desc": "Técnica para detectar textos hardcoded y problemas de longitud."
+                }
+            ]
+        },
+        "heart": {
+            "title": "❤️ Corazón",
+            "subtitle": "Un corazón sin alma",
+            "concept": "Instancias de componentes desvinculados que no bombean la sangre y no mantienen un sistema vivo.",
+            "errors": [
+                {
+                    "error": "Instancias de componentes desvinculadas",
+                    "errorCode": "/* Figma: Componente \"detached\" */\n/* Dev: copy-paste del HTML */\n/* Resultado: 15 variantes manuales */",
+                    "solution": "Single source of truth",
+                    "solutionCode": "/* Figma: Instancia vinculada */\n/* Dev: <Button variant=\"primary\"> */\n/* Resultado: 1 componente, N variantes */",
+                    "desc": "Desprender un componente es como traficar con órganos. Se pierde la conexión con el sistema y ya no recibe actualizaciones.",
+                    "visual": "detach"
+                },
+                {
+                    "error": "Actualizaciones del DS no propagadas",
+                    "errorCode": "/* DS v2.3: border-radius: 8px */\n/* Producto: border-radius: 4px */\n/* Hace 6 meses sin actualizar */",
+                    "solution": "Pipeline de actualización",
+                    "solutionCode": "/* package.json */\n\"@ds/components\": \"^2.3.0\"\n/* CI: check DS version freshness */\n/* Alerta si > 1 minor atrás */",
+                    "desc": "Sin pipeline de actualización, el DS se convierte en código muerto. Cuando se actualiza el DS pero no las páginas, queda un órgano obsoleto.",
+                    "visual": "version"
+                },
+                {
+                    "error": "Naming inconsistente Diseño ↔ Desarrollo",
+                    "errorCode": "/* Figma: \"Card/Destacada\" */\n/* Código: <FeaturedTile /> */\n/* QA: \"el recuadro de arriba\" */",
+                    "solution": "Vocabulario compartido",
+                    "solutionCode": "/* Figma: \"Card/Featured\" */\n/* Código: <CardFeatured /> */\n/* QA: \"Card Featured\" */\n/* Documentado en el DS */",
+                    "desc": "Un glosario compartido elimina fricciones en handoff. Falta de evangelización = caos.",
+                    "visual": "naming"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Chromatic",
+                    "desc": "Revisión visual de cambios en componentes con Storybook."
+                },
+                {
+                    "name": "Figma Tokens Plugin",
+                    "desc": "Sincronización de tokens entre Figma y repositorios Git."
+                }
+            ]
+        },
+        "torso": {
+            "title": "🦴 Torso",
+            "subtitle": "Escoliosis de componentes",
+            "concept": "Arquitectura doblada, el core que mantiene nuestros órganos dentro.",
+            "errors": [
+                {
+                    "error": "Márgenes negativos como solución",
+                    "errorCode": ".component {\n  margin-top: -32px;\n  margin-left: -16px;\n  /* \"funciona, no lo toques\" */\n}",
+                    "solution": "Layout correcto desde el padre",
+                    "solutionCode": ".parent {\n  display: grid;\n  gap: 0;\n}\n.component {\n  /* Sin márgenes negativos */\n}",
+                    "desc": "Los márgenes negativos son parches que rompen en otros contextos.",
+                    "visual": "negative"
+                },
+                {
+                    "error": "Carrusel con overflow hidden cortando sombras",
+                    "errorCode": ".carousel {\n  overflow: hidden;\n}\n.card {\n  box-shadow: 0 8px 24px rgba(0,0,0,.2);\n  /* Sombra cortada arriba y abajo */\n}",
+                    "solution": "overflow-clip-margin o padding",
+                    "solutionCode": ".carousel {\n  overflow: clip;\n  overflow-clip-margin: 24px;\n}\n/* O: padding interno */\n.carousel__inner {\n  padding: 24px 0;\n}",
+                    "desc": "overflow:hidden corta todo, dejar padding de seguridad.",
+                    "visual": "shadow"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "CSS Grid Inspector",
+                    "desc": "Visualización del grid en DevTools de Firefox/Chrome."
+                },
+                {
+                    "name": "VisBug",
+                    "desc": "Extensión para editar layout visualmente en el navegador."
+                }
+            ]
+        },
+        "arms": {
+            "title": "💪 Brazos",
+            "subtitle": "Caos de z-index",
+            "concept": "La fuerza que mueve el sistema al mundo real.",
+            "errors": [
+                {
+                    "error": "z-index sin concordancia",
+                    "errorCode": ".header  { z-index: 999; }\n.modal   { z-index: 9999; }\n.tooltip { z-index: 99999; }\n.dropdown{ z-index: 999999; }",
+                    "solution": "Escala de z-index tokenizada",
+                    "solutionCode": ":root {\n  --z-base: 1;\n  --z-dropdown: 100;\n  --z-sticky: 200;\n  --z-modal: 300;\n  --z-tooltip: 400;\n}",
+                    "desc": "Sin escala, se entra en una guerra de z-index infinita. Diseño debe documentar las capas de apilamiento.",
+                    "visual": "zindex"
+                },
+                {
+                    "error": "Overlap forzado ignorando padding del layout",
+                    "errorCode": ".floating-btn {\n  position: absolute;\n  right: 0;\n  /* Tapa el contenido del padre */\n}",
+                    "solution": "Respetar el layout del padre",
+                    "solutionCode": ".parent {\n  display: grid;\n  grid-template-columns: 1fr auto;\n}\n.floating-btn {\n  /* Integrado en el flujo */\n}",
+                    "desc": "Posicionamiento absoluto ignora el flujo y crea solapamientos. Diseño debe pensar en el sistema de layout.",
+                    "visual": "overlap"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "z-index Manager",
+                    "desc": "Visualización de capas de stacking context en DevTools."
+                },
+                {
+                    "name": "CSS Stacking Context Inspector",
+                    "desc": "Extensión para debuggear contextos de apilamiento."
+                }
+            ]
+        },
+        "hands": {
+            "title": "🤚 Manos",
+            "subtitle": "Problemas táctiles",
+            "concept": "Touch — la interfaz entre el usuario y el producto.",
+            "errors": [
+                {
+                    "error": "Touch targets diminutos",
+                    "errorCode": ".icon-btn {\n  width: 24px;\n  height: 24px;\n  /* Dedo humano: ~44px mínimo */\n}",
+                    "solution": "Mínimo 44×44px de área táctil",
+                    "solutionCode": ".icon-btn {\n  width: 24px;\n  height: 24px;\n  padding: 10px;\n  /* Área total: 44×44px */\n}",
+                    "desc": "WCAG 2.5.5 requiere mínimo 44×44 CSS px de área táctil. Diseño debe respetar mínimos en la spec.",
+                    "visual": "touch"
+                },
+                {
+                    "error": "Pseudo-elementos bloqueando scroll",
+                    "errorCode": ".overlay::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  /* Bloquea todo scroll */\n}",
+                    "solution": "pointer-events: none si es decorativo",
+                    "solutionCode": ".overlay::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  pointer-events: none;\n}",
+                    "desc": "Los pseudo-elementos decorativos deben dejar pasar los eventos de interacción.",
+                    "visual": "pointerevents"
+                },
+                {
+                    "error": "Modales que no bloquean scroll del body",
+                    "errorCode": "/* Modal abierto pero el body\n   sigue haciendo scroll detrás */",
+                    "solution": "Bloquear scroll del body",
+                    "solutionCode": "// Al abrir:\ndocument.documentElement\n  .style.overflow = \"hidden\";\n// Al cerrar:\ndocument.documentElement\n  .style.overflow = \"\";",
+                    "desc": "El scroll detrás del modal es desorientador y rompe la experiencia de usuario.",
+                    "visual": "scroll"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Touch Target Checker",
+                    "desc": "Verificación de tamaños mínimos de áreas táctiles."
+                },
+                {
+                    "name": "Chrome Device Mode",
+                    "desc": "Emulación de dispositivos móviles y touch events."
+                }
+            ]
+        },
+        "legs": {
+            "title": "🦿 Piernas",
+            "subtitle": "Flexibilidad inexistente",
+            "concept": "Escalabilidad y flexibilidad. Responsive, medidas flexibles, tamaños mínimos y máximos.",
+            "errors": [
+                {
+                    "error": "Tamaños fijos",
+                    "errorCode": ".container {\n  width: 1200px;\n  height: 800px;\n}",
+                    "solution": "Tamaños fluidos con límites",
+                    "solutionCode": ".container {\n  width: min(100%, 1200px);\n  min-height: 100dvh;\n}",
+                    "desc": "Los tamaños fijos rompen en cualquier pantalla diferente. Diseño debe entregar layouts con min/max.",
+                    "visual": "responsive"
+                },
+                {
+                    "error": "Viewport no dinámico",
+                    "errorCode": ".hero {\n  height: 100vh;\n  /* En móvil, la barra del navegador\n     oculta contenido */\n}",
+                    "solution": "dvh con fallback",
+                    "solutionCode": ".hero {\n  height: 100vh; /* fallback */\n  height: 100dvh;\n}",
+                    "desc": "100vh no descuenta la barra del navegador móvil. dvh sí. Siempre incluir fallback.",
+                    "visual": "viewport"
+                },
+                {
+                    "error": "Sin safe-area-inset",
+                    "errorCode": ".bottom-bar {\n  position: fixed;\n  bottom: 0;\n  /* En iPhone con notch, se oculta */\n}",
+                    "solution": "env(safe-area-inset-*)",
+                    "solutionCode": ".bottom-bar {\n  position: fixed;\n  bottom: 0;\n  padding-bottom:\n    env(safe-area-inset-bottom);\n}",
+                    "desc": "Sin safe-area, el contenido queda detrás del notch o home indicator.",
+                    "visual": "safearea"
+                },
+                {
+                    "error": "Sin grid/flexbox, solo floats",
+                    "errorCode": ".col { float: left; width: 33.33%; }\n.clearfix::after { clear: both; }",
+                    "solution": "CSS Grid moderno",
+                    "solutionCode": ".grid {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(250px, 1fr));\n  gap: 1rem;\n}",
+                    "desc": "Floats para layout es una técnica de 2010. Grid y Flex son el estándar.",
+                    "visual": "grid"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Responsively",
+                    "desc": "Navegador para testear múltiples viewports simultáneamente."
+                },
+                {
+                    "name": "Polypane",
+                    "desc": "Navegador especializado para desarrollo responsive y accesible."
+                }
+            ]
+        },
+        "feet": {
+            "title": "🦶 Pies",
+            "subtitle": "Base del producto escalable",
+            "concept": "Un diseño no escalable a largo plazo es más lento y costoso para adaptarse a nuevos mercados.",
+            "errors": [
+                {
+                    "error": "Metodología no modular",
+                    "errorCode": "#page .content div.box > span {\n  color: red !important;\n}\n/* Especificidad: 1-2-3 */",
+                    "solution": "BEM + bajo acoplamiento",
+                    "solutionCode": ".card__title {\n  color: var(--color-error-base);\n}\n/* Especificidad: 0-1-0 */",
+                    "desc": "Selectores profundos crean acoplamiento y guerras de especificidad.",
+                    "visual": "specificity"
+                },
+                {
+                    "error": "Código difícil de mantener",
+                    "errorCode": "/* 4000 líneas en un solo archivo */\n/* Sin comentarios */\n/* Variables mágicas */\nmargin-top: 37px; /* ¿por qué 37? */",
+                    "solution": "Arquitectura modular documentada",
+                    "solutionCode": "/* tokens/_spacing.css */\n--space-lg: 2rem; /* 32px - base×4 */\n\n/* components/_card.css */\n.card { margin-top: var(--space-lg); }",
+                    "desc": "Archivos pequeños, bien nombrados, con tokens centralizados.",
+                    "visual": "maintainability"
+                },
+                {
+                    "error": "Tecnologías obsoletas",
+                    "errorCode": "/* jQuery UI datepicker */\n/* Bootstrap 3.x grid */\n/* Compass mixins para Sass */",
+                    "solution": "Stack moderno y auditable",
+                    "solutionCode": "/* Native <input type=\"date\"> */\n/* CSS Grid nativo */\n/* CSS custom properties nativas */\n/* Lighthouse CI en pipeline */",
+                    "desc": "Las dependencias obsoletas son agujeros de seguridad y peso muerto.",
+                    "visual": "obsolete"
+                },
+                {
+                    "error": "Sin auditorías periódicas",
+                    "errorCode": "/* Último análisis de accesibilidad:\n   \"no recuerdo\" */\n/* Último performance check:\n   \"en la v1\" */",
+                    "solution": "Auditorías trimestrales",
+                    "solutionCode": "/* Trimestral:\n   - Lighthouse performance\n   - axe-core accesibilidad\n   - Bundle size analysis\n   - DS coverage report */",
+                    "desc": "Lo que no se mide, no se mejora. Auditorías regulares = salud del producto.",
+                    "visual": "audits"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Storybook",
+                    "desc": "Documentación y desarrollo aislado de componentes."
+                },
+                {
+                    "name": "Stylelint",
+                    "desc": "Linter de CSS para mantener convenciones y detectar errores."
+                },
+                {
+                    "name": "BEM Linter",
+                    "desc": "Validación de nomenclatura BEM en hojas de estilo."
+                }
+            ]
+        },
+        "tail": {
+            "title": "🦎 Cola",
+            "subtitle": "El lastre del legacy",
+            "concept": "La cola del lagarto que se cae por deuda técnica.",
+            "errors": [
+                {
+                    "error": "Librerías externas para un solo elemento",
+                    "errorCode": "/* moment.js (73KB) solo para\n   formatear una fecha */\n/* lodash (72KB) solo para\n   un _.debounce */\nimport moment from \"moment\";",
+                    "solution": "Nativo o micro-utilidades",
+                    "solutionCode": "/* Intl.DateTimeFormat nativo */\nnew Intl.DateTimeFormat(\"es\",\n  { dateStyle: \"long\" })\n  .format(date);\n\n/* Debounce en 5 líneas */",
+                    "desc": "Cada KB de JS tiene coste de parse. Usa lo nativo primero.",
+                    "visual": "bundle"
+                },
+                {
+                    "error": "Componentes obsoletos sin eliminar",
+                    "errorCode": "/* OldCarousel.jsx — sin usar desde 2022 */\n/* LegacyModal.css — 400 líneas muertas */\n/* \"no lo borres por si acaso\" */",
+                    "solution": "Dead code elimination",
+                    "solutionCode": "/* git log muestra sin uso > 6 meses */\n/* Coverage report: 0% */\n/* Acción: eliminar + git lo guarda */\n/* CI: alerta de unused exports */",
+                    "desc": "El código muerto confunde, pesa, y da falsa sensación de complejidad.",
+                    "visual": "deadcode"
+                },
+                {
+                    "error": "Escalabilidad a largo plazo imposible",
+                    "errorCode": "/* 50 componentes sin documentar */\n/* 0 tests */\n/* 3 desarrolladores que \"saben\" */\n/* Turnover = catástrofe */",
+                    "solution": "Documentación + tests + onboarding",
+                    "solutionCode": "/* Storybook con todos los componentes */\n/* Tests de regresión visual */\n/* Guía de contribución clara */\n/* Bus factor > 1 */",
+                    "desc": "Un DS sin documentación ni tests depende de personas, no de procesos.",
+                    "visual": "scalability"
+                }
+            ],
+            "tools": [
+                {
+                    "name": "Bundlephobia",
+                    "desc": "Análisis del peso de dependencias npm antes de instalar."
+                },
+                {
+                    "name": "Knip",
+                    "desc": "Detección de código muerto, exports no usados y dependencias huérfanas."
+                },
+                {
+                    "name": "Depcheck",
+                    "desc": "Detección de dependencias no utilizadas en el proyecto."
+                }
+            ]
+        }
+    },
+    "slide4.subtitle.post.1": "Como cualquier cuerpo vivo, necesita <strong>riego constante</strong> — <em>comunicación, documentación y revisiones periódicas</em>— para no convertirse en otro cadáver.",
+    "slide4.subtitle.post.2": "// system.online() → OK\nahora mantenlo con vida →",
+    "visual.demo.tokens.error": "Hex hardcoded",
+    "visual.demo.tokens.solution": "Tokens semánticos",
+    "visual.demo.themes.error": "Temas rotos",
+    "visual.demo.themes.solution": "Tokens por capa",
+    "visual.demo.spacing.error": "Valores random",
+    "visual.demo.spacing.solution": "Escala base-8",
+    "visual.demo.units.error": "Unidades mezcladas",
+    "visual.demo.units.solution": "Convención clara",
+    "visual.demo.contrast.error": "Contraste bajo",
+    "visual.demo.contrast.solution": "Alto contraste",
+    "visual.demo.touch.error": "Target diminuto",
+    "visual.demo.touch.solution": "Target correcto",
+    "visual.demo.focus.error": "Sin focus visible",
+    "visual.demo.focus.solution": "Focus ring claro",
+    "visual.demo.srcset.error": "1x en pantalla 2x",
+    "visual.demo.srcset.solution": "2x con srcset",
+    "visual.demo.heading.error": "Jerarquía rota",
+    "visual.demo.heading.solution": "Jerarquía correcta",
+    "visual.demo.overflow.error": "Contenedor fijo",
+    "visual.demo.overflow.solution": "Contenedor flexible",
+    "visual.demo.rtl.error": "margin-left fijo",
+    "visual.demo.rtl.solution": "Propiedades lógicas",
+    "visual.demo.detach.error": "Instancias detached",
+    "visual.demo.detach.solution": "Instancias vinculadas",
+    "visual.demo.zindex.error": "Guerra de z-index",
+    "visual.demo.zindex.solution": "Escala tokenizada",
+    "visual.demo.bundle.error": "Librerías pesadas",
+    "visual.demo.bundle.solution": "Nativo / micro",
+    "visual.demo.responsive.error": "Ancho fijo",
+    "visual.demo.responsive.solution": "Fluido",
+    "visual.demo.aria.error": "Botones idénticos",
+    "visual.demo.aria.solution": "aria-label descriptivo",
+    "visual.demo.liveregion.error": "Sin aria-live",
+    "visual.demo.liveregion.solution": "aria-live=\"polite\"",
+    "visual.demo.version.error": "Desincronizado",
+    "visual.demo.version.solution": "Sincronizado",
+    "visual.demo.negative.error": "Márgenes negativos",
+    "visual.demo.negative.solution": "Layout correcto",
+    "visual.demo.shadow.error": "Sombras cortadas",
+    "visual.demo.shadow.solution": "Padding de seguridad",
+    "visual.demo.specificity.error": "Selectores profundos",
+    "visual.demo.specificity.solution": "BEM plano",
+    "visual.demo.deadcode.error": "Código muerto",
+    "visual.demo.deadcode.solution": "Limpio",
+    "visual.demo.decimals.error": "Sub-píxeles",
+    "visual.demo.decimals.solution": "Enteros siempre",
+    "visual.demo.lineclamp.error": "Solo 1 línea",
+    "visual.demo.lineclamp.solution": "3 líneas con clamp",
+    "visual.demo.naming.error": "Vocabularios distintos",
+    "visual.demo.naming.solution": "Vocabulario único",
+    "visual.demo.overlap.error": "Absolute tapa contenido",
+    "visual.demo.overlap.solution": "Integrado en el flujo",
+    "visual.demo.pointerevents.error": "Overlay bloquea clics",
+    "visual.demo.pointerevents.solution": "pointer-events: none",
+    "visual.demo.viewport.error": "100vh tapa contenido",
+    "visual.demo.viewport.solution": "100dvh se adapta",
+    "visual.demo.safearea.error": "Sin safe-area",
+    "visual.demo.safearea.solution": "env(safe-area-inset)",
+    "visual.demo.grid.error": "Float layout roto",
+    "visual.demo.grid.solution": "CSS Grid moderno",
+    "visual.demo.maintainability.error": "Monolito sin orden",
+    "visual.demo.maintainability.solution": "Modular + tokens",
+    "visual.demo.obsolete.error": "Stack obsoleto",
+    "visual.demo.obsolete.solution": "Nativo moderno",
+    "visual.demo.audits.error": "Sin métricas",
+    "visual.demo.audits.solution": "Auditorías trimestrales",
+    "visual.demo.scalability.error": "Conocimiento centralizado",
+    "visual.demo.scalability.solution": "Proceso documentado",
+    "visual.demo.scroll.error": "Body scrollea",
+    "visual.demo.scroll.solution": "Body bloqueado",
+    "visual.demo.tokens.label.error": "--color1, --color2... sin sentido",
+    "visual.demo.tokens.label.solution": "--color-{semantic}-base ✓",
+    "visual.demo.themes.label.error": "Texto oscuro sobre fondo oscuro = invisible",
+    "visual.demo.themes.label.solution": "Ambos temas legibles ✓",
+    "visual.demo.spacing.label.error": "Sin ritmo visual",
+    "visual.demo.spacing.label.solution": "Ritmo consistente ✓",
+    "visual.demo.units.label.error": "px + rem + em = caos",
+    "visual.demo.units.label.solution": "rem global, em local ✓",
+    "visual.demo.contrast.label.error": "Gris sobre gris = ilegible",
+    "visual.demo.contrast.label.solution": "Blanco sobre azul = claro",
+    "visual.demo.touch.label.error": "El dedo no cabe en el target",
+    "visual.demo.touch.label.solution": "Target = tamaño del dedo ✓",
+    "visual.demo.srcset.label.error": "1x en display Retina",
+    "visual.demo.srcset.label.solution": "srcset 1x, 2x, 3x ✓",
+    "visual.demo.heading.label.error": "Screen reader perdido",
+    "visual.demo.heading.label.solution": "Secuencial y lógico ✓",
+    "visual.demo.overflow.label.error": "width: 120px fijo = desborde",
+    "visual.demo.overflow.label.solution": "min/max-width flexible ✓",
+    "visual.demo.rtl.label.error": "RTL completamente roto",
+    "visual.demo.rtl.label.solution": "Se adapta a cualquier dirección ✓",
+    "visual.demo.detach.label.error": "3 variantes manuales sin conexión",
+    "visual.demo.detach.label.solution": "1 componente, 3 instancias ✓",
+    "visual.demo.zindex.label.error": "Carrera infinita de números",
+    "visual.demo.zindex.label.solution": "Escala predecible ✓",
+    "visual.demo.bundle.label.error": "145KB para 2 funciones",
+    "visual.demo.bundle.label.solution": "0.3KB — 99.8% menos ✓",
+    "visual.demo.responsive.label.error": "← scroll horizontal en móvil",
+    "visual.demo.responsive.label.solution": "Se adapta a cualquier pantalla ✓",
+    "visual.demo.aria.label.error": "¿Cuál es cuál?",
+    "visual.demo.aria.label.solution": "Cada botón es único ✓",
+    "visual.demo.liveregion.label.error": "Invisible para screen reader",
+    "visual.demo.liveregion.label.solution": "El lector anuncia el cambio ✓",
+    "visual.demo.version.label.error": "6 meses sin actualizar",
+    "visual.demo.version.label.solution": "Pipeline de actualización ✓",
+    "visual.demo.negative.label.error": "Parche que rompe en otro contexto",
+    "visual.demo.negative.label.solution": "Layout limpio desde el padre ✓",
+    "visual.demo.shadow.label.error": "overflow:hidden corta box-shadow ✂",
+    "visual.demo.shadow.label.solution": "overflow-clip-margin ✓",
+    "visual.demo.specificity.label.error": "Imposible de sobreescribir",
+    "visual.demo.specificity.label.solution": "Predecible y mantenible ✓",
+    "visual.demo.deadcode.label.error": "100+ líneas muertas",
+    "visual.demo.deadcode.label.solution": "-3 archivos = -1200 líneas ✓",
+    "visual.demo.decimals.label.error": "Rendering inconsistente",
+    "visual.demo.decimals.label.solution": "Pixel-perfect en todos los browsers",
+    "visual.demo.lineclamp.label.error": "Corte abrupto en mitad de frase",
+    "visual.demo.lineclamp.label.solution": "Corte elegante a 3 líneas ✓",
+    "visual.demo.naming.label.error": "3 equipos, 3 nombres distintos",
+    "visual.demo.naming.label.solution": "1 nombre en el DS ✓",
+    "visual.demo.overlap.label.error": "Botón flota y tapa texto",
+    "visual.demo.overlap.label.solution": "Grid layout, sin solapamiento ✓",
+    "visual.demo.pointerevents.label.error": "El clic no llega al botón",
+    "visual.demo.pointerevents.label.solution": "pointer-events: none ✓",
+    "visual.demo.viewport.label.error": "100vh oculta teclado/nav",
+    "visual.demo.viewport.label.solution": "100dvh se adapta al viewport ✓",
+    "visual.demo.safearea.label.error": "Contenido detrás de la muesca",
+    "visual.demo.safearea.label.solution": "env(safe-area-inset) ✓",
+    "visual.demo.grid.label.error": "Layout float frágil",
+    "visual.demo.grid.label.solution": "Sistema grid flexible ✓",
+    "visual.demo.maintainability.label.error": "4000 líneas, sin estructura",
+    "visual.demo.maintainability.label.solution": "Modular y documentado ✓",
+    "visual.demo.obsolete.label.error": "jQuery 1.x, Bootstrap 3, Compass",
+    "visual.demo.obsolete.label.solution": "APIs nativas modernas ✓",
+    "visual.demo.audits.label.error": "Nunca medido",
+    "visual.demo.audits.label.solution": "Auditorías trimestrales ✓",
+    "visual.demo.scalability.label.error": "Solo 3 personas lo saben",
+    "visual.demo.scalability.label.solution": "Documentado y testeado ✓",
+    "visual.demo.scroll.label.error": "La página scrollea detrás del modal",
+    "visual.demo.scroll.label.solution": "Body overflow bloqueado ✓"
+}

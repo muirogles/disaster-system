@@ -1,0 +1,1865 @@
+/* =====================================================
+   FULL CORPSE — zoom view of all 3 parts together
+   ===================================================== */
+
+.corpse__item--full {
+    position: relative;
+    justify-content: flex-start !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Allow this slide to grow beyond 100dvh for closing section */
+    height: auto !important;
+    min-height: 100vh; /* fallback */
+    min-height: 100dvh;
+
+    @media (orientation: portrait) {
+        align-items: flex-start;
+        padding: 1.5rem;
+
+        .helmet {
+            left: 10%;
+            transform: translateX(0);
+        }
+
+        .corpse__header {
+            left: auto;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            top: auto;
+            max-height: calc(100dvh - 3rem);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    }
+}
+
+/* Zoom-scale so 3 x 100dvh sections fit in one viewport */
+.full-corpse {
+    zoom: 0.31;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+@supports not (zoom: 0.31) {
+    .full-corpse {
+        transform: scale(0.31);
+        transform-origin: top center;
+    }
+}
+
+/* Each part lives inside a 100dvh wrapper */
+.fc-part {
+    width: 100%;
+    height: 100vh; /* fallback */
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.fc-part:nth-child(1) { 
+    justify-content: flex-end;
+}
+.fc-part:nth-child(2) { justify-content: flex-start; }
+.fc-part:nth-child(3) { justify-content: flex-start; }
+
+/* Ensure proportions match slides */
+.fc-part {
+    --trunk-min-height: 100%;
+    --trunk-height: 100%;
+    --legs-height: 100%;
+
+    pointer-events: none;
+}
+
+.fc-part .trunk {
+    height: 100%;
+}
+
+.fc-part:nth-child(2) {
+    height: 80dvh;
+    z-index: 2;
+}
+
+.fc-part .head-wrap {
+    overflow: visible;
+}
+
+.fc-part .head-wrap .neck {
+    margin-bottom: calc(var(--neck-overlapping) * -1);
+}
+
+/* =====================================================
+   CLOSING SLIDE — standalone scroll-snap section
+   ===================================================== */
+.corpse__item--closing {
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(155,93,229,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 100%, rgba(233,30,99,0.04) 0%, transparent 60%),
+        #000;
+}
+
+/* =====================================================
+   REANIMAR BUTTON — terminal command prompt
+   ===================================================== */
+.btn-reanimate {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75em 1.5em 0.75em 1em;
+    border: 1px solid rgba(255, 68, 68, 0.38);
+    border-left: 3px solid rgba(255, 68, 68, 0.7);
+    border-radius: 0 8px 8px 0;
+    background: rgba(255, 68, 68, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(255, 180, 160, 0.92);
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.85rem, 1.45vw, 1.15rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-transform: none;
+    box-shadow:
+        0 0 18px rgba(255, 68, 68, 0.1),
+        inset 0 0 12px rgba(255, 68, 68, 0.03);
+    transition: box-shadow 0.25s, border-color 0.25s, color 0.25s, background 0.25s;
+    align-self: flex-start;
+    position: relative;
+}
+
+/* Terminal prompt > */
+.btn-reanimate::after {
+    content: '>';
+    color: rgba(0, 255, 85, 0.75);
+    font-weight: 300;
+    font-size: 1em;
+    flex-shrink: 0;
+}
+
+.btn-reanimate:hover:not(:disabled) {
+    background: rgba(255, 68, 68, 0.1);
+    border-color: rgba(255, 68, 68, 0.55);
+    border-left-color: rgba(255, 68, 68, 0.9);
+    color: rgba(255, 220, 200, 0.95);
+    box-shadow:
+        0 0 30px rgba(255, 68, 68, 0.22),
+        inset 0 0 20px rgba(255, 68, 68, 0.06);
+}
+
+.btn-reanimate:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-reanimate__bolt {
+    font-style: normal;
+    animation: boltPulse 1.2s ease-in-out infinite;
+}
+
+/* Done state — green terminal success */
+.btn-reanimate--done {
+    border-color: rgba(0, 220, 80, 0.38);
+    border-left-color: rgba(0, 220, 80, 0.7);
+    color: rgba(120, 255, 160, 0.92);
+    background: rgba(0, 220, 80, 0.05);
+    box-shadow: 0 0 18px rgba(0, 220, 80, 0.1);
+}
+
+.btn-reanimate--done::after {
+    content: '✓';
+    color: rgba(0, 255, 85, 0.8);
+}
+
+.btn-reanimate--done .btn-reanimate__bolt {
+    animation: none;
+}
+
+.btn-reanimate--done .btn-reanimate__bolt svg {
+    display: block;
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+/* =====================================================
+   HELMET
+   ===================================================== */
+.helmet {
+    position: absolute;
+    top: -38vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15vw;
+    min-width: 120px;
+    max-width: 200px;
+    height: auto;
+    z-index: 200;
+    pointer-events: none;
+    transition: top 0.55s cubic-bezier(0.3, 0, 0.5, 1.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.helmet--drop {
+    top: 4vh;
+}
+
+/* Wires coming from top */
+.helmet__wire {
+    position: absolute;
+    top: -12vh;
+    width: 4px;
+    height: 14vh;
+    background: repeating-linear-gradient(
+        to bottom,
+        #555 0px, #888 4px, #555 8px
+    );
+    border-radius: 2px;
+}
+.helmet__wire--l { left: 20%; transform: rotate(-6deg); }
+.helmet__wire--r { right: 20%; transform: rotate(6deg); }
+
+/* Main cap */
+.helmet__cap {
+    width: 100%;
+    height: 5.5vw;
+    min-height: 44px;
+    max-height: 72px;
+    background: linear-gradient(180deg, #555 0%, #333 50%, #222 100%);
+    border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+    border: 3px solid #666;
+    border-bottom: none;
+    position: relative;
+    box-shadow:
+        0 -4px 12px rgba(0,0,0,0.6),
+        inset 0 4px 12px rgba(255,255,255,0.08),
+        inset 0 -4px 10px rgba(0,0,0,0.4);
+}
+
+.helmet__band {
+    position: absolute;
+    left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #444, #777, #555, #888, #444);
+    border-radius: 2px;
+}
+.helmet__band--1 { top: 30%; }
+.helmet__band--2 { top: 60%; }
+
+.helmet__rivet {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #aaa, #555);
+    border: 1px solid #888;
+}
+.helmet__rivet--1 { top: 28%; left: 12%; }
+.helmet__rivet--2 { top: 28%; right: 12%; }
+.helmet__rivet--3 { top: 58%; left: 12%; }
+.helmet__rivet--4 { top: 58%; right: 12%; }
+
+/* Electrodes on the sides */
+.helmet__electrode {
+    position: absolute;
+    top: 0;
+    width: 14px;
+    height: 4.5vw;
+    min-height: 36px;
+    max-height: 58px;
+    background: linear-gradient(180deg, #777 0%, #444 40%, #222 100%);
+    border: 2px solid #888;
+    border-radius: 4px 4px 3px 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding-top: 4px;
+}
+.helmet__electrode--l { left: -18px; }
+.helmet__electrode--r { right: -18px; }
+
+.helmet__coil {
+    width: 8px;
+    height: 60%;
+    background: repeating-linear-gradient(
+        to bottom,
+        #aaa 0px, #888 2px, #aaa 4px, #666 6px
+    );
+    border-radius: 2px;
+}
+
+.helmet__tip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, #aaa 50%, #555);
+    box-shadow: 0 0 6px rgba(255,255,200,0.6);
+    margin-top: auto;
+    margin-bottom: 3px;
+}
+
+/* Electric arcs — visible only when shocking */
+.helmet__arc {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    bottom: -6px;
+    width: 3px;
+    border-radius: 2px;
+}
+.helmet__arc--1 { left: 22%;  height: 18px; background: #00ff88; transform: rotate(-12deg); }
+.helmet__arc--2 { left: 50%;  height: 24px; background: #88ffff; transform: rotate(5deg); }
+.helmet__arc--3 { right: 22%; height: 15px; background: #aaff44; transform: rotate(14deg); }
+
+.helmet--shock .helmet__arc { animation: arcFlicker 0.12s steps(1) infinite; }
+.helmet--shock .helmet__arc--1 { animation-delay: 0s; }
+.helmet--shock .helmet__arc--2 { animation-delay: 0.04s; }
+.helmet--shock .helmet__arc--3 { animation-delay: 0.08s; }
+
+/* =====================================================
+   SHOCK ANIMATION on full-corpse
+   ===================================================== */
+.full-corpse.is-shocked {
+    animation: corpseShock 2s ease-in-out forwards;
+}
+
+/* =====================================================
+   TRANSITIONS — smooth color morphing on theme change
+   Only applies within the full-corpse view
+   ===================================================== */
+.corpse__item--full .full-corpse .hair__top,
+.corpse__item--full .full-corpse .hair__side,
+.corpse__item--full .full-corpse .eye__lashes,
+.corpse__item--full .full-corpse .brain,
+.corpse__item--full .full-corpse .head,
+.corpse__item--full .full-corpse .ear,
+.corpse__item--full .full-corpse .nose,
+.corpse__item--full .full-corpse .blush,
+.corpse__item--full .full-corpse .eye__white,
+.corpse__item--full .full-corpse .eye__iris,
+.corpse__item--full .full-corpse .eye__lid,
+.corpse__item--full .full-corpse .lip--upper,
+.corpse__item--full .full-corpse .lip--lower,
+.corpse__item--full .full-corpse .tooth,
+.corpse__item--full .full-corpse .glasses__lens,
+.corpse__item--full .full-corpse .glasses__bridge,
+.corpse__item--full .full-corpse .glasses__wing,
+.corpse__item--full .full-corpse .glasses__triangle,
+.corpse__item--full .full-corpse .glasses__arm,
+.corpse__item--full .full-corpse .trunk__body,
+.corpse__item--full .full-corpse .trunk__collar,
+.corpse__item--full .full-corpse .trunk__waist,
+.corpse__item--full .full-corpse .arm__shoulder,
+.corpse__item--full .full-corpse .arm__upper,
+.corpse__item--full .full-corpse .arm__elbow,
+.corpse__item--full .full-corpse .arm__lower,
+.corpse__item--full .full-corpse .hand__palm,
+.corpse__item--full .full-corpse .finger,
+.corpse__item--full .full-corpse .tail,
+.corpse__item--full .full-corpse .leg__thigh,
+.corpse__item--full .full-corpse .leg__shin,
+.corpse__item--full .full-corpse .leg__joint,
+.corpse__item--full .full-corpse .leg__ankle,
+.corpse__item--full .full-corpse .foot__heel,
+.corpse__item--full .full-corpse .toe__seg {
+    transition:
+        background 1.8s ease,
+        border-color 1.8s ease,
+        box-shadow 1.8s ease,
+        opacity 1.8s ease,
+        clip-path 1.8s ease,
+        filter 1.8s ease;
+}
+
+/* =====================================================
+   DATA-THEME="design" — structural overrides only
+   All TOKEN overrides for the design theme live in
+   base/_themes.css. This section only contains shape /
+   behavior changes that can't be expressed as token swaps.
+   ===================================================== */
+
+/* ── Remove mouth stitches ── */
+.corpse__item--full[data-theme="design"] .full-corpse .mouth__inner::before,
+.corpse__item--full[data-theme="design"] .full-corpse .mouth__inner::after {
+    opacity: 0;
+    transition: opacity 1.8s ease;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .head::after {
+    opacity: 0;
+    animation: none;
+    transition: opacity 1.8s ease;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .eye__white {
+    border-color: transparent;
+    animation: none;
+}
+
+/* ── Fade scar sutures, show natural blush ── */
+.corpse__item--full[data-theme="design"] .full-corpse .blush {
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: none;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .blush::before,
+.corpse__item--full[data-theme="design"] .full-corpse .blush::after {
+    opacity: 0;
+    transition: opacity 1.8s ease;
+}
+
+/* ── Hide brain entirely — hair covers the top ── */
+.corpse__item--full[data-theme="design"] .full-corpse .brain {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Dark blonde flowing hair ── */
+.corpse__item--full[data-theme="design"] .full-corpse .hair__top {
+    background:
+        radial-gradient(ellipse 50% 30% at 35% 20%, rgba(220,185,100,0.4) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 22% at 70% 32%, rgba(195,155,70,0.25) 0%, transparent 50%),
+        linear-gradient(168deg,
+            #7a5214 0%, #a07428 18%,
+            #8a6218 40%, #b88c38 58%,
+            #8a6218 78%, #7a5214 100%);
+    /* Soft, rounded silhouette — gentle waves */
+    clip-path: polygon(
+        3%  100%, 0%  80%,  0%  60%,  2%  42%,  6%  26%, 12%  12%,
+        20%  4%, 30%  0%,  42%  3%,  50%  1%,  58%  3%,  68%  0%,
+        78%  3%,  86%  0%,  92%  8%,  96% 20%,  99% 36%, 100% 54%,
+        99%  72%, 100% 90%, 97% 100%
+    );
+    filter: drop-shadow(0 -0.2vmax 0.6vmax rgba(0,0,0,0.5));
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .hair__side {
+    height: 160%;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .hair__side--l {
+    background: linear-gradient(to bottom right,
+        #a07428 0%, #8a6218 30%, #7a5214 60%, rgba(90,60,10,0.2) 100%);
+    clip-path: polygon(
+        20%  0%,  64%  3%,  88% 16%,
+        100% 34%,  96% 56%,  86% 76%,
+        70%  90%,  46% 100%,  20%  96%,
+        8%   80%,  2%  56%,   5%  30%
+    );
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .hair__side--r {
+    background: linear-gradient(to bottom left,
+        #a07428 0%, #8a6218 30%, #7a5214 60%, rgba(90,60,10,0.2) 100%);
+    clip-path: polygon(
+        30%  0%,  76%  2%,  94% 16%,
+        98%  34%,  95% 56%,  84% 78%,
+        64%  92%,  40% 100%,  16%  94%,
+        5%   76%,  2%  52%,   7%  28%
+    );
+}
+
+/* ── Ears: warm skin-tone, remove green tragus tint ── */
+.corpse__item--full[data-theme="design"] .full-corpse .ear::before {
+    background:
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(0,0,0,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 50% 55%, rgba(0,0,0,0.18) 0%, transparent 50%),
+        radial-gradient(circle 20% at 75% 48%, rgba(232,180,140,0.2) 0%, transparent 60%);
+}
+
+/* ── Nose: softer, more rounded shape ── */
+.corpse__item--full[data-theme="design"] .full-corpse .nose {
+    border-radius: 38% 38% 50% 50% / 30% 30% 55% 55%;
+    box-shadow:
+        inset 0 4px 10px rgba(0,0,0,0.18),
+        inset 0 -2px 6px rgba(255,220,190,0.1),
+        2px 5px 12px rgba(0,0,0,0.3);
+}
+
+/* ── Mouth: softer lip shape, gentler scar color ── */
+.corpse__item--full[data-theme="design"] .full-corpse .mouth {
+    border-radius: 0 0 48% 48% / 0 0 60% 60%;
+}
+
+/* ── Subtle eye blink animation on reanimated ── */
+/* .corpse__item--full[data-theme="design"] .full-corpse .eye__lid {
+    animation: humanBlink 5s ease-in-out infinite;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .eye--r .eye__lid {
+    animation-delay: 0.08s;
+} */
+
+/* ── Feminine: more pronounced lashes ── */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__lashes {
+    opacity: 1;
+    filter: drop-shadow(0 -1px 2px rgba(60,20,80,0.6));
+    transform: scaleX(1.08);
+}
+
+/* ── Trunk: soft lavender-purple blouse ── */
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__body {
+    background: linear-gradient(155deg,
+        #c8aee8 0%,
+        #b498d8 15%,
+        #9a7dc4 38%,
+        #8568b0 62%,
+        #9a7dc4 80%,
+        #b298d8 100%
+    );
+    box-shadow:
+        inset  5px  0 14px rgba(220,200,255,.22),
+        inset -5px  0 14px rgba(0,0,0,.18),
+        inset  0  6px 12px rgba(220,200,255,.2),
+        inset  0 -8px 18px rgba(0,0,0,.22),
+        6px 12px 32px rgba(0,0,0,.55);
+}
+
+/* Blouse seam lines: soft purple shading */
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__body::before {
+    background: rgba(100,60,160,0.12);
+}
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__body::after {
+    background: rgba(100,60,160,0.1);
+}
+
+/* ── Collar: deep plum collar ── */
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__collar {
+    background: linear-gradient(to bottom, #3a1a5c, #1e0838);
+    box-shadow: 0 3px 8px rgba(0,0,0,.5);
+}
+
+/* ── Hide Frankenstein bolts on the body ── */
+.corpse__item--full[data-theme="design"] .full-corpse .bolt {
+    opacity: 0;
+    transition: opacity 1.8s ease;
+}
+
+/* ── Arms: same lavender as blouse ── */
+.corpse__item--full[data-theme="design"] .full-corpse .arm__shoulder,
+.corpse__item--full[data-theme="design"] .full-corpse .arm__upper,
+.corpse__item--full[data-theme="design"] .full-corpse .arm__elbow,
+.corpse__item--full[data-theme="design"] .full-corpse .arm__lower {
+    background: linear-gradient(170deg,
+        #c0a0e0 0%, #a888cc 35%, #9070b8 70%, #7858a0 100%);
+    box-shadow:
+        inset 2px 0 8px rgba(220,200,255,.18),
+        inset -2px 0 8px rgba(0,0,0,.2),
+        3px 5px 14px rgba(0,0,0,.45);
+    border-radius: 40% 40% 30% 30% / 18% 18% 20% 20%;
+}
+
+/* ── Hands: round, soft, skin-toned ── */
+.corpse__item--full[data-theme="design"] .full-corpse .hand__palm {
+    border-radius: 45% 45% 38% 38% / 52% 52% 50% 50%;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .finger {
+    border-radius: 40% 40% 28% 28% / 50% 50% 50% 50%;
+    background: linear-gradient(to bottom, #e0b090, #c88060, #a86040);
+    box-shadow: 1px 2px 6px rgba(0,0,0,.3), inset 0 1px 3px rgba(255,255,255,.25);
+}
+
+/* ── Legs: clean dark indigo denim — remove scale texture ── */
+.corpse__item--full[data-theme="design"] .full-corpse .leg__thigh,
+.corpse__item--full[data-theme="design"] .full-corpse .leg__shin {
+    --leg-thigh-height: 35%;
+    --leg-shin-height: 35%;
+
+    /* Denim texture: subtle diagonal weave */
+    background:
+        repeating-linear-gradient(
+            62deg,
+            transparent 0px, transparent 3px,
+            rgba(255,255,255,0.03) 3px, rgba(255,255,255,0.03) 4px
+        ),
+        linear-gradient(175deg,
+            var(--leg-c2) 0%, var(--leg-c3) 35%,
+            var(--leg-c4) 65%, var(--leg-c5) 100%);
+    /* No scale ridge */
+}
+
+/* Remove lizard dorsal ridges */
+.corpse__item--full[data-theme="design"] .full-corpse .leg__thigh::after {
+    opacity: 0;
+}
+
+/* ── Hide Lizard toes ── */
+.corpse__item--full[data-theme="design"] .full-corpse .foot__toes {
+    --foot-toes-height: 0;
+
+    opacity: 0;
+}
+
+
+.corpse__item--full[data-theme="design"] .full-corpse .foot {
+    --foot-height: 15%;
+}
+
+/* ── Feet: shoes / sneakers ── */
+.corpse__item--full[data-theme="design"] .full-corpse .foot__heel {
+    --foot-heel-height: 100%;
+    --foot-heel-width: 140%;
+
+    background: linear-gradient(to bottom, #2c2c2c, #1a1a1a, #111);
+}
+.corpse__item--full[data-theme="design"] .full-corpse .leg--l .foot__heel {
+    align-self: flex-end;
+    border-radius: 50% 5% 5% 5%;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .leg--r .foot__heel {
+    align-self: flex-start;
+    border-radius: 5% 50% 5% 5%;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .toe__seg {
+    background: linear-gradient(to bottom, #3a3a3a, #222);
+}
+.corpse__item--full[data-theme="design"] .full-corpse .toe__claw {
+    border-top-color: #444;
+}
+
+/* ── WTM logo inside heart: hidden by default, shown in design theme ── */
+.heart-wtm-logo {
+    display: none;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 50%;
+    aspect-ratio: 1/1;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    filter: brightness(0) invert(1);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 1.4s ease 0.8s;
+    top: -30%;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .heart-wtm-logo {
+    display: block;
+    opacity: 0.78;
+}
+
+/* ── Heart window: visible healthy heart ── */
+.corpse__item--full[data-theme="design"] .full-corpse .heart-window {
+    box-shadow:
+    inset 0 0 40px rgba(220,100,80,.4),
+    inset 0 0 14px rgba(220,100,80,.2),
+    0 0 30px rgba(220,100,80,.25);
+    border-color: #c8785a;
+}
+
+/* Hide tail */
+.corpse__item--full[data-theme="design"] .full-corpse .tail {
+    opacity: 0;
+}
+
+/* Full-corpse reveal animation after shock */
+.corpse__item--full[data-theme="design"] .full-corpse {
+    animation: designReveal 1s ease-out forwards;
+}
+
+@keyframes titleReveal {
+    from { 
+        opacity: 0; 
+        transform: scale(0.9) translateY(20px);
+        filter: blur(4px);
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+}
+
+.closing__tools-divider-label::before {
+    content: "✨ ";
+}
+
+/* =====================================================
+   AWAKENING SLIDE — own full-viewport slide after reanimate
+   ===================================================== */
+.corpse__item--awakening {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,137,123,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(233,30,99,0.06) 0%, transparent 60%),
+        #000;
+    overflow: hidden;
+}
+
+.awakening {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.6rem, 1.4vh, 1.2rem);
+    text-align: center;
+    padding: clamp(2rem, 6vh, 5rem) clamp(1.5rem, 6vw, 4rem);
+    max-width: min(90vw, 900px);
+}
+
+/* Eyebrow label — small uppercase intro */
+.awakening__eyebrow {
+    font-size: clamp(0.6rem, 1vw, 0.85rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-teal);
+    opacity: 0;
+    animation: awakeningFadeIn 0.6s ease-out 0.1s forwards;
+    margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);
+}
+
+/* Individual lines — staggered fade-in */
+.awakening__line {
+    opacity: 0;
+    font-size: clamp(1.1rem, 2.4vw, 3rem);
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.35;
+    margin: 0;
+    animation: awakeningFadeIn 0.7s ease-out forwards;
+}
+
+.awakening__line strong {
+    font-weight: 800;
+    color: #fff;
+}
+
+/* Stagger delays */
+.awakening__line--1 { animation-delay: 0.4s;  color: rgba(255,130,130,0.85); }
+.awakening__line--2 { animation-delay: 1.0s;  color: rgba(255,180,110,0.75); font-size: clamp(0.95rem, 2vw, 2.5rem); }
+.awakening__line--3 { animation-delay: 1.9s;  color: rgba(255,255,255,0.7);  font-size: clamp(1rem, 2.1vw, 2.6rem); }
+
+/* Climax line — largest, green glow */
+.awakening__line--4 {
+    animation-delay: 2.7s;
+    font-size: clamp(1.6rem, 3.8vw, 5rem);
+    font-weight: 800;
+    color: rgba(100,220,160,0.98);
+    letter-spacing: -0.02em;
+    text-shadow:
+        0 0 40px rgba(68,204,102,0.5),
+        0 0 80px rgba(68,204,102,0.2);
+    line-height: 1.15;
+}
+
+/* Closing line — smaller, italic, secondary */
+.awakening__line--5 {
+    animation-delay: 3.6s;
+    font-size: clamp(0.85rem, 1.7vw, 2.2rem);
+    color: rgba(180,210,255,0.65);
+    font-style: italic;
+    font-weight: 400;
+    max-width: 680px;
+    line-height: 1.5;
+}
+
+/* Scroll hint arrow */
+.awakening__scroll-hint {
+    opacity: 0;
+    animation: awakeningFadeIn 0.6s ease-out 4.5s forwards;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    color: rgba(255,255,255,0.2);
+    margin-top: clamp(0.5rem, 1.5vh, 1rem);
+    animation-iteration-count: 1;
+}
+
+@keyframes awakeningFadeIn {
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   CLOSING SECTION — Tools summary and farewell
+   ===================================================== */
+.closing {
+    width: 100%;
+    max-width: min(90vw, 1200px);
+    margin: clamp(2rem, 6vh, 5rem) auto 0;
+    padding: clamp(2rem, 5vw, 4rem);
+    text-align: center;
+}
+
+.closing__title {
+    font-size: clamp(3rem, 5vw, 8rem);
+    font-weight: 900;
+    color: rgba(255,255,255,0.96);
+    text-shadow: 0 0 40px rgba(155,93,229,0.3);
+    margin: clamp(2.5rem, 6vh, 5rem) auto clamp(1rem, 2vh, 1.5rem);
+    max-width: min(92%, 900px);
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+    position: relative;
+    animation: titleReveal 1.5s ease-out 0.5s both;
+}
+
+/* Decorative gradient underline below title */
+.closing__title::after {
+    content: '';
+    display: block;
+    width: clamp(48px, 6vw, 80px);
+    height: 3px;
+    margin: clamp(0.6rem, 1.2vw, 1rem) auto 0;
+    background: linear-gradient(90deg,
+        var(--color-purple) 0%,
+        var(--color-magenta) 60%,
+        transparent 100%);
+    border-radius: 2px;
+    opacity: 0.7;
+}
+
+.closing .highlight,
+.corpse__header-philosophy-title .highlight {
+    color: var(--color-purple);
+    text-shadow: 0 0 60px rgba(155, 93, 229, 0.5);
+    display: inline-block;
+}
+
+.closing__intro {
+    font-size: clamp(0.95rem, 1.55vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.5);
+    max-width: min(90%, 680px);
+    margin: clamp(0.8rem, 2vh, 1.5rem) auto clamp(1rem, 2vh, 1.6rem);
+    line-height: 1.78;
+    padding: 1em 1.4em;
+    background: rgba(255,255,255,0.018);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: 2px solid rgba(155,93,229,0.25);
+    border-radius: 0 10px 10px 0;
+    text-align: left;
+}
+
+.closing__intro strong {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+}
+
+/* ---- Section divider between philosophy and tools ---- */
+.closing__tools-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    margin: clamp(1.5rem, 4vh, 3rem) 0 clamp(1.2rem, 2.5vh, 2rem);
+    color: rgba(255,255,255,0.18);
+}
+
+.closing__tools-divider::before,
+.closing__tools-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+}
+
+.closing__tools-divider::before {
+    background: linear-gradient(90deg, transparent, rgba(155,93,229,0.3));
+}
+
+.closing__tools-divider::after {
+    background: linear-gradient(90deg, rgba(255,179,0,0.25), transparent);
+}
+
+.closing__tools-divider-label {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(1rem, 1.125vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-indent: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.22);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ---- Tools grid grouped by body part ---- */
+.closing__tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+    gap: clamp(0.5rem, 1vw, 0.9rem);
+    text-align: left;
+    margin-bottom: clamp(2rem, 5vh, 4rem);
+    line-height: 1;
+}
+
+/* Compact terminal token card */
+.closing__group {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(155,93,229,0.1);
+    border-left: 2px solid rgba(155,93,229,0.22);
+    border-radius: 0 8px 8px 0;
+    padding: clamp(0.65rem, 1.2vw, 1rem);
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    cursor: default;
+}
+
+.closing__group:hover {
+    border-left-color: rgba(155,93,229,0.5);
+    background: rgba(155,93,229,0.04);
+    box-shadow: 0 0 16px rgba(155,93,229,0.04);
+}
+
+/* Group title — code comment style */
+.closing__group-title {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.55rem, 0.8vw, 0.68rem);
+    font-weight: 400;
+    color: rgba(155,93,229,0.5);
+    margin: 0 0 0.55em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid rgba(155,93,229,0.1);
+    text-transform: none;
+    letter-spacing: 0.04em;
+}
+
+.closing__group-title::before {
+    content: '// ';
+    color: rgba(155,93,229,0.35);
+}
+
+.closing__group-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+.closing__tool {
+    padding: 0.15em 0;
+}
+
+.closing__tool-name {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.62rem, 0.9vw, 0.78rem);
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+}
+
+.closing__tool-desc {
+    font-size: clamp(0.6rem, 0.88vw, 0.75rem);
+    color: rgba(255,255,255,0.3);
+    line-height: 1.4;
+}
+
+a.closing__tool-name {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.22em 0.45em 0.22em 0.35em;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+}
+
+a.closing__tool-name::before {
+    content: '→';
+    font-size: 0.8em;
+    color: rgba(155,93,229,0.35);
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+a.closing__tool-name:hover {
+    color: rgba(196,160,245,0.9);
+    background: rgba(155,93,229,0.08);
+}
+
+a.closing__tool-name:hover::before {
+    color: rgba(155,93,229,0.7);
+    transform: translateX(2px);
+}
+
+/* ---- Closing message ---- */
+.closing__message {
+    max-width: 750px;
+    margin: 0 auto clamp(2rem, 4vh, 3rem);
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(155,93,229,0.3);
+    border-radius: 0 12px 12px 0;
+}
+
+.closing__message-title {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 0.6em;
+}
+
+.closing__message-text {
+    font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    margin: 0 0 0.8em;
+}
+
+.closing__message-text:last-child {
+    margin-bottom: 0;
+}
+
+.closing__message-text strong {
+    color: var(--color-magenta);
+}
+
+.closing__message-text em {
+    color: var(--color-teal);
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* ---- CTA / farewell ---- */
+.closing__cta {
+    padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+}
+
+.closing__cta-card {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(155, 93, 229, 0.008) 3px,
+            rgba(155, 93, 229, 0.008) 4px
+        ),
+        rgba(8, 6, 18, 0.75);
+    border: 1px solid rgba(155,93,229,0.18);
+    border-left: 3px solid rgba(155,93,229,0.45);
+    border-radius: 0 16px 16px 0;
+    padding: calc(clamp(1.8rem, 3.5vw, 3rem) + 1.9em) clamp(2rem, 4vw, 3.5rem) clamp(1.8rem, 3.5vw, 3rem);
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3), 0 0 40px rgba(155,93,229,0.04);
+}
+
+/* Terminal title bar */
+.closing__cta-card::before {
+    content: '● ○ ○   session.close()   ▶   EOF';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.9em;
+    line-height: 1.9em;
+    padding: 0 0.85em;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.52rem, 0.72vw, 0.65rem);
+    letter-spacing: 0.1em;
+    text-transform: none;
+    font-weight: 400;
+    color: rgba(155, 93, 229, 0.55);
+    background: rgba(155, 93, 229, 0.06);
+    border-bottom: 1px solid rgba(155, 93, 229, 0.12);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* CRT scan sweep */
+.closing__cta-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3em;
+    top: -3em;
+    background: linear-gradient(180deg,
+        transparent 30%,
+        rgba(155, 93, 229, 0.04) 50%,
+        transparent 70%);
+    animation: closingCtaScan 9s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+@keyframes closingCtaScan {
+    to { top: calc(100% + 3em); }
+}
+
+.closing__cta-title {
+    font-size: clamp(1.3rem, 2.2vw, 2.4rem);
+    color: rgba(255,255,255,0.92);
+    line-height: 1.4;
+    margin: 0 0 0.7em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.closing__cta-text {
+    font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.closing__cta-text strong {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+}
+
+.closing__cta-actions {
+    margin: clamp(1.5rem, 2.5vw, 2.2rem) 0 clamp(1rem, 1.5vw, 1.5rem);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+/* LinkedIn share button — terminal style */
+.closing__share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    text-decoration: none;
+    color: rgba(100, 190, 255, 0.85);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-weight: 600;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    padding: 0.65em 1.4em 0.65em 0.9em;
+    background: rgba(0, 119, 181, 0.06);
+    border: 1px solid rgba(0, 119, 181, 0.22);
+    border-left: 3px solid rgba(0, 119, 181, 0.55);
+    border-radius: 0 10px 10px 0;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.closing__share-btn::before {
+    content: '↗';
+    font-size: 0.9em;
+    color: rgba(0, 150, 210, 0.55);
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
+    text-transform: none;
+    font-style: normal;
+}
+
+.closing__share-btn:hover {
+    background: rgba(0, 119, 181, 0.12);
+    border-left-color: rgba(0, 160, 230, 0.75);
+    color: rgba(130, 210, 255, 0.95);
+    transform: none;
+    box-shadow: none;
+}
+
+.closing__share-btn:hover::before {
+    color: rgba(0, 160, 230, 0.75);
+    transform: translate(2px, -2px);
+}
+
+.closing__share-btn svg {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    fill: currentColor;
+    opacity: 0.7;
+}
+
+/* ---- Social + hashtags area ---- */
+.closing__cta-social {
+    margin-top: clamp(1.2rem, 2.2vw, 2rem);
+    padding-top: clamp(1rem, 1.8vw, 1.5rem);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.closing__hashtags-label {
+    font-size: clamp(0.62rem, 0.88vw, 0.75rem);
+    color: rgba(155,93,229,0.45);
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin: 0;
+    text-transform: none;
+}
+
+.closing__hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 0.6rem;
+    margin: 0;
+}
+
+.closing__hashtag {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.72rem, 1.05vw, 0.9rem);
+    font-weight: 600;
+    color: var(--color-teal);
+    background: rgba(0,137,123,0.05);
+    border: 1px solid rgba(0,137,123,0.15);
+    border-left: 2px solid rgba(0,137,123,0.4);
+    border-radius: 0 4px 4px 0;
+    padding: 0.18em 0.65em 0.18em 0.55em;
+    white-space: nowrap;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.closing__hashtag:nth-child(2n) { color: var(--color-gold); background: rgba(255,179,0,0.04); border-color: rgba(255,179,0,0.12); border-left-color: rgba(255,179,0,0.38); }
+.closing__hashtag:nth-child(3n) { color: var(--color-magenta); background: rgba(233,30,99,0.04); border-color: rgba(233,30,99,0.12); border-left-color: rgba(233,30,99,0.38); }
+
+.closing__social-authors {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.closing__social-label {
+    font-size: clamp(0.62rem, 0.88vw, 0.75rem);
+    color: rgba(255,255,255,0.22);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.closing__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    text-decoration: none;
+    color: rgba(255,255,255,0.35);
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-weight: 500;
+    padding: 0.35em 0.75em;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    transition: color 0.2s, background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.closing__social-link:hover {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+
+.closing__social-icon {
+    width: 0.95em;
+    height: 0.95em;
+    flex-shrink: 0;
+    opacity: 0.6;
+    fill: currentColor;
+}
+
+/* When used in the CTA card, the disaster-title hashtag needs contained sizing */
+.closing__cta-hashtag {
+    font-size: clamp(1.8rem, 4vw, 5rem);
+    margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
+}
+
+/* =====================================================
+   CORPSE HEADER — terminal card (slide 4)
+   DISASTER state = red, DESIGN state = green
+   ===================================================== */
+.corpse__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6vmax;
+    position: absolute;
+    left: calc(50% + (var(--trunk-width) / 2) + 2.5vw);
+    top: 8%;
+    max-width: clamp(240px, 30vw, 460px);
+    /* Extra top padding for terminal title bar */
+    padding: calc(clamp(1.4rem, 2.8vw, 2.6rem) + 1.9em) clamp(1.2rem, 2.2vw, 2.2rem) clamp(1.4rem, 2.8vw, 2.6rem);
+    overflow: hidden;
+
+    /* Terminal window card — DISASTER (red) */
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(255, 68, 68, 0.012) 3px,
+            rgba(255, 68, 68, 0.012) 4px
+        ),
+        linear-gradient(150deg,
+            rgba(14, 0, 3, 0.92) 0%,
+            rgba(8, 0, 2, 0.96) 100%);
+    border: 1px solid rgba(255, 68, 68, 0.35);
+    border-radius: 10px;
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+
+    box-shadow:
+        0 0 30px rgba(255, 68, 68, 0.08),
+        0 28px 90px rgba(0, 0, 0, 0.75),
+        inset 0 0 40px rgba(255, 68, 68, 0.02);
+
+    /* Entrance + ambient glow */
+    animation:
+        headerReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both,
+        headerGlow 6s ease-in-out 1.5s infinite;
+    z-index: 10;
+}
+
+/* Terminal title bar — DISASTER state */
+.corpse__header::before {
+    content: '● ○ ○   disaster.exe   ▶   ERR: MISSING_TOKENS';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.9em;
+    line-height: 1.9em;
+    padding: 0 0.8em;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.5rem, 0.68vw, 0.62rem);
+    letter-spacing: 0.1em;
+    text-transform: none;
+    font-weight: 400;
+    color: rgba(255, 68, 68, 0.65);
+    background: rgba(255, 68, 68, 0.07);
+    border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* CRT scan-line sweep */
+.corpse__header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -3em;
+    height: 3em;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 68, 68, 0.05) 50%,
+        transparent
+    );
+    animation: headerScanSweep 7s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+@keyframes headerScanSweep {
+    0%   { top: -3em; }
+    100% { top: calc(100% + 3em); }
+}
+
+@keyframes headerReveal {
+    from {
+        opacity: 0;
+        transform: translateX(28px) translateY(-6px);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes headerGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 30px rgba(255, 68, 68, 0.06),
+            0 28px 90px rgba(0, 0, 0, 0.75),
+            inset 0 0 40px rgba(255, 68, 68, 0.015);
+    }
+    50% {
+        box-shadow:
+            0 0 50px rgba(255, 68, 68, 0.18),
+            0 28px 90px rgba(0, 0, 0, 0.75),
+            inset 0 0 60px rgba(255, 68, 68, 0.04);
+    }
+}
+
+/* Status badge with pulsing dot */
+.corpse__header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.9vw, 0.8rem);
+    font-weight: 600;
+    color: rgba(255, 120, 80, 0.9);
+    letter-spacing: 0.07em;
+    background: rgba(255, 68, 68, 0.08);
+    border: 1px solid rgba(255, 68, 68, 0.22);
+    border-radius: 6px;
+    padding: 0.3em 0.8em 0.3em 0.55em;
+    margin-bottom: 0.4vmax;
+}
+
+.corpse__header-dot {
+    width: clamp(5px, 0.5vw, 7px);
+    height: clamp(5px, 0.5vw, 7px);
+    border-radius: 50%;
+    background: var(--color-coral);
+    flex-shrink: 0;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.5);
+    }
+    50% {
+        opacity: 0.45;
+        box-shadow: 0 0 0 5px rgba(255, 87, 34, 0);
+    }
+}
+
+/* Divider with diamond */
+.corpse__header-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    width: 100%;
+    color: rgba(255, 68, 68, 0.4);
+    font-size: clamp(0.38rem, 0.5vw, 0.5rem);
+    letter-spacing: 0.4em;
+    margin: 0.4vmax 0;
+}
+
+.corpse__header-divider--philosophy {
+    display: none;
+}
+
+.corpse__header-divider::before,
+.corpse__header-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+}
+
+.corpse__header-divider::before {
+    background: linear-gradient(90deg, transparent, rgba(255,68,68,0.35));
+}
+
+.corpse__header-divider::after {
+    background: linear-gradient(90deg, rgba(255,68,68,0.35), transparent);
+}
+
+/* Subtitle — error log style */
+.corpse__subtitle {
+    font-size: clamp(0.72rem, 1.05vw, 0.95rem);
+    color: rgba(255, 100, 80, 0.55);
+    line-height: 1.65;
+    font-style: normal;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.corpse__subtitle-em {
+    color: rgba(255, 255, 255, 0.72);
+    font-style: normal;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+/* The h2 wraps the disaster-title span */
+.corpse__title {
+    margin: 0;
+    line-height: 1;
+    font-size: clamp(1.5rem, 2vw, 3.5rem);
+    text-align: center;
+    margin-inline: auto;
+}
+
+/* disaster-title inside the CTA card — controlled size */
+.corpse__title--disaster {
+    display: block;
+    font-family: 'Courier New', 'Cascadia Code', monospace;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: var(--color-gold);
+    text-shadow: 3px -2px 0 var(--color-coral), -2px 3px 0 var(--color-magenta), -1px -1px 0 var(--color-purple), 4px 4px 10px rgba(233, 30, 99, 0.6), -3px -3px 20px rgba(255, 87, 34, 0.3), 0 0 50px rgba(233, 30, 99, 0.35);
+    transform: rotate(-1.8deg) skewX(-3deg);
+    animation: disasterGlitch 4s ease-in-out infinite;
+    padding: 0.05em 0.15em;
+}
+
+/* design-title inside the CTA card — controlled size */
+.corpse__title--design {
+    position: relative;
+    display: inline-block;
+    color: var(--color-purple);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0 0 30px rgba(155, 93, 229, 0.25);
+    padding: 0.25em 0.5em;
+}
+
+.corpse__title--design::before {
+    content: '';
+    position: absolute;
+    inset: -4px -10px;
+    border: 1px solid rgba(155, 93, 229, 0.3);
+    border-radius: 3px;
+    background: linear-gradient(rgba(155, 93, 229, 0.05) 1px, transparent 1px) 0 0 / 8px 8px, linear-gradient(90deg, rgba(155, 93, 229, 0.05) 1px, transparent 1px) 0 0 / 8px 8px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.corpse__title--design::after {
+    content: '';
+    position: absolute;
+    inset: -8px -14px;
+    pointer-events: none;
+    background: linear-gradient(var(--color-purple), var(--color-purple)) 0 0 / 5px 5px no-repeat, linear-gradient(var(--color-purple), var(--color-purple)) 100% 0 / 5px 5px no-repeat, linear-gradient(var(--color-purple), var(--color-purple)) 0 100% / 5px 5px no-repeat, linear-gradient(var(--color-purple), var(--color-purple)) 100% 100% / 5px 5px no-repeat;
+}
+
+.corpse__title--system {
+    text-transform: uppercase;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    color: var(--color-green);
+    text-shadow:
+        0 0 20px var(--color-green),
+        0 0 40px rgba(0,255,85,0.4),
+        0 0 60px rgba(0,220,60,0.2);
+    position: relative;
+    animation: matrixGlow 3s ease-in-out infinite alternate;
+}
+
+.corpse__title--system::before {
+    content: 'WTM MADRID 2026';
+    position: absolute;
+    inset: 0;
+    color: rgba(0,255,85,0.15);
+    font-size: 0.675em;
+    letter-spacing: 0.25em;
+    text-indent: 0.25em;
+    animation: matrixFall 4s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes matrixGlow {
+    0% { 
+        text-shadow:
+            0 0 20px var(--color-green),
+            0 0 40px rgba(0,255,85,0.4),
+            0 0 60px rgba(0,220,60,0.2);
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    100% {
+        text-shadow:
+            0 0 30px var(--color-green),
+            0 0 60px rgba(0,255,85,0.6),
+            0 0 80px rgba(0,220,60,0.3);
+        filter: hue-rotate(120deg) brightness(1.1);
+    }
+}
+
+@keyframes matrixFall {
+    0% { transform: translateY(-100%) rotateX(15deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100%) rotateX(-15deg); opacity: 0; }
+}
+
+/* Gradient line spanning "System" — Design purple left, Disaster gold right */
+.corpse__title--system ::after {
+    content: '';
+    position: absolute;
+    bottom: -0.25em;
+    left: 0.35em;   /* align with text-indent offset */
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        rgba(155,93,229,0.5) 0%,
+        rgba(255,255,255,0.12) 50%,
+        rgba(255,179,0,0.5) 100%);
+    pointer-events: none;
+}
+
+/* =====================================================
+   DESIGN STATE — green terminal card
+   ===================================================== */
+[data-theme="design"] .corpse__header {
+    border-color: rgba(0, 220, 80, 0.35);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 255, 85, 0.012) 3px,
+            rgba(0, 255, 85, 0.012) 4px
+        ),
+        linear-gradient(150deg,
+            rgba(0, 14, 4, 0.92) 0%,
+            rgba(0, 8, 2, 0.96) 100%);
+    box-shadow:
+        0 0 30px rgba(0, 255, 85, 0.08),
+        0 28px 90px rgba(0, 0, 0, 0.75),
+        inset 0 0 40px rgba(0, 255, 85, 0.02);
+    animation:
+        headerReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both,
+        headerGlowGreen 6s ease-in-out infinite;
+}
+
+@keyframes headerGlowGreen {
+    0%, 100% {
+        box-shadow:
+            0 0 30px rgba(0, 255, 85, 0.06),
+            0 28px 90px rgba(0, 0, 0, 0.75),
+            inset 0 0 40px rgba(0, 255, 85, 0.015);
+    }
+    50% {
+        box-shadow:
+            0 0 50px rgba(0, 255, 85, 0.18),
+            0 28px 90px rgba(0, 0, 0, 0.75),
+            inset 0 0 60px rgba(0, 255, 85, 0.04);
+    }
+}
+
+[data-theme="design"] .corpse__header::before {
+    content: '● ● ●   design_system.exe   ▶   STATUS: ONLINE';
+    color: rgba(0, 255, 85, 0.65);
+    background: rgba(0, 255, 85, 0.07);
+    border-bottom-color: rgba(0, 255, 85, 0.2);
+}
+
+[data-theme="design"] .corpse__header::after {
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 255, 85, 0.06) 50%,
+        transparent
+    );
+}
+
+[data-theme="design"] .corpse__header .corpse__header-badge {
+    color: rgba(100, 255, 150, 0.88);
+    background: rgba(0, 220, 80, 0.08);
+    border-color: rgba(0, 220, 80, 0.25);
+}
+
+[data-theme="design"] .corpse__header .corpse__header-dot {
+    background: rgba(0, 255, 85, 0.85);
+    box-shadow: 0 0 8px rgba(0, 255, 85, 0.5);
+}
+
+[data-theme="design"] .corpse__header .corpse__header-divider {
+    color: rgba(0, 220, 80, 0.4);
+}
+
+[data-theme="design"] .corpse__header .corpse__header-divider::before {
+    background: linear-gradient(90deg, transparent, rgba(0,220,80,0.35));
+}
+
+[data-theme="design"] .corpse__header .corpse__header-divider::after {
+    background: linear-gradient(90deg, rgba(0,220,80,0.35), transparent);
+}
+
+[data-theme="design"] .corpse__header .corpse__subtitle {
+    color: rgba(0, 200, 80, 0.55);
+}
+
+/* =====================================================
+   HEADER PHILOSOPHY — concept bridge, visible after reanimate
+   ===================================================== */
+.corpse__header-philosophy {
+    display: none;
+    width: 100%;
+    padding: 0.9em 1.2em;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 220, 80, 0.006) 3px,
+            rgba(0, 220, 80, 0.006) 4px
+        ),
+        rgba(0, 220, 80, 0.03);
+    border: 1px solid rgba(0, 220, 80, 0.18);
+    border-left: 3px solid rgba(0, 220, 80, 0.5);
+    border-radius: 0 10px 10px 0;
+    text-align: left;
+    animation: philosophyReveal 0.6s ease-out both;
+}
+
+[data-theme="design"] .corpse__header-philosophy {
+    display: block;
+}
+
+[data-theme="design"] .corpse__header-divider--philosophy {
+    display: flex;
+}
+
+.corpse__header {
+    padding-block: 3em 2em;
+}
+
+.corpse__header-philosophy-title {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.75rem, 1.15vw, 1.1rem);
+    font-weight: 700;
+    color: rgba(0, 255, 85, 0.88);
+    margin: 0 0 0.4em;
+    letter-spacing: 0.04em;
+    text-transform: none;
+}
+
+.corpse__header-philosophy-title::before {
+    content: '// ';
+    color: rgba(0, 220, 80, 0.4);
+    font-weight: 400;
+}
+
+.corpse__header-philosophy-text {
+    font-size: clamp(0.72rem, 1.1vw, 0.92rem);
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.corpse__header-philosophy-text strong {
+    color: rgba(0, 255, 85, 0.75);
+    font-weight: 700;
+}
+
+@keyframes philosophyReveal {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   HEADER CTA — visible only after design theme (post-reanimate)
+   ===================================================== */
+.corpse__header-cta {
+    display: none;
+    flex-direction: column;
+    gap: 0.6em;
+    width: 100%;
+    margin-top: 0.8em;
+    padding-top: 0.85em;
+    border-top: 1px solid rgba(0, 220, 80, 0.18);
+}
+
+.corpse__header-cta.is-visible {
+    display: flex;
+}
+
+/* "git push --tags // comparte" label */
+.corpse__header-cta-label {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.9vw, 0.78rem);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    color: rgba(0, 200, 80, 0.65);
+    margin: 0;
+}
+
+.corpse__header-hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin: 0;
+}
+
+.corpse__header-hashtag {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.9vw, 0.82rem);
+    font-weight: 600;
+    color: rgba(0, 255, 85, 0.85);
+    background: rgba(0, 220, 80, 0.08);
+    border: 1px solid rgba(0, 220, 80, 0.25);
+    border-radius: 5px;
+    padding: 0.28em 0.65em;
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(0, 255, 85, 0.3);
+}
+
+.corpse__header-authors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.15em;
+}
+
+.corpse__header-author-link {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.88vw, 0.78rem);
+    font-weight: 400;
+    color: rgba(0, 200, 80, 0.55);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+.corpse__header-author-link::before {
+    content: '→ ';
+    color: rgba(0, 200, 80, 0.35);
+    font-size: 0.85em;
+}
+
+.corpse__header-author-link:hover {
+    color: rgba(0, 255, 85, 0.9);
+    text-shadow: 0 0 10px rgba(0, 255, 85, 0.4);
+}
+
+/* =====================================================
+   BTN-REANIMATE — SHARE state (LinkedIn morphed)
+   ===================================================== */
+.btn-reanimate--share {
+    border-color: rgba(90, 173, 219, 0.38);
+    border-left-color: rgba(90, 173, 219, 0.65);
+    background: rgba(90, 173, 219, 0.05);
+    color: rgba(180, 220, 245, 0.9);
+    box-shadow: 0 0 18px rgba(90, 173, 219, 0.1);
+}
+
+.btn-reanimate--share::after {
+    content: '↗';
+    color: rgba(90, 173, 219, 0.7);
+}
+
+.btn-reanimate--share .btn-reanimate__bolt {
+    animation: none;
+    color: #5aaddb;
+}
+
+.btn-reanimate--share .btn-reanimate__bolt svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+.btn-reanimate--share:hover:not(:disabled) {
+    background: rgba(90, 173, 219, 0.1);
+    border-color: rgba(90, 173, 219, 0.55);
+    border-left-color: rgba(90, 173, 219, 0.88);
+    color: rgba(210, 235, 255, 0.95);
+    box-shadow: 0 0 28px rgba(90, 173, 219, 0.2);
+}

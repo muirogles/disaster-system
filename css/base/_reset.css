@@ -1,0 +1,84 @@
+/* =====================================================
+   GLOBAL RESET & BASE
+   ===================================================== */
+
+/* Dynamic viewport height fallback */
+@supports (height: 100dvh) {
+  :root {
+    --vh-unit: 1dvh;
+  }
+}
+
+@supports not (height: 100dvh) {
+  :root {
+    --vh-unit: 1vh;
+  }
+}
+
+/* Scroll-snap with fallback */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html.scroll-locked {
+  overflow: hidden !important;
+}
+
+body {
+  background-color: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  font-size: clamp(14px, 1.6vw, 18px);
+  padding-bottom: env(safe-area-inset-bottom);
+  min-height: 100dvh;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Custom Scrollbar using your Root Variables --- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  /* Usa tu color negro puro */
+}
+
+::-webkit-scrollbar-thumb {
+  /* Usamos el púrpura de tus gafas/labios para el scroll */
+  background: var(--glasses-color-base);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  /* Al pasar el ratón, brilla como el highlight de los labios */
+  background: var(--lip-color-highlight);
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--glasses-color-base) var(--bg);
+}

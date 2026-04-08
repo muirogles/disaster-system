@@ -1,0 +1,156 @@
+/* =====================================================
+   TIMER OVERLAY — terminal HUD countdown
+   ===================================================== */
+
+.timer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(255, 68, 68, 0.014) 3px,
+            rgba(255, 68, 68, 0.014) 4px
+        ),
+        rgba(0, 0, 0, 0.94);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+/* HUD title bar */
+.timer-overlay::before {
+    content: '⚠   TIMER.exe   ▶   RUNNING';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    padding: 0 1.5rem;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.62rem, 0.9vw, 0.82rem);
+    letter-spacing: 0.15em;
+    text-transform: none;
+    color: rgba(255, 68, 68, 0.65);
+    background: rgba(255, 68, 68, 0.08);
+    border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* CRT scan-line sweep */
+.timer-overlay::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -80px;
+    height: 80px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 68, 68, 0.05) 50%,
+        transparent
+    );
+    animation: timerScanSweep 4s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 0;
+}
+
+@keyframes timerScanSweep {
+    0%   { top: -80px; }
+    100% { top: 100vh; }
+}
+
+.timer-overlay.active {
+    display: flex;
+}
+
+.timer__display {
+    font-size: clamp(6rem, 20vw, 16rem);
+    font-weight: 900;
+    color: #ff4444;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    text-shadow:
+        0 0 30px rgba(255, 50, 50, 0.9),
+        0 0 70px rgba(255, 50, 50, 0.55),
+        0 0 140px rgba(255, 50, 50, 0.25);
+    animation: heartbeatPulse 1s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.timer__label {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.8rem, 1.6vw, 1.15rem);
+    color: rgba(255, 68, 68, 0.5);
+    margin-top: 0.25em;
+    text-transform: none;
+    letter-spacing: 0.2em;
+    z-index: 2;
+    position: relative;
+}
+
+/* Alarm flash when timer ends */
+.timer-overlay.alarm {
+    animation: alarmFlash 0.3s ease-in-out 6;
+}
+
+.timer-overlay.alarm .timer__display {
+    animation: alarmShake 0.15s ease-in-out 12;
+    color: #ff0000;
+}
+
+/* =====================================================
+   TIMER FAB — Active state and sub-elements
+   (Base positioning and styles in base/_buttons.css)
+   ===================================================== */
+
+.timer-fab:focus-visible {
+    outline: 2px solid rgba(255,68,68,0.7);
+    outline-offset: 3px;
+}
+
+.timer-fab--active {
+    animation: fabAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1s both, fabPulseRing 1.2s ease-in-out infinite !important;
+}
+
+@keyframes fabPulseRing {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(255,68,68,0.2), 0 6px 28px rgba(255,68,68,0.25); }
+    50%       { box-shadow: 0 0 0 6px rgba(255,68,68,0.08), 0 6px 28px rgba(255,68,68,0.3); }
+}
+
+.timer-fab--active .timer-fab__icon {
+    animation: heartbeatPulse 0.8s ease-in-out infinite;
+}
+
+.timer-fab__seconds {
+    font-size: 1.3rem;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: #ff4444;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+}
+
+.timer-fab__seconds small {
+    font-size: 0.55em;
+    font-weight: 400;
+    color: rgba(255,68,68,0.6);
+}
+
+.timer-fab__hint {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.35);
+    white-space: nowrap;
+}

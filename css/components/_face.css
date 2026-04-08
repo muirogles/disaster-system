@@ -1,0 +1,402 @@
+/* =====================================================
+   FACE — Realistic terrifying feminine Frankenstein
+   Eyes (bloodshot, green iris with depth), glasses (soft cat-eye),
+   nose (organic feminine), mouth (plump purple lips, realistic stitches)
+   ===================================================== */
+
+/* ---- EYES CONTAINER ---- */
+.face__eyes {
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4vw;
+    z-index: 8;
+    cursor: pointer;
+    width: 80%;
+    justify-content: center;
+}
+
+.eye {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+/* Deep bruised eye socket — dark purple sunken look */
+.eye__shadow {
+    position: absolute;
+    top: -28%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170%;
+    height: 170%;
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(40,10,50,0.85) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(80,20,90,0.5) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 45% 55%, rgba(20,5,30,0.6) 0%, transparent 50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Eyeball — larger, with bloodshot veins */
+.eye__white {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 50% 50% 48% 48% / 52% 52% 46% 46%;
+    background:
+        /* Bloodshot veins radiating from edges */
+        radial-gradient(ellipse 8% 45% at 15% 40%, rgba(180,20,20,0.5) 0%, transparent 100%),
+        radial-gradient(ellipse 6% 40% at 82% 35%, rgba(160,15,15,0.45) 0%, transparent 100%),
+        radial-gradient(ellipse 40% 7% at 50% 12%, rgba(150,20,20,0.35) 0%, transparent 100%),
+        radial-gradient(ellipse 5% 30% at 25% 75%, rgba(140,10,10,0.3) 0%, transparent 100%),
+        radial-gradient(ellipse 5% 25% at 78% 70%, rgba(170,25,20,0.4) 0%, transparent 100%),
+        radial-gradient(ellipse 35% 5% at 40% 82%, rgba(130,15,15,0.25) 0%, transparent 100%),
+        /* Yellowish sclera tint */
+        radial-gradient(circle at 50% 50%, var(--sclera-c1) 0%, var(--sclera-c2) 40%, var(--sclera-c3) 70%, var(--sclera-c4) 100%);
+    box-shadow:
+        0 0 12px var(--eye-glow),
+        0 0 32px var(--eye-glow-mid),
+        0 0 60px var(--eye-glow-outer),
+        inset 0 3px 12px rgba(255,255,255,0.18),
+        inset 0 -2px 8px rgba(0,0,0,0.3);
+    animation: eyeGlow 2.7s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.eye--r .eye__white {
+    animation-delay: 0.45s;
+}
+
+/* Iris — deep emerald with concentric rings and cataract depth */
+.eye__iris {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 58%;
+    height: 58%;
+    border-radius: 50%;
+    background:
+        /* Cataract cloudy film */
+        radial-gradient(circle at 55% 40%, rgba(180,220,180,0.15) 0%, transparent 40%),
+        /* Inner glow ring */
+        radial-gradient(circle at 50% 50%, transparent 22%, rgba(0,255,80,0.3) 28%, transparent 34%),
+        /* Mid ring — bright emerald */
+        radial-gradient(circle at 50% 50%, transparent 34%, rgba(0,200,60,0.25) 40%, transparent 46%),
+        /* Outer ring — dark forest */
+        radial-gradient(circle at 50% 50%, transparent 46%, rgba(0,80,20,0.4) 52%, transparent 58%),
+        /* Limbal ring — dark edge */
+        radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,30,10,0.7) 72%, rgba(0,20,5,0.9) 80%),
+        /* Base iris gradient */
+        radial-gradient(circle at 42% 38%, var(--iris-bright) 0%, var(--iris-green) 20%, var(--iris-mid) 42%, var(--iris-deep) 62%, var(--iris-dark) 85%, var(--iris-abyss) 100%);
+    box-shadow:
+        0 0 6px rgba(0,255,80,0.6),
+        0 0 15px rgba(0,200,50,0.3),
+        inset 0 0 8px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* Pupil — deep black with slight green reflection */
+.eye__pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26%;
+    height: 26%;
+    background:
+        radial-gradient(circle at 45% 40%, rgba(0,40,10,0.3) 0%, #020808 40%, #000000 100%);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 4px rgba(0,0,0,0.8);
+}
+
+/* Primary light reflection */
+.eye__shine {
+    position: absolute;
+    top: 16%;
+    left: 22%;
+    width: 16%;
+    height: 12%;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    z-index: 3;
+    filter: blur(0.5px);
+}
+
+/* Secondary smaller reflection */
+.eye__shine--2 {
+    top: 40%;
+    left: 60%;
+    width: 8%;
+    height: 6%;
+    background: rgba(255,255,255,0.5);
+    filter: blur(0.3px);
+}
+
+/* Heavy drooping eyelid — dramatic feminine arch with bruised coloring */
+.eye__lid {
+    position: absolute;
+    top: -0.5vmax;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130%;
+    height: 52%;
+    background:
+        /* Bruised / shadowed eyelid */
+        radial-gradient(ellipse 80% 60% at 50% 80%, rgba(60,20,70,0.4) 0%, transparent 70%),
+        linear-gradient(to bottom,
+            var(--lid-c1) 0%,
+            var(--lid-c2) 20%,
+            var(--lid-c3) 45%,
+            color-mix(in srgb, var(--lid-c3) 60%, transparent) 70%,
+            transparent 100%);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    z-index: 4;
+    /* Slight droop on left eye for asymmetric realism */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Left eye lid droops slightly more */
+.eye--l .eye__lid {
+    transform: translateX(-50%) rotate(-2deg);
+    height: 54%;
+}
+
+/* ---- NOSE — organic feminine upturned shape ---- */
+.nose {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%;
+    height: auto;
+    aspect-ratio: 3/2;
+    background:
+        /* Nose bridge highlight — light strip down center */
+        radial-gradient(ellipse 30% 70% at 48% 30%, rgba(180,200,170,0.35) 0%, transparent 70%),
+        /* Soft lateral shading */
+        radial-gradient(ellipse 55% 50% at 25% 45%, var(--head-skin-light) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 50% at 75% 45%, var(--head-skin-shadow) 0%, transparent 55%),
+        /* Base color */
+        linear-gradient(to bottom, var(--head-bg) 0%, var(--head-skin-dark) 60%, var(--head-skin-shadow) 100%);
+    /* Soft, slightly upturned feminine nose */
+    border-radius: 38% 38% 50% 50% / 20% 20% 60% 60%;
+    z-index: 8;
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.4),
+        inset 0 2px 8px rgba(255,255,255,0.06),
+        /* Soft shadow on right side for 3D depth */
+        3px 2px 8px rgba(0,0,0,0.25);
+}
+
+/* Nostrils — organic elliptical openings */
+.nose::before,
+.nose::after {
+    content: '';
+    position: absolute;
+    bottom: 16%;
+    width: 28%;
+    height: 35%;
+    background:
+        radial-gradient(ellipse at 50% 50%,
+            #050510 0%,
+            #0a1008 50%,
+            rgba(20,40,20,0.8) 80%,
+            transparent 100%);
+    border-radius: 45% 45% 50% 50% / 40% 40% 60% 60%;
+}
+
+.nose::before { left: 14%; transform: rotate(-5deg); }
+.nose::after  { right: 14%; transform: rotate(5deg); }
+
+/* ---- MOUTH — plump purple lips, realistic stitches, visible teeth ---- */
+.mouth {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 8;
+    cursor: pointer;
+}
+
+/* Upper lip — fuller with organic cupid's bow shape */
+.lip--upper {
+    width: 100%;
+    height: 20%;
+    background:
+        /* Glossy sheen highlight */
+        radial-gradient(ellipse 40% 30% at 50% 25%, rgba(200,120,255,0.35) 0%, transparent 70%),
+        /* Depth gradient */
+        linear-gradient(to bottom, var(--lip-color-base) 0%, var(--lip-color-dark) 100%);
+    /* Softer cupid's bow shape */
+    border-radius: 40% 40% 8% 8% / 100% 100% 15% 15%;
+    box-shadow:
+        0 -2px 10px rgba(0,0,0,0.35),
+        inset 0 3px 8px rgba(180,80,255,0.2),
+        inset 0 -1px 3px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+/* Cupid's bow highlight — glossy sheen */
+.lip--upper::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+    height: 45%;
+    background:
+        radial-gradient(ellipse at 50% 20%, rgba(220,160,255,0.5) 0%, transparent 70%);
+    border-radius: 0 0 50% 50%;
+}
+
+/* Lip line / cupid's bow dip */
+.lip--upper::after {
+    content: '';
+    position: absolute;
+    top: -5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12%;
+    height: 18%;
+    background: var(--head-skin-dark);
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Inner mouth — slightly parted, showing teeth through gap */
+.mouth__inner {
+    display: flex;
+    background:
+        radial-gradient(ellipse at 50% 50%, var(--mouth-bg) 0%, color-mix(in srgb, var(--mouth-bg) 60%, #000) 50%, #020008 100%);
+    width: 82%;
+    height: 50%;
+    justify-content: center;
+    gap: 2%;
+    padding: 2% 4%;
+    position: relative;
+    overflow: visible;
+    border-radius: 2px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+}
+
+/* Horizontal stitch line across mouth — thicker, more realistic */
+.mouth__inner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -8%;
+    right: -8%;
+    height: 3px;
+    background: #1a2818;
+    z-index: 6;
+    border-radius: 1px;
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.5),
+        0 -1px 0 rgba(60,80,50,0.3);
+}
+
+/* Cross-stitch marks — small circular dots instead of straight lines */
+.mouth__inner::after {
+    content: '';
+    position: absolute;
+    inset: -0.8vh -8%;
+    z-index: 7;
+    pointer-events: none;
+    /* Circular stitch points using radial gradients */
+    background:
+        /* Top row stitch dots */
+        radial-gradient(circle 2.5px at 8% 25%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 22% 25%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 36% 25%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 50% 25%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 64% 25%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 78% 25%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 92% 25%, #0e1a08 70%, transparent 71%),
+        /* Bottom row stitch dots */
+        radial-gradient(circle 2.5px at 8% 75%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 22% 75%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 36% 75%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 50% 75%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 64% 75%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 78% 75%, #0e1a08 70%, transparent 71%),
+        radial-gradient(circle 2.5px at 92% 75%, #0e1a08 70%, transparent 71%),
+        /* Diagonal thread lines connecting dots */
+        repeating-linear-gradient(
+            60deg,
+            transparent 0px, transparent 3px,
+            rgba(14,26,8,0.6) 3px, rgba(14,26,8,0.6) 4px,
+            transparent 4px, transparent 10px
+        );
+}
+
+/* Teeth — visible through slightly parted lips, uneven for horror */
+.tooth {
+    display: block;
+    width: 14%;
+    height: 90%;
+    background:
+        /* Enamel — stained (monster) or clean (human) */
+        linear-gradient(to bottom,
+            var(--tooth-c1) 0%,
+            var(--tooth-c2) 25%,
+            var(--tooth-c3) 50%,
+            var(--tooth-c4) 75%,
+            var(--tooth-c5) 100%);
+    border-radius: 3px 3px 6px 6px / 3px 3px 50% 50%;
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.5),
+        inset 1px 0 2px rgba(255,255,255,0.1),
+        inset -1px 0 2px rgba(0,0,0,0.2);
+}
+
+/* Slightly different sizing for realism — uneven teeth */
+.tooth:nth-child(1) { height: 50%; transform: rotate(2deg); }
+.tooth:nth-child(2) { border-radius: 3px 3px 50% 100% / 3px 3px 100% 100%; }
+.tooth:nth-child(3) { height: 75%; }
+.tooth:nth-child(4) { height: 75%; transform: rotate(-1deg); }
+.tooth:nth-child(5) { border-radius: 3px 3px 100% 50% / 3px 3px 100% 100%; }
+.tooth:nth-child(6) { height: 50%; transform: rotate(-3deg); }
+
+/* Lower lip — fuller, plump, feminine with glossy sheen */
+.lip--lower {
+    width: 100%;
+    height: 30%;
+    background:
+        /* Glossy light catch */
+        radial-gradient(ellipse 50% 30% at 50% 60%, rgba(160,80,220,0.4) 0%, transparent 70%),
+        /* Central fullness highlight */
+        radial-gradient(ellipse 35% 50% at 50% 40%, rgba(130,60,180,0.3) 0%, transparent 60%),
+        linear-gradient(to bottom, var(--lip-color-dark) 0%, var(--lip-color-base) 45%, var(--lip-color-highlight) 100%);
+    border-radius: 8% 8% 50% 50% / 15% 15% 100% 100%;
+    box-shadow:
+        0 5px 14px rgba(0,0,0,0.55),
+        inset 0 -3px 8px rgba(106,27,154,0.35),
+        inset 0 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* Lower lip glossy sheen spot */
+.lip--lower::before {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 25%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.12) 0%, transparent 80%);
+    border-radius: 50%;
+}

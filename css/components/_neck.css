@@ -1,0 +1,35 @@
+/* =====================================================
+   NECK
+   Background gradient inlined so the skin tones inherit
+   correctly from [data-theme="design"] — see the note in
+   _ear.css for the @property / computed-value-time gotcha.
+   ===================================================== */
+
+.neck {
+    /* Component-scoped layout tokens */
+    --neck-width: auto;
+    --neck-border-radius: 0 0 20% 20%;
+    --neck-max-width: 30%;
+    --neck-height: 12%;
+    --neck-aspect-ratio: 2/1;
+    --neck-overlapping: 4%;
+
+    width: var(--neck-width);
+    max-width: var(--neck-max-width);
+    height: var(--neck-height);
+    aspect-ratio: var(--neck-aspect-ratio);
+    border-radius: var(--neck-border-radius);
+    background:
+        /* Subtle veins showing through thin skin */
+        radial-gradient(ellipse 15% 60% at 30% 50%, rgba(70, 40, 90, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 10% 50% at 72% 40%, rgba(60, 35, 80, 0.12) 0%, transparent 70%),
+        /* Skin highlight */
+        radial-gradient(ellipse 60% 80% at 35% 40%, var(--head-skin-light) 0%, transparent 55%),
+        /* Base skin tone */
+        linear-gradient(to bottom,
+            var(--head-bg)          0%,
+            var(--head-skin-shadow) 55%,
+            var(--head-skin-dark)   100%);
+    position: relative;
+    top: calc(var(--neck-overlapping) * -1);
+}
