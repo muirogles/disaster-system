@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // Set the base path to match the repository name for GitHub Pages
-  base: '/disaster-system/',
+  // Use relative paths for assets for maximum flexibility
+  base: './',
   build: {
     outDir: 'dist',
     // Ensure all assets are included
