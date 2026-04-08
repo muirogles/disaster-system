@@ -3,7 +3,10 @@
 > *The exquisite corpse between design and development.*  
 > *El cadáver exquisito entre diseño y desarrollo.*
 
-🔗 **Live demo / Demo en vivo:** [muirogles.github.io/disaster-system](https://muirogles.github.io/disaster-system/)
+🔗 **Live demo / Demo en vivo:** [![Preview](img/preview.PNG)](https://muirogles.github.io/disaster-system/)
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/muirogles/disaster-system?style=social)](https://github.com/muirogles/disaster-system)
+[![GitHub](https://img.shields.io/github/license/muirogles/disaster-system)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ---
 
@@ -133,8 +136,12 @@ disaster-system/
 ├── i18n/
 │   ├── es.json             # Spanish (default) / Español (por defecto)
 │   └── en.json             # English / Inglés
-└── context/                # Talk outline & speaker script
+├── img/
+│   ├── preview.PNG         # Project screenshot
+│   └── wtm.png             # WTM Madrid logo
+└── context/                # Talk outline & speaker script (optional)
 ```
+
 
 ---
 
