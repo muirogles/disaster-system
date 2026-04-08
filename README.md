@@ -52,16 +52,24 @@ Each body part maps to a real Design System concept, explored live with code sni
 
 ### Tech Stack
 
-- **HTML / CSS / JavaScript** — no frameworks, no bundlers
+- **Vite** — fast development server and optimized build bundling
 - **Web Audio API** — procedural heartbeat, alarm, shock, and success sounds
 - **CSS custom properties** — design tokens for the entire visual system
 - **CSS art** — all body parts drawn in pure CSS, no images
 - **Vanilla i18n** — lightweight ES/EN switching with JSON translation files
-- **GitHub Pages** — zero-config deployment
+- **GitHub Actions** — automated CI/CD for GitHub Pages
 
-### How to Use
+### Development & Deployment
 
-Open `index.html` with the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VS Code extension (recommended — correctly serves the i18n JSON files), or visit the live version directly.
+This project uses **Vite** for a modern development experience.
+
+#### Local Development
+1. Install dependencies: `npm install`
+2. Start the dev server: `npm run dev`
+3. Open `http://localhost:5173/disaster-system/`
+
+#### Deployment
+Deployment is **automatic** via **GitHub Actions**. Simply push your changes to the `main` or `develop` branch. Ensure your repository settings under **Settings > Pages** are set to **"GitHub Actions"** as the source.
 
 **Timer:** Press **Space** or click the clock FAB to start · press again to stop.
 
@@ -103,13 +111,21 @@ Cada parte del cuerpo corresponde a un concepto real de Design System, explorado
 - **Cronómetro de 30 segundos** con sintetizador procedural (Web Audio API) — latido que escala en urgencia y explosión de alarma al llegar a cero
 - **Partes del cuerpo interactivas** — clic en cualquier parte para abrir un panel modal con snippets, errores y herramientas recomendadas
 - **Botón Reanimar** — transiciones CSS que transforman la criatura en un ser humano coordinado
-- **Selector de idioma ES / EN** — i18n completo, persistido en `localStorage`
+- **Selector de idioma ES / EN** — i18n completo, con renderizado de HTML en traducciones
 - **CTA de compartir en LinkedIn** — botón de compartir directo a la demo en vivo
-- **Sin proceso de build** — HTML, CSS y JS vanilla puros
+- **Automatización con Vite** — bundling de CSS y JS para máximo rendimiento
 
-### Cómo usarlo
+### Desarrollo y Despliegue
 
-Abre `index.html` con la extensión [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) de VS Code (recomendado — sirve correctamente los archivos JSON de i18n), o visita la versión en vivo directamente.
+Este proyecto utiliza **Vite** para una experiencia de desarrollo moderna.
+
+#### Desarrollo Local
+1. Instala dependencias: `npm install`
+2. Arranca el servidor: `npm run dev`
+3. Abre `http://localhost:5173/disaster-system/`
+
+#### Despliegue
+El despliegue es **automático** mediante **GitHub Actions**. Solo tienes que hacer `push` de tus cambios. Asegúrate de que en **Settings > Pages** el origen sea **"GitHub Actions"**.
 
 **Cronómetro:** Pulsa **Espacio** o el FAB del reloj para iniciar · pulsa de nuevo para detener.
 
@@ -120,26 +136,12 @@ Abre `index.html` con la extensión [Live Server](https://marketplace.visualstud
 ```
 disaster-system/
 ├── index.html              # Main page / Página principal
-├── css/
-│   ├── base/               # Variables, reset, typography, buttons
-│   ├── layout/             # Corpse grid, modal layout, footer
-│   ├── components/         # Each body part (brain, eyes, trunk…)
-│   ├── slides/             # Intro and timer slides
-│   ├── modal/              # Modal panel, error cards, demos
-│   └── animations/         # Keyframes and transitions
-├── js/
-│   ├── audio-synth.js      # Web Audio API synthesizer
-│   ├── timer.js            # 30-second countdown
-│   ├── modal.js            # Modal rendering
-│   ├── i18n.js             # Language switching
-│   └── visual-demos.js     # Interactive demos
-├── i18n/
-│   ├── es.json             # Spanish (default) / Español (por defecto)
-│   └── en.json             # English / Inglés
-├── img/
-│   ├── preview.PNG         # Project screenshot
-│   └── wtm.png             # WTM Madrid logo
-└── context/                # Talk outline & speaker script (optional)
+├── package.json            # Vite & dependencies / Configuración y dependencias
+├── vite.config.js          # Vite build config / Configuración de build
+├── css/                    # Styles / Estilos
+├── js/                     # Logic / Lógica
+├── public/                 # Static assets (i18n & img) / Archivos estáticos
+└── .github/workflows/      # CI/CD deployment logic / Automatización de despliegue
 ```
 
 

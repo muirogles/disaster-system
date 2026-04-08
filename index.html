@@ -16,7 +16,7 @@
     <meta name="twitter:description" content="El cadáver exquisito entre diseño y desarrollo">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧟</text></svg>">
     <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="dark light">
     <script>
@@ -908,7 +908,6 @@
                 <p class="site-footer__license" data-i18n="footer.license">© Disaster System 2026 - CC BY-NC-SA 4.0</p>
             </footer>
         </section>
-        </ul>
 
         <div class="rules-overlay" id="introRules">
             <button class="rules-overlay__close" id="rulesClose">&times;</button>
@@ -934,11 +933,11 @@
             </div>
         </div>
 
-        <script src="js/i18n.js"></script>
-        <script src="js/audio-synth.js"></script>
-        <script src="js/visual-demos.js"></script>
-        <script src="js/timer.js"></script>
-        <script src="js/modal.js"></script>
+        <script type="module" src="js/i18n.js"></script>
+        <script type="module" src="js/audio-synth.js"></script>
+        <script type="module" src="js/visual-demos.js"></script>
+        <script type="module" src="js/timer.js"></script>
+        <script type="module" src="js/modal.js"></script>
         <script>
             /* Toggle game rules visibility */
             (function () {
@@ -1049,7 +1048,7 @@
                             // Swap subtitle after reanimate ¡
                             var subEl = document.getElementById('slide4Subtitle');
                             if (subEl) {
-                                subEl.innerHTML = '<span class="corpse__subtitle">' + t('slide4.subtitle.post.1') + '</span><br><span class="corpse__subtitle-em">' + t('slide4.subtitle.post.2') + '</span>';
+                                subEl.innerHTML = '<span class="corpse__subtitle" data-i18n-html="slide4.subtitle.post.1">' + t('slide4.subtitle.post.1') + '</span><br><span class="corpse__subtitle-em" data-i18n-html="slide4.subtitle.post.2">' + t('slide4.subtitle.post.2') + '</span>';
                                 subEl.classList.add('subtitle-revealed');
                             }
 

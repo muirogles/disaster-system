@@ -1168,3 +1168,4 @@ function buildVisualDemo(visual) {
     };
     return demos[visual] || '';
 }
+window.buildVisualDemo = buildVisualDemo;

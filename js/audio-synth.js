@@ -450,3 +450,4 @@ const AudioSynth = (function () {
         playSuccess
     };
 })();
+window.AudioSynth = AudioSynth;

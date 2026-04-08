@@ -85,7 +85,7 @@ function buildModalContent(data) {
         html += '<div class="modal__section">'
             + '<span class="modal__section-num" aria-hidden="true">0' + (i + 1) + '</span>'
             + '<p class="modal__text">' + err.desc + '</p>'
-            + (err.visual ? buildVisualDemo(err.visual) : '')
+            + (err.visual ? window.buildVisualDemo(err.visual) : '')
             + '</div>';
     });
 
@@ -142,7 +142,12 @@ function highlightPart(partKey) {
     activePartKey = partKey;
 }
 
-function openModal(partKey) {
+function openModal(partKey, isRefresh = false) {
+    /* Close instructions if open */
+    const introRules = document.getElementById('introRules');
+    if (introRules) introRules.classList.remove('is-visible');
+
+    const I18N = window.I18N;
     if (!I18N || !I18N['modal.content']) return;
     const data = I18N['modal.content'][partKey];
     if (!data) return;
@@ -174,7 +179,7 @@ function openModal(partKey) {
         return;
     }
 
-    if (isAlreadyOpen && activePartKey === partKey) {
+    if (!isRefresh && isAlreadyOpen && activePartKey === partKey) {
         /* Same part clicked — close modal */
         closeModal();
         return;
@@ -202,6 +207,7 @@ function openModal(partKey) {
 
     highlightPart(partKey);
 }
+window.openModal = openModal;
 
 function closeModal() {
     modal.classList.remove('open');
@@ -214,6 +220,7 @@ function closeModal() {
     activePart = null;
     activePartKey = null;
 }
+window.closeModal = closeModal;
 
 /* Selectors whose clicks should NEVER close the modal even when
    they land outside the panel (language switcher, theme toggle,

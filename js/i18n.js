@@ -5,9 +5,12 @@
 var currentLang = 'es';
 var I18N = {}; // Will be populated from JSON
 
+window.I18N = I18N;
+window.currentLang = currentLang;
+
 /* ── Translation helper ── */
 function t(key) {
-    var dict = I18N || {};
+    var dict = window.I18N || {};
     return Object.prototype.hasOwnProperty.call(dict, key) ? dict[key] : key;
 }
 window.t = t;
@@ -17,7 +20,8 @@ async function loadTranslations(lang) {
     try {
         const response = await fetch(`./i18n/${lang}.json`);
         if (!response.ok) throw new Error(`Could not load ${lang}.json`);
-        I18N = await response.json();
+        window.I18N = await response.json();
+        I18N = window.I18N;
     } catch (error) {
         console.error('Translation load error:', error);
         // Fallback or keep current if load fails
@@ -27,7 +31,8 @@ async function loadTranslations(lang) {
 /* ── Apply language to the DOM ── */
 async function setLanguage(lang) {
     await loadTranslations(lang);
-    currentLang = lang;
+    window.currentLang = lang;
+    currentLang = window.currentLang;
 
     document.documentElement.lang = lang;
 
@@ -102,11 +107,12 @@ async function setLanguage(lang) {
     var modalEl = document.getElementById('modal');
     if (modalEl && modalEl.classList.contains('open')) {
         var activePart = document.querySelector('.part-active');
-        if (activePart && activePart.dataset.part && typeof openModal === 'function') {
-            openModal(activePart.dataset.part);
+        if (activePart && activePart.dataset.part && typeof window.openModal === 'function') {
+            window.openModal(activePart.dataset.part, true);
         }
     }
 }
+window.setLanguage = setLanguage;
 
 /* ── Lang button wiring ── */
 document.addEventListener('DOMContentLoaded', function () {
