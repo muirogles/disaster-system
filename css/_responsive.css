@@ -266,6 +266,10 @@
         font-size: clamp(0.7rem, 2.5vw, 0.9rem);
     }
 
+    .modal__header {
+        padding-bottom: 0.3em;
+    }
+
     .visual-demo {
         flex-direction: column;
     }
