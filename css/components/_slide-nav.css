@@ -1,0 +1,90 @@
+/* =====================================================
+   SLIDE PROGRESS NAVIGATION — vertical dot nav
+   ===================================================== */
+
+.slide-nav {
+    position: fixed;
+    left: clamp(0.75rem, 1.5vw, 2rem);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.6rem, 1vw, 1.2rem);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Hide when modal is open */
+html.modal-open .slide-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.slide-nav__dot {
+    width: clamp(28px, 2.5vw, 44px);
+    height: clamp(28px, 2.5vw, 44px);
+    border-radius: 50%;
+    border: clamp(1px, 0.12vw, 3px) solid rgba(155, 93, 229, 0.25);
+    background: rgba(8, 6, 18, 0.7);
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide-nav__dot svg {
+    width: 55%;
+    height: 55%;
+}
+
+.slide-nav__dot:hover {
+    border-color: rgba(155, 93, 229, 0.5);
+    color: rgba(196, 160, 245, 0.85);
+    background: rgba(25, 18, 50, 0.85);
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(155, 93, 229, 0.2);
+}
+
+.slide-nav__dot:focus-visible {
+    outline: 2px solid rgba(155, 93, 229, 0.8);
+    outline-offset: 3px;
+}
+
+/* Active state */
+.slide-nav__dot--active {
+    border-color: rgba(155, 93, 229, 0.6);
+    background: rgba(155, 93, 229, 0.15);
+    color: rgba(196, 160, 245, 0.95);
+    box-shadow: 0 0 16px rgba(155, 93, 229, 0.25);
+}
+
+/* Mobile — smaller, more transparent */
+@media (max-width: 600px) {
+    .slide-nav {
+        left: 0.5rem;
+        gap: 0.4rem;
+    }
+    .slide-nav__dot {
+        width: 24px;
+        height: 24px;
+        opacity: 0.6;
+    }
+    .slide-nav__dot--active {
+        opacity: 1;
+    }
+}
+
+/* Large screens */
+@media (min-width: 2560px) {
+    .slide-nav__dot {
+        width: clamp(36px, 3vw, 60px);
+        height: clamp(36px, 3vw, 60px);
+        border-width: clamp(1px, 0.15vw, 4px);
+    }
+}

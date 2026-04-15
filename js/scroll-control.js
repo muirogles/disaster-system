@@ -123,4 +123,26 @@
         goToSlide: goToSlide,
         getCurrentSlide: function () { return currentSlide; }
     };
+
+    /* ── Progress Nav ── */
+    var slideNav = document.getElementById('slideNav');
+    if (slideNav) {
+        var dots = slideNav.querySelectorAll('.slide-nav__dot');
+
+        // Click to navigate
+        dots.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                var idx = parseInt(dot.dataset.slide, 10);
+                goToSlide(idx);
+            });
+        });
+
+        // Update active dot on slide change
+        window.addEventListener('slidechange', function (e) {
+            var idx = e.detail.index;
+            dots.forEach(function (d, i) {
+                d.classList.toggle('slide-nav__dot--active', i === idx);
+            });
+        });
+    }
 })();
