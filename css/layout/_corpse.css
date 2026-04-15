@@ -4,6 +4,8 @@
 
 .corpse {
    width: 100%;
+   touch-action: pan-y;
+   overscroll-behavior: contain;
 }
 
 /* dvh fallback pattern */
