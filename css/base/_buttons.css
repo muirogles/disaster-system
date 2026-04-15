@@ -318,3 +318,37 @@ html.fab-hidden .fab-group {
     transform: translateY(8px) scale(0.9);
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
+
+/* ----- Large screen FAB scaling ----- */
+@media (min-width: 2560px) {
+    .timer-fab, .rules-fab {
+        width: clamp(3.5rem, 4vw, 6rem);
+        height: clamp(3.5rem, 4vw, 6rem);
+        border-width: clamp(1px, 0.15vw, 4px);
+    }
+    .timer-fab__icon, .rules-fab__icon {
+        width: clamp(24px, 2.5vw, 48px);
+        height: clamp(24px, 2.5vw, 48px);
+    }
+    .lang-btn {
+        width: clamp(3.5rem, 4vw, 6rem);
+        height: clamp(3.5rem, 4vw, 6rem);
+        font-size: clamp(0.78rem, 1.1vw, 1.4rem);
+        border-width: clamp(1px, 0.15vw, 4px);
+    }
+    .rules-fab__q {
+        width: clamp(20px, 2vw, 36px);
+        height: clamp(20px, 2vw, 36px);
+        font-size: clamp(0.65rem, 0.9vw, 1.1rem);
+        border-width: clamp(1px, 0.12vw, 3px);
+    }
+    .fab-group {
+        bottom: clamp(1.5rem, 2.5vw, 4rem);
+        right: clamp(1.5rem, 2.5vw, 4rem);
+        gap: clamp(1.25rem, 2vw, 3rem);
+    }
+    .lang-btn {
+        bottom: clamp(1.5rem, 2.5vw, 4rem);
+        left: clamp(1.5rem, 2.5vw, 4rem);
+    }
+}
