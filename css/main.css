@@ -32,6 +32,7 @@
 @import 'components/_legs.css';
 @import 'components/_full-corpse.css';
 @import 'components/_part-cta.css';
+@import 'components/_slide-nav.css';
 
 @import 'slides/_intro.css';
 @import 'slides/_timer.css';

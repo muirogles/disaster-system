@@ -66,19 +66,19 @@
 }
 
 .visual-demo--large .visual-demo__arrow {
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     color: rgba(255,255,255,0.25);
 }
 
 /* ─── Caption below side ─── */
 .visual-demo__label {
-    font-size: clamp(0.68rem, 1vw, 0.82rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     font-weight: 600;
     margin-top: 0.3em;
 }
 
 .visual-demo--large .visual-demo__label {
-    font-size: clamp(0.78rem, 1.2vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     margin-top: 0.4em;
 }
 
@@ -87,7 +87,7 @@
 
 /* ─── Side heading ─── */
 .visual-demo__side-title {
-    font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     font-weight: 700;
     margin-bottom: 0.5em;
     padding-bottom: 0.35em;
@@ -104,7 +104,7 @@
     padding: 12px 28px;
     border-radius: 6px;
     font-weight: 600;
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     text-align: center;
     display: inline-flex;
     align-items: center;
@@ -124,13 +124,13 @@
 
 .visual-demo__btn--huge {
     padding: clamp(16px, 3vw, 28px) clamp(32px, 5vw, 56px);
-    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    font-size: clamp(1.125rem, 2vw, 1.75rem);
     border-radius: 10px;
 }
 
 .visual-demo__btn--big {
     padding: clamp(10px, 2vw, 18px) clamp(16px, 3vw, 28px);
-    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
 }
 
 .visual-demo__btn--ghost {
@@ -141,12 +141,12 @@
 
 .visual-demo__btn--ghost.visual-demo__btn--big {
     padding: clamp(10px, 2vw, 16px) clamp(16px, 3vw, 28px);
-    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
 }
 
 .visual-demo__btn--compact {
     padding: 6px 14px;
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
 }
 
 /* Contrast ratio display */
@@ -173,7 +173,7 @@
 
 .visual-demo__contrast-number {
     display: block;
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
     font-weight: 800;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
 }
@@ -233,7 +233,7 @@
 
 .visual-demo__touch-icon {
     color: #fff;
-    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
     font-weight: bold;
 }
 
@@ -245,7 +245,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.5rem, 0.8vw, 0.65rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     pointer-events: none;
 }
 
@@ -262,7 +262,7 @@
 }
 
 .visual-demo__touch-size {
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     font-weight: 700;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
     color: #ccc;
@@ -318,12 +318,12 @@
     color: #fff;
     border-radius: 6px;
     font-weight: 600;
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
 }
 
 .visual-demo__focus-btn--big {
     padding: clamp(14px, 2.5vw, 24px) clamp(24px, 4vw, 44px);
-    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
     border-radius: 8px;
 }
 
@@ -337,7 +337,7 @@
 }
 
 .visual-demo__focus-hint {
-    font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     display: block;
     margin-top: 2px;
 }
@@ -346,13 +346,13 @@
 .visual-demo__focus-hint--good { color: #90CAF9; }
 
 .visual-demo__focus-cursor {
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     color: #888;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
 }
 
 .visual-demo__focus-result {
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     font-weight: 600;
 }
 
@@ -376,7 +376,7 @@
 }
 
 .visual-demo__image-detail {
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     font-weight: 600;
     text-align: center;
 }
@@ -397,7 +397,7 @@
     gap: 8px;
     padding: 6px 12px;
     border-radius: 6px;
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     font-weight: 600;
 }
 
@@ -415,10 +415,10 @@
 .visual-demo__heading-node--indent2 { margin-left: 48px; }
 .visual-demo__heading-node--indent3 { margin-left: 72px; }
 
-.visual-demo__heading-node--h1 { font-size: clamp(1rem, 1.6vw, 1.3rem); }
-.visual-demo__heading-node--h2 { font-size: clamp(0.9rem, 1.4vw, 1.15rem); }
-.visual-demo__heading-node--h3 { font-size: clamp(0.8rem, 1.2vw, 1rem); }
-.visual-demo__heading-node--h4 { font-size: clamp(0.75rem, 1.1vw, 0.9rem); }
+.visual-demo__heading-node--h1 { font-size: clamp(1rem, 1.6vw, 1.25rem); }
+.visual-demo__heading-node--h2 { font-size: clamp(1rem, 1.4vw, 1.125rem); }
+.visual-demo__heading-node--h3 { font-size: clamp(0.875rem, 1.2vw, 1rem); }
+.visual-demo__heading-node--h4 { font-size: clamp(0.75rem, 1.1vw, 1rem); }
 
 .visual-demo__heading-tag {
     display: inline-block;
@@ -479,7 +479,7 @@
 .visual-demo__overflow-card-header {
     padding: 8px 12px;
     font-weight: 700;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     background: rgba(255,255,255,0.05);
     border-bottom: 1px solid rgba(255,255,255,0.1);
     color: #ddd;
@@ -490,7 +490,7 @@
 }
 
 .visual-demo__overflow-text {
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     color: #ccc;
 }
 
@@ -513,7 +513,7 @@
 
 .visual-demo__overflow-price {
     font-weight: 700;
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     color: #ddd;
 }
 
@@ -521,7 +521,7 @@
 .visual-demo__text-box {
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     color: #fff;
 }
 .visual-demo__text-box--overflow {
@@ -568,11 +568,11 @@
 }
 
 .visual-demo__rtl-text {
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
 }
 
 .visual-demo__rtl-card--big .visual-demo__rtl-text {
-    font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
 }
 
 .visual-demo__rtl-text--error {
@@ -600,7 +600,7 @@
     gap: 10px;
     padding: 10px 14px;
     border-radius: 8px;
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
 }
 
 .visual-demo__detach-card--detached {
@@ -620,7 +620,7 @@
 
 .visual-demo__detach-name {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     color: #ccc;
     flex: 1;
 }
@@ -669,18 +669,18 @@
     gap: 8px;
     padding: 0 12px;
     color: #fff;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .visual-demo__zindex-num {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
     font-weight: 700;
-    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
 }
 
 .visual-demo__zindex-name {
-    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     opacity: 0.8;
 }
 
@@ -696,7 +696,7 @@
     width: 60%;
     height: 25px;
     border-radius: 4px;
-    font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     color: #fff;
     display: flex;
     align-items: center;
@@ -714,7 +714,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
 }
 
 .visual-demo__bundle-row--big {
@@ -741,13 +741,13 @@
 .visual-demo__bundle-label--success { color: #88ff88; }
 
 .visual-demo__bundle-label--big {
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     font-weight: 600;
     white-space: nowrap;
 }
 
 .visual-demo__bundle-total {
-    font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
     font-weight: 800;
     padding: 6px 12px;
     border-radius: 6px;
@@ -828,7 +828,7 @@
     color: #fff;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: clamp(0.55rem, 0.8vw, 0.7rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     text-align: center;
 }
@@ -836,7 +836,7 @@
 .visual-demo__phone-block {
     padding: 6px 4px;
     border-radius: 4px;
-    font-size: clamp(0.45rem, 0.7vw, 0.55rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     text-align: center;
     color: #fff;
 }
@@ -854,7 +854,7 @@
 
 .visual-demo__phone-overflow-indicator {
     color: #ff6666;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     text-align: right;
     animation: scrollHint 1.5s ease-in-out infinite;
 }
@@ -871,7 +871,7 @@
     display: flex;
     align-items: center;
     padding: 0 8px;
-    font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     color: #fff;
 }
 .visual-demo__size-bar--fixed {
@@ -916,7 +916,7 @@
 
 .visual-demo__token-name {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.58rem, 0.85vw, 0.72rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 600;
     text-align: center;
     line-height: 1.2;
@@ -939,7 +939,7 @@
     padding-bottom: 2px;
 }
 .visual-demo__token--labeled span {
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
@@ -979,7 +979,7 @@
 
 .visual-demo__theme-card-header {
     font-weight: 700;
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
     margin-bottom: 6px;
     padding-bottom: 4px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -1003,24 +1003,24 @@
 
 .visual-demo__theme-text--readable {
     color: #333;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
 }
 
 .visual-demo__theme-text--invisible {
     color: #1a1a1a;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
 }
 
 .visual-demo__theme-text--dark-readable {
     color: #e0e0e0;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
 }
 
 .visual-demo__theme-btn {
     display: inline-block;
     padding: 4px 14px;
     border-radius: 4px;
-    font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     font-weight: 600;
     width: fit-content;
 }
@@ -1057,17 +1057,18 @@
     width: 40px;
     background: #ff4444;
     border-radius: 2px;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .visual-demo__spacing-blocks--big .visual-demo__spacing-block {
     width: clamp(50px, 8vw, 70px);
     border-radius: 4px;
-    font-size: clamp(0.55rem, 0.85vw, 0.7rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
 }
 
 .visual-demo__spacing-block--bad {
@@ -1081,6 +1082,8 @@
 .visual-demo__spacing-block span {
     text-align: center;
     line-height: 1.1;
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
 }
 
 /* ===================== UNITS DEMOS ===================== */
@@ -1114,7 +1117,7 @@
 
 .visual-demo__units-value {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
     font-weight: 700;
 }
 
@@ -1127,7 +1130,7 @@
 }
 
 .visual-demo__units-desc {
-    font-size: clamp(0.65rem, 1vw, 0.8rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     color: #999;
     margin-top: 2px;
 }
@@ -1148,7 +1151,7 @@
 .visual-demo__sr-output {
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
     font-weight: 600;
     text-align: center;
     margin-bottom: 6px;
@@ -1168,7 +1171,7 @@
 .visual-demo__toast {
     padding: 8px 16px;
     border-radius: 6px;
-    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1177,7 +1180,7 @@
 
 .visual-demo__toast--big {
     padding: clamp(12px, 2vw, 20px) clamp(16px, 3vw, 28px);
-    font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
     border-radius: 10px;
     gap: 12px;
 }
@@ -1222,7 +1225,7 @@
     display: inline-block;
     padding: 4px 12px;
     border-radius: 12px;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     font-family: 'Cascadia Code', 'Fira Code', monospace;
     margin: 2px 4px;
 }
@@ -1237,13 +1240,13 @@
 }
 
 .visual-demo__version-label {
-    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     opacity: 0.7;
     font-weight: 400;
 }
 
 .visual-demo__version-num {
-    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    font-size: clamp(1rem, 1.6vw, 1.5rem);
     font-weight: 700;
 }
 
@@ -1284,13 +1287,13 @@
     padding: 6px;
     margin-top: -20px;
     margin-left: -10px;
-    font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     color: #fff;
 }
 
 .visual-demo__margin-child--bad.visual-demo__margin-child--big {
     padding: 12px;
-    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     margin-top: -28px;
     margin-left: -14px;
     display: flex;
@@ -1302,13 +1305,13 @@
     background: #44cc66;
     border-radius: 4px;
     padding: 6px;
-    font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     color: #fff;
 }
 
 .visual-demo__margin-child--good.visual-demo__margin-child--big {
     padding: 12px;
-    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -1368,7 +1371,7 @@
 /* ===================== SPECIFICITY DEMOS ===================== */
 .visual-demo__specificity {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
 }
 
 .visual-demo__specificity--big {
@@ -1382,7 +1385,7 @@
 .visual-demo__specificity-selector--good { color: #66dd88; }
 
 .visual-demo__specificity-selector--big {
-    font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     padding: 8px 14px;
     background: rgba(255,255,255,0.05);
     border-radius: 6px;
@@ -1402,7 +1405,7 @@
 .visual-demo__specificity-score--big {
     padding: 8px 16px;
     border-radius: 8px;
-    font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
     font-weight: 700;
     margin-top: 0;
 }
@@ -1415,7 +1418,7 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
 }
 
 .visual-demo__file-list--big {
@@ -1431,7 +1434,7 @@
 .visual-demo__file--big {
     padding: 10px 14px;
     border-radius: 6px;
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1498,13 +1501,13 @@
     color: #fff;
     padding: 4px 12px;
     border-radius: 4px;
-    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     z-index: 2;
 }
 
 .visual-demo__scroll-modal--big {
     padding: 8px 20px;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     border-radius: 8px;
     top: 10px;
     font-weight: 600;
@@ -1519,12 +1522,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
 }
 
 .visual-demo__scroll-body--big {
     height: clamp(36px, 5vw, 48px);
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
     font-weight: 600;
 }
 
@@ -1559,7 +1562,7 @@
 
 /* Ratio pill (legacy) */
 .visual-demo__ratio {
-    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     opacity: 0.8;
 }
 .visual-demo__ratio--error { color: #ff6666; }
@@ -1594,7 +1597,7 @@
 .visual-demo__pixel-box {
     padding: 6px 8px;
     border-radius: 4px;
-    font-size: clamp(0.5rem, 0.75vw, 0.65rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-family: 'Cascadia Code', 'Fira Code', monospace;
     font-weight: 700;
     text-align: center;
@@ -1613,7 +1616,7 @@
 }
 
 .visual-demo__pixel-badge {
-    font-size: clamp(0.45rem, 0.65vw, 0.58rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 600;
     text-align: center;
     padding: 3px 6px;
@@ -1642,7 +1645,7 @@
 }
 
 .visual-demo__clamp-text {
-    font-size: clamp(0.45rem, 0.68vw, 0.58rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     color: #ccc;
     line-height: 1.4;
 }
@@ -1665,7 +1668,7 @@
 
 .visual-demo__clamp-tag {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.4rem, 0.6vw, 0.52rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     padding: 2px 5px;
     border-radius: 3px;
     font-weight: 600;
@@ -1693,7 +1696,7 @@
 }
 
 .visual-demo__naming-role {
-    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     padding: 3px 7px;
     border-radius: 4px;
@@ -1718,7 +1721,7 @@
 
 .visual-demo__naming-name {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 600;
     padding: 3px 6px;
     border-radius: 4px;
@@ -1762,7 +1765,7 @@
     background: rgba(255,255,255,0.08);
     border-radius: 4px;
     padding: 6px 8px;
-    font-size: clamp(0.45rem, 0.68vw, 0.58rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     color: #bbb;
     flex: 1;
 }
@@ -1775,7 +1778,7 @@
     color: #fff;
     padding: 5px 10px;
     border-radius: 4px;
-    font-size: clamp(0.45rem, 0.68vw, 0.58rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     /* covering content below */
     box-shadow: 0 0 0 2000px rgba(0,0,0,0.25);
@@ -1786,7 +1789,7 @@
     color: #fff;
     padding: 5px 10px;
     border-radius: 4px;
-    font-size: clamp(0.45rem, 0.68vw, 0.58rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     text-align: center;
     align-self: flex-end;
@@ -1809,7 +1812,7 @@
     display: flex;
     align-items: flex-start;
     padding: 6px;
-    font-size: clamp(0.4rem, 0.6vw, 0.52rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 600;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
 }
@@ -1834,7 +1837,7 @@
     z-index: 1;
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: clamp(0.5rem, 0.75vw, 0.62rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -1868,7 +1871,7 @@
 .visual-demo__viewport-bar {
     background: rgba(255,68,68,0.3);
     color: #ff8888;
-    font-size: clamp(0.38rem, 0.55vw, 0.48rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     padding: 4px 6px;
     text-align: center;
@@ -1880,7 +1883,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.5rem, 0.75vw, 0.62rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     color: #ddd;
 }
@@ -1888,7 +1891,7 @@
 .visual-demo__viewport-hidden {
     background: rgba(255,68,68,0.2);
     color: #ff8888;
-    font-size: clamp(0.38rem, 0.55vw, 0.48rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     padding: 4px 6px;
     text-align: center;
@@ -1901,7 +1904,7 @@
 .visual-demo__viewport-cta {
     background: rgba(68,204,102,0.25);
     color: #66dd88;
-    font-size: clamp(0.42rem, 0.62vw, 0.52rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     padding: 5px 6px;
     text-align: center;
@@ -1942,7 +1945,7 @@
     left: 0;
     right: 0;
     padding: 6px 8px;
-    font-size: clamp(0.42rem, 0.62vw, 0.52rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     text-align: center;
     border-radius: 0 0 4px 4px;
@@ -1982,7 +1985,7 @@
 .visual-demo__grid-col {
     padding: 8px 4px;
     border-radius: 4px;
-    font-size: clamp(0.42rem, 0.62vw, 0.52rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 700;
     text-align: center;
     color: #fff;
@@ -2004,7 +2007,7 @@
 .visual-demo__grid-clear {
     clear: both;
     width: 100%;
-    font-size: clamp(0.38rem, 0.55vw, 0.48rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     color: #ff8888;
     text-align: center;
     padding: 3px;
@@ -2032,7 +2035,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     font-weight: 800;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
 }
@@ -2051,7 +2054,7 @@
 }
 
 .visual-demo__audit-label {
-    font-size: clamp(0.48rem, 0.7vw, 0.6rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     color: #888;
     text-align: center;
     font-weight: 600;
@@ -2068,7 +2071,7 @@
 }
 
 .visual-demo__bus-person {
-    font-size: clamp(0.65rem, 1vw, 0.82rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     font-weight: 700;
     padding: 5px 10px;
     border-radius: 6px;
@@ -2085,17 +2088,17 @@
     background: rgba(68,204,102,0.15);
     border: 1px solid rgba(68,204,102,0.35);
     color: #66dd88;
-    font-size: clamp(0.55rem, 0.85vw, 0.7rem);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
 }
 
 .visual-demo__bus-arrow {
-    font-size: clamp(0.7rem, 1.1vw, 0.88rem);
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
     color: #ff8888;
     font-weight: 600;
 }
 
 .visual-demo__bus-result {
-    font-size: clamp(0.58rem, 0.88vw, 0.72rem);
+    font-size: clamp(0.75rem, 1vw, 1rem);
     font-weight: 600;
     padding: 4px 10px;
     border-radius: 4px;

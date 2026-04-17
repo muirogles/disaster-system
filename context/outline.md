@@ -4,7 +4,7 @@
 **Ponente:** María Rogles López
 **Evento:** International Women's Day - Women Techmakers Madrid (WTM) -  en Celonis
 **Fecha:** 17 de Abril del 2026
-**Dinámica:** Creación colectiva analógica (Cadáver Exquisito) con 6 voluntarios + landing pedagógica interactiva.
+**Dinámica:** Creación colectiva analógica (Cadáver Exquisito) con voluntarios del público + landing pedagógica interactiva.
 
 ---
 
@@ -12,13 +12,13 @@
 
 ### 0. El Inicio: El dolor compartido (05 min)
 * **Introducción:** Del diseño gráfico al desarrollo: el drama de los "microinfartos" visuales.
-* **Dinámica:** Selección de 6 voluntarios (2 Diseño, 2 Dev, 2 Mixtos).
+* **Dinámica:** Selección de voluntarios del público con perfiles mixtos (Diseño, Dev y otros perfiles).
 * **Instrucciones:** Reglas del juego (30s por turno, doblar y pasar).
 
 ---
 
 ### 1. La Parte Superior: Cabeza estilo Frankenstein (10 min)
-* **Dinámica en vivo:** Turno 1 de dibujo - Perfiles de diseño - Cabeza (30s).
+* **Dinámica en vivo:** Turno 1 de dibujo - Cabeza (30s).
 * **🧠 El Cerebro:** Estrategia.
 * **👁️ Los Ojos:** Accesibilidad visual.
 * **👂 Las Orejas:** Accesibilidad auditiva.
@@ -27,7 +27,7 @@
 ---
 
 ### 2. La Parte Central: Tronco estilo hombre de hojalata (10 min)
-* **Dinámica en vivo:** Turno 2 de dibujo - Perfiles dev - Tronco (30s).
+* **Dinámica en vivo:** Turno 2 de dibujo - Tronco (30s).
 * **🦴 El Tronco:** Arquitectura.
 * **❤️ El Corazón:** Componentes.
 * **💪 Los Brazos:** Jerarquía.
@@ -36,7 +36,7 @@
 ---
 
 ### 3. La Parte Inferior: Piernas y cola estilo lagarto (10 min)
-* **Dinámica en vivo:** Turno 3 de dibujo - Perfiles mixtos - Piernas (30s).
+* **Dinámica en vivo:** Turno 3 de dibujo - Piernas (30s).
 * **🦿 Las Piernas:** Flexibilidad y responsive.
 * **🦶 Los Pies:** Escalabilidad y mantenimiento.
 * **🦎 La Cola:** Deuda técnica (Legacy).

@@ -4,9 +4,10 @@
 
 .corpse {
    width: 100%;
+   touch-action: pan-y;
+   overscroll-behavior: contain;
 }
 
-/* dvh fallback pattern */
 .corpse__item {
    position: relative;
    display: flex;
@@ -17,13 +18,18 @@
    /* fallback */
    height: 100dvh;
    scroll-snap-align: start;
-   padding-block: 8dvh;
+   padding-block: var(--corpse-padding-block);
 
    @media (orientation: portrait) {
       overflow-x: hidden;
    }
 }
 
+.corpse__item:focus,
+.corpse__item:focus-visible {
+   outline: none;
+}
+   
 @supports (scroll-snap-stop: always) {
    .corpse__item {
       scroll-snap-stop: always;

@@ -46,18 +46,13 @@
     z-index: 9998;
     transform: translateX(100%);
     transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     padding: 0;
-
-    /* Custom scrollbar */
+    display: flex;
+    flex-direction: column;
     scrollbar-width: thin;
     scrollbar-color: rgba(255,255,255,0.08) transparent;
 }
-
-.modal::-webkit-scrollbar { width: 3px; }
-.modal::-webkit-scrollbar-track { background: transparent; }
-.modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
 
 .modal.open {
     transform: translateX(0);
@@ -83,6 +78,29 @@
 }
 
 /* =====================================================
+   MODAL HEADER — sticky, never scrolls
+   ===================================================== */
+.modal__header {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    padding-bottom: 0.5em;
+}
+
+/* Fade hint at bottom of header — signals scrollable content below */
+.modal__header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* =====================================================
    CLOSE BUTTON — terminal dismiss
    ===================================================== */
 .modal__close {
@@ -100,7 +118,7 @@
     border-radius: 0 6px 6px 0;
     color: rgba(255, 130, 150, 0.85);
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.62rem, 0.9vw, 0.82rem);
+    font-size: clamp(0.75rem, 0.9vw, 1rem);
     letter-spacing: 0.06em;
     line-height: 1;
     cursor: pointer;
@@ -163,7 +181,7 @@
 }
 
 .modal__subtitle {
-    font-size: clamp(0.85rem, 1.8vw, 3.5rem);
+    font-size: clamp(0.875rem, 1.8vw, 3.5rem);
     font-weight: 500;
     color: var(--md-text-dim);
     margin: 0 var(--md-pad) 0.55em;
@@ -174,7 +192,7 @@
 
 /* Concept callout — terminal output block */
 .modal__concept {
-    font-size: clamp(0.75rem, 1.2vw, 2.2rem);
+    font-size: clamp(0.875rem, 1.2vw, 2.25rem);
     color: rgba(160, 245, 185, 0.88);
     margin: 0 var(--md-pad) var(--md-gap);
     line-height: 1.7;
@@ -217,7 +235,19 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+    /* Scrollable */
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    /* Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.08) transparent;
 }
+
+.modal__body::-webkit-scrollbar { width: 3px; }
+.modal__body::-webkit-scrollbar-track { background: transparent; }
+.modal__body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
 
 .modal__body--transitioning {
     opacity: 0;
@@ -251,7 +281,7 @@
 .modal__section-num {
     display: inline-block;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.55rem, 0.8vw, 1.35rem);
+    font-size: clamp(0.75rem, 0.8vw, 1.5rem);
     font-weight: 700;
     color: var(--color-purple);
     opacity: 0.6;
@@ -295,7 +325,7 @@
     display: flex;
     align-items: center;
     gap: 0.45em;
-    font-size: clamp(0.7rem, 1.2vw, 2.4rem);
+    font-size: clamp(0.875rem, 1.2vw, 2.5rem);
     font-weight: 700;
     color: var(--md-text-mid);
     margin: 0 0 0.75em;
@@ -318,14 +348,14 @@
 .modal__tools-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
-    gap: clamp(0.4rem, 0.8vw, 1.4rem);
+    gap: clamp(0.5rem, 0.8vw, 1.5rem);
 }
 
 .modal__tool {
     background: var(--md-surface);
     border: 1px solid var(--md-border);
     border-radius: 8px;
-    padding: clamp(0.55rem, 1vw, 1.8rem);
+    padding: clamp(0.75rem, 1vw, 2rem);
     transition: border-color 0.2s, background 0.2s;
 }
 
@@ -339,7 +369,7 @@ a.modal__tool-name {
     display: inline-flex;
     align-items: center;
     gap: 0.3em;
-    font-size: clamp(0.7rem, 1.1vw, 2.2rem);
+    font-size: clamp(0.875rem, 1.1vw, 2.25rem);
     font-weight: 700;
     color: var(--md-text-mid);
     font-family: 'Cascadia Code', 'Fira Code', monospace;
@@ -362,4 +392,11 @@ a.modal__tool-name:hover {
 a.modal__tool-name:hover .modal__tool-link-icon {
     opacity: 0.75;
     transform: translate(1px, -1px);
+}
+
+.modal__tool-desc {
+    margin: 0.4em 0 0;
+    font-size: clamp(0.75rem, 0.9vw, 1.8rem);
+    line-height: 1.4;
+    color: var(--md-text-dim);
 }

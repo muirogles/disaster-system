@@ -19,14 +19,14 @@
     "intro.rules.btn.close": "Cerrar instrucciones",
     "intro.rules.close": "Cerrar",
     "intro.rule.1": "Los voluntarios dibujan a ciegas cada parte del cuerpo en 3 turnos",
-    "intro.rule.2": "30 s por turno — pulsa el cronómetro para empezar",
+    "intro.rule.2": "30s por turno — pulsa el cronómetro para empezar",
     "intro.rule.3": "Dobla el papel y pásalo al siguiente voluntario sin mirar",
     "intro.rule.4": "¿El resultado es un Design System o un Disaster System?",
     "hint.head": "Pulsa en el cerebro, los ojos, las orejas o la boca",
     "hint.trunk": "Pulsa en el tronco, el corazón, los brazos o las manos",
     "hint.legs": "Pulsa en las piernas, los pies o la cola",
-    "slide4.state.disaster": "// estado: DISASTER",
-    "slide4.state.design": "// status: DESIGN_SYSTEM",
+    "slide4.state.disaster": "DISASTER_SYSTEM = failed",
+    "slide4.state.design": "DESIGN_SYSTEM = success",
     "slide4.title.pre": "Esto es un",
     "slide4.subtitle.1": "// TypeError: design.tokens → undefined",
     "slide4.subtitle.2": "¿Cómo lo convertimos en sistema?",
@@ -36,20 +36,20 @@
     "cta.phi.title": "Con <span class=\"highlight\">empatía</span> técnica",
     "cta.phi.text": "No es un entregable de Figma. Es un <strong>contrato social</strong> entre diseño, desarrollo y producto.",
     "closing.title": "Cread <span class=\"highlight\">sistemas</span><br>con alma",
-    "closing.p1": "La diferencia entre un <strong>Design System</strong> y un <strong>Disaster System</strong> no está en las herramientas. Está en si el equipo lo trata como un <strong>producto con dueño</strong> o como un proyecto que \"se termina\".",
+    "closing.p1": "Como cualquier cuerpo vivo, necesita <strong>riego constante</strong> — <em>comunicación, documentación y revisiones periódicas</em>— para no convertirse en otro cadáver.",
     "closing.p2": "<strong>No trabajéis a ciegas</strong>. Cread sistemas con alma y, sobre todo... <strong class=\"highlight\">hablad entre vosotros</strong>.",
     "closing.tools.section.label": "Herramientas:",
-    "closing.tools.brain": "Cerebro — Design Tokens",
-    "closing.tools.eyes": "Ojos — Accesibilidad visual",
-    "closing.tools.ears": "Orejas — Audición y semántica",
-    "closing.tools.mouth": "Boca — Internacionalización",
-    "closing.tools.heart": "Corazón — Componentes vivos",
-    "closing.tools.torso": "Torso — Arquitectura CSS",
-    "closing.tools.arms": "Brazos — Z-index y capas",
-    "closing.tools.hands": "Manos — Touch y eventos",
-    "closing.tools.legs": "Piernas — Responsive",
-    "closing.tools.feet": "Pies — Base escalable",
-    "closing.tools.tail": "Cola — Legacy y deuda técnica",
+    "closing.tools.brain": "🧠 Cerebro",
+    "closing.tools.eyes": "👁️ Ojos",
+    "closing.tools.ears": "👂 Orejas",
+    "closing.tools.mouth": "👄 Boca",
+    "closing.tools.heart": "❤️ Corazón",
+    "closing.tools.trunk": "🦴 Torso",
+    "closing.tools.arms": "💪 Brazos",
+    "closing.tools.hands": "🤚 Manos",
+    "closing.tools.legs": "🦿 Piernas",
+    "closing.tools.feet": "🦶 Pies",
+    "closing.tools.tail": "🦎 Cola",
     "closing.tool.tokens-studio.desc": "Gestión de design tokens sincronizados entre Figma y código.",
     "closing.tool.style-dictionary.desc": "Generación automatizada de tokens para múltiples plataformas.",
     "closing.tool.axe-devtools.desc": "Auditoría de accesibilidad automatizada en el navegador.",
@@ -87,8 +87,8 @@
     "modal.content": {
         "brain": {
             "title": "🧠 Cerebro",
-            "subtitle": "Design Tokens sin neuronas",
-            "concept": "Lógica, consistencia y \"fuente única de la verdad\".",
+            "subtitle": "Design tokens sin neuronas",
+            "concept": "Sin neuronas, los impulsos no llegan. Los tokens son las sinapsis del sistema: un acuerdo, no un hex.",
             "errors": [
                 {
                     "error": "Sin estrategia de nomenclatura",
@@ -136,8 +136,8 @@
         },
         "eyes": {
             "title": "👁️ Ojos",
-            "subtitle": "Miopía y ceguera en la interfaz",
-            "concept": "Accesibilidad visual y nitidez. Cómo el usuario percibe el producto.",
+            "subtitle": "Miopía de la interfaz",
+            "concept": "Miopía: la interfaz no ve lo que el usuario necesita. Contraste, foco y nitidez son la corrección.",
             "errors": [
                 {
                     "error": "Contraste de color insuficiente",
@@ -180,10 +180,6 @@
                 {
                     "name": "Stark (Figma)",
                     "desc": "Verificación de contraste y simulación de daltonismo en diseño."
-                },
-                {
-                    "name": "Lighthouse",
-                    "desc": "Auditoría de rendimiento, accesibilidad y SEO integrada en Chrome."
                 }
             ]
         },
@@ -234,8 +230,8 @@
         },
         "mouth": {
             "title": "👄 Boca",
-            "subtitle": "Storytelling e internacionalización",
-            "concept": "Cambios de idiomas. Comunicación. Estrategia diccionario / contenido dinámico.",
+            "subtitle": "Afasia del contenido",
+            "concept": "La afasia corta la comunicación. Sin diseño flexible para otros idiomas, el sistema pierde la voz.",
             "errors": [
                 {
                     "error": "Texto desborda contenedores fijos",
@@ -299,7 +295,7 @@
                     "errorCode": "/* Figma: \"Card/Destacada\" */\n/* Código: <FeaturedTile /> */\n/* QA: \"el recuadro de arriba\" */",
                     "solution": "Vocabulario compartido",
                     "solutionCode": "/* Figma: \"Card/Featured\" */\n/* Código: <CardFeatured /> */\n/* QA: \"Card Featured\" */\n/* Documentado en el DS */",
-                    "desc": "Un glosario compartido elimina fricciones en handoff. Falta de evangelización = caos.",
+                    "desc": "Un glosario compartido elimina fricciones en handoff. Falta de coordinación = caos.",
                     "visual": "naming"
                 }
             ],
@@ -314,10 +310,10 @@
                 }
             ]
         },
-        "torso": {
+        "trunk": {
             "title": "🦴 Torso",
-            "subtitle": "Escoliosis de componentes",
-            "concept": "Arquitectura doblada, el core que mantiene nuestros órganos dentro.",
+            "subtitle": "Armazón inflexible",
+            "concept": "Una estructura soldada a presión donde nada encaja por diseño.",
             "errors": [
                 {
                     "error": "Márgenes negativos como solución",
@@ -349,8 +345,8 @@
         },
         "arms": {
             "title": "💪 Brazos",
-            "subtitle": "Caos de z-index",
-            "concept": "La fuerza que mueve el sistema al mundo real.",
+            "subtitle": "Alcance fallido",
+            "concept": "Piezas que flotan sin conexión; los brazos no alcanzan nada mientras el layout se desmorona.",
             "errors": [
                 {
                     "error": "z-index sin concordancia",
@@ -382,8 +378,8 @@
         },
         "hands": {
             "title": "🤚 Manos",
-            "subtitle": "Problemas táctiles",
-            "concept": "Touch — la interfaz entre el usuario y el producto.",
+            "subtitle": "Manos de hojalata",
+            "concept": "Torpes y rígidas, las manos no sienten lo que tocan. La interfaz no responde cuando el usuario pulsa.",
             "errors": [
                 {
                     "error": "Touch targets diminutos",
@@ -423,8 +419,8 @@
         },
         "legs": {
             "title": "🦿 Piernas",
-            "subtitle": "Flexibilidad inexistente",
-            "concept": "Escalabilidad y flexibilidad. Responsive, medidas flexibles, tamaños mínimos y máximos.",
+            "subtitle": "Extremidades estáticas",
+            "concept": "La rigidez impide el avance; el diseño adaptable no son parches cosidos, es fluidez nativa.",
             "errors": [
                 {
                     "error": "Tamaños fijos",
@@ -472,8 +468,8 @@
         },
         "feet": {
             "title": "🦶 Pies",
-            "subtitle": "Base del producto escalable",
-            "concept": "Un diseño no escalable a largo plazo es más lento y costoso para adaptarse a nuevos mercados.",
+            "subtitle": "Base inestable",
+            "concept": "Las garras deberían fijar el sistema al suelo; sin pipeline ni auditorías, cada release pierde el agarre.",
             "errors": [
                 {
                     "error": "Metodología no modular",
@@ -514,12 +510,8 @@
                     "desc": "Documentación y desarrollo aislado de componentes."
                 },
                 {
-                    "name": "Stylelint",
-                    "desc": "Linter de CSS para mantener convenciones y detectar errores."
-                },
-                {
-                    "name": "BEM Linter",
-                    "desc": "Validación de nomenclatura BEM en hojas de estilo."
+                    "name": "Lighthouse",
+                    "desc": "Auditoría de rendimiento, accesibilidad y SEO integrada en Chrome."
                 }
             ]
         },
@@ -561,16 +553,13 @@
                 {
                     "name": "Knip",
                     "desc": "Detección de código muerto, exports no usados y dependencias huérfanas."
-                },
-                {
-                    "name": "Depcheck",
-                    "desc": "Detección de dependencias no utilizadas en el proyecto."
                 }
             ]
         }
     },
-    "slide4.subtitle.post.1": "Como cualquier cuerpo vivo, necesita <strong>riego constante</strong> — <em>comunicación, documentación y revisiones periódicas</em>— para no convertirse en otro cadáver.",
-    "slide4.subtitle.post.2": "// system.online() → OK\nahora mantenlo con vida →",
+    "slide4.subtitle.post.1": "// system.online() → ",
+    "slide4.subtitle.post.2": "Comparte tu cadáver exquisito y demuestra si es un Design System o un Disaster System",
+    "slide4.scroll.hint": "↓ continuar al cierre",
     "visual.demo.tokens.error": "Hex hardcoded",
     "visual.demo.tokens.solution": "Tokens semánticos",
     "visual.demo.themes.error": "Temas rotos",
@@ -690,8 +679,8 @@
     "visual.demo.naming.label.error": "3 equipos, 3 nombres distintos",
     "visual.demo.naming.label.solution": "1 nombre en el DS ✓",
     "visual.demo.overlap.label.error": "Botón flota y tapa texto",
-    "visual.demo.overlap.label.solution": "Grid layout, sin solapamiento ✓",
-    "visual.demo.pointerevents.label.error": "El clic no llega al botón",
+    "visual.demo.overlap.label.solution": "Layout sin solapamiento ✓",
+    "visual.demo.pointerevents.label.error": "El click no llega al botón",
     "visual.demo.pointerevents.label.solution": "pointer-events: none ✓",
     "visual.demo.viewport.label.error": "100vh oculta teclado/nav",
     "visual.demo.viewport.label.solution": "100dvh se adapta al viewport ✓",

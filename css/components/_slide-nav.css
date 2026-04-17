@@ -1,0 +1,121 @@
+/* =====================================================
+   SLIDE PROGRESS NAVIGATION — vertical dot nav
+   ===================================================== */
+
+.slide-nav {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.5rem, 1vw, 1.5rem);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    @media (orientation: portrait) {
+        flex-direction: row;
+        top: 1.5rem;
+        right: 50%;
+        transform: translateX(50%) translateY(0);
+    }
+}
+
+/* Hide when modal is open */
+html.modal-open .slide-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.slide-nav__dot {
+    width: clamp(1.75rem, 2.5vw, 2.75rem);
+    height: clamp(1.75rem, 2.5vw, 2.75rem);
+    border-radius: 50%;
+    /* border color handled by --dot-color below */
+    border: clamp(1px, 0.12vw, 3px) solid color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 30%, transparent);
+    background: rgba(8, 6, 18, 0.7);
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide-nav__dot svg {
+    width: 62%;
+    height: 62%;
+    transition: transform 0.25s ease;
+}
+
+.slide-nav__dot:hover {
+    border-color: color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 60%, transparent);
+    background: color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 15%, rgba(25, 18, 50, 0.85));
+    color: color-mix(in srgb, var(--dot-color, white) 85%, transparent);
+    transform: scale(1.15);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 25%, transparent);
+}
+
+.slide-nav__dot:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--focus-glow);
+}
+
+/* Active state */
+.slide-nav__dot--active {
+    border-color: var(--dot-color, rgba(155, 93, 229, 0.7));
+    background: color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 20%, transparent);
+    color: color-mix(in srgb, var(--dot-color, white) 95%, transparent);
+    box-shadow: 
+        0 0 20px color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 35%, transparent),
+        inset 0 0 12px color-mix(in srgb, var(--dot-color, rgba(155, 93, 229, 1)) 10%, transparent);
+    transform: scale(1.08);
+}
+
+.slide-nav__dot--active svg {
+    transform: scale(1.1);
+}
+
+/* ── Different colors for each slide ── */
+
+/* 1. Intro — Purple */
+.slide-nav__dot:nth-child(1) { --dot-color: var(--color-purple); }
+/* 2. Head — Teal */
+.slide-nav__dot:nth-child(2) { --dot-color: var(--color-teal); }
+/* 3. Trunk — Gold */
+.slide-nav__dot:nth-child(3) { --dot-color: var(--color-gold); }
+/* 4. Legs — Green */
+.slide-nav__dot:nth-child(4) { --dot-color: var(--color-green); }
+/* 5. Full Corpse — Magenta */
+.slide-nav__dot:nth-child(5) { --dot-color: var(--color-magenta); }
+/* 6. Closing — Coral */
+.slide-nav__dot:nth-child(6) { --dot-color: var(--color-coral); }
+
+/* Mobile — smaller, more transparent */
+@media (max-width: 600px) {
+    .slide-nav {
+        gap: 0.5rem;
+    }
+    .slide-nav__dot {
+        width: 1.5rem;
+        height: 1.5rem;
+        opacity: 0.6;
+    }
+    .slide-nav__dot--active {
+        opacity: 1;
+    }
+}
+
+/* Large screens */
+@media (min-width: 2560px) {
+    .slide-nav__dot {
+        width: clamp(2.25rem, 3vw, 4rem);
+        height: clamp(2.25rem, 3vw, 4rem);
+        border-width: clamp(1px, 0.15vw, 4px);
+    }
+}

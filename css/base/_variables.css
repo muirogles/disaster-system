@@ -43,9 +43,19 @@
         radial-gradient(ellipse 78% 55% at 50% 0%, rgba(90,220,40,.38) 0%, transparent 70%) 10px 7px / 20px 14px;
 
     /* Modal shrink behavior */
-    --modal-width: 58vw;
-    --modal-shrink-scale: 0.52;
+    --modal-width: 54vw;
+    --modal-shrink-scale: 0.64;
     --modal-shift-x: 2vw;
+
+    /* Button design tokens */
+    --btn-border: rgba(155, 93, 229, 0.25);
+    --btn-border-hover: rgba(155, 93, 229, 0.55);
+    --btn-bg: rgba(8, 6, 18, 0.85);
+    --btn-bg-hover: rgba(25, 18, 50, 0.92);
+    --btn-color: rgba(255, 255, 255, 0.75);
+    --btn-color-hover: rgba(196, 160, 245, 0.9);
+    --focus-ring: rgba(155, 93, 229, 0.9);
+    --focus-glow: rgba(155, 93, 229, 0.12);
 
     /* Vibrant palette */
     --color-magenta: #E91E63;
@@ -242,4 +252,34 @@
     /* Pubis */
     --pubis-width: 25%;
     --pubis-height: 20%;
+    
+    /* corpse */
+    --corpse-padding-block: 8dvh;
+
+    /* =====================================================
+       DEMO TYPOGRAPHY & SPACING TOKENS
+       Integer-px rem values only — scale via media queries in _responsive.css
+       Base-8 rhythm; 4-step intermediates only for typography
+       ===================================================== */
+
+    /* Demo typography (mobile default) */
+    --demo-fs-xs: 0.75rem;   /* 12px — annotations, badges */
+    --demo-fs-sm: 0.875rem;  /* 14px — captions, labels */
+    --demo-fs-md: 1rem;      /* 16px — body */
+    --demo-fs-lg: 1.125rem;  /* 18px — subheads */
+    --demo-fs-xl: 1.5rem;    /* 24px — emphasis */
+    --demo-fs-2xl: 2rem;     /* 32px — hero numbers */
+
+    /* Demo gaps */
+    --demo-gap-xs: 0.5rem;   /*  8px */
+    --demo-gap-sm: 0.75rem;  /* 12px */
+    --demo-gap-md: 1rem;     /* 16px */
+    --demo-gap-lg: 1.5rem;   /* 24px */
+
+    /* Demo padding */
+    --demo-pad-xs: 0.5rem;   /*  8px */
+    --demo-pad-sm: 0.75rem;  /* 12px */
+    --demo-pad-md: 1rem;     /* 16px */
+    --demo-pad-lg: 1.5rem;   /* 24px */
+    --demo-pad-xl: 2rem;     /* 32px */
 }
