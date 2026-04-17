@@ -21,6 +21,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overscroll-behavior: contain;
 }
 
 html::-webkit-scrollbar {
@@ -39,7 +40,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: clamp(14px, 1.6vw, 28px);
   padding-bottom: env(safe-area-inset-bottom);
   min-height: 100dvh;
 }

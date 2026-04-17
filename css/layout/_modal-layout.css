@@ -73,20 +73,20 @@
 }
 
 /* When head section is active: hide part-hint */
-.corpse.has-modal .section-active .part-hint {
+.corpse.has-modal .corpse__item--active .part-hint {
     opacity: 0 !important;
     pointer-events: none;
 }
 
 /* When head section is active: keep face decorations visible */
-.corpse.has-modal .section-active .head,
-.corpse.has-modal .section-active .hair {
+.corpse.has-modal .corpse__item--active .head,
+.corpse.has-modal .corpse__item--active .hair {
     filter: grayscale(0) brightness(0.7);
 }
-.corpse.has-modal .section-active .nose,
-.corpse.has-modal .section-active .blush,
-.corpse.has-modal .section-active .glasses,
-.corpse.has-modal .section-active .neck {
+.corpse.has-modal .corpse__item--active .nose,
+.corpse.has-modal .corpse__item--active .blush,
+.corpse.has-modal .corpse__item--active .glasses,
+.corpse.has-modal .corpse__item--active .neck {
     filter: grayscale(0) brightness(0.7);
 }
 

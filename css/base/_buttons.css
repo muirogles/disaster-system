@@ -21,8 +21,9 @@
 }
 
 .btn-base:focus-visible {
-    outline: 2px solid var(--color-purple);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--focus-glow);
 }
 
 .btn-base:active {
@@ -67,8 +68,9 @@
 }
 
 .timer-fab:focus-visible, .rules-fab:focus-visible {
-    outline: 3px solid rgba(155, 93, 229, 0.8);
-    outline-offset: 4px;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--focus-glow);
 }
 
 /* Icons within FABs */
@@ -145,12 +147,30 @@
     box-shadow: 0 0 8px rgba(155,93,229,0.15);
 }
 
-/* ── Language Switcher (Always prominent) ── */
-.lang-btn {
+/* ── Language + QR Group (left-side FABs) ── */
+.lang-control {
     position: fixed;
     bottom: 1.5rem;
     left: 1.5rem;
     z-index: 10005;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+    animation: langSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.5s both;
+}
+
+.lang-control > button {
+    pointer-events: auto;
+}
+
+@keyframes langSlideIn {
+    from { opacity: 0; transform: translateX(-1.25rem); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.lang-btn, .qr-btn {
     background: rgba(8, 6, 18, 0.85);
     backdrop-filter: blur(16px);
     border: 1px solid rgba(155, 93, 229, 0.3);
@@ -158,10 +178,6 @@
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
-    font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
@@ -169,10 +185,22 @@
     align-items: center;
     justify-content: center;
     padding: 0;
+}
+
+.qr-btn {
+    border-color: rgba(255, 179, 0, 0.3);
+    color: rgba(255, 179, 0, 0.7);
+}
+
+.lang-btn {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     text-transform: none;
 }
 
-.lang-btn:hover {
+.lang-btn:hover, .qr-btn:hover {
     background: rgba(155, 93, 229, 0.1);
     border-color: rgba(155, 93, 229, 0.55);
     color: rgba(196, 160, 245, 0.98);
@@ -180,9 +208,75 @@
     box-shadow: 0 8px 28px rgba(155,93,229,0.2);
 }
 
-.lang-btn:focus-visible {
-    outline: 3px solid rgba(155, 93, 229, 0.8);
-    outline-offset: 4px;
+.qr-btn:hover {
+    background: rgba(255, 179, 0, 0.08);
+    border-color: rgba(255, 179, 0, 0.6);
+    color: rgba(255, 179, 0, 0.95);
+    box-shadow: 0 8px 28px rgba(255, 179, 0, 0.15);
+}
+
+.lang-btn:focus-visible, .qr-btn:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--focus-glow);
+}
+
+html.modal-open .lang-control {
+    opacity: 0 !important;
+    pointer-events: none;
+    transform: translateY(0.5rem) scale(0.9);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ── QR Fullscreen Overlay ── */
+.qr-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2, 1, 8, 0.92);
+    backdrop-filter: blur(24px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.qr-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.qr-overlay__img {
+    max-width: min(80vw, 80vh);
+    max-height: 80vh;
+    border-radius: 1rem;
+    box-shadow: 0 0 60px rgba(155, 93, 229, 0.25);
+}
+
+.qr-overlay__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(8, 6, 18, 0.7);
+    border: 1px solid rgba(155, 93, 229, 0.3);
+    color: rgba(196, 160, 245, 0.9);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.qr-overlay__close:hover {
+    background: rgba(155, 93, 229, 0.15);
+    border-color: rgba(155, 93, 229, 0.55);
+    transform: scale(1.1);
 }
 
 /* ── Rules Drawer ── */
@@ -315,6 +409,68 @@ html.modal-open .fab-group,
 html.fab-hidden .fab-group {
     opacity: 0 !important;
     pointer-events: none;
-    transform: translateY(8px) scale(0.9);
+    transform: translateY(0.5rem) scale(0.9);
     transition: opacity 0.25s ease, transform 0.25s ease;
+    visibility: hidden;
+}
+
+html.lang-hidden .lang-control {
+    opacity: 0 !important;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateY(0.5rem) scale(0.9);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ----- Large screen FAB scaling ----- */
+@media (min-width: 2560px) {
+    .timer-fab, .rules-fab {
+        width: clamp(3.5rem, 4vw, 6rem);
+        height: clamp(3.5rem, 4vw, 6rem);
+        border-width: clamp(0.0625rem, 0.15vw, 0.25rem);
+    }
+    .timer-fab__icon, .rules-fab__icon {
+        width: clamp(1.5rem, 2.5vw, 3rem);
+        height: clamp(1.5rem, 2.5vw, 3rem);
+    }
+    .lang-btn, .qr-btn {
+        width: clamp(3.5rem, 4vw, 6rem);
+        height: clamp(3.5rem, 4vw, 6rem);
+        border-width: clamp(0.0625rem, 0.15vw, 0.25rem);
+    }
+    .lang-btn {
+        font-size: clamp(0.75rem, 1.1vw, 1.5rem);
+    }
+    .rules-fab__q {
+        width: clamp(1.25rem, 2vw, 2.25rem);
+        height: clamp(1.25rem, 2vw, 2.25rem);
+        font-size: clamp(0.625rem, 0.9vw, 1.125rem);
+        border-width: clamp(0.0625rem, 0.12vw, 0.25rem);
+    }
+    .fab-group {
+        bottom: clamp(1.5rem, 2.5vw, 4rem);
+        right: clamp(1.5rem, 2.5vw, 4rem);
+        gap: clamp(1.25rem, 2vw, 3rem);
+    }
+    .lang-control {
+        bottom: clamp(1.5rem, 2.5vw, 4rem);
+        left: clamp(1.5rem, 2.5vw, 4rem);
+        gap: clamp(0.75rem, 1.2vw, 2rem);
+    }
+}
+
+/* ── FAB entrance animation ── */
+.fab-group {
+    animation: fabSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.5s both;
+}
+
+@keyframes fabSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(1.25rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

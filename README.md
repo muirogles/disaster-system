@@ -18,7 +18,7 @@ An interactive landing page built to support a live tech talk about Design Syste
 
 The talk uses an old surrealist parlour game to show, live on stage, what happens when designers, developers, and mixed-profile teams build *without a shared system*:
 
-1. Six volunteers each draw one section of a body (head / torso / legs) in **30 seconds**, without seeing what the others drew.
+1. A group of volunteers from the audience each draw one section of a body (head / trunk / legs) in **30 seconds**, without seeing what the others drew.
 2. They fold the paper and pass it on.
 3. The result is revealed: a glorious, chaotic **Disaster System** creature.
 4. The landing then **transforms** that creature into a healthy, coordinated human — a Design System done right.
@@ -83,7 +83,7 @@ Una landing interactiva creada para apoyar en directo una charla técnica sobre 
 
 La charla utiliza el juego surrealista del Cadáver Exquisito para demostrar en vivo qué ocurre cuando diseñadores, desarrolladores y perfiles mixtos construyen *sin un sistema compartido*:
 
-1. Seis voluntarios dibujan cada uno una sección del cuerpo (cabeza / tronco / piernas) en **30 segundos**, sin ver lo que han dibujado los demás.
+1. Un grupo de voluntarios del público dibuja cada uno una sección del cuerpo (cabeza / tronco / piernas) en **30 segundos**, sin ver lo que han dibujado los demás.
 2. Doblan el papel y lo pasan.
 3. Se revela el resultado: una criatura gloriosa y caótica — el **Disaster System**.
 4. La landing **transforma** esa criatura en un ser humano sano y coordinado: un Design System bien hecho.
@@ -109,7 +109,7 @@ Cada parte del cuerpo corresponde a un concepto real de Design System, explorado
 ### Funcionalidades
 
 - **Cronómetro de 30 segundos** con sintetizador procedural (Web Audio API) — latido que escala en urgencia y explosión de alarma al llegar a cero
-- **Partes del cuerpo interactivas** — clic en cualquier parte para abrir un panel modal con snippets, errores y herramientas recomendadas
+- **Partes del cuerpo interactivas** — click en cualquier parte para abrir un panel modal con snippets, errores y herramientas recomendadas
 - **Botón Reanimar** — transiciones CSS que transforman la criatura en un ser humano coordinado
 - **Selector de idioma ES / EN** — i18n completo, con renderizado de HTML en traducciones
 - **CTA de compartir en LinkedIn** — botón de compartir directo a la demo en vivo

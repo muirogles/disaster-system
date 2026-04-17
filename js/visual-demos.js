@@ -386,13 +386,15 @@ function buildVisualDemo(visual) {
                     <div class="visual-demo__phone visual-demo__phone--error">
                         <div class="visual-demo__phone-notch"></div>
                         <div class="visual-demo__phone-screen">
+                            <span class="visual-demo__rtl-dir-pill">\u2192 LTR</span>
                             <div class="visual-demo__rtl-card visual-demo__rtl-card--big">
                                 <div class="visual-demo__rtl-avatar visual-demo__rtl-avatar--error"></div>
-                                <div class="visual-demo__rtl-text visual-demo__rtl-text--error">\u0641\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u2190 \u00a1roto!</div>
+                                <div class="visual-demo__rtl-text visual-demo__rtl-text--error">margin-left \u2717</div>
                             </div>
+                            <span class="visual-demo__rtl-dir-pill visual-demo__rtl-dir-pill--rtl">\u2190 RTL</span>
                             <div class="visual-demo__rtl-card visual-demo__rtl-card--big" dir="rtl">
                                 <div class="visual-demo__rtl-avatar visual-demo__rtl-avatar--error"></div>
-                                <div class="visual-demo__rtl-text visual-demo__rtl-text--error">\u0641\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u2190 \u00a1roto!</div>
+                                <div class="visual-demo__rtl-text visual-demo__rtl-text--error">\u0641\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u2014 roto \u2717</div>
                             </div>
                         </div>
                     </div>
@@ -404,13 +406,15 @@ function buildVisualDemo(visual) {
                     <div class="visual-demo__phone visual-demo__phone--ok">
                         <div class="visual-demo__phone-notch"></div>
                         <div class="visual-demo__phone-screen">
+                            <span class="visual-demo__rtl-dir-pill">\u2192 LTR</span>
                             <div class="visual-demo__rtl-card visual-demo__rtl-card--big">
                                 <div class="visual-demo__rtl-avatar visual-demo__rtl-avatar--good"></div>
-                                <div class="visual-demo__rtl-text visual-demo__rtl-text--good">\u0641\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u2190 \u2713</div>
+                                <div class="visual-demo__rtl-text visual-demo__rtl-text--good">inline-start \u2713</div>
                             </div>
+                            <span class="visual-demo__rtl-dir-pill visual-demo__rtl-dir-pill--rtl">\u2190 RTL</span>
                             <div class="visual-demo__rtl-card visual-demo__rtl-card--big" dir="rtl">
                                 <div class="visual-demo__rtl-avatar visual-demo__rtl-avatar--good"></div>
-                                <div class="visual-demo__rtl-text visual-demo__rtl-text--good">\u0641\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u2190 \u2713</div>
+                                <div class="visual-demo__rtl-text visual-demo__rtl-text--good">\u0641\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u2014 \u2713</div>
                             </div>
                         </div>
                     </div>
@@ -892,7 +896,7 @@ function buildVisualDemo(visual) {
                             <div class="visual-demo__pe-demo">
                                 <div class="visual-demo__pe-overlay visual-demo__pe-overlay--blocking">decorativo::before</div>
                                 <div class="visual-demo__pe-btn visual-demo__pe-btn--blocked">
-                                    <span>\uD83D\uDD12</span> Bot\u00f3n bloqueado
+                                    <span>\uD83D\uDD12</span> Bloqueado
                                 </div>
                             </div>
                         </div>
@@ -955,13 +959,16 @@ function buildVisualDemo(visual) {
                         <div class="visual-demo__phone-notch"></div>
                         <div class="visual-demo__phone-island"></div>
                         <div class="visual-demo__phone-screen">
+                            <div class="visual-demo__safearea-content">App content</div>
                             <div class="visual-demo__safearea-bar visual-demo__safearea-bar--bad">
-                                Tab bar oculta
+                                <span>\u2715 Nav bar</span>
                             </div>
                         </div>
-                        <div class="visual-demo__phone-homeind visual-demo__phone-homeind--cover"></div>
+                        <div class="visual-demo__phone-homeind visual-demo__phone-homeind--cover">
+                            <span class="visual-demo__safearea-hidden-label">HIDDEN</span>
+                        </div>
                     </div>
-                    <div class="visual-demo__label visual-demo__label--error">Contenido detr\u00e1s del notch/home</div>
+                    <div class="visual-demo__label visual-demo__label--error">bottom: 0 \u2014 detr\u00e1s del home indicator</div>
                 </div>
                 <div class="visual-demo__arrow">\u2192</div>
                 <div class="visual-demo__side visual-demo__side--solution">
@@ -970,13 +977,14 @@ function buildVisualDemo(visual) {
                         <div class="visual-demo__phone-notch"></div>
                         <div class="visual-demo__phone-island"></div>
                         <div class="visual-demo__phone-screen">
+                            <div class="visual-demo__safearea-content">App content</div>
                             <div class="visual-demo__safearea-bar visual-demo__safearea-bar--good">
-                                Tab bar visible \u2713
+                                <span>\u2713 Nav bar</span>
                             </div>
                         </div>
                         <div class="visual-demo__phone-homeind"></div>
                     </div>
-                    <div class="visual-demo__label visual-demo__label--success">Padding respeta el notch \u2713</div>
+                    <div class="visual-demo__label visual-demo__label--success">env(safe-area-inset-bottom) \u2713</div>
                 </div>
             </div>`,
         grid: `
@@ -1141,7 +1149,7 @@ function buildVisualDemo(visual) {
                             <div class="visual-demo__scroll-demo visual-demo__scroll-demo--big">
                                 <div class="visual-demo__scroll-modal visual-demo__scroll-modal--big">Modal abierto</div>
                                 <div class="visual-demo__scroll-body visual-demo__scroll-body--scrolling visual-demo__scroll-body--big">
-                                    \u2195 Body sigue scroll
+                                    \u2195 Body con scroll
                                 </div>
                             </div>
                         </div>
@@ -1157,7 +1165,7 @@ function buildVisualDemo(visual) {
                             <div class="visual-demo__scroll-demo visual-demo__scroll-demo--big">
                                 <div class="visual-demo__scroll-modal visual-demo__scroll-modal--big">Modal abierto</div>
                                 <div class="visual-demo__scroll-body visual-demo__scroll-body--locked visual-demo__scroll-body--big">
-                                    \uD83D\uDD12 Body bloqueado
+                                    \uD83D\uDD12 Bloqueado
                                 </div>
                             </div>
                         </div>
