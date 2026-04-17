@@ -14,6 +14,16 @@
     height: var(--legs-height);
     position: relative;
     overflow: hidden;
+
+
+    @media (orientation: portrait) {
+        --leg-width: 20%;
+        top: 5vh;
+
+        .full-corpse & {
+            top: 0;
+        }
+    }
 }
 
 /* ---- PUBIS — rump/hip connector, same lizard texture as tail ---- */
