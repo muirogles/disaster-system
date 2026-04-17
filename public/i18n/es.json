@@ -215,16 +215,12 @@
             ],
             "tools": [
                 {
-                    "name": "NVDA / VoiceOver",
-                    "desc": "Screen readers para testear la experiencia no visual."
+                    "name": "NVDA",
+                    "desc": "Screen reader para Windows, gratuito y open-source."
                 },
                 {
-                    "name": "axe-core",
-                    "desc": "Motor de reglas de accesibilidad automatizadas."
-                },
-                {
-                    "name": "Accessibility Insights",
-                    "desc": "Extensión de Microsoft para auditorías WCAG paso a paso."
+                    "name": "VoiceOver",
+                    "desc": "Screen reader nativo de macOS/iOS para testear en Apple."
                 }
             ]
         },
@@ -667,7 +663,7 @@
     "visual.demo.negative.label.error": "Parche que rompe en otro contexto",
     "visual.demo.negative.label.solution": "Layout limpio desde el padre ✓",
     "visual.demo.shadow.label.error": "overflow:hidden corta box-shadow ✂",
-    "visual.demo.shadow.label.solution": "overflow-clip-margin ✓",
+    "visual.demo.shadow.label.solution": "Espacio mínimo = tamaño de la sombra ✓",
     "visual.demo.specificity.label.error": "Imposible de sobreescribir",
     "visual.demo.specificity.label.solution": "Predecible y mantenible ✓",
     "visual.demo.deadcode.label.error": "100+ líneas muertas",

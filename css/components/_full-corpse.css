@@ -406,16 +406,18 @@
     animation: none;
 }
 
-/* ── Fade scar sutures, show natural blush ── */
+/* ── Hide scar entirely in design mode ── */
 .corpse__item--full[data-theme="design"] .full-corpse .blush {
-    height: 10px;
-    border-radius: 50%;
-    box-shadow: none;
-}
-.corpse__item--full[data-theme="design"] .full-corpse .blush::before,
-.corpse__item--full[data-theme="design"] .full-corpse .blush::after {
     opacity: 0;
+    pointer-events: none;
     transition: opacity 1.8s ease;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .mouth__inner {
+    height: 20%;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .tooth {
+    height: 90%;
 }
 
 /* ── Hide brain entirely — hair covers the top ── */
@@ -424,49 +426,67 @@
     pointer-events: none;
 }
 
-/* ── Dark blonde flowing hair ── */
+/* ── Dark blonde flowing hair — elegant, coordinated silhouette ── */
 .corpse__item--full[data-theme="design"] .full-corpse .hair__top {
     background:
-        radial-gradient(ellipse 50% 30% at 35% 20%, rgba(220,185,100,0.4) 0%, transparent 55%),
-        radial-gradient(ellipse 35% 22% at 70% 32%, rgba(195,155,70,0.25) 0%, transparent 50%),
-        linear-gradient(168deg,
-            #7a5214 0%, #a07428 18%,
-            #8a6218 40%, #b88c38 58%,
-            #8a6218 78%, #7a5214 100%);
-    /* Soft, rounded silhouette — gentle waves */
+        /* Glossy shine streak — well-kept hair */
+        linear-gradient(108deg,
+            transparent 0%, transparent 36%,
+            rgba(245,210,130,0.32) 48%, rgba(245,210,130,0.42) 52%,
+            rgba(245,210,130,0.28) 58%, transparent 70%, transparent 100%),
+        /* Crown volume highlight */
+        radial-gradient(ellipse 58% 42% at 40% 22%, rgba(232,198,118,0.5) 0%, transparent 62%),
+        /* Side shadow for depth */
+        radial-gradient(ellipse 30% 55% at 92% 60%, rgba(60,38,8,0.35) 0%, transparent 70%),
+        /* Base blonde gradient with warm flow */
+        linear-gradient(165deg,
+            #7a5214 0%, #a07428 16%,
+            #b88c38 38%, #9a6e22 60%,
+            #7a5214 82%, #6a4410 100%);
+    /* Smooth side-swept silhouette — soft crown, elegant fringe */
     clip-path: polygon(
-        3%  100%, 0%  80%,  0%  60%,  2%  42%,  6%  26%, 12%  12%,
-        20%  4%, 30%  0%,  42%  3%,  50%  1%,  58%  3%,  68%  0%,
-        78%  3%,  86%  0%,  92%  8%,  96% 20%,  99% 36%, 100% 54%,
-        99%  72%, 100% 90%, 97% 100%
+        0%  100%,  0%  68%,
+        3%   42%,  9%  22%,
+        18%   9%, 30%   2%,
+        44%   0%, 54%   5%,
+        62%   2%, 74%   0%,
+        86%   4%, 94%  15%,
+        99%  34%, 100% 58%,
+        100% 100%
     );
-    filter: drop-shadow(0 -0.2vmax 0.6vmax rgba(0,0,0,0.5));
+    filter: drop-shadow(0 -0.25vmax 0.75vmax rgba(0,0,0,0.45));
 }
 
 .corpse__item--full[data-theme="design"] .full-corpse .hair__side {
-    height: 160%;
+    height: 175%;
 }
 
+/* Left curtain — smooth flowing cascade, no jagged edges */
 .corpse__item--full[data-theme="design"] .full-corpse .hair__side--l {
-    background: linear-gradient(to bottom right,
-        #a07428 0%, #8a6218 30%, #7a5214 60%, rgba(90,60,10,0.2) 100%);
-    clip-path: polygon(
-        20%  0%,  64%  3%,  88% 16%,
-        100% 34%,  96% 56%,  86% 76%,
-        70%  90%,  46% 100%,  20%  96%,
-        8%   80%,  2%  56%,   5%  30%
-    );
+    background:
+        linear-gradient(105deg,
+            transparent 0%, transparent 55%,
+            rgba(240,205,128,0.22) 68%, transparent 82%),
+        linear-gradient(160deg,
+            #a07428 0%, #8a6218 26%,
+            #7a5214 56%, #6a4410 82%,
+            rgba(90,60,10,0.15) 100%);
+    clip-path: none;
+    border-radius: 30% 70% 85% 55% / 12% 20% 72% 82%;
 }
 
+/* Right curtain — mirrored smooth cascade */
 .corpse__item--full[data-theme="design"] .full-corpse .hair__side--r {
-    background: linear-gradient(to bottom left,
-        #a07428 0%, #8a6218 30%, #7a5214 60%, rgba(90,60,10,0.2) 100%);
-    clip-path: polygon(
-        30%  0%,  76%  2%,  94% 16%,
-        98%  34%,  95% 56%,  84% 78%,
-        64%  92%,  40% 100%,  16%  94%,
-        5%   76%,  2%  52%,   7%  28%
-    );
+    background:
+        linear-gradient(255deg,
+            transparent 0%, transparent 55%,
+            rgba(240,205,128,0.22) 68%, transparent 82%),
+        linear-gradient(200deg,
+            #a07428 0%, #8a6218 26%,
+            #7a5214 56%, #6a4410 82%,
+            rgba(90,60,10,0.15) 100%);
+    clip-path: none;
+    border-radius: 70% 30% 55% 85% / 20% 12% 82% 72%;
 }
 
 /* ── Ears: warm skin-tone, remove green tragus tint ── */

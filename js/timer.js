@@ -34,6 +34,7 @@ function stopTimer() {
     timerInterval = null;
     if (timerOverlay) timerOverlay.classList.remove('active', 'alarm');
     document.documentElement.classList.remove('scroll-locked');
+    document.documentElement.classList.remove('timer-active');
     timerActive = false;
     timerSeconds = 30;
     if (timerDisplay) timerDisplay.textContent = '30';
@@ -56,6 +57,7 @@ function startTimer() {
         timerOverlay.classList.remove('alarm');
     }
     document.documentElement.classList.add('scroll-locked');
+    document.documentElement.classList.add('timer-active');
     fabActivate();
 
     // Start sounds

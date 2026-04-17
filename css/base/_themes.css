@@ -180,12 +180,12 @@
     --head-skin-dark:   #9a5535;
     --head-skin-shadow: #7a3820;
 
-    /* ── Eyes: warm brown / hazel ── */
-    --iris-green:      #8B5E3C;
-    --iris-dark:       #5C3D28;
-    --eye-glow:        rgba(139,94,60,0.12);
-    --eye-glow-mid:    rgba(139,94,60,0.06);
-    --eye-glow-outer:  rgba(139,94,60,0.03);
+    /* ── Eyes: natural hazel-green ── */
+    --iris-green:      #5E8A4A;
+    --iris-dark:       #365A28;
+    --eye-glow:        rgba(94,138,74,0.18);
+    --eye-glow-mid:    rgba(94,138,74,0.09);
+    --eye-glow-outer:  rgba(94,138,74,0.04);
     --sclera-c1:       #f8f4f0;
     --sclera-c2:       #f0ece4;
     --sclera-c3:       #e8e0d8;
@@ -259,11 +259,11 @@
     /* ── Remove lizard scale texture ── */
     --scale-tile: linear-gradient(transparent, transparent);
 
-    /* ── Iris: warm brown ── */
-    --iris-bright: #d4944a;
-    --iris-mid:    #6b3e20;
-    --iris-deep:   #3d2210;
-    --iris-abyss:  #1e0e06;
+    /* ── Iris: natural hazel-green gradient ── */
+    --iris-bright: #a4c478;
+    --iris-mid:    #587a38;
+    --iris-deep:   #304a1c;
+    --iris-abyss:  #12200a;
     --mouth-bg:    #080008;
 }
 
