@@ -13,7 +13,7 @@
 
     var currentSlide = 0;
     var isScrolling = false;
-    var SCROLL_COOLDOWN = 850;
+    var SCROLL_COOLDOWN = 1000;
 
     function goToSlide(index) {
         if (index < 0 || index >= slides.length) return;
@@ -33,16 +33,28 @@
 
     /* ── IntersectionObserver — track current slide for nav dots ── */
     var observer = new IntersectionObserver(function (entries) {
+        // Find the slide that is most visible
+        var mostVisible = null;
+        var maxRatio = 0;
+
         entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                var idx = slides.indexOf(entry.target);
-                if (idx !== -1 && !isScrolling) {
-                    currentSlide = idx;
-                    window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: idx } }));
-                }
+            if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                maxRatio = entry.intersectionRatio;
+                mostVisible = entry.target;
             }
         });
-    }, { threshold: 0.3 });
+
+        if (mostVisible && !isScrolling) {
+            var idx = slides.indexOf(mostVisible);
+            if (idx !== -1 && idx !== currentSlide) {
+                currentSlide = idx;
+                window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: idx } }));
+            }
+        }
+    }, { 
+        threshold: [0.5],
+        rootMargin: "-10% 0px -10% 0px" // Better for mobile chrome UI changes
+    });
 
     slides.forEach(function (slide) {
         observer.observe(slide);
