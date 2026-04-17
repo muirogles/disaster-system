@@ -662,6 +662,7 @@
    ===================================================== */
 .intro__scroll-hint {
     position: absolute;
+    top: calc(100% + 1.5vh); /* fallback */
     top: calc(100% + 1.5dvh);
     display: flex;
     flex-direction: column;

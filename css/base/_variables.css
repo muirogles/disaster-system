@@ -142,7 +142,9 @@
     /* ─── Trunk ─── */
     --trunk-width: 30%;
     --trunk-height: auto;
+    --trunk-min-height: 40vh;
     --trunk-min-height: 40dvh;
+    --trunk-max-height: 80vh;
     --trunk-max-height: 80dvh;
     --trunk-aspect-ratio: 1/2;
     --trunk-collar-width: 40%;
@@ -203,6 +205,7 @@
 
     /* ─── Legs ─── */
     --legs-width: 100%;
+    --legs-height: 90vh;
     --legs-height: 90dvh;
     --leg-width: 12%;
     --leg-height: 100%;
@@ -254,6 +257,7 @@
     --pubis-height: 20%;
     
     /* corpse */
+    --corpse-padding-block: 8vh;
     --corpse-padding-block: 8dvh;
 
     /* =====================================================

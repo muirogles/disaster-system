@@ -73,6 +73,7 @@
 }
 
 .fc-part:nth-child(2) {
+    height: 80vh; /* fallback */
     height: 80dvh;
     z-index: 2;
 }
@@ -1338,6 +1339,7 @@ a.closing__tool-name:hover::before {
 }
 
 .corpse__header-content {
+    max-height: calc(100vh - ((var(--corpse-padding-block) * 2) + (clamp(1.4rem, 2.8vw, 2.6rem) + 1.9em))); /* fallback */
     max-height: calc(100dvh - ((var(--corpse-padding-block) * 2) + (clamp(1.4rem, 2.8vw, 2.6rem) + 1.9em)));
     display: flex;
     flex-direction: column;
