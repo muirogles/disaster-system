@@ -19,14 +19,14 @@
     "intro.rules.btn.close": "Close instructions",
     "intro.rules.close": "Close",
     "intro.rule.1": "Volunteers draw each body part blindly in 3 turns",
-    "intro.rule.2": "30 s per turn — press the timer to start",
+    "intro.rule.2": "30s per turn — press the timer to start",
     "intro.rule.3": "Fold the paper and pass it to the next volunteer without looking",
     "intro.rule.4": "Is the result a Design System or a Disaster System?",
     "hint.head": "Press the brain, eyes, ears or mouth",
-    "hint.trunk": "Press the torso, heart, arms or hands",
+    "hint.trunk": "Press the trunk, heart, arms or hands",
     "hint.legs": "Press the legs, feet or tail",
-    "slide4.state.disaster": "// state: DISASTER",
-    "slide4.state.design": "// status: DESIGN_SYSTEM",
+    "slide4.state.disaster": "DISASTER_SYSTEM = failed",
+    "slide4.state.design": "DESIGN_SYSTEM = success",
     "slide4.title.pre": "This is a",
     "slide4.subtitle.1": "// TypeError: design.tokens → undefined",
     "slide4.subtitle.2": "How do we turn it into a system?",
@@ -36,20 +36,20 @@
     "cta.phi.title": "With technic <span class=\"highlight\">empathy</span>",
     "cta.phi.text": "Not a Figma deliverable. It's a <strong>social contract</strong> between design, development and product.",
     "closing.title": "Create <span class=\"highlight\">systems</span><br>with soul",
-    "closing.p1": "The difference between a <strong>Design System</strong> and a <strong>Disaster System</strong> is not in the tools. It is in whether the team treats it as a <strong>product with an owner</strong> or a project that \"gets finished\".",
+    "closing.p1": "Like any living body, it needs <strong>constant care</strong> — <em>communication, documentation and periodic reviews</em> — to avoid becoming another corpse.",
     "closing.p2": "<strong>Don't work blindly</strong>. Create systems with soul and, above all... <strong class=\"highlight\">talk to each other</strong>.",
     "closing.tools.section.label": "Tools:",
-    "closing.tools.brain": "Brain — Design Tokens",
-    "closing.tools.eyes": "Eyes — Visual Accessibility",
-    "closing.tools.ears": "Ears — Semantics & Screen Readers",
-    "closing.tools.mouth": "Mouth — Internationalization",
-    "closing.tools.heart": "Heart — Living Components",
-    "closing.tools.torso": "Torso — CSS Architecture",
-    "closing.tools.arms": "Arms — Z-index & Layers",
-    "closing.tools.hands": "Hands — Touch & Events",
-    "closing.tools.legs": "Legs — Responsive",
-    "closing.tools.feet": "Feet — Scalable Foundation",
-    "closing.tools.tail": "Tail — Legacy & Technical Debt",
+    "closing.tools.brain": "🧠 Brain",
+    "closing.tools.eyes": "👁️ Eyes",
+    "closing.tools.ears": "👂 Ears",
+    "closing.tools.mouth": "👄 Mouth",
+    "closing.tools.heart": "❤️ Heart",
+    "closing.tools.trunk": "🦴 Trunk",
+    "closing.tools.arms": "💪 Arms",
+    "closing.tools.hands": "🤚 Hands",
+    "closing.tools.legs": "🦿 Legs",
+    "closing.tools.feet": "🦶 Feet",
+    "closing.tools.tail": "🦎 Tail",
     "closing.tool.tokens-studio.desc": "Synchronized design token management between Figma and code.",
     "closing.tool.style-dictionary.desc": "Automated token generation for multiple platforms.",
     "closing.tool.axe-devtools.desc": "Automated accessibility audit in the browser.",
@@ -87,8 +87,8 @@
     "modal.content": {
         "brain": {
             "title": "🧠 Brain",
-            "subtitle": "Design Tokens without neurons",
-            "concept": "Logic, consistency and “single source of truth”.",
+            "subtitle": "Design tokens without neurons",
+            "concept": "Without neurons, impulses don't connect. Tokens are the system's synapses: an agreement, not a hex.",
             "errors": [
                 {
                     "error": "No naming strategy",
@@ -136,8 +136,8 @@
         },
         "eyes": {
             "title": "👁️ Eyes",
-            "subtitle": "Myopia and blindness in the interface",
-            "concept": "Visual accessibility and sharpness. How the user perceives the product.",
+            "subtitle": "Interface myopia",
+            "concept": "Myopia: the interface can't see what the user needs. Contrast, focus and sharpness are the correction.",
             "errors": [
                 {
                     "error": "Insufficient color contrast",
@@ -180,10 +180,6 @@
                 {
                     "name": "Stark (Figma)",
                     "desc": "Contrast verification and color blindness simulation in design."
-                },
-                {
-                    "name": "Lighthouse",
-                    "desc": "Integrated performance, accessibility and SEO audit in Chrome."
                 }
             ]
         },
@@ -234,8 +230,8 @@
         },
         "mouth": {
             "title": "👄 Mouth",
-            "subtitle": "Storytelling and internationalization",
-            "concept": "Language switching. Communication. Dictionary strategy / dynamic content.",
+            "subtitle": "Content aphasia",
+            "concept": "Aphasia cuts communication. Without flexible design for other languages, the system loses its voice.",
             "errors": [
                 {
                     "error": "Text overflows fixed containers",
@@ -314,10 +310,10 @@
                 }
             ]
         },
-        "torso": {
-            "title": "🦴 Torso",
-            "subtitle": "Component scoliosis",
-            "concept": "Bent architecture, the core that keeps our organs inside.",
+        "trunk": {
+            "title": "🦴 Trunk",
+            "subtitle": "Inflexible Framework",
+            "concept": "A pressure-welded structure where nothing fits by design.",
             "errors": [
                 {
                     "error": "Negative margins as a solution",
@@ -349,8 +345,8 @@
         },
         "arms": {
             "title": "💪 Arms",
-            "subtitle": "Z-index chaos",
-            "concept": "The force that moves the system into the real world.",
+            "subtitle": "Failed Reach",
+            "concept": "Floating pieces without connection; these arms reach for nothing as the layout collapses.",
             "errors": [
                 {
                     "error": "Inconsistent z-index",
@@ -382,8 +378,8 @@
         },
         "hands": {
             "title": "🤚 Hands",
-            "subtitle": "Touch problems",
-            "concept": "Touch — the interface between the user and the product.",
+            "subtitle": "Hands of Tin",
+            "concept": "Clumsy and rigid, these hands cannot feel what they touch. The interface remains unresponsive when the user clicks.",
             "errors": [
                 {
                     "error": "Tiny touch targets",
@@ -423,8 +419,8 @@
         },
         "legs": {
             "title": "🦿 Legs",
-            "subtitle": "Non-existent flexibility",
-            "concept": "Scalability and flexibility. Responsive, flexible measurements, minimum and maximum sizes.",
+            "subtitle": "Static Limbs",
+            "concept": "Rigidity prevents all progress; responsive design isn't about stitched patches, it's about native fluidity.",
             "errors": [
                 {
                     "error": "Fixed sizes",
@@ -472,8 +468,8 @@
         },
         "feet": {
             "title": "🦶 Feet",
-            "subtitle": "Scalable product foundation",
-            "concept": "A non-scalable design in the long term is slower and more costly to adapt to new markets.",
+            "subtitle": "Unstable Footing",
+            "concept": "Claws should ground the system; without a pipeline and audits, every release loses its grip.",
             "errors": [
                 {
                     "error": "Non-modular methodology",
@@ -514,12 +510,8 @@
                     "desc": "Isolated component documentation and development."
                 },
                 {
-                    "name": "Stylelint",
-                    "desc": "CSS linter to maintain conventions and detect errors."
-                },
-                {
-                    "name": "BEM Linter",
-                    "desc": "BEM naming convention validation in stylesheets."
+                    "name": "Lighthouse",
+                    "desc": "Integrated performance, accessibility and SEO audit in Chrome."
                 }
             ]
         },
@@ -561,16 +553,13 @@
                 {
                     "name": "Knip",
                     "desc": "Detection of dead code, unused exports and orphan dependencies."
-                },
-                {
-                    "name": "Depcheck",
-                    "desc": "Detection of unused dependencies in the project."
                 }
             ]
         }
     },
-    "slide4.subtitle.post.1": "Like any living body, it needs <strong>constant care</strong> — <em>communication, documentation and periodic reviews</em> — to avoid becoming another corpse.",
-    "slide4.subtitle.post.2": "// system.online() → OK\nnow keep it alive →",
+    "slide4.subtitle.post.1": "// system.online() →",
+    "slide4.subtitle.post.2": "Share your exquisite corpse and prove whether it is a Design System or a Disaster System.",
+    "slide4.scroll.hint": "↓ continue to closing",
     "visual.demo.tokens.error": "Hardcoded hex",
     "visual.demo.tokens.solution": "Semantic tokens",
     "visual.demo.themes.error": "Broken themes",
@@ -690,7 +679,7 @@
     "visual.demo.naming.label.error": "3 teams, 3 different names",
     "visual.demo.naming.label.solution": "1 name in the DS ✓",
     "visual.demo.overlap.label.error": "Button floats and covers text",
-    "visual.demo.overlap.label.solution": "Grid layout, no overlap ✓",
+    "visual.demo.overlap.label.solution": "Layout no overlap ✓",
     "visual.demo.pointerevents.label.error": "Click doesn't reach button",
     "visual.demo.pointerevents.label.solution": "pointer-events: none ✓",
     "visual.demo.viewport.label.error": "100vh hides keyboard/nav",

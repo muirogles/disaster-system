@@ -73,7 +73,7 @@
 }
 
 .timer__display {
-    font-size: clamp(6rem, 20vw, 16rem);
+    font-size: clamp(6rem, 30vw, 20rem);
     font-weight: 900;
     color: #ff4444;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
@@ -90,9 +90,8 @@
 
 .timer__label {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.8rem, 1.6vw, 1.15rem);
+    font-size: clamp(1rem, 2.125vw, 2rem);
     color: rgba(255, 68, 68, 0.5);
-    margin-top: 0.25em;
     text-transform: none;
     letter-spacing: 0.2em;
     z-index: 2;

@@ -5,12 +5,7 @@
 .corpse__item--full {
     position: relative;
     justify-content: flex-start !important;
-    overflow-y: auto;
-    overflow-x: hidden;
-    /* Allow this slide to grow beyond 100dvh for closing section */
-    height: auto !important;
-    min-height: 100vh; /* fallback */
-    min-height: 100dvh;
+    overflow: hidden;
 
     @media (orientation: portrait) {
         align-items: flex-start;
@@ -26,25 +21,22 @@
             right: 1.5rem;
             bottom: 1.5rem;
             top: auto;
-            max-height: calc(100dvh - 3rem);
-            overflow-x: hidden;
-            overflow-y: auto;
         }
     }
 }
 
 /* Zoom-scale so 3 x 100dvh sections fit in one viewport */
 .full-corpse {
-    zoom: 0.31;
+    zoom: 0.30;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
 }
 
-@supports not (zoom: 0.31) {
+@supports not (zoom: 0.30) {
     .full-corpse {
-        transform: scale(0.31);
+        transform: scale(0.30);
         transform-origin: top center;
     }
 }
@@ -384,6 +376,10 @@
         opacity 1.8s ease,
         clip-path 1.8s ease,
         filter 1.8s ease;
+}
+
+.corpse__item--full .full-corpse .legs {
+    overflow: visible;
 }
 
 /* =====================================================
@@ -791,9 +787,9 @@
    ===================================================== */
 .closing {
     width: 100%;
-    max-width: min(90vw, 1200px);
-    margin: clamp(2rem, 6vh, 5rem) auto 0;
-    padding: clamp(2rem, 5vw, 4rem);
+    max-width: 1248px;
+    margin: clamp(1.5rem, 6vh, 4rem) auto 0;
+    padding: clamp(1.5rem, 5vw, 4rem);
     text-align: center;
 }
 
@@ -835,7 +831,7 @@
 
 .closing__intro {
     font-size: clamp(0.95rem, 1.55vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.65);
     max-width: min(90%, 680px);
     margin: clamp(0.8rem, 2vh, 1.5rem) auto clamp(1rem, 2vh, 1.6rem);
     line-height: 1.78;
@@ -843,7 +839,7 @@
     background: rgba(255,255,255,0.018);
     border: 1px solid rgba(255,255,255,0.05);
     border-left: 2px solid rgba(155,93,229,0.25);
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
     text-align: left;
 }
 
@@ -900,9 +896,9 @@
 
 /* Compact terminal token card */
 .closing__group {
-    background: rgba(0,0,0,0.25);
-    border: 1px solid rgba(155,93,229,0.1);
-    border-left: 2px solid rgba(155,93,229,0.22);
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(155,93,229,0.15);
+    border-left: 2px solid rgba(155,93,229,0.35);
     border-radius: 0 8px 8px 0;
     padding: clamp(0.65rem, 1.2vw, 1rem);
     transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
@@ -910,27 +906,28 @@
 }
 
 .closing__group:hover {
-    border-left-color: rgba(155,93,229,0.5);
-    background: rgba(155,93,229,0.04);
-    box-shadow: 0 0 16px rgba(155,93,229,0.04);
+    border-left-color: rgba(155,93,229,0.65);
+    background: rgba(155,93,229,0.06);
+    box-shadow: 0 0 16px rgba(155,93,229,0.06);
 }
 
 /* Group title — code comment style */
 .closing__group-title {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.55rem, 0.8vw, 0.68rem);
-    font-weight: 400;
-    color: rgba(155,93,229,0.5);
+    font-size: clamp(0.75rem, 1.1vw, 1.25rem);
+    font-weight: 700;
+    color: var(--color-purple);
     margin: 0 0 0.55em;
     padding-bottom: 0.3em;
-    border-bottom: 1px solid rgba(155,93,229,0.1);
+    border-bottom: 1px solid rgba(155,93,229,0.15);
     text-transform: none;
     letter-spacing: 0.04em;
 }
 
 .closing__group-title::before {
     content: '// ';
-    color: rgba(155,93,229,0.35);
+    color: rgba(155,93,229,0.55);
+    font-weight: 400;
 }
 
 .closing__group-tools {
@@ -945,14 +942,14 @@
 
 .closing__tool-name {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.62rem, 0.9vw, 0.78rem);
+    font-size: clamp(1rem, 0.9vw, 1.125rem);
     font-weight: 600;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.92);
 }
 
 .closing__tool-desc {
-    font-size: clamp(0.6rem, 0.88vw, 0.75rem);
-    color: rgba(255,255,255,0.3);
+    font-size: clamp(0.875rem, 0.88vw, 1rem);
+    color: rgba(255,255,255,0.68);
     line-height: 1.4;
 }
 
@@ -969,18 +966,18 @@ a.closing__tool-name {
 a.closing__tool-name::before {
     content: '→';
     font-size: 0.8em;
-    color: rgba(155,93,229,0.35);
+    color: rgba(155,93,229,0.6);
     transition: color 0.2s, transform 0.2s;
     flex-shrink: 0;
 }
 
 a.closing__tool-name:hover {
-    color: rgba(196,160,245,0.9);
-    background: rgba(155,93,229,0.08);
+    color: white;
+    background: rgba(155,93,229,0.12);
 }
 
 a.closing__tool-name:hover::before {
-    color: rgba(155,93,229,0.7);
+    color: rgba(155,93,229,0.9);
     transform: translateX(2px);
 }
 
@@ -992,7 +989,7 @@ a.closing__tool-name:hover::before {
     background: rgba(0,0,0,0.2);
     border: 1px solid rgba(255,255,255,0.04);
     border-left: 2px solid rgba(155,93,229,0.3);
-    border-radius: 0 12px 12px 0;
+    border-radius: 0 0.75rem 0.75rem 0;
 }
 
 .closing__message-title {
@@ -1003,8 +1000,8 @@ a.closing__tool-name:hover::before {
 }
 
 .closing__message-text {
-    font-size: clamp(0.85rem, 1.4vw, 1.1rem);
-    color: rgba(255,255,255,0.5);
+    font-size: clamp(0.875rem, 1.4vw, 1.125rem);
+    color: rgba(255,255,255,0.6);
     line-height: 1.65;
     margin: 0 0 0.8em;
 }
@@ -1040,7 +1037,7 @@ a.closing__tool-name:hover::before {
         rgba(8, 6, 18, 0.75);
     border: 1px solid rgba(155,93,229,0.18);
     border-left: 3px solid rgba(155,93,229,0.45);
-    border-radius: 0 16px 16px 0;
+    border-radius: 0 1rem 1rem 0;
     padding: calc(clamp(1.8rem, 3.5vw, 3rem) + 1.9em) clamp(2rem, 4vw, 3.5rem) clamp(1.8rem, 3.5vw, 3rem);
     max-width: 760px;
     margin: 0 auto;
@@ -1105,8 +1102,8 @@ a.closing__tool-name:hover::before {
 }
 
 .closing__cta-text {
-    font-size: clamp(0.85rem, 1.3vw, 1.05rem);
-    color: rgba(255,255,255,0.45);
+    font-size: clamp(0.875rem, 1.3vw, 1rem);
+    color: rgba(255,255,255,0.55);
     line-height: 1.65;
     margin: 0;
 }
@@ -1138,7 +1135,7 @@ a.closing__tool-name:hover::before {
     background: rgba(0, 119, 181, 0.06);
     border: 1px solid rgba(0, 119, 181, 0.22);
     border-left: 3px solid rgba(0, 119, 181, 0.55);
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
     text-transform: none;
     letter-spacing: 0.02em;
@@ -1241,10 +1238,10 @@ a.closing__tool-name:hover::before {
 .closing__social-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.45em;
+    gap: 0.5em;
     text-decoration: none;
-    color: rgba(255,255,255,0.35);
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    color: rgba(255,255,255,0.5);
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
     font-weight: 500;
     padding: 0.35em 0.75em;
     border: 1px solid rgba(255,255,255,0.07);
@@ -1284,12 +1281,12 @@ a.closing__tool-name:hover::before {
     align-items: flex-start;
     gap: 0.6vmax;
     position: absolute;
-    left: calc(50% + (var(--trunk-width) / 2) + 2.5vw);
-    top: 8%;
-    max-width: clamp(240px, 30vw, 460px);
+    top: var(--corpse-padding-block);
+    max-width: clamp(15rem, 30vw, 28.75rem);
     /* Extra top padding for terminal title bar */
     padding: calc(clamp(1.4rem, 2.8vw, 2.6rem) + 1.9em) clamp(1.2rem, 2.2vw, 2.2rem) clamp(1.4rem, 2.8vw, 2.6rem);
     overflow: hidden;
+    right: calc(clamp(1.75rem, 2.5vw, 2.75rem) + 3rem);
 
     /* Terminal window card — DISASTER (red) */
     background:
@@ -1304,9 +1301,9 @@ a.closing__tool-name:hover::before {
             rgba(14, 0, 3, 0.92) 0%,
             rgba(8, 0, 2, 0.96) 100%);
     border: 1px solid rgba(255, 68, 68, 0.35);
-    border-radius: 10px;
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(1.75rem);
+    -webkit-backdrop-filter: blur(1.75rem);
 
     box-shadow:
         0 0 30px rgba(255, 68, 68, 0.08),
@@ -1318,6 +1315,15 @@ a.closing__tool-name:hover::before {
         headerReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both,
         headerGlow 6s ease-in-out 1.5s infinite;
     z-index: 10;
+}
+
+.corpse__header-content {
+    max-height: calc(100dvh - ((var(--corpse-padding-block) * 2) + (clamp(1.4rem, 2.8vw, 2.6rem) + 1.9em)));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5vmax;
+    overflow-x: hidden;
 }
 
 /* Terminal title bar — DISASTER state */
@@ -1683,6 +1689,62 @@ a.closing__tool-name:hover::before {
 }
 
 /* =====================================================
+   DESIGN STATE — compact spacing after reanimate
+   ===================================================== */
+[data-theme="design"] .corpse__header {
+    padding: calc(clamp(1rem, 2vw, 1.8rem) + 1.9em) clamp(1rem, 1.8vw, 1.8rem) clamp(1rem, 2vw, 1.8rem);
+}
+
+[data-theme="design"] .corpse__header-content {
+    gap: 0.3vmax;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 220, 80, 0.2) transparent;
+}
+
+/* =====================================================
+   HEADER SCROLL HINT — visible after reanimate
+   ===================================================== */
+.corpse__header-scroll-hint {
+    display: none;
+    align-items: center;
+    gap: 0.5em;
+    width: 100%;
+    padding: 0.5em 0.75em;
+    background: rgba(0, 220, 80, 0.04);
+    border: 1px dashed rgba(0, 220, 80, 0.28);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.88vw, 0.75rem);
+    color: rgba(0, 200, 80, 0.65);
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    animation: scrollHintPulse 2.5s ease-in-out 0.4s infinite;
+}
+
+.corpse__header-scroll-hint.is-visible {
+    display: flex;
+}
+
+.corpse__header-scroll-hint:hover {
+    background: rgba(0, 220, 80, 0.09);
+    border-color: rgba(0, 220, 80, 0.5);
+    color: rgba(0, 255, 85, 0.92);
+    animation: none;
+}
+
+.corpse__header-scroll-hint__label::before {
+    content: '$ ';
+    color: rgba(0, 200, 80, 0.35);
+}
+
+@keyframes scrollHintPulse {
+    0%, 100% { opacity: 0.65; }
+    50%       { opacity: 1; }
+}
+
+/* =====================================================
    HEADER PHILOSOPHY — concept bridge, visible after reanimate
    ===================================================== */
 .corpse__header-philosophy {
@@ -1839,8 +1901,7 @@ a.closing__tool-name:hover::before {
 }
 
 .btn-reanimate--share::after {
-    content: '↗';
-    color: rgba(90, 173, 219, 0.7);
+    content: none;
 }
 
 .btn-reanimate--share .btn-reanimate__bolt {

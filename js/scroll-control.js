@@ -31,73 +31,7 @@
         }, SCROLL_COOLDOWN);
     }
 
-    function onWheel(e) {
-        if (document.documentElement.classList.contains('scroll-locked')) return;
-
-        e.preventDefault();
-
-        if (isScrolling) return;
-
-        if (e.deltaY > 0) {
-            goToSlide(currentSlide + 1);
-        } else if (e.deltaY < 0) {
-            goToSlide(currentSlide - 1);
-        }
-    }
-
-    var touchStartY = 0;
-    var touchStartTime = 0;
-    var SWIPE_THRESHOLD = 50;
-
-    function onTouchStart(e) {
-        if (document.documentElement.classList.contains('scroll-locked')) return;
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
-    }
-
-    function onTouchEnd(e) {
-        if (document.documentElement.classList.contains('scroll-locked')) return;
-        if (isScrolling) return;
-
-        var deltaY = touchStartY - e.changedTouches[0].clientY;
-        var deltaTime = Date.now() - touchStartTime;
-
-        if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
-        if (deltaTime > 800) return;
-
-        if (deltaY > 0) {
-            goToSlide(currentSlide + 1);
-        } else {
-            goToSlide(currentSlide - 1);
-        }
-    }
-
-    function onKeydown(e) {
-        if (document.documentElement.classList.contains('scroll-locked')) return;
-
-        switch (e.key) {
-            case 'ArrowDown':
-            case 'PageDown':
-            case ' ':
-                e.preventDefault();
-                goToSlide(currentSlide + 1);
-                break;
-            case 'ArrowUp':
-            case 'PageUp':
-                e.preventDefault();
-                goToSlide(currentSlide - 1);
-                break;
-            case 'Home':
-                e.preventDefault();
-                goToSlide(0);
-                break;
-            case 'End':
-                e.preventDefault();
-                goToSlide(slides.length - 1);
-                break;
-        }
-    }
-
+    /* ── IntersectionObserver — track current slide for nav dots ── */
     var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -108,16 +42,11 @@
                 }
             }
         });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.3 });
 
     slides.forEach(function (slide) {
         observer.observe(slide);
     });
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchend', onTouchEnd, { passive: true });
-    document.addEventListener('keydown', onKeydown);
 
     window.scrollControl = {
         goToSlide: goToSlide,

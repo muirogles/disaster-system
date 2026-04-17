@@ -41,16 +41,19 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </button>
         <button class="slide-nav__dot" data-slide="1" aria-label="Head">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="10" r="7"/><path d="M8 17v1a4 4 0 0 0 8 0v-1"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 0-8 3.6-8 8 0 3.2 1.8 6 4.5 7.2L9 21h6l.5-2.8c2.7-1.2 4.5-4 4.5-7.2 0-4.4-3.6-8-8-8z"/><path d="M10 11h4"/></svg>
         </button>
         <button class="slide-nav__dot" data-slide="2" aria-label="Trunk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 3H6l-2 7h5l-1 11h8l-1-11h5L18 3z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3L5 10v11h14V10l-2-7H7z"/><path d="M12 3v18"/></svg>
         </button>
         <button class="slide-nav__dot" data-slide="3" aria-label="Legs">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2v10.5l-3 3V22M14 2v10.5l3 3V22"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3L8 21h3V12h2v9h3L15 3H9z"/></svg>
         </button>
         <button class="slide-nav__dot" data-slide="4" aria-label="Full corpse">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12h8M10 22l2-6 2 6"/></svg>
+        </button>
+        <button class="slide-nav__dot" data-slide="5" aria-label="Closing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
         </button>
     </nav>
 
@@ -96,7 +99,8 @@
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal__header">
             <button class="modal__close" id="modalClose" aria-label="Cerrar panel"
-                data-i18n-aria="modal.close.aria">&times;</button>
+                data-i18n-aria="modal.close.aria">
+            </button>
             <h2 class="modal__title" id="modalTitle"></h2>
             <p class="modal__subtitle" id="modalSubtitle"></p>
             <p class="modal__concept" id="modalConcept"></p>
@@ -108,6 +112,15 @@
     <nav class="lang-control" aria-label="Language and theme controls">
         <button class="lang-btn" id="langBtn" data-i18n="lang.btn.text" data-i18n-title="lang.btn.title"
             data-i18n-aria="lang.btn.aria">EN</button>
+        <button class="qr-btn" id="qrBtn" type="button" aria-label="Share QR code" title="Share QR">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/>
+                <line x1="21" y1="14" x2="21" y2="14.01"/><line x1="21" y1="21" x2="21" y2="21.01"/>
+                <line x1="17" y1="21" x2="17" y2="21.01"/><line x1="21" y1="17" x2="21" y2="17.01"/>
+            </svg>
+        </button>
 
         <!-- TODO: config light theme -->
         <!-- <button class="theme-fab" id="themeBtn" type="button"
@@ -146,7 +159,7 @@
             <span class="intro__deco intro__deco--3" aria-hidden="true">&lt;Button /&gt;</span>
             <span class="intro__deco intro__deco--4" aria-hidden="true">grid</span>
             <span class="intro__deco intro__deco--5" aria-hidden="true">!important</span>
-            <span class="intro__deco intro__deco--6" aria-hidden="true">z:9999</span>
+            <span class="intro__deco intro__deco--6" aria-hidden="true">z-index:9999</span>
             <span class="intro__deco intro__deco--7" aria-hidden="true">a11y</span>
             <span class="intro__deco intro__deco--8" aria-hidden="true">rem</span>
 
@@ -281,14 +294,14 @@
 
         <!-- ===== SLIDE 2: TRUNK ===== -->
         <section class="corpse__item corpse__item--middle" data-i18n-aria="corpse.middle">
-            <h2 class="sr-only">Torso, Arms & Hands</h2>
+            <h2 class="sr-only">Trunk, Arms & Hands</h2>
             <div class="part-hint" aria-hidden="true">
                 <span class="part-hint__cursor">👆</span>
                 <span data-i18n="hint.trunk">Toca cada parte del tronco o los brazos para explorar</span>
             </div>
             <div class="trunk">
                 <!-- TORSO -->
-                <div class="trunk__body" data-part="torso">
+                <div class="trunk__body" data-part="trunk">
                     <div class="trunk__collar"></div>
                     <div class="trunk__chest">
                         <div class="heart-window" data-part="heart">
@@ -646,55 +659,58 @@
             </div>
 
             <header class="corpse__header">
-                <div class="corpse__header-badge">
-                    <span class="corpse__header-dot"></span>
-                    <span id="corpseHeaderState" data-i18n="slide4.state">// estado: DISASTER</span>
-                </div>
-                <!-- Philosophy — visible only after data-theme="design" -->
-                <div class="corpse__header-philosophy" aria-hidden="true">
-                    <p class="corpse__header-philosophy-title" data-i18n-html="cta.phi.title">Con <span class="highlight">Empatía</span> Técnica</p>
-                    <p class="corpse__header-philosophy-text" data-i18n-html="ct.phi.text">No es un entregable de
-                        Figma. Es un <strong>contrato social</strong> entre diseño, desarrollo y producto.</p>
-                </div>
-                <div class="corpse__header-divider corpse__header-divider--philosophy" aria-hidden="true"><span>◆</span>
-                </div>
-                <h2 class="corpse__title corpse__title--disaster" id="full-corpse-title">
-                    <span class="dd">Disaster</span><span class="corpse__title--system">System</span>
-                </h2>
-                <div class="corpse__header-divider" aria-hidden="true"><span>◆</span></div>
-
-                <p class="corpse__subtitle" id="slide4Subtitle">
-                    <span data-i18n="slide4.subtitle.1">Si el desastre es inevitable,</span><br>
-                    <span class="corpse__subtitle-em" data-i18n="slide4.subtitle.2">¿Cómo lo convertimos en
-                        sistema?</span>
-                </p>
-
-                <button class="btn-reanimate" id="btnReanimate">
-                    <span class="btn-reanimate__bolt">⚡</span>
-                    <span class="btn-reanimate__label" data-i18n="slide4.btn">Pulsa para darle vida</span>
-                </button>
-
-                <!-- CTA: visible only after data-theme="design" via .is-visible -->
-                <div class="corpse__header-cta" aria-hidden="true">
-                    <p class="corpse__header-cta-label" data-i18n="closing.hashtags.label">Etiquétanos con los hashtags:
-                    </p>
-                    <p class="corpse__header-hashtags">
-                        <span class="corpse__header-hashtag">#DisasterSystem</span>
-                        <span class="corpse__header-hashtag">#DesignSystem</span>
-                        <span class="corpse__header-hashtag">#WTMMadrid</span>
-                        <span class="corpse__header-hashtag">#IWD2026</span>
-                        <span class="corpse__header-hashtag">#BreakThePattern</span>
-                        <span class="corpse__header-hashtag">#BuildWithIA</span>
-                        <span class="corpse__header-hashtag">#CareerGrowth</span>
-                        <span class="corpse__header-hashtag">#WomenInTech</span>
-                        <span class="corpse__header-hashtag">#GDGMadrid</span>
-                    </p>
-                    <div class="corpse__header-authors">
-                        <a class="corpse__header-author-link" href="https://linkedin.com/in/mariarogles" target="_blank"
-                            rel="noopener">/mariarogles</a>
-                        <a class="corpse__header-author-link" href="https://linkedin.com/in/wtmmadrid" target="_blank"
-                            rel="noopener">/wtmmadrid</a>
+                <div class="corpse__header-content">
+                    <div class="corpse__header-badge">
+                        <span class="corpse__header-dot"></span>
+                        <span id="corpseHeaderState" data-i18n="slide4.state">DISASTER_SYSTEM = failed</span>
                     </div>
+                    <!-- Philosophy — visible only after data-theme="design" -->
+                    <div class="corpse__header-philosophy" aria-hidden="true">
+                        <p class="corpse__header-philosophy-title" data-i18n-html="cta.phi.title">Con <span class="highlight">Empatía</span> Técnica</p>
+                        <p class="corpse__header-philosophy-text" data-i18n-html="ct.phi.text">No es un entregable de
+                            Figma. Es un <strong>contrato social</strong> entre diseño, desarrollo y producto.</p>
+                    </div>
+                    <div class="corpse__header-divider corpse__header-divider--philosophy" aria-hidden="true"><span>◆</span>
+                    </div>
+                    <h2 class="corpse__title corpse__title--disaster" id="full-corpse-title">
+                        <span class="dd">Disaster</span><span class="corpse__title--system">System</span>
+                    </h2>
+                    <div class="corpse__header-divider" aria-hidden="true"><span>◆</span></div>
+    
+                    <p class="corpse__subtitle" id="slide4Subtitle">
+                        <span data-i18n="slide4.subtitle.1">Si el desastre es inevitable,</span><br>
+                        <span class="corpse__subtitle-em" data-i18n="slide4.subtitle.2">¿Cómo lo convertimos en
+                            sistema?</span>
+                    </p>
+    
+                    <button class="btn-reanimate" id="btnReanimate">
+                        <span class="btn-reanimate__bolt">⚡</span>
+                        <span class="btn-reanimate__label" data-i18n="slide4.btn">Pulsa para darle vida</span>
+                    </button>
+    
+                    <!-- CTA: visible only after data-theme="design" via .is-visible -->
+                    <div class="corpse__header-cta" aria-hidden="true">
+                        <p class="corpse__header-cta-label" data-i18n="closing.hashtags.label">Etiquétanos con los hashtags:
+                        </p>
+                        <p class="corpse__header-hashtags">
+                            <span class="corpse__header-hashtag">#DisasterSystem</span>
+                            <span class="corpse__header-hashtag">#WTMMadrid</span>
+                            <span class="corpse__header-hashtag">#IWD2026</span>
+                            <span class="corpse__header-hashtag">#BreakThePattern</span>
+                            <span class="corpse__header-hashtag">#WomenInTech</span>
+                            <span class="corpse__header-hashtag">#GDGMadrid</span>
+                        </p>
+                        <div class="corpse__header-authors">
+                            <a class="corpse__header-author-link" href="https://linkedin.com/in/mariarogles" target="_blank"
+                                rel="noopener">/mariarogles</a>
+                            <a class="corpse__header-author-link" href="https://linkedin.com/in/wtmmadrid" target="_blank"
+                                rel="noopener">/wtmmadrid</a>
+                        </div>
+                    </div>
+                    <!-- Scroll hint — visible only after reanimate -->
+                    <button class="corpse__header-scroll-hint" id="btnScrollClosing" type="button" aria-hidden="true">
+                        <span class="corpse__header-scroll-hint__label" data-i18n="slide4.scroll.hint">↓ continuar al cierre</span>
+                    </button>
                 </div>
             </header>
         </section>
@@ -724,7 +740,7 @@
                 <ul class="closing__tools">
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.brain">Cerebro — Design Tokens</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.brain">Cerebro</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://tokens.studio/" target="_blank"
@@ -740,7 +756,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.eyes">Ojos — Accesibilidad visual</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.eyes">Ojos</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://www.deque.com/axe/devtools/" target="_blank"
@@ -752,6 +768,17 @@
                                     rel="noopener noreferrer">Stark (Figma)</a>
 
                             </div>
+                        </div>
+                    </li>
+
+                    <li class="closing__group">
+                        <h3 class="closing__group-title" data-i18n="closing.tools.ears">Orejas</h3>
+                        <div class="closing__group-tools">
+                            <div class="closing__tool">
+                                <a class="closing__tool-name" href="https://www.nvaccess.org/" target="_blank"
+                                    rel="noopener noreferrer">NVDA / VoiceOver</a>
+
+                            </div>
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://developer.chrome.com/docs/lighthouse/"
                                     target="_blank" rel="noopener noreferrer">Lighthouse</a>
@@ -761,25 +788,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.ears">Orejas — Semántica y screen
-                            readers</h3>
-                        <div class="closing__group-tools">
-                            <div class="closing__tool">
-                                <a class="closing__tool-name" href="https://www.nvaccess.org/" target="_blank"
-                                    rel="noopener noreferrer">NVDA / VoiceOver</a>
-
-                            </div>
-                            <div class="closing__tool">
-                                <a class="closing__tool-name" href="https://accessibilityinsights.io/" target="_blank"
-                                    rel="noopener noreferrer">Accessibility Insights</a>
-
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.mouth">Boca — Internacionalización
-                        </h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.mouth">Boca</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://www.i18next.com/" target="_blank"
@@ -788,16 +797,14 @@
                             </div>
                             <div class="closing__tool">
                                 <a class="closing__tool-name"
-                                    href="https://lingohub.com/academy/best-practices/pseudolocalization"
+                                    href="https://netflixtechblog.com/pseudo-localization-netflix-12fff76fbcbe"
                                     target="_blank" rel="noopener noreferrer">Pseudolocalization</a>
-
                             </div>
                         </div>
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.heart">Corazón — Componentes vivos
-                        </h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.heart">Corazón</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://www.chromatic.com/" target="_blank"
@@ -814,7 +821,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.torso">Torso — Arquitectura CSS</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.trunk">Torso</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name"
@@ -831,7 +838,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.arms">Brazos — Z-index y capas</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.arms">Brazos</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name"
@@ -843,7 +850,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.hands">Manos — Touch y eventos</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.hands">Manos</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name"
@@ -861,7 +868,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.legs">Piernas — Responsive</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.legs">Piernas</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://responsively.app/" target="_blank"
@@ -877,7 +884,7 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.feet">Pies — Base escalable</h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.feet">Pies</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://storybook.js.org/" target="_blank"
@@ -893,18 +900,15 @@
                     </li>
 
                     <li class="closing__group">
-                        <h3 class="closing__group-title" data-i18n="closing.tools.tail">Cola — Legacy y deuda técnica
-                        </h3>
+                        <h3 class="closing__group-title" data-i18n="closing.tools.tail">Cola</h3>
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://bundlephobia.com/" target="_blank"
                                     rel="noopener noreferrer">Bundlephobia</a>
-
                             </div>
                             <div class="closing__tool">
                                 <a class="closing__tool-name" href="https://knip.dev/" target="_blank"
                                     rel="noopener noreferrer">Knip</a>
-
                             </div>
                         </div>
                     </li>
@@ -1012,6 +1016,12 @@
                     // Toggle the 'fab-hidden' class on the root element based on the global state
                     document.documentElement.classList.toggle('fab-hidden', isAnyVisible);
 
+                    // Specifically hide lang-control only in the closing slide
+                    var isClosingVisible = Array.from(visibleSections).some(function(el) {
+                        return el.classList.contains('corpse__item--closing');
+                    });
+                    document.documentElement.classList.toggle('lang-hidden', isClosingVisible);
+
                 }, {
                     // 15% of the element must be visible to trigger the change
                     threshold: 0.15,
@@ -1093,6 +1103,20 @@
                                 cta.removeAttribute('aria-hidden');
                             }
 
+                            // Show + wire scroll-to-closing hint
+                            var scrollHint = document.getElementById('btnScrollClosing');
+                            if (scrollHint) {
+                                scrollHint.removeAttribute('aria-hidden');
+                                scrollHint.classList.add('is-visible');
+                                scrollHint.addEventListener('click', function () {
+                                    var slides = Array.from(document.querySelectorAll('#corpse .corpse__item'));
+                                    var closingIdx = slides.findIndex(function (s) { return s.classList.contains('corpse__item--closing'); });
+                                    if (window.scrollControl && closingIdx !== -1) {
+                                        window.scrollControl.goToSlide(closingIdx);
+                                    }
+                                });
+                            }
+
                             // Morph btn-reanimate into LinkedIn share button
                             btn.disabled = false;
                             btn.classList.add('btn-reanimate--share');
@@ -1111,6 +1135,42 @@
                             }, 100);
                         }, 2000);
                     }, 650);
+                });
+            }());
+        </script>
+
+    <!-- QR fullscreen overlay -->
+    <div class="qr-overlay" id="qrOverlay" role="dialog" aria-modal="true" aria-label="QR Code" aria-hidden="true">
+        <button class="qr-overlay__close" id="qrOverlayClose" type="button" aria-label="Close">&times;</button>
+        <img class="qr-overlay__img" src="public/img/qr_disaster-system.png" alt="QR code — Disaster System" />
+    </div>
+
+        <script>
+            /* QR fullscreen overlay */
+            (function () {
+                var qrBtn = document.getElementById('qrBtn');
+                var overlay = document.getElementById('qrOverlay');
+                var closeBtn = document.getElementById('qrOverlayClose');
+                if (!qrBtn || !overlay || !closeBtn) return;
+
+                function open() {
+                    overlay.classList.add('is-visible');
+                    overlay.setAttribute('aria-hidden', 'false');
+                    closeBtn.focus();
+                }
+                function close() {
+                    overlay.classList.remove('is-visible');
+                    overlay.setAttribute('aria-hidden', 'true');
+                    qrBtn.focus();
+                }
+
+                qrBtn.addEventListener('click', open);
+                closeBtn.addEventListener('click', close);
+                overlay.addEventListener('click', function (e) {
+                    if (e.target === overlay) close();
+                });
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && overlay.classList.contains('is-visible')) close();
                 });
             }());
         </script>

@@ -9,7 +9,7 @@ const PART_ICONS = {
     ears:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 0 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg>`,
     mouth:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l4 6h10l4-6"/><path d="M7 12s.5 5 5 5 5-5 5-5"/></svg>`,
     heart:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
-    torso:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H6l-2 7h5l-1 11h8l-1-11h5L18 3z"/></svg>`,
+    trunk:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H6l-2 7h5l-1 11h8l-1-11h5L18 3z"/></svg>`,
     arms:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6V2"/><path d="m8 10-4-4 1.5-1.5"/><path d="m16 10 4-4-1.5-1.5"/><path d="M12 14v8"/><path d="m8 18-3 3"/><path d="m16 18 3 3"/></svg>`,
     hands:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>`,
     legs:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v10.5l-3 3V22"/><path d="M14 2v10.5l3 3V22"/><path d="M8 22h4"/><path d="M12 22h4"/></svg>`,
@@ -27,7 +27,7 @@ const TOOL_URLS = {
     'NVDA / VoiceOver':                'https://www.nvaccess.org/',
     'Accessibility Insights':          'https://accessibilityinsights.io/',
     'i18next':                         'https://www.i18next.com/',
-    'Pseudolocalization':              'https://lingohub.com/academy/best-practices/pseudolocalization',
+    'Pseudolocalization':              'https://netflixtechblog.com/pseudo-localization-netflix-12fff76fbcbe',
     'Chromatic':                       'https://www.chromatic.com/',
     'Figma Tokens Plugin':             'https://www.figma.com/community/plugin/843461159747178978',
     'CSS Grid Inspector':              'https://firefox-source-docs.mozilla.org/devtools-user/page_inspector/how_to/examine_grid_layouts/',
@@ -40,7 +40,7 @@ const TOOL_URLS = {
     'Storybook':                       'https://storybook.js.org/',
     'Stylelint':                       'https://stylelint.io/',
     'Bundlephobia':                    'https://bundlephobia.com/',
-    'Knip':                            'https://knip.dev/',
+    'Knip':                            'https://knip.dev/'
 };
 function getPartIconHtml(partKey) {
     const svg = PART_ICONS[partKey] || '';
@@ -67,7 +67,7 @@ function escapeHtml(str) {
 /* Which slide owns each part — used to keep sibling decorations visible */
 const PART_SECTIONS = {
     brain: 'head', eyes: 'head', ears: 'head', mouth: 'head',
-    heart: 'trunk', torso: 'trunk', arms: 'trunk', hands: 'trunk',
+    heart: 'trunk', trunk: 'trunk', arms: 'trunk', hands: 'trunk',
     legs: 'legs', feet: 'legs', tail: 'legs'
 };
 
@@ -100,7 +100,8 @@ function buildModalContent(data) {
             const nameHtml = url
                 ? '<a class="modal__tool-name" href="' + url + '" target="_blank" rel="noopener noreferrer">' + tool.name + ' <span class="modal__tool-link-icon" aria-hidden="true">↗</span></a>'
                 : '<div class="modal__tool-name">' + tool.name + '</div>';
-            html += '<div class="modal__tool">' + nameHtml + '</div>';
+            const descHtml = tool.desc ? '<p class="modal__tool-desc">' + tool.desc + '</p>' : '';
+            html += '<div class="modal__tool">' + nameHtml + descHtml + '</div>';
         });
         html += `</div></div>`;
     }
@@ -111,7 +112,7 @@ function buildModalContent(data) {
 function highlightPart(partKey) {
     /* Remove old highlights */
     document.querySelectorAll('.part-active').forEach(el => el.classList.remove('part-active'));
-    document.querySelectorAll('.section-active').forEach(el => el.classList.remove('section-active'));
+    document.querySelectorAll('.corpse__item--active').forEach(el => el.classList.remove('corpse__item--active'));
     document.querySelectorAll('.part-has-active-child').forEach(el => el.classList.remove('part-has-active-child'));
 
     /* Highlight ALL elements with this data-part */
@@ -134,7 +135,7 @@ function highlightPart(partKey) {
     if (slideIndex !== null) {
         const slides = corpseEl.querySelectorAll('.corpse__item');
         if (slides[slideIndex]) {
-            slides[slideIndex].classList.add('section-active');
+            slides[slideIndex].classList.add('corpse__item--active');
         }
     }
 
@@ -215,7 +216,7 @@ function closeModal() {
     document.documentElement.classList.remove('scroll-locked');
     document.documentElement.classList.remove('modal-open');
     document.querySelectorAll('.part-active').forEach(el => el.classList.remove('part-active'));
-    document.querySelectorAll('.section-active').forEach(el => el.classList.remove('section-active'));
+    document.querySelectorAll('.corpse__item--active').forEach(el => el.classList.remove('corpse__item--active'));
     document.querySelectorAll('.part-has-active-child').forEach(el => el.classList.remove('part-has-active-child'));
     activePart = null;
     activePartKey = null;

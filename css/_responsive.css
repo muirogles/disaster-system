@@ -4,200 +4,24 @@
 
    /* TODO: mobile first and 8K scales */
 
-/* ----- VIDEOWALL / 4K (2560px+) ----- */
-@media (min-width: 2560px) {
-    :root {
-        --modal-width: 50vw;
-        --modal-shrink-scale: 0.48;
-        --md-pad: clamp(3rem, 4vw, 6rem);
-        --md-gap: clamp(2rem, 3vw, 4rem);
-    }
-    .modal__title {
-        font-size: clamp(3rem, 4vw, 5rem);
-    }
-    .modal__subtitle {
-        font-size: clamp(1.8rem, 2.5vw, 2.8rem);
-    }
-    .modal__concept {
-        font-size: clamp(1.4rem, 1.8vw, 2.2rem);
-    }
-    .error-card__code {
-        font-size: clamp(1rem, 1.2vw, 1.6rem);
-    }
-    .error-card__desc {
-        font-size: clamp(1.1rem, 1.3vw, 1.8rem);
-    }
-    .error-card__label {
-        font-size: clamp(0.9rem, 1vw, 1.3rem);
-    }
-    .error-card__explanation {
-        font-size: clamp(1.1rem, 1.3vw, 1.8rem);
-    }
-    .visual-demo {
-        font-size: clamp(1rem, 1.2vw, 1.5rem);
-    }
-    .visual-demo__label {
-        font-size: clamp(0.9rem, 1vw, 1.3rem);
-    }
-    .visual-demo__phone {
-        min-width: 200px;
-        min-height: 350px;
-    }
-    .modal__tool-name {
-        font-size: clamp(1.1rem, 1.3vw, 1.6rem);
-    }
-    .modal__tool-desc {
-        font-size: clamp(1rem, 1.2vw, 1.4rem);
-    }
-    /* Borders — scale width and bump opacity */
-    .modal__section {
-        border-left-width: clamp(2px, 0.15vw, 5px);
-        border-color: rgba(155, 93, 229, 0.4);
-    }
-    .modal__concept {
-        border-left-width: clamp(3px, 0.25vw, 8px);
-        border-color: rgba(0, 220, 80, 0.35);
-    }
-    .modal::before {
-        height: clamp(2px, 0.2vw, 6px);
-    }
-    .modal__close {
-        border-width: clamp(1px, 0.12vw, 3px);
-        border-left-width: clamp(2px, 0.18vw, 5px);
-        height: clamp(26px, 3vw, 52px);
-        font-size: clamp(0.62rem, 1vw, 1.1rem);
-    }
-    .modal__tool {
-        border-width: clamp(1px, 0.12vw, 3px);
-    }
-    .modal__tools {
-        border-top-width: clamp(1px, 0.12vw, 3px);
-    }
-    .error-card__explanation {
-        border-left-width: clamp(2px, 0.15vw, 5px);
-    }
-    .btn-reanimate {
-        font-size: clamp(1rem, 1.5vw, 2.2rem);
-        padding: clamp(0.8rem, 1.5vw, 2rem) clamp(1.5rem, 3vw, 4rem);
-        border-width: clamp(1px, 0.15vw, 4px);
-    }
-}
-
-/* ----- 4K (3840px+) ----- */
-@media (min-width: 3840px) {
-    :root {
-        --modal-width: 45vw;
-        --modal-shrink-scale: 0.5;
-        --md-pad: clamp(4rem, 5vw, 8rem);
-        --md-gap: clamp(3rem, 4vw, 6rem);
-    }
-    .modal__title {
-        font-size: clamp(4rem, 5vw, 7rem);
-    }
-    .modal__subtitle {
-        font-size: clamp(2.2rem, 3vw, 4rem);
-    }
-    .modal__concept {
-        font-size: clamp(1.8rem, 2.2vw, 3rem);
-    }
-    .modal__text {
-        font-size: clamp(1.2rem, 1.6vw, 3rem);
-    }
-    .error-card__code {
-        font-size: clamp(1.2rem, 1.5vw, 2rem);
-    }
-    .error-card__desc {
-        font-size: clamp(1.4rem, 1.6vw, 2.2rem);
-    }
-    .error-card__explanation {
-        font-size: clamp(1.4rem, 1.6vw, 2.2rem);
-    }
-    .visual-demo {
-        font-size: clamp(1.2rem, 1.5vw, 2rem);
-    }
-    .visual-demo__phone {
-        min-width: 280px;
-        min-height: 480px;
-    }
-    .modal__tool-name {
-        font-size: clamp(1.4rem, 1.6vw, 2rem);
-    }
-    .part-hint {
-        font-size: clamp(0.9rem, 1.2vw, 1.4rem);
-        padding: 0.6em 1.4em;
-    }
-    .closing__title {
-        font-size: clamp(3rem, 5vw, 7rem);
-    }
-    .closing__intro {
-        font-size: clamp(1.4rem, 1.8vw, 2.5rem);
-    }
-    .closing__group-title {
-        font-size: clamp(1.2rem, 1.5vw, 2rem);
-    }
-    .closing__tool-name {
-        font-size: clamp(1rem, 1.3vw, 1.8rem);
-    }
-}
-
-/* ----- 8K (7680px+) ----- */
-@media (min-width: 7680px) {
-    :root {
-        --modal-width: 40vw;
-        --md-pad: clamp(6rem, 6vw, 12rem);
-        --md-gap: clamp(4rem, 5vw, 8rem);
-    }
-    .modal__title {
-        font-size: clamp(6rem, 7vw, 10rem);
-    }
-    .modal__subtitle {
-        font-size: clamp(3.5rem, 4vw, 6rem);
-    }
-    .modal__concept {
-        font-size: clamp(2.5rem, 3vw, 5rem);
-    }
-    .modal__text {
-        font-size: clamp(2rem, 2.5vw, 4rem);
-    }
-    .part-hint {
-        font-size: clamp(1.4rem, 1.6vw, 2.2rem);
-        padding: 0.8em 1.8em;
-    }
-    .closing__title {
-        font-size: clamp(5rem, 7vw, 12rem);
-    }
-    .closing__intro {
-        font-size: clamp(2rem, 2.5vw, 4rem);
-    }
-}
-
-/* ----- LARGE TV (1920px+) ----- */
-@media (min-width: 1920px) {
-    .modal__title {
-        font-size: clamp(2.5rem, 3.5vw, 4.5rem);
-    }
-    .error-card__code {
-        font-size: clamp(0.9rem, 1.1vw, 1.4rem);
-    }
-    .visual-demo__btn {
-        padding: 12px 28px;
-        font-size: clamp(0.9rem, 1vw, 1.2rem);
-    }
-}
+/* =====================================================
+   DEMO TOKEN OVERRIDES — Step-based, integer-px only
+   Mobile defaults live in _variables.css
+   ===================================================== */
 
 /* ----- TABLET (max 1024px) ----- */
 @media (max-width: 1024px) {
     :root {
-        --modal-width: 65vw;
-        --modal-shrink-scale: 0.42;
+        --modal-width: 60vw;
+        --modal-shrink-scale: 0.52;
     }
 }
 
 /* ----- SMALL TABLET / LARGE PHONE LANDSCAPE (max 900px) ----- */
 @media (max-width: 900px) {
     :root {
-        --modal-width: 80vw;
-        --modal-shrink-scale: 0.38;
+        --modal-width: 75vw;
+        --modal-shrink-scale: 0.44;
     }
     .error-card {
         grid-template-columns: 1fr;
@@ -208,8 +32,12 @@
 @media (max-width: 600px) {
     :root {
         --modal-width: 100vw;
-        --modal-shrink-scale: 0.5;
         --modal-shift-x: 0vw;
+        --modal-shif-y: 0vh;
+    }
+
+    .tail {
+        width: 20%;
     }
 
     /* On mobile, modal takes bottom half */
@@ -238,8 +66,28 @@
 
     /* Body part goes to top, scaled down */
     .corpse.has-modal .corpse__item {
-        transform: scale(var(--modal-shrink-scale));
+        transform: scale(var(--modal-shrink-scale)) translateY(var(--modal-shif-y));
         transform-origin: top center;
+        overflow: visible;
+    }  
+
+    .corpse.has-modal .corpse__item--upper.corpse__item--active {
+        --modal-shrink-scale: 0.5;
+        --modal-shif-y: -10vh;
+    }
+    
+    .corpse.has-modal .corpse__item--middle.corpse__item--active {
+        --modal-shrink-scale: 0.7;
+        --modal-shif-y: -20vh;
+    }
+
+    .corpse.has-modal .corpse__item--lower.corpse__item--active {
+        --modal-shrink-scale: 0.45;
+        --modal-shif-y: -5vh;
+    }
+
+    .corpse.has-modal .corpse__item--lower.corpse__item--active .legs {
+        overflow: visible;
     }
 
     .intro__components {
@@ -283,6 +131,10 @@
         min-width: unset;
         width: 100%;
     }
+
+    .visual-demo__side {
+        min-width: 100%;
+    }
 }
 
 /* ----- VERY SMALL MOBILE (max 380px) ----- */
@@ -292,9 +144,378 @@
         height: 60dvh;
         padding: 1rem;
     }
+}
 
+/* ----- TABLET (≥ 768px / 48rem) ----- */
+@media (min-width: 48rem) {
     :root {
-        --modal-shrink-scale: 0.25;
+        --demo-fs-xs: 0.875rem;  /* 14px */
+        --demo-fs-sm: 1rem;      /* 16px */
+        --demo-fs-md: 1.125rem;  /* 18px */
+        --demo-fs-lg: 1.5rem;    /* 24px */
+        --demo-fs-xl: 1.75rem;   /* 28px */
+        --demo-fs-2xl: 2.25rem;  /* 36px */
+    }
+}
+
+/* ----- DESKTOP (≥ 1200px / 75rem) ----- */
+@media (min-width: 75rem) {
+    :root {
+        --demo-fs-xs: 1rem;      /* 16px */
+        --demo-fs-sm: 1.125rem;  /* 18px */
+        --demo-fs-md: 1.25rem;   /* 20px */
+        --demo-fs-lg: 1.5rem;    /* 24px */
+        --demo-fs-xl: 2rem;      /* 32px */
+        --demo-fs-2xl: 2.5rem;   /* 40px */
+
+        --demo-gap-md: 1.25rem;  /* 20px */
+        --demo-gap-lg: 2rem;     /* 32px */
+
+        --demo-pad-md: 1.25rem;  /* 20px */
+        --demo-pad-lg: 2rem;     /* 32px */
+    }
+}
+
+/* ----- FULLHD / PROJECTOR (≥ 1600px / 100rem) ----- */
+@media (min-width: 100rem) {
+    :root {
+        --modal-width: 50vw;
+
+        --demo-fs-xs: 1.125rem;  /* 18px */
+        --demo-fs-sm: 1.25rem;   /* 20px */
+        --demo-fs-md: 1.5rem;    /* 24px */
+        --demo-fs-lg: 1.75rem;   /* 28px */
+        --demo-fs-xl: 2.25rem;   /* 36px */
+        --demo-fs-2xl: 3rem;     /* 48px */
+
+        --demo-gap-sm: 1rem;     /* 16px */
+        --demo-gap-md: 1.5rem;   /* 24px */
+        --demo-gap-lg: 2.5rem;   /* 40px */
+
+        --demo-pad-sm: 1rem;     /* 16px */
+        --demo-pad-md: 1.5rem;   /* 24px */
+        --demo-pad-lg: 2.5rem;   /* 40px */
+    }
+
+    .corpse.has-modal .corpse__item--upper.corpse__item--active {
+        --modal-shrink-scale: 1;
+        --modal-shift-x: -23vw;
+    }
+
+    .corpse.has-modal .corpse__item--middle.corpse__item--active {
+        --modal-shrink-scale: 0.8;
+        --modal-shift-x: -32vh;
+    }
+
+    .corpse.has-modal .corpse__item--lower.corpse__item--active {
+        --modal-shrink-scale: 0.9;
+        --modal-shift-x: -12vw;
+    }
+
+    .corpse__header {
+        left: calc(50% + (var(--trunk-width) / 2) + 2.5vw);
+        right: auto;
+    }
+}
+
+/* ----- 4K DEMO SCALE (≥ 2560px / 160rem) ----- */
+@media (min-width: 160rem) {
+    :root {
+        --demo-fs-xs: 1.5rem;    /* 24px */
+        --demo-fs-sm: 1.75rem;   /* 28px */
+        --demo-fs-md: 2rem;      /* 32px */
+        --demo-fs-lg: 2.5rem;    /* 40px */
+        --demo-fs-xl: 3rem;      /* 48px */
+        --demo-fs-2xl: 4rem;     /* 64px */
+
+        --demo-gap-md: 2rem;     /* 32px */
+        --demo-gap-lg: 3rem;     /* 48px */
+
+        --demo-pad-md: 2rem;     /* 32px */
+        --demo-pad-lg: 3rem;     /* 48px */
+        --modal-width: 44vw;
+        
+        --md-pad: clamp(3rem, 4vw, 6rem);
+        --md-gap: clamp(2rem, 3vw, 4rem);
+    }
+    
+    .modal__title {
+        font-size: clamp(3rem, 4vw, 5rem);
+    }
+    .modal__subtitle {
+        font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    }
+    .modal__concept {
+        font-size: clamp(1.4rem, 1.8vw, 2.2rem);
+    }
+    .error-card__code {
+        font-size: clamp(1rem, 1.2vw, 1.6rem);
+    }
+    .error-card__desc {
+        font-size: clamp(1.1rem, 1.3vw, 1.8rem);
+    }
+    .error-card__label {
+        font-size: clamp(0.9rem, 1vw, 1.3rem);
+    }
+    .error-card__explanation {
+        font-size: clamp(1.1rem, 1.3vw, 1.8rem);
+    }
+    .visual-demo {
+        font-size: clamp(1rem, 1.2vw, 1.5rem);
+    }
+    .visual-demo__label {
+        font-size: clamp(0.9rem, 1vw, 1.3rem);
+    }
+    .visual-demo__phone {
+        min-width: 12.5rem;
+        min-height: 22rem;
+    }
+    .modal__tool-name {
+        font-size: clamp(1.1rem, 1.3vw, 1.6rem);
+    }
+    .modal__tool-desc {
+        font-size: clamp(1rem, 1.2vw, 1.4rem);
+    }
+    /* Borders — scale width and bump opacity */
+    .modal__section {
+        border-left-width: clamp(0.125rem, 0.15vw, 0.25rem);
+        border-color: rgba(155, 93, 229, 0.4);
+    }
+    .modal__concept {
+        border-left-width: clamp(0.25rem, 0.25vw, 0.5rem);
+        border-color: rgba(0, 220, 80, 0.35);
+    }
+    .modal::before {
+        height: clamp(0.125rem, 0.2vw, 0.375rem);
+    }
+    .modal__close {
+        border-width: clamp(0.125rem, 0.12vw, 0.25rem);
+        border-left-width: clamp(0.125rem, 0.18vw, 0.375rem);
+        height: clamp(1.5rem, 3vw, 3.25rem);
+        font-size: clamp(0.625rem, 1vw, 1.125rem);
+    }
+    .modal__tool {
+        border-width: clamp(0.0625rem, 0.12vw, 0.25rem);
+    }
+    .modal__tools {
+        border-top-width: clamp(0.0625rem, 0.12vw, 0.25rem);
+    }
+    .error-card__explanation {
+        border-left-width: clamp(0.125rem, 0.15vw, 0.25rem);
+    }
+    .btn-reanimate {
+        font-size: clamp(1rem, 1.5vw, 2rem);
+        padding: clamp(0.75rem, 1.5vw, 2rem) clamp(1.5rem, 3vw, 4rem);
+        border-width: clamp(0.125rem, 0.15vw, 0.25rem);
+    }
+    /* Closing section — scale for big screens */
+    .closing__share-btn {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+        padding: 0.75em 1.5em 0.75em 1em;
+        border-width: clamp(0.125rem, 0.12vw, 0.25rem);
+        border-left-width: clamp(0.25rem, 0.2vw, 0.5rem);
+    }
+    .closing__hashtag {
+        font-size: clamp(0.875rem, 1.1vw, 1.25rem);
+        padding: 0.25em 0.75em;
+        border-width: clamp(0.125rem, 0.1vw, 0.25rem);
+        border-left-width: clamp(0.25rem, 0.15vw, 0.5rem);
+    }
+    .closing__social-link {
+        font-size: clamp(0.875rem, 1.1vw, 1.25rem);
+        padding: 0.5em 1em;
+        border-width: clamp(0.125rem, 0.1vw, 0.25rem);
+    }
+    .closing__cta-title {
+        font-size: clamp(1.5rem, 2.5vw, 3rem);
+    }
+    .closing__cta-text {
+        font-size: clamp(1rem, 1.4vw, 1.5rem);
+    }
+    .closing__message-title {
+        font-size: clamp(2rem, 3.5vw, 4rem);
+    }
+    .closing__message-text {
+        font-size: clamp(1rem, 1.5vw, 1.5rem);
+    }
+    .closing__hashtags-label {
+        font-size: clamp(0.75rem, 1vw, 1rem);
+    }
+    .closing__social-label {
+        font-size: clamp(0.75rem, 1vw, 1rem);
+    }
+    .corpse__header {
+        max-width: clamp(17.5rem, 32vw, 35rem);
+        gap: 1vmax;
+    }
+    .corpse__header-badge {
+        font-size: clamp(0.75rem, 1vw, 1.25rem);
+    }
+    .corpse__header-cta-label {
+        font-size: clamp(0.75rem, 1vw, 1rem);
+    }
+    .corpse__header-hashtag {
+        font-size: clamp(0.75rem, 1vw, 1rem);
+    }
+    .corpse__header-author-link {
+        font-size: clamp(0.75rem, 1vw, 1rem);
+    }
+    .corpse__header-philosophy-title {
+        font-size: clamp(0.875rem, 1.25vw, 1.5rem);
+    }
+    .corpse__header-philosophy-text {
+        font-size: clamp(0.875rem, 1.1vw, 1.25rem);
+    }
+    .corpse__header::before {
+        font-size: clamp(0.625rem, 0.75vw, 1rem);
+    }
+}
+
+/* ----- 4K (3840px+) ----- */
+@media (min-width: 3840px) {
+    :root {
+        --modal-width: 42vw;
+        --modal-shrink-scale: 0.62;
+        --md-pad: clamp(4rem, 5vw, 8rem);
+        --md-gap: clamp(3rem, 4vw, 6rem);
+    }
+    .modal__title {
+        font-size: clamp(4rem, 5vw, 7rem);
+    }
+    .modal__subtitle {
+        font-size: clamp(2.2rem, 3vw, 4rem);
+    }
+    .modal__concept {
+        font-size: clamp(1.8rem, 2.2vw, 3rem);
+    }
+    .modal__text {
+        font-size: clamp(1.2rem, 1.6vw, 3rem);
+    }
+    .error-card__code {
+        font-size: clamp(1.2rem, 1.5vw, 2rem);
+    }
+    .error-card__desc {
+        font-size: clamp(1.4rem, 1.6vw, 2.2rem);
+    }
+    .error-card__explanation {
+        font-size: clamp(1.4rem, 1.6vw, 2.2rem);
+    }
+    .visual-demo {
+        font-size: clamp(1.2rem, 1.5vw, 2rem);
+    }
+    .visual-demo__phone {
+        min-width: 17.5rem;
+        min-height: 30rem;
+    }
+    .modal__tool-name {
+        font-size: clamp(1.4rem, 1.6vw, 2rem);
+    }
+    .part-hint {
+        font-size: clamp(0.9rem, 1.2vw, 1.4rem);
+        padding: 0.6em 1.4em;
+    }
+    .closing__title {
+        font-size: clamp(3rem, 5vw, 7rem);
+    }
+    .closing__intro {
+        font-size: clamp(1.4rem, 1.8vw, 2.5rem);
+    }
+    .closing__group-title {
+        font-size: clamp(1.2rem, 1.5vw, 2rem);
+    }
+    .closing__tool-name {
+        font-size: clamp(1rem, 1.3vw, 1.75rem);
+    }
+    .closing__tool-desc {
+        font-size: clamp(0.875rem, 1.1vw, 1.5rem);
+    }
+    .closing__share-btn {
+        font-size: clamp(1.25rem, 1.5vw, 2rem);
+        padding: 0.75em 2em 0.75em 1.25em;
+        border-left-width: clamp(0.25rem, 0.25vw, 0.5rem);
+    }
+    .closing__hashtag {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+        padding: 0.25em 1em;
+    }
+    .closing__social-link {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+        padding: 0.5em 1.25em;
+    }
+    .closing__cta-title {
+        font-size: clamp(2rem, 3vw, 4rem);
+    }
+    .closing__cta-text {
+        font-size: clamp(1.25rem, 1.75vw, 2rem);
+    }
+    .closing__message-title {
+        font-size: clamp(2.5rem, 4vw, 5rem);
+    }
+    .closing__message-text {
+        font-size: clamp(1.25rem, 1.75vw, 2rem);
+    }
+    .closing__hashtags-label {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+    }
+    .closing__social-label {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+    }
+    /* corpse__header at 4K */
+    .corpse__header {
+        max-width: clamp(20rem, 35vw, 45rem);
+        gap: 1.25vmax;
+    }
+    .corpse__header-badge {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+    }
+    .corpse__header-cta-label {
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+    }
+    .corpse__header-hashtag {
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+    }
+    .corpse__header-author-link {
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+    }
+    .corpse__header-philosophy-title {
+        font-size: clamp(1.125rem, 1.5vw, 2rem);
+    }
+    .corpse__header-philosophy-text {
+        font-size: clamp(1rem, 1.25vw, 1.5rem);
+    }
+    .corpse__header::before {
+        font-size: clamp(0.75rem, 1vw, 1.25rem);
+    }
+}
+
+/* ----- 8K (7680px+) ----- */
+@media (min-width: 7680px) {
+    :root {
+        --modal-width: 40vw;
+        --md-pad: clamp(6rem, 6vw, 12rem);
+        --md-gap: clamp(4rem, 5vw, 8rem);
+    }
+    .modal__title {
+        font-size: clamp(6rem, 7vw, 10rem);
+    }
+    .modal__subtitle {
+        font-size: clamp(3.5rem, 4vw, 6rem);
+    }
+    .modal__concept {
+        font-size: clamp(2.5rem, 3vw, 5rem);
+    }
+    .modal__text {
+        font-size: clamp(2rem, 2.5vw, 4rem);
+    }
+    .part-hint {
+        font-size: clamp(1.4rem, 1.6vw, 2.2rem);
+        padding: 0.8em 1.8em;
+    }
+    .closing__title {
+        font-size: clamp(5rem, 7vw, 12rem);
+    }
+    .closing__intro {
+        font-size: clamp(2rem, 2.5vw, 4rem);
     }
 }
 
