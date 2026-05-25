@@ -42,6 +42,7 @@ body {
   overflow-x: hidden;
   font-size: clamp(14px, 1.6vw, 28px);
   padding-bottom: env(safe-area-inset-bottom);
+  min-height: 100vh; /* fallback */
   min-height: 100dvh;
 }
 
