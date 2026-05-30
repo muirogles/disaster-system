@@ -33,6 +33,7 @@ const TOOL_URLS = {
     'Figma Tokens Plugin':             'https://www.figma.com/community/plugin/843461159747178978',
     'CSS Grid Inspector':              'https://firefox-source-docs.mozilla.org/devtools-user/page_inspector/how_to/examine_grid_layouts/',
     'VisBug':                          'https://visbug.web.app/',
+    'DevTools z-index':                'https://chromewebstore.google.com/detail/devtools-z-index/bcnpmhefiohkpmjacfoanhbjhikegmoe',
     'CSS Stacking Context Inspector':  'https://github.com/andreadev-it/stacking-contexts-inspector',
     'Touch Target Checker':            'https://www.google.com/accessibility/for-developers/',
     'Chrome Device Mode':              'https://developer.chrome.com/docs/devtools/device-mode/',

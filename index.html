@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Design System o Disaster System?</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/event-config.js"></script>
     <meta property="og:title" content="¿Design System o Disaster System?">
     <meta property="og:description" content="El cadáver exquisito entre diseño y desarrollo.">
     <meta property="og:image" content="https://muirogles.github.io/disaster-system/img/social-preview.png">
@@ -692,7 +693,7 @@
                     <div class="corpse__header-cta" aria-hidden="true">
                         <p class="corpse__header-cta-label" data-i18n="closing.hashtags.label">Etiquétanos con los hashtags:
                         </p>
-                        <p class="corpse__header-hashtags">
+                        <p class="corpse__header-hashtags" id="event-hashtags">
                             <span class="corpse__header-hashtag">#DisasterSystem</span>
                             <span class="corpse__header-hashtag">#WTMMadrid</span>
                             <span class="corpse__header-hashtag">#IWD2026</span>
@@ -703,7 +704,7 @@
                         <div class="corpse__header-authors">
                             <a class="corpse__header-author-link" href="https://linkedin.com/in/mariarogles" target="_blank"
                                 rel="noopener">/mariarogles</a>
-                            <a class="corpse__header-author-link" href="https://linkedin.com/in/wtmmadrid" target="_blank"
+                            <a id="event-linkedin" class="corpse__header-author-link" href="https://linkedin.com/in/wtmmadrid" target="_blank"
                                 rel="noopener">/wtmmadrid</a>
                         </div>
                     </div>
@@ -842,6 +843,12 @@
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name"
+                                    href="https://chromewebstore.google.com/detail/devtools-z-index/bcnpmhefiohkpmjacfoanhbjhikegmoe" target="_blank"
+                                    rel="noopener noreferrer">DevTools z-index</a>
+
+                            </div>
+                            <div class="closing__tool">
+                                <a class="closing__tool-name"
                                     href="https://github.com/andreadev-it/stacking-contexts-inspector" target="_blank"
                                     rel="noopener noreferrer">CSS Stacking Context Inspector</a>
 
@@ -916,7 +923,7 @@
             </div>
 
             <footer class="site-footer" role="contentinfo">
-                <p class="site-footer__name">María Rogles x <span style="color: var(--color-gold);">WTM</span></p>
+                <p class="site-footer__name">María Rogles x <span id="event-community-label" style="color: var(--color-gold);">WTM</span></p>
                 <div class="site-footer__center">
                     <span class="site-footer__hashtag disaster-title">#DesignSystemODisasterSystem</span>
                 </div>
@@ -925,9 +932,9 @@
                         rel="noopener" aria-label="María Rogles on LinkedIn">
                         🧟
                     </a>
-                    <a href="https://linkedin.com/in/wtmmadrid" class="site-footer__social-link" target="_blank"
+                    <a id="event-linkedin-footer" href="https://linkedin.com/in/wtmmadrid" class="site-footer__social-link" target="_blank"
                         rel="noopener" aria-label="WTM Madrid on LinkedIn">
-                        <img class="site-footer__social-logo"
+                        <img id="event-logo" class="site-footer__social-logo"
                         src="img/wtm.png"
                         alt="WTM Madrid" aria-hidden="true">
                     </a>
@@ -1142,7 +1149,7 @@
     <!-- QR fullscreen overlay -->
     <div class="qr-overlay" id="qrOverlay" role="dialog" aria-modal="true" aria-label="QR Code" aria-hidden="true">
         <button class="qr-overlay__close" id="qrOverlayClose" type="button" aria-label="Close">&times;</button>
-        <img class="qr-overlay__img" src="public/img/qr_disaster-system.png" alt="QR code — Disaster System" />
+        <img class="qr-overlay__img" src="/img/qr_disaster-system.png" alt="QR code — Disaster System" />
     </div>
 
         <script>

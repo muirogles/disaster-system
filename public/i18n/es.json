@@ -363,8 +363,8 @@
             ],
             "tools": [
                 {
-                    "name": "z-index Manager",
-                    "desc": "Visualización de capas de stacking context en DevTools."
+                    "name": "DevTools z-index",
+                    "desc": "Extensión para visualizar capas de stacking context directamente en DevTools."
                 },
                 {
                     "name": "CSS Stacking Context Inspector",
