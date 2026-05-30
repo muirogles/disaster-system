@@ -1,0 +1,286 @@
+/* =====================================================
+   CAUSE SLIDE — social cause / non-profit highlight
+   Reuses the .brain markup from slide 1 to literally tie
+   the talk's "brain = tokens" metaphor to real brains.
+   ===================================================== */
+
+.corpse__item--cause {
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(ellipse 70% 45% at 50% 0%, rgba(155, 93, 229, 0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 15% 100%, rgba(0, 137, 123, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 90% 80%, rgba(233, 30, 99, 0.04) 0%, transparent 60%),
+        #000;
+}
+
+/* ── Two-column layout: brain | content ── */
+.cause {
+    width: 100%;
+    max-width: 1248px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vh, 4rem) clamp(1.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+@media (max-width: 900px) {
+    .cause {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+        padding-top: 4rem;
+    }
+}
+
+/* =====================================================
+   BRAIN COLUMN
+   The .brain is normally absolutely positioned inside a
+   .head container. Here we give it an explicit sized box
+   and reset its positioning so it lives standalone.
+   ===================================================== */
+.cause__brain-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 360px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(155, 93, 229, 0.35);
+}
+
+.cause .brain {
+    /* Reset slide-1 absolute placement, fit the wrap exactly */
+    position: relative;
+    top: auto;
+    inset-inline-start: auto;
+    transform: none;
+    width: 100%;
+    height: 75%;
+    /* Stronger ambient glow so the brain reads as the "hero" */
+    box-shadow:
+        0 0 60px rgba(155, 93, 229, 0.25),
+        0 -5px 35px rgba(40, 80, 20, 0.45),
+        inset 0 0 30px rgba(0, 0, 0, 0.6),
+        inset 0 0 60px rgba(60, 120, 40, 0.18);
+}
+
+/* Connector arc — visual bridge from brain → text on desktop */
+.cause__connector {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    opacity: 0.5;
+    pointer-events: none;
+    animation: causeConnectorPulse 4s ease-in-out infinite;
+}
+
+@media (max-width: 900px) {
+    .cause__connector {
+        display: none;
+    }
+}
+
+@keyframes causeConnectorPulse {
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 0.65; }
+}
+
+/* =====================================================
+   CONTENT COLUMN
+   ===================================================== */
+.cause__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 580px;
+}
+
+@media (max-width: 900px) {
+    .cause__content {
+        align-items: center;
+        margin: 0 auto;
+    }
+}
+
+.cause__eyebrow {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
+    color: var(--color-teal);
+    letter-spacing: 0.06em;
+    margin: 0 0 0.5rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.cause__title {
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.96);
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 40px rgba(155, 93, 229, 0.25);
+    text-wrap: balance;
+}
+
+.cause__title::after {
+    content: '';
+    display: block;
+    width: clamp(48px, 6vw, 80px);
+    height: 3px;
+    margin-top: 1rem;
+    background: linear-gradient(90deg,
+        var(--color-purple) 0%,
+        var(--color-teal)   60%,
+        transparent 100%);
+    border-radius: 2px;
+    opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+    .cause__title::after { margin-inline: auto; }
+}
+
+.cause__lead {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+}
+
+.cause__lead strong {
+    color: var(--color-purple);
+    font-weight: 700;
+}
+
+.cause__body {
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    margin: 0;
+    padding: 1em 1.25em;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 2px solid rgba(0, 137, 123, 0.4);
+    border-radius: 0 0.5rem 0.5rem 0;
+    text-align: left;
+}
+
+.cause__body strong {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 700;
+}
+
+.cause__body em {
+    color: var(--color-teal);
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* =====================================================
+   CTA — clickable card with logo tile + label + URL
+   ===================================================== */
+.cause__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 1rem 1.25rem 1rem 1rem;
+    margin-top: 0.5rem;
+    background: rgba(8, 6, 18, 0.85);
+    border: 1px solid rgba(155, 93, 229, 0.25);
+    border-left: 3px solid rgba(155, 93, 229, 0.55);
+    border-radius: 0 8px 8px 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+    align-self: flex-start;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 900px) {
+    .cause__cta { align-self: center; }
+}
+
+.cause__cta:hover,
+.cause__cta:focus-visible {
+    background: rgba(25, 18, 50, 0.92);
+    border-color: rgba(155, 93, 229, 0.55);
+    border-left-color: rgba(155, 93, 229, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(155, 93, 229, 0.18);
+}
+
+.cause__cta:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+.cause__cta-logo-tile {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    border-radius: 6px;
+    width: 96px;
+    height: 56px;
+}
+
+.cause__cta-logo-tile img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.cause__cta-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: left;
+    line-height: 1.3;
+}
+
+.cause__cta-label {
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+}
+
+.cause__cta-url {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.75rem, 0.9vw, 0.875rem);
+    color: var(--color-purple);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.25s ease;
+}
+
+.cause__cta:hover .cause__cta-url {
+    color: rgba(196, 160, 245, 1);
+}
+
+/* =====================================================
+   SLIDE-NAV DOT ACCENT (cause = teal, "health/connection")
+   ===================================================== */
+.slide-nav__dot[data-slide="cause"] { --dot-color: var(--color-teal); }
