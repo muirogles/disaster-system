@@ -4,7 +4,7 @@
    Tracks current slide for the progress nav.
    ===================================================== */
 
-(function () {
+function initScrollControl() {
     var corpse = document.getElementById('corpse');
     if (!corpse) return;
 
@@ -70,11 +70,10 @@
     if (slideNav) {
         var dots = slideNav.querySelectorAll('.slide-nav__dot');
 
-        // Click to navigate
-        dots.forEach(function (dot) {
+        // Click to navigate — use the dot's position so non-numeric data-slide values work too
+        dots.forEach(function (dot, i) {
             dot.addEventListener('click', function () {
-                var idx = parseInt(dot.dataset.slide, 10);
-                goToSlide(idx);
+                goToSlide(i);
             });
         });
 
@@ -86,4 +85,10 @@
             });
         });
     }
-})();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollControl);
+} else {
+    initScrollControl();
+}

@@ -1,0 +1,304 @@
+/* =====================================================
+   SPONSORS SLIDE — terminal-styled tier list
+   Rendered only for events with sponsors data.
+   Follows the closing slide's terminal-card language.
+   ===================================================== */
+
+.corpse__item--sponsors {
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 179, 0, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(155, 93, 229, 0.05) 0%, transparent 60%),
+        #000;
+}
+
+.sponsors {
+    width: 100%;
+    max-width: 1248px;
+    margin: clamp(2rem, 6vh, 4rem) auto 0;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 4vh, 3rem);
+}
+
+/* ── Header ── */
+.sponsors__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sponsors__eyebrow {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
+    color: rgba(155, 93, 229, 0.55);
+    letter-spacing: 0.08em;
+    margin: 0;
+    font-weight: 400;
+}
+
+.sponsors__title {
+    font-size: clamp(3rem, 5vw, 6rem);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow: 0 0 40px rgba(255, 179, 0, 0.25);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.sponsors__divider {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    width: clamp(160px, 30vw, 320px);
+    color: rgba(255, 179, 0, 0.5);
+    font-size: 0.625rem;
+    letter-spacing: 0.4em;
+}
+
+.sponsors__divider::before,
+.sponsors__divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+}
+
+.sponsors__divider::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 179, 0, 0.4));
+}
+
+.sponsors__divider::after {
+    background: linear-gradient(90deg, rgba(255, 179, 0, 0.4), transparent);
+}
+
+/* ── Tier groups stack ── */
+.sponsors__tiers {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vh, 2.5rem);
+    margin-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+/* ── A single tier card — terminal-style ── */
+.sponsors__tier {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(155, 93, 229, 0.15);
+    border-left: 2px solid rgba(155, 93, 229, 0.35);
+    border-radius: 0 8px 8px 0;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    text-align: left;
+}
+
+/* Tier title — code comment style (matches .closing__group-title) */
+.sponsors__tier-title {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.875rem, 1.2vw, 1.25rem);
+    font-weight: 700;
+    color: var(--color-purple);
+    margin: 0 0 1rem;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid rgba(155, 93, 229, 0.15);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.sponsors__tier-title::before {
+    content: '// ';
+    color: rgba(155, 93, 229, 0.55);
+    font-weight: 400;
+    text-transform: none;
+}
+
+/* ── Per-tier accent colors ── */
+.sponsors__tier--venue {
+    border-left-color: rgba(0, 137, 123, 0.55);
+}
+.sponsors__tier--venue .sponsors__tier-title {
+    color: var(--color-teal);
+    border-bottom-color: rgba(0, 137, 123, 0.2);
+}
+.sponsors__tier--venue .sponsors__tier-title::before {
+    color: rgba(0, 137, 123, 0.55);
+}
+
+.sponsors__tier--platinum {
+    border-left-color: rgba(196, 196, 220, 0.65);
+}
+.sponsors__tier--platinum .sponsors__tier-title {
+    color: rgba(220, 220, 240, 0.92);
+    border-bottom-color: rgba(196, 196, 220, 0.2);
+}
+.sponsors__tier--platinum .sponsors__tier-title::before {
+    color: rgba(196, 196, 220, 0.55);
+}
+
+.sponsors__tier--gold {
+    border-left-color: rgba(255, 179, 0, 0.6);
+}
+.sponsors__tier--gold .sponsors__tier-title {
+    color: var(--color-gold);
+    border-bottom-color: rgba(255, 179, 0, 0.2);
+}
+.sponsors__tier--gold .sponsors__tier-title::before {
+    color: rgba(255, 179, 0, 0.55);
+}
+
+.sponsors__tier--silver {
+    border-left-color: rgba(192, 192, 208, 0.5);
+}
+.sponsors__tier--silver .sponsors__tier-title {
+    color: rgba(200, 200, 215, 0.85);
+    border-bottom-color: rgba(192, 192, 208, 0.18);
+}
+.sponsors__tier--silver .sponsors__tier-title::before {
+    color: rgba(192, 192, 208, 0.5);
+}
+
+/* ── Logo grid ── */
+.sponsors__logos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+/* Venue: single huge logo */
+.sponsors__tier--venue .sponsors__logos {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+/* Platinum: up to 3 per row on desktop */
+.sponsors__tier--platinum .sponsors__logos {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Gold: 3 per row */
+.sponsors__tier--gold .sponsors__logos {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+/* Silver: 3 per row, slightly smaller */
+.sponsors__tier--silver .sponsors__logos {
+    grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
+}
+
+/* ── Logo tile — full-color logos on a light tile for legibility ── */
+.sponsors__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    min-height: 96px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.sponsors__logo:hover {
+    transform: translateY(-2px);
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5),
+                0 0 24px rgba(155, 93, 229, 0.15);
+}
+
+.sponsors__logo img {
+    max-width: 100%;
+    max-height: 64px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+    mix-blend-mode: multiply;
+}
+
+/* Tier-specific logo heights */
+.sponsors__logo--venue {
+    padding: 2rem 3rem;
+    min-height: 160px;
+}
+.sponsors__logo--venue img {
+    max-height: 96px;
+}
+
+.sponsors__logo--platinum {
+    min-height: 120px;
+}
+.sponsors__logo--platinum img {
+    max-height: 72px;
+}
+
+.sponsors__logo--gold {
+    min-height: 96px;
+}
+.sponsors__logo--gold img {
+    max-height: 56px;
+}
+
+.sponsors__logo--silver {
+    min-height: 80px;
+    padding: 1rem 1.5rem;
+}
+.sponsors__logo--silver img {
+    max-height: 48px;
+}
+
+/* ── Mobile tuning ── */
+@media (max-width: 600px) {
+    .sponsors {
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .sponsors__tier--platinum .sponsors__logos,
+    .sponsors__tier--gold .sponsors__logos,
+    .sponsors__tier--silver .sponsors__logos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sponsors__logo {
+        padding: 1rem;
+        min-height: 80px;
+    }
+    .sponsors__logo img {
+        max-height: 48px;
+    }
+    .sponsors__logo--venue {
+        padding: 1.5rem;
+        min-height: 120px;
+    }
+    .sponsors__logo--venue img {
+        max-height: 72px;
+    }
+}
+
+/* =====================================================
+   FOOTER SLIDE — own scroll-snap section
+   ===================================================== */
+.corpse__item--footer {
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: clamp(2rem, 6vh, 4rem) clamp(1rem, 4vw, 3rem);
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(155, 93, 229, 0.06) 0%, transparent 60%),
+        #000;
+}

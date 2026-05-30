@@ -93,8 +93,10 @@ html.modal-open .slide-nav {
 .slide-nav__dot:nth-child(4) { --dot-color: var(--color-green); }
 /* 5. Full Corpse — Magenta */
 .slide-nav__dot:nth-child(5) { --dot-color: var(--color-magenta); }
-/* 6. Closing — Coral */
-.slide-nav__dot:nth-child(6) { --dot-color: var(--color-coral); }
+/* 6. Sponsors — Gold (only present when event has sponsors) */
+.slide-nav__dot[data-slide="sponsors"] { --dot-color: var(--color-gold); }
+/* 7. Closing — Coral */
+.slide-nav__dot:last-child { --dot-color: var(--color-coral); }
 
 /* Mobile — larger touch target, clearer active state */
 @media (max-width: 600px) {

@@ -53,6 +53,7 @@
         <button class="slide-nav__dot" data-slide="4" aria-label="Full corpse">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12h8M10 22l2-6 2 6"/></svg>
         </button>
+        <!-- Sponsors dot injected by event-config.js when the event has sponsors -->
         <button class="slide-nav__dot" data-slide="5" aria-label="Closing">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
         </button>
@@ -921,7 +922,12 @@
                     </li>
                 </ul>
             </div>
+        </section>
 
+        <!-- Sponsors slide injected by event-config.js when the event has sponsors -->
+
+        <!-- ===== FOOTER SLIDE ===== -->
+        <section class="corpse__item corpse__item--footer">
             <footer class="site-footer" role="contentinfo">
                 <p class="site-footer__name">María Rogles x <span id="event-community-label" style="color: var(--color-gold);">WTM</span></p>
                 <div class="site-footer__center">
@@ -998,7 +1004,7 @@
             /* Hide FABs when past reanimate slide (awakening or closing slide visible) */
             (function () {
                 // Select all target sections that should hide the FAB/UI element
-                var targets = document.querySelectorAll('.corpse__item--lower, .corpse__item--awakening, .corpse__item--full, .corpse__item--closing');
+                var targets = document.querySelectorAll('.corpse__item--lower, .corpse__item--awakening, .corpse__item--full, .corpse__item--closing, .corpse__item--sponsors, .corpse__item--footer');
 
                 // Safety check for browser compatibility and element existence
                 if (!targets.length || !('IntersectionObserver' in window)) return;
@@ -1023,11 +1029,13 @@
                     // Toggle the 'fab-hidden' class on the root element based on the global state
                     document.documentElement.classList.toggle('fab-hidden', isAnyVisible);
 
-                    // Specifically hide lang-control only in the closing slide
-                    var isClosingVisible = Array.from(visibleSections).some(function(el) {
-                        return el.classList.contains('corpse__item--closing');
+                    // Specifically hide lang-control on the closing-area slides (tools / sponsors / footer)
+                    var isClosingAreaVisible = Array.from(visibleSections).some(function(el) {
+                        return el.classList.contains('corpse__item--closing')
+                            || el.classList.contains('corpse__item--sponsors')
+                            || el.classList.contains('corpse__item--footer');
                     });
-                    document.documentElement.classList.toggle('lang-hidden', isClosingVisible);
+                    document.documentElement.classList.toggle('lang-hidden', isClosingAreaVisible);
 
                 }, {
                     // 15% of the element must be visible to trigger the change
