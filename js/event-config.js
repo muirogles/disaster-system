@@ -59,7 +59,17 @@
                 slug: 'danocerebral',
                 logo: 'danocerebral.png',
                 logoAlt: 'Daño Cerebral Estatal',
-                url: 'https://danocerebralestatal.org/'
+                url: 'https://danocerebralestatal.org/',
+                phone: '914 178 905',
+                phoneHref: 'tel:+34914178905',
+                services: 5,
+                manifestoImg: 'danocerebral_atencion.jpg',
+                manifestoImgAlt: 'Atención universal e inclusiva — una vida salvada merece ser vivida',
+                collaborator: {
+                    name: 'Fundación ONCE',
+                    logo: 'logo-fonce.png',
+                    url: 'https://www.fundaciononce.es/'
+                }
             }
         },
         guarandinga: {
@@ -211,7 +221,8 @@
         var cause = EVENT.cause;
         if (!cause || !cause.url) return;
 
-        var logoSrc = BASE_PATH + 'img/sponsors/' + cause.logo;
+        var assetBase = BASE_PATH + 'img/sponsors/';
+        var logoSrc = assetBase + cause.logo;
 
         var brainHtml =
             '<div class="cause__brain-wrap" aria-hidden="true">' +
@@ -242,12 +253,60 @@
               '</svg>' +
             '</div>';
 
-        var contentHtml =
-            '<div class="cause__content">' +
+        var introHtml =
+            '<div class="cause__intro">' +
               '<p class="cause__eyebrow" data-i18n="cause.eyebrow"></p>' +
+              '<p class="cause__kicker" data-i18n="cause.kicker"></p>' +
               '<h2 class="cause__title" id="cause-title" data-i18n="cause.title"></h2>' +
               '<p class="cause__lead" data-i18n-html="cause.lead"></p>' +
-              '<p class="cause__body" data-i18n-html="cause.body"></p>' +
+            '</div>';
+
+        var servicesHtml = '';
+        for (var i = 1; i <= cause.services; i++) {
+            servicesHtml +=
+                '<li class="cause__service">' +
+                  '<span class="cause__service-num" aria-hidden="true">' + String(i).padStart(2, '0') + '</span>' +
+                  '<div class="cause__service-body">' +
+                    '<h4 class="cause__service-title" data-i18n="cause.service.' + i + '.title"></h4>' +
+                    '<p class="cause__service-desc" data-i18n="cause.service.' + i + '.desc"></p>' +
+                  '</div>' +
+                '</li>';
+        }
+        var servicesBlockHtml =
+            '<div class="cause__services">' +
+              '<h3 class="cause__services-title" data-i18n="cause.services.title"></h3>' +
+              '<ul class="cause__services-list">' + servicesHtml + '</ul>' +
+            '</div>';
+
+        var manifestoHtml =
+            '<aside class="cause__manifesto">' +
+              '<figure class="cause__manifesto-figure">' +
+                '<img src="' + assetBase + cause.manifestoImg + '" alt="' + cause.manifestoImgAlt + '" loading="lazy">' +
+              '</figure>' +
+              '<div class="cause__manifesto-text">' +
+                '<blockquote class="cause__quote" data-i18n="cause.manifesto"></blockquote>' +
+                '<p class="cause__about" data-i18n-html="cause.about"></p>' +
+              '</div>' +
+            '</aside>';
+
+        var collab = cause.collaborator;
+        var collabHtml = '';
+        if (collab && collab.logo) {
+            var collabUrlOpen = collab.url
+                ? '<a class="cause__collab-link" href="' + collab.url + '" target="_blank" rel="noopener noreferrer" aria-label="' + collab.name + '">'
+                : '<span class="cause__collab-link">';
+            var collabUrlClose = collab.url ? '</a>' : '</span>';
+            collabHtml =
+                '<div class="cause__collab">' +
+                  '<span class="cause__collab-label" data-i18n="cause.collab.label"></span>' +
+                  collabUrlOpen +
+                    '<img src="' + assetBase + collab.logo + '" alt="' + collab.name + '" loading="lazy">' +
+                  collabUrlClose +
+                '</div>';
+        }
+
+        var ctaHtml =
+            '<div class="cause__cta-card">' +
               '<a class="cause__cta" href="' + cause.url + '" target="_blank" rel="noopener noreferrer">' +
                 '<span class="cause__cta-logo-tile">' +
                   '<img src="' + logoSrc + '" alt="' + cause.logoAlt + '" loading="lazy">' +
@@ -257,11 +316,25 @@
                   '<span class="cause__cta-url">danocerebralestatal.org →</span>' +
                 '</span>' +
               '</a>' +
+              (cause.phone
+                ? '<a class="cause__phone" href="' + (cause.phoneHref || ('tel:' + cause.phone.replace(/\s+/g, ''))) + '" data-i18n-aria="cause.cta.phone.aria">' +
+                    '<svg class="cause__phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                      '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>' +
+                    '</svg>' +
+                    '<span class="cause__phone-num">' + cause.phone + '</span>' +
+                  '</a>'
+                : '') +
+              collabHtml +
             '</div>';
 
         var sectionHtml =
             '<section class="corpse__item corpse__item--cause" id="causeSection" aria-labelledby="cause-title">' +
-              '<div class="cause">' + brainHtml + contentHtml + '</div>' +
+              '<div class="cause">' +
+                '<div class="cause__hero">' + brainHtml + introHtml + '</div>' +
+                servicesBlockHtml +
+                manifestoHtml +
+                ctaHtml +
+              '</div>' +
             '</section>';
 
         var footerSlide = document.querySelector('.corpse__item--footer');
