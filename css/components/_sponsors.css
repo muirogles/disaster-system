@@ -375,6 +375,7 @@
     align-items: center;
     justify-content: center;
     overflow: visible;
+    pointer-events: none; /* brain is decorative, not interactive */
 }
 
 /* The .head-wrap normally fills 100dvh — collapse to stage and act as a
