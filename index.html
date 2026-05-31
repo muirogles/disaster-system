@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Design System o Disaster System?</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/event-config.js"></script>
     <meta property="og:title" content="¿Design System o Disaster System?">
     <meta property="og:description" content="El cadáver exquisito entre diseño y desarrollo.">
     <meta property="og:image" content="https://muirogles.github.io/disaster-system/img/social-preview.png">
@@ -52,8 +53,9 @@
         <button class="slide-nav__dot" data-slide="4" aria-label="Full corpse">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12h8M10 22l2-6 2 6"/></svg>
         </button>
+        <!-- Sponsors + cause dot injected by event-config.js when the event has them -->
         <button class="slide-nav__dot" data-slide="5" aria-label="Closing">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-4.35-9-8.5C1 8 4 4 8 4c2 0 3.5 1 4 2 0.5-1 2-2 4-2 4 0 7 4 5 8.5-3 4.15-9 8.5-9 8.5z"/></svg>
         </button>
     </nav>
 
@@ -692,7 +694,7 @@
                     <div class="corpse__header-cta" aria-hidden="true">
                         <p class="corpse__header-cta-label" data-i18n="closing.hashtags.label">Etiquétanos con los hashtags:
                         </p>
-                        <p class="corpse__header-hashtags">
+                        <p class="corpse__header-hashtags" id="event-hashtags">
                             <span class="corpse__header-hashtag">#DisasterSystem</span>
                             <span class="corpse__header-hashtag">#WTMMadrid</span>
                             <span class="corpse__header-hashtag">#IWD2026</span>
@@ -703,7 +705,7 @@
                         <div class="corpse__header-authors">
                             <a class="corpse__header-author-link" href="https://linkedin.com/in/mariarogles" target="_blank"
                                 rel="noopener">/mariarogles</a>
-                            <a class="corpse__header-author-link" href="https://linkedin.com/in/wtmmadrid" target="_blank"
+                            <a id="event-linkedin" class="corpse__header-author-link" href="https://linkedin.com/in/wtmmadrid" target="_blank"
                                 rel="noopener">/wtmmadrid</a>
                         </div>
                     </div>
@@ -842,6 +844,12 @@
                         <div class="closing__group-tools">
                             <div class="closing__tool">
                                 <a class="closing__tool-name"
+                                    href="https://chromewebstore.google.com/detail/devtools-z-index/bcnpmhefiohkpmjacfoanhbjhikegmoe" target="_blank"
+                                    rel="noopener noreferrer">DevTools z-index</a>
+
+                            </div>
+                            <div class="closing__tool">
+                                <a class="closing__tool-name"
                                     href="https://github.com/andreadev-it/stacking-contexts-inspector" target="_blank"
                                     rel="noopener noreferrer">CSS Stacking Context Inspector</a>
 
@@ -914,9 +922,14 @@
                     </li>
                 </ul>
             </div>
+        </section>
 
+        <!-- Sponsors + cause slide injected by event-config.js when the event has them -->
+
+        <!-- ===== FOOTER SLIDE ===== -->
+        <section class="corpse__item corpse__item--footer">
             <footer class="site-footer" role="contentinfo">
-                <p class="site-footer__name">María Rogles x <span style="color: var(--color-gold);">WTM</span></p>
+                <p class="site-footer__name">María Rogles x <span id="event-community-label" style="color: var(--color-gold);">WTM</span></p>
                 <div class="site-footer__center">
                     <span class="site-footer__hashtag disaster-title">#DesignSystemODisasterSystem</span>
                 </div>
@@ -925,9 +938,9 @@
                         rel="noopener" aria-label="María Rogles on LinkedIn">
                         🧟
                     </a>
-                    <a href="https://linkedin.com/in/wtmmadrid" class="site-footer__social-link" target="_blank"
+                    <a id="event-linkedin-footer" href="https://linkedin.com/in/wtmmadrid" class="site-footer__social-link" target="_blank"
                         rel="noopener" aria-label="WTM Madrid on LinkedIn">
-                        <img class="site-footer__social-logo"
+                        <img id="event-logo" class="site-footer__social-logo"
                         src="img/wtm.png"
                         alt="WTM Madrid" aria-hidden="true">
                     </a>
@@ -989,50 +1002,51 @@
             }());
 
             /* Hide FABs when past reanimate slide (awakening or closing slide visible) */
-            (function () {
+            function initFabObserver() {
                 // Select all target sections that should hide the FAB/UI element
-                var targets = document.querySelectorAll('.corpse__item--lower, .corpse__item--awakening, .corpse__item--full, .corpse__item--closing');
+                // NOTE: sponsors / cause slides are injected by event-config.js, so we run
+                // this after DOMContentLoaded to pick them up.
+                var targets = document.querySelectorAll('.corpse__item--lower, .corpse__item--awakening, .corpse__item--full, .corpse__item--closing, .corpse__item--sc, .corpse__item--footer');
 
-                // Safety check for browser compatibility and element existence
                 if (!targets.length || !('IntersectionObserver' in window)) return;
 
-                // We use a Set to track which specific sections are currently inside the viewport
                 var visibleSections = new Set();
 
                 var observer = new IntersectionObserver(function (entries) {
                     entries.forEach(function (entry) {
                         if (entry.isIntersecting) {
-                            // If the section enters the threshold, add it to our tracking Set
                             visibleSections.add(entry.target);
                         } else {
-                            // If it leaves the threshold, remove it from the Set
                             visibleSections.delete(entry.target);
                         }
                     });
 
-                    // The FAB should be hidden if at least one tracked section is visible
                     var isAnyVisible = visibleSections.size > 0;
-
-                    // Toggle the 'fab-hidden' class on the root element based on the global state
                     document.documentElement.classList.toggle('fab-hidden', isAnyVisible);
 
-                    // Specifically hide lang-control only in the closing slide
-                    var isClosingVisible = Array.from(visibleSections).some(function(el) {
-                        return el.classList.contains('corpse__item--closing');
+                    // Hide lang-control on the closing-area slides (tools / sponsors / cause / footer)
+                    var isClosingAreaVisible = Array.from(visibleSections).some(function(el) {
+                        return el.classList.contains('corpse__item--closing')
+                            || el.classList.contains('corpse__item--sc')
+                            || el.classList.contains('corpse__item--footer');
                     });
-                    document.documentElement.classList.toggle('lang-hidden', isClosingVisible);
+                    document.documentElement.classList.toggle('lang-hidden', isClosingAreaVisible);
 
                 }, {
-                    // 15% of the element must be visible to trigger the change
                     threshold: 0.15,
-                    root: null // Default is the browser viewport
+                    root: null
                 });
 
-                // Start observing each targeted section
                 targets.forEach(function (el) {
                     observer.observe(el);
                 });
-            }());
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFabObserver);
+            } else {
+                initFabObserver();
+            }
 
             /* Reanimation Animation Logic */
             (function () {
@@ -1142,7 +1156,7 @@
     <!-- QR fullscreen overlay -->
     <div class="qr-overlay" id="qrOverlay" role="dialog" aria-modal="true" aria-label="QR Code" aria-hidden="true">
         <button class="qr-overlay__close" id="qrOverlayClose" type="button" aria-label="Close">&times;</button>
-        <img class="qr-overlay__img" src="public/img/qr_disaster-system.png" alt="QR code — Disaster System" />
+        <img class="qr-overlay__img" src="/img/qr_disaster-system.png" alt="QR code — Disaster System" />
     </div>
 
         <script>

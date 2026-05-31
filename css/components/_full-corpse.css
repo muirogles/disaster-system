@@ -1576,7 +1576,7 @@ a.closing__tool-name:hover::before {
 }
 
 .corpse__title--system::before {
-    content: 'WTM MADRID 2026';
+    content: var(--community-name) ' 2026';
     position: absolute;
     inset: 0;
     color: rgba(0,255,85,0.15);

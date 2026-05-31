@@ -3,6 +3,11 @@
    (Lang button base styles in base/_buttons.css)
    ===================================================== */
 
+:root {
+    --event-name: 'IWD2026';
+    --community-name: 'WTM MADRID';
+}
+
 /* ── Footer inside the closing slide — terminal card ── */
 .site-footer {
     width: 100%;
@@ -34,7 +39,7 @@
 
 /* Terminal title bar */
 .site-footer::before {
-    content: '● ○ ○   session.end()   ▶   thanks! landing created for IWD2026';
+    content: '● ○ ○   session.end()   ▶   thanks! landing created for ' var(--event-name);
     position: absolute;
     top: 0;
     left: 0;
