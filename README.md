@@ -48,7 +48,31 @@ Each body part maps to a real Design System concept, explored live with code sni
 - **Reanimate button** — CSS transitions that transform the Frankenstein/Tin Man/Lizard creature into a healthy human
 - **ES / EN language toggle** — full i18n support, persisted in `localStorage`
 - **LinkedIn share CTA** — direct share button pointing to the live demo
+- **Multi-event support** — the same landing serves multiple talk editions (WTM, W4TT, Guarandinga…); the URL path picks the right event branding and optional sections
 - **No build step** — pure HTML, CSS, and vanilla JS
+
+### Multi-event architecture
+
+The landing is one codebase serving multiple talk editions. The active event is resolved from the **last path segment** of the URL:
+
+| URL | Event | Optional sections |
+|---|---|---|
+| `/disaster-system/` or `/disaster-system/wtm` | WTM Madrid (default) | — |
+| `/disaster-system/w4tt` | W4TT | Sponsors + Cause |
+| `/disaster-system/guarandinga` | Guarandinga Tech | — |
+
+All event configuration lives in [`js/event-config.js`](js/event-config.js) as a single `EVENTS` object. Each entry declares branding (`logo`, `eventLabel`, `linkedin`, `hashtags`) and may optionally include:
+
+- `sponsors` — keyed by tier (`venue`, `platinum`, `gold`, `silver`) with a list of `{ name, file }`. When present, a sponsors + cause slide is **injected into the DOM** between the closing slide and the footer, along with a matching star nav-dot.
+- `cause` — a non-profit recipient with `logo`, `url`, `phone`, `services`, `manifestoImg` and optional `collaborator`. Rendered as the right column of the same slide (animated brain hero + mission + 5 services + manifesto + CTA).
+
+The bridge line *"100 % de las entradas va a esta causa →"* visually connects the two columns. Events without `sponsors`/`cause` simply skip the section — no markup, no nav dot, no empty space.
+
+**Adding a new event:**
+
+1. Drop the event logo in `public/img/<slug>.png` (also update `BASE_PATH` if needed).
+2. Add an entry to `EVENTS` in [`js/event-config.js`](js/event-config.js) with the slug as key.
+3. Push, deploy, and share `https://muirogles.github.io/disaster-system/<slug>`.
 
 ### Tech Stack
 
@@ -113,7 +137,31 @@ Cada parte del cuerpo corresponde a un concepto real de Design System, explorado
 - **Botón Reanimar** — transiciones CSS que transforman la criatura en un ser humano coordinado
 - **Selector de idioma ES / EN** — i18n completo, con renderizado de HTML en traducciones
 - **CTA de compartir en LinkedIn** — botón de compartir directo a la demo en vivo
+- **Soporte multi-evento** — la misma landing sirve para varias ediciones de la charla (WTM, W4TT, Guarandinga…); la URL determina el branding y las secciones opcionales
 - **Automatización con Vite** — bundling de CSS y JS para máximo rendimiento
+
+### Arquitectura multi-evento
+
+La landing es un único código que sirve para varias ediciones. El evento activo se resuelve a partir del **último segmento de la URL**:
+
+| URL | Evento | Secciones opcionales |
+|---|---|---|
+| `/disaster-system/` o `/disaster-system/wtm` | WTM Madrid (por defecto) | — |
+| `/disaster-system/w4tt` | W4TT | Sponsors + Causa |
+| `/disaster-system/guarandinga` | Guarandinga Tech | — |
+
+Toda la configuración de eventos vive en [`js/event-config.js`](js/event-config.js) dentro del objeto `EVENTS`. Cada entrada declara el branding (`logo`, `eventLabel`, `linkedin`, `hashtags`) y opcionalmente:
+
+- `sponsors` — agrupados por tier (`venue`, `platinum`, `gold`, `silver`) con una lista de `{ name, file }`. Si existen, se **inyecta** una slide de sponsors + causa entre la slide de cierre y el footer, junto con su botón de navegación (icono de estrella ⭐).
+- `cause` — entidad receptora con `logo`, `url`, `phone`, `services`, `manifestoImg` y `collaborator` opcional. Se renderiza en la columna derecha de la misma slide (cerebro animado + misión + 5 servicios + manifiesto + CTA).
+
+El puente *"el 100 % de las entradas va a esta causa →"* conecta visualmente las dos columnas. Los eventos sin `sponsors`/`cause` simplemente no muestran la sección — no se inyecta markup, ni dot, ni espacio vacío.
+
+**Para añadir un nuevo evento:**
+
+1. Sube el logo del evento a `public/img/<slug>.png`.
+2. Añade una entrada a `EVENTS` en [`js/event-config.js`](js/event-config.js) usando el slug como clave.
+3. Push, deploy y comparte `https://muirogles.github.io/disaster-system/<slug>`.
 
 ### Desarrollo y Despliegue
 
@@ -140,8 +188,16 @@ disaster-system/
 ├── vite.config.js          # Vite build config / Configuración de build
 ├── css/                    # Styles / Estilos
 ├── js/                     # Logic / Lógica
-├── public/                 # Static assets (i18n & img) / Archivos estáticos
-└── .github/workflows/      # CI/CD deployment logic / Automatización de despliegue
+│   ├── event-config.js     # Multi-event registry & sponsors/cause renderer
+│   ├── i18n.js             # ES/EN switcher
+│   ├── scroll-control.js   # Snap navigation + active dot tracking
+│   ├── modal.js            # Body-part modal panel
+│   ├── timer.js            # 30-second countdown
+│   └── audio-synth.js      # Web Audio API sounds
+├── public/                 # Static assets / Archivos estáticos
+│   ├── i18n/               # en.json · es.json
+│   └── img/sponsors/       # Per-event sponsor & cause logos
+└── .github/workflows/      # CI/CD deployment / Automatización de despliegue
 ```
 
 
