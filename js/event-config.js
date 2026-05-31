@@ -85,6 +85,20 @@
     };
 
     function resolveEvent() {
+        // 1. Try query parameter: ?event=w4tt
+        var params = new URLSearchParams(window.location.search);
+        var eventParam = params.get('event');
+        if (eventParam && EVENTS[eventParam.toLowerCase()]) {
+            return EVENTS[eventParam.toLowerCase()];
+        }
+
+        // 2. Try hash: #/w4tt
+        var hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+        if (hash && EVENTS[hash]) {
+            return EVENTS[hash];
+        }
+
+        // 3. Try path segment: /disaster-system/w4tt
         var path = window.location.pathname.replace(/\/+$/, '').toLowerCase();
         var segment = path.split('/').pop();
         return EVENTS[segment] || EVENTS.wtm;

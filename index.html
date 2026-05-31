@@ -990,8 +990,9 @@
                 rulesBtn.addEventListener('click', function () {
                     var isVisible = introRules.classList.toggle('is-visible');
                     var key = isVisible ? 'intro.rules.btn.close' : 'intro.rules.btn.open';
-                    rulesBtn.setAttribute('title', t(key));
-                    rulesBtn.setAttribute('aria-label', t(key));
+                    var label = (typeof t === 'function') ? t(key) : key;
+                    rulesBtn.setAttribute('title', label);
+                    rulesBtn.setAttribute('aria-label', label);
                 });
 
                 rulesClose.addEventListener('click', function () {
@@ -1156,7 +1157,7 @@
     <!-- QR fullscreen overlay -->
     <div class="qr-overlay" id="qrOverlay" role="dialog" aria-modal="true" aria-label="QR Code" aria-hidden="true">
         <button class="qr-overlay__close" id="qrOverlayClose" type="button" aria-label="Close">&times;</button>
-        <img class="qr-overlay__img" src="/img/qr_disaster-system.png" alt="QR code — Disaster System" />
+        <img class="qr-overlay__img" src="img/qr_disaster-system.png" alt="QR code — Disaster System" />
     </div>
 
         <script>
