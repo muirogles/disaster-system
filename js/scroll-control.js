@@ -31,29 +31,37 @@ function initScrollControl() {
         }, SCROLL_COOLDOWN);
     }
 
-    /* ── IntersectionObserver — track current slide for nav dots ── */
+    /* ── IntersectionObserver — track current slide for nav dots ──
+       Use multiple thresholds so we still pick the most-visible slide
+       even when slides have different heights (e.g. injected slides with
+       overflow:hidden + custom height). */
     var observer = new IntersectionObserver(function (entries) {
-        // Find the slide that is most visible
-        var mostVisible = null;
-        var maxRatio = 0;
-
+        // Track the visibility ratio for every slide we know about
         entries.forEach(function (entry) {
-            if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-                maxRatio = entry.intersectionRatio;
-                mostVisible = entry.target;
+            entry.target.__visibility = entry.intersectionRatio;
+        });
+
+        // Pick the most visible slide across ALL slides (not just entries)
+        var best = null;
+        var bestRatio = 0;
+        slides.forEach(function (slide) {
+            var r = slide.__visibility || 0;
+            if (r > bestRatio) {
+                bestRatio = r;
+                best = slide;
             }
         });
 
-        if (mostVisible && !isScrolling) {
-            var idx = slides.indexOf(mostVisible);
+        if (best && bestRatio > 0.3) {
+            var idx = slides.indexOf(best);
             if (idx !== -1 && idx !== currentSlide) {
                 currentSlide = idx;
                 window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: idx } }));
             }
         }
-    }, { 
-        threshold: [0.5],
-        rootMargin: "-10% 0px -10% 0px" // Better for mobile chrome UI changes
+    }, {
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: "0px"
     });
 
     slides.forEach(function (slide) {

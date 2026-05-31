@@ -1,115 +1,177 @@
 /* =====================================================
-   SPONSORS SLIDE — terminal-styled tier list
-   Rendered only for events with sponsors data.
-   Follows the closing slide's terminal-card language.
+   SPONSORS + CAUSE — one viewport, two columns
+   Sponsors (left, compact tier list) | Cause (right, brain hero)
    ===================================================== */
 
-.corpse__item--sponsors {
-    justify-content: flex-start;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: auto !important;
-    min-height: 100vh;
-    min-height: 100dvh;
+.corpse__item--sc {
+    --sc-pad-block: clamp(1rem, 2.5dvh, 1.75rem);
+    --sc-pad-inline: clamp(1rem, 2.5vw, 2rem);
+    --sc-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    --sc-stack: clamp(0.5rem, 1.2dvh, 0.875rem);
+
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    padding: var(--sc-pad-block) var(--sc-pad-inline);
+    justify-content: center;
     background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 179, 0, 0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(155, 93, 229, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 40% at 0% 0%,    rgba(255, 179, 0,  0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 100% 50%, rgba(155, 93, 229, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 50% 100%, rgba(0, 137, 123,  0.05) 0%, transparent 60%),
         #000;
 }
 
-.sponsors {
+.sc {
     width: 100%;
-    max-width: 1248px;
-    margin: clamp(2rem, 6vh, 4rem) auto 0;
-    padding: clamp(1.5rem, 5vw, 4rem);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(2rem, 4vh, 3rem);
+    max-width: min(1360px, 100%);
+    height: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: var(--sc-stack);
+    min-height: 0;
 }
 
-/* ── Header ── */
-.sponsors__header {
+/* =====================================================
+   BRIDGE — top storytelling strip with directional arrow
+   Visually points from sponsors (left) to cause (right):
+   "thanks to those who fund this → it ends up here"
+   ===================================================== */
+.sc-bridge {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.65rem, 0.85vw, 0.78rem);
+    color: rgba(255, 179, 0, 0.9);
+    margin: 0;
+    padding: clamp(0.35rem, 0.7dvh, 0.55rem) clamp(0.75rem, 1.5vw, 1.25rem);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255, 179, 0, 0.22);
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        rgba(255, 179, 0, 0.05) 0%,
+        rgba(155, 93, 229, 0.05) 60%,
+        rgba(0, 137, 123, 0.05) 100%);
+    text-wrap: balance;
+    text-align: center;
+    justify-self: stretch;
+    box-shadow: 0 0 24px rgba(255, 179, 0, 0.04);
 }
 
-.sponsors__eyebrow {
+/* =====================================================
+   2-COLUMN SPLIT
+   Sponsors slimmer (4fr), cause wider (8fr) to give the brain space
+   ===================================================== */
+.sc__split {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--sc-gap);
+    min-height: 0;
+    align-items: stretch;
+}
+
+@media (orientation: portrait), (max-width: 880px) {
+    .sc__split {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr) minmax(0, 1.3fr);
+    }
+}
+
+.sc__col {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================================================
+   SPONSORS COLUMN
+   ===================================================== */
+.sc-block--sponsors {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: var(--sc-stack);
+    padding: clamp(0.75rem, 1.2dvh, 1rem) clamp(0.75rem, 1.2vw, 1rem);
+    background: rgba(8, 6, 18, 0.55);
+    border: 1px solid rgba(155, 93, 229, 0.12);
+    border-left: 2px solid rgba(255, 179, 0, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sc-block__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.sc-block__title {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.75rem, 1vw, 0.875rem);
-    color: rgba(155, 93, 229, 0.55);
-    letter-spacing: 0.08em;
+    font-size: clamp(0.82rem, 1.2vw, 1rem);
+    font-weight: 800;
     margin: 0;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.sc-block__title::before {
+    content: '// ';
+    color: rgba(255, 179, 0, 0.7);
     font-weight: 400;
 }
 
-.sponsors__title {
-    font-size: clamp(3rem, 5vw, 6rem);
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.96);
-    text-shadow: 0 0 40px rgba(255, 179, 0, 0.25);
+.sc-block__eyebrow {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.55rem, 0.72vw, 0.65rem);
+    color: rgba(255, 255, 255, 0.32);
     margin: 0;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    text-wrap: balance;
+    line-height: 1.3;
+    text-align: right;
 }
 
-.sponsors__divider {
-    display: flex;
-    align-items: center;
-    gap: 0.7em;
-    width: clamp(160px, 30vw, 320px);
-    color: rgba(255, 179, 0, 0.5);
-    font-size: 0.625rem;
-    letter-spacing: 0.4em;
-}
-
-.sponsors__divider::before,
-.sponsors__divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-}
-
-.sponsors__divider::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 179, 0, 0.4));
-}
-
-.sponsors__divider::after {
-    background: linear-gradient(90deg, rgba(255, 179, 0, 0.4), transparent);
-}
-
-/* ── Tier groups stack ── */
+/* ── Tier rows — venue smaller relative weight, the rest equal ── */
 .sponsors__tiers {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 3vh, 2.5rem);
-    margin-bottom: clamp(2rem, 5vh, 4rem);
+    display: grid;
+    /* Venue no longer dominates — its single logo is naturally wide,
+       so it doesn't need the most height */
+    grid-template-rows: 0.9fr 1fr 1fr 1fr;
+    gap: clamp(0.3rem, 0.6dvh, 0.45rem);
+    min-height: 0;
 }
 
-/* ── A single tier card — terminal-style ── */
 .sponsors__tier {
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(155, 93, 229, 0.15);
-    border-left: 2px solid rgba(155, 93, 229, 0.35);
-    border-radius: 0 8px 8px 0;
-    padding: clamp(1rem, 2vw, 1.5rem);
-    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(155, 93, 229, 0.08);
+    border-left: 2px solid rgba(155, 93, 229, 0.3);
+    border-radius: 0 5px 5px 0;
+    padding: clamp(0.3rem, 0.55dvh, 0.4rem) clamp(0.4rem, 0.75vw, 0.55rem);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(0.18rem, 0.35dvh, 0.25rem);
+    min-height: 0;
 }
 
-/* Tier title — code comment style (matches .closing__group-title) */
 .sponsors__tier-title {
     font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: clamp(0.875rem, 1.2vw, 1.25rem);
+    font-size: clamp(0.52rem, 0.7vw, 0.62rem);
     font-weight: 700;
     color: var(--color-purple);
-    margin: 0 0 1rem;
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid rgba(155, 93, 229, 0.15);
-    letter-spacing: 0.04em;
+    margin: 0;
+    padding-bottom: 0.15em;
+    border-bottom: 1px solid rgba(155, 93, 229, 0.12);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    line-height: 1;
 }
 
 .sponsors__tier-title::before {
@@ -119,175 +181,539 @@
     text-transform: none;
 }
 
-/* ── Per-tier accent colors ── */
-.sponsors__tier--venue {
-    border-left-color: rgba(0, 137, 123, 0.55);
-}
-.sponsors__tier--venue .sponsors__tier-title {
-    color: var(--color-teal);
-    border-bottom-color: rgba(0, 137, 123, 0.2);
-}
-.sponsors__tier--venue .sponsors__tier-title::before {
-    color: rgba(0, 137, 123, 0.55);
-}
+.sponsors__tier--venue    { border-left-color: rgba(0, 137, 123, 0.6); }
+.sponsors__tier--venue    .sponsors__tier-title { color: var(--color-teal); border-bottom-color: rgba(0, 137, 123, 0.2); }
+.sponsors__tier--venue    .sponsors__tier-title::before { color: rgba(0, 137, 123, 0.6); }
 
-.sponsors__tier--platinum {
-    border-left-color: rgba(196, 196, 220, 0.65);
-}
-.sponsors__tier--platinum .sponsors__tier-title {
-    color: rgba(220, 220, 240, 0.92);
-    border-bottom-color: rgba(196, 196, 220, 0.2);
-}
-.sponsors__tier--platinum .sponsors__tier-title::before {
-    color: rgba(196, 196, 220, 0.55);
-}
+.sponsors__tier--platinum { border-left-color: rgba(196, 196, 220, 0.65); }
+.sponsors__tier--platinum .sponsors__tier-title { color: rgba(225, 225, 240, 0.92); border-bottom-color: rgba(196, 196, 220, 0.2); }
+.sponsors__tier--platinum .sponsors__tier-title::before { color: rgba(196, 196, 220, 0.6); }
 
-.sponsors__tier--gold {
-    border-left-color: rgba(255, 179, 0, 0.6);
-}
-.sponsors__tier--gold .sponsors__tier-title {
-    color: var(--color-gold);
-    border-bottom-color: rgba(255, 179, 0, 0.2);
-}
-.sponsors__tier--gold .sponsors__tier-title::before {
-    color: rgba(255, 179, 0, 0.55);
-}
+.sponsors__tier--gold     { border-left-color: rgba(255, 179, 0, 0.65); }
+.sponsors__tier--gold     .sponsors__tier-title { color: var(--color-gold); border-bottom-color: rgba(255, 179, 0, 0.2); }
+.sponsors__tier--gold     .sponsors__tier-title::before { color: rgba(255, 179, 0, 0.6); }
 
-.sponsors__tier--silver {
-    border-left-color: rgba(192, 192, 208, 0.5);
-}
-.sponsors__tier--silver .sponsors__tier-title {
-    color: rgba(200, 200, 215, 0.85);
-    border-bottom-color: rgba(192, 192, 208, 0.18);
-}
-.sponsors__tier--silver .sponsors__tier-title::before {
-    color: rgba(192, 192, 208, 0.5);
-}
+.sponsors__tier--silver   { border-left-color: rgba(210, 210, 225, 0.55); }
+.sponsors__tier--silver   .sponsors__tier-title { color: rgba(220, 220, 230, 0.9); border-bottom-color: rgba(210, 210, 225, 0.2); }
+.sponsors__tier--silver   .sponsors__tier-title::before { color: rgba(210, 210, 225, 0.55); }
 
-/* ── Logo grid ── */
+/* Logo strip — tiles are 16/9 cards, images centered inside */
 .sponsors__logos {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 1rem;
-    align-items: stretch;
+    gap: clamp(0.2rem, 0.4vw, 0.32rem);
+    align-items: center;
+    justify-items: stretch;
+    min-height: 0;
+    height: 100%;
 }
 
-/* Venue: single huge logo */
-.sponsors__tier--venue .sponsors__logos {
-    grid-template-columns: 1fr;
-    justify-items: center;
+.sponsors__tier--venue    .sponsors__logos { grid-template-columns: 1fr; justify-items: center; }
+.sponsors__tier--platinum .sponsors__logos { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.sponsors__tier--gold     .sponsors__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sponsors__tier--silver   .sponsors__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 1200px) {
+    .sponsors__tier--platinum .sponsors__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* Platinum: up to 3 per row on desktop */
-.sponsors__tier--platinum .sponsors__logos {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-/* Gold: 3 per row */
-.sponsors__tier--gold .sponsors__logos {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-}
-
-/* Silver: 3 per row, slightly smaller */
-.sponsors__tier--silver .sponsors__logos {
-    grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
-}
-
-/* ── Logo tile — full-color logos on a light tile for legibility ── */
+/* Tile: 16/9 card with white background, image scales inside */
 .sponsors__logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem 2rem;
+    padding: clamp(0.2rem, 0.5dvh, 0.35rem) clamp(0.3rem, 0.7vw, 0.5rem);
     background: rgba(255, 255, 255, 0.96);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    min-height: 96px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    border-radius: 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    min-width: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    /* The 16/9 ratio is enforced here — tile width is driven by the grid,
+       height follows. Tiles fit their tier row regardless of orientation. */
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-height: 100%;
+    height: auto;
+    justify-self: stretch;
+    align-self: center;
 }
 
 .sponsors__logo:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     background: #fff;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5),
-                0 0 24px rgba(155, 93, 229, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(155, 93, 229, 0.12);
 }
 
 .sponsors__logo img {
-    max-width: 100%;
-    max-height: 64px;
-    height: auto;
+    max-width: 92%;
+    max-height: 78%;
     width: auto;
+    height: auto;
     object-fit: contain;
     object-position: center;
     mix-blend-mode: multiply;
 }
 
-/* Tier-specific logo heights */
+/* Venue tile is wider — give it a flatter ratio so NTT DATA logo breathes */
 .sponsors__logo--venue {
-    padding: 2rem 3rem;
-    min-height: 160px;
+    aspect-ratio: 21 / 9;
+    max-width: 78%;
 }
-.sponsors__logo--venue img {
-    max-height: 96px;
+.sponsors__logo--venue img { max-height: 82%; max-width: 78%; }
+
+/* =====================================================
+   CAUSE COLUMN — brain as hero
+   ===================================================== */
+.cause {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-rows:
+        auto                       /* brand header (logo + title) */
+        minmax(0, 1fr)             /* brain — hero block */
+        auto                       /* lead */
+        auto                       /* services */
+        auto                       /* manifesto (figure + quote + about) */
+        auto;                      /* cta */
+    gap: var(--sc-stack);
+    padding: clamp(0.75rem, 1.2dvh, 1rem) clamp(0.875rem, 1.4vw, 1.15rem);
+    background:
+        radial-gradient(ellipse 90% 50% at 50% 35%, rgba(155, 93, 229, 0.12) 0%, transparent 70%),
+        rgba(8, 6, 18, 0.55);
+    border: 1px solid rgba(155, 93, 229, 0.12);
+    border-left: 2px solid rgba(0, 137, 123, 0.55);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.sponsors__logo--platinum {
-    min-height: 120px;
-}
-.sponsors__logo--platinum img {
-    max-height: 72px;
-}
-
-.sponsors__logo--gold {
-    min-height: 96px;
-}
-.sponsors__logo--gold img {
-    max-height: 56px;
+/* ── Brand header — danocerebral logo anchors the whole cause section ── */
+.cause__brand {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(0.75rem, 1.3vw, 1.1rem);
+    padding-bottom: clamp(0.4rem, 0.7dvh, 0.55rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.sponsors__logo--silver {
-    min-height: 80px;
-    padding: 1rem 1.5rem;
+.cause__brand-link {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: clamp(0.45rem, 0.9dvh, 0.65rem) clamp(0.6rem, 1.1vw, 0.85rem);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4),
+                0 0 32px rgba(155, 93, 229, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.sponsors__logo--silver img {
-    max-height: 48px;
+
+.cause__brand-link:hover,
+.cause__brand-link:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(155, 93, 229, 0.2);
 }
 
-/* ── Mobile tuning ── */
-@media (max-width: 600px) {
-    .sponsors {
-        gap: 1.5rem;
-        padding: 1.5rem 1rem;
-    }
+.cause__brand-link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+}
 
-    .sponsors__tier--platinum .sponsors__logos,
-    .sponsors__tier--gold .sponsors__logos,
-    .sponsors__tier--silver .sponsors__logos {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.cause__brand-logo {
+    display: block;
+    height: clamp(34px, 5.5dvh, 56px);
+    width: auto;
+    max-width: clamp(140px, 16vw, 200px);
+    object-fit: contain;
+}
 
-    .sponsors__logo {
-        padding: 1rem;
-        min-height: 80px;
-    }
-    .sponsors__logo img {
-        max-height: 48px;
-    }
-    .sponsors__logo--venue {
-        padding: 1.5rem;
-        min-height: 120px;
-    }
-    .sponsors__logo--venue img {
-        max-height: 72px;
-    }
+.cause__brand-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+}
+
+.cause__eyebrow {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.78vw, 0.7rem);
+    color: var(--color-teal);
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+
+.cause__title {
+    font-size: clamp(1.125rem, 2.4dvh, 1.75rem);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.96);
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 28px rgba(155, 93, 229, 0.25);
+    text-wrap: balance;
 }
 
 /* =====================================================
-   FOOTER SLIDE — own scroll-snap section
+   BRAIN STAGE — the hero. Big, centered.
+   Reuses the slide-1 .head shell (invisible) ONLY for its
+   DOM structure; the brain itself is re-sized to dominate
+   the stage instead of being 40 % of the head.
+   ===================================================== */
+.cause__brain-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+/* The .head-wrap normally fills 100dvh — collapse to stage and act as a
+   neutral flex parent so the brain can claim the full height. */
+.cause__head-host {
+    height: 100% !important;
+    width: 100%;
+    overflow: visible;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    display: flex !important;
+}
+
+/* Invisible "head" — drops all visuals, becomes a positioning anchor
+   sized so the brain (which is width:105%, height:100% via override below)
+   ends up roughly square and dominant. */
+.cause__head-host .head {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    position: relative !important;
+    width: clamp(160px, 22vw, 320px) !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    aspect-ratio: auto !important;
+    max-width: 100% !important;
+    display: block !important;
+}
+
+.cause__head-host .head::before,
+.cause__head-host .head::after { display: none !important; }
+
+/* THE FIX: brain is normally width:105%, height:40%, top:-12% of the head.
+   In the cause stage we want the brain to BE the hero — give it the full
+   stage height, keep its native aspect/proportions intact by keying off
+   width-as-percentage-of-head. */
+.cause__head-host .brain {
+    position: relative !important;
+    inset-inline-start: auto !important;
+    transform: none !important;
+    top: 0 !important;
+    width: 110% !important;
+    height: 100% !important;
+    margin-inline-start: -5% !important;        /* re-center the 110 % width */
+    box-shadow:
+        0 0 80px rgba(155, 93, 229, 0.4),
+        0 -8px 40px rgba(40, 80, 20, 0.55),
+        inset 0 0 36px rgba(0, 0, 0, 0.6),
+        inset 0 0 80px rgba(60, 120, 40, 0.25) !important;
+}
+
+/* ── Lead paragraph ── */
+.cause__lead {
+    font-size: clamp(0.78rem, 1vw, 0.92rem);
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.5;
+    margin: 0;
+    text-wrap: pretty;
+}
+
+.cause__lead strong { color: var(--color-gold); font-weight: 700; }
+.cause__lead em     { color: var(--color-teal); font-style: italic; font-weight: 500; }
+
+/* =====================================================
+   SERVICES — 5 compact pill-cards in a row
+   ===================================================== */
+.cause__services-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(0.25rem, 0.5vw, 0.4rem);
+    min-height: 0;
+}
+
+@media (max-width: 1200px) {
+    .cause__services-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+    .cause__services-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.cause__service {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3rem;
+    padding: clamp(0.3rem, 0.55dvh, 0.42rem) clamp(0.4rem, 0.7vw, 0.55rem);
+    background: rgba(0, 137, 123, 0.05);
+    border: 1px solid rgba(0, 137, 123, 0.18);
+    border-left: 2px solid rgba(0, 137, 123, 0.5);
+    border-radius: 0 4px 4px 0;
+    transition: border-color 0.25s ease, background 0.25s ease;
+    min-width: 0;
+}
+
+.cause__service:hover {
+    border-left-color: rgba(0, 200, 180, 0.85);
+    background: rgba(0, 137, 123, 0.12);
+}
+
+.cause__service-num {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.58rem, 0.72vw, 0.66rem);
+    font-weight: 700;
+    color: rgba(0, 137, 123, 0.75);
+    line-height: 1;
+    padding-top: 0.15em;
+    flex-shrink: 0;
+}
+
+.cause__service-title {
+    font-size: clamp(0.64rem, 0.82vw, 0.74rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.cause__service-desc {
+    font-size: clamp(0.56rem, 0.7vw, 0.65rem);
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.35;
+    margin: 0.15rem 0 0;
+}
+
+/* =====================================================
+   MANIFESTO — illustration (left, big) + quote/about (right)
+   The "atención universal e inclusiva" image visually
+   embodies the "una vida salvada merece ser vivida" line,
+   so it earns real space — it IS the emotional climax.
+   ===================================================== */
+.cause__manifesto {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    align-items: center;
+    padding: clamp(0.45rem, 0.8dvh, 0.65rem) 0;
+    border-top: 1px solid rgba(155, 93, 229, 0.1);
+}
+
+@media (max-width: 720px) {
+    .cause__manifesto { grid-template-columns: 1fr; }
+}
+
+.cause__manifesto-figure {
+    margin: 0;
+    background: #fff;
+    border-radius: 8px;
+    padding: clamp(0.4rem, 0.8vw, 0.6rem);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45),
+                0 0 32px rgba(255, 179, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    max-height: clamp(110px, 17dvh, 200px);
+}
+
+.cause__manifesto-figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.cause__manifesto-text {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.3rem, 0.6dvh, 0.45rem);
+    min-width: 0;
+}
+
+.cause__quote {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(0.82rem, 1.25vw, 1.0625rem);
+    font-style: italic;
+    font-weight: 500;
+    color: rgba(255, 179, 0, 0.95);
+    line-height: 1.3;
+    margin: 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid rgba(255, 179, 0, 0.6);
+    text-wrap: balance;
+    text-shadow: 0 0 16px rgba(255, 179, 0, 0.18);
+}
+
+.cause__about {
+    font-size: clamp(0.62rem, 0.78vw, 0.72rem);
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.45;
+    margin: 0;
+}
+
+.cause__about strong { color: rgba(255, 255, 255, 0.85); font-weight: 700; }
+
+/* =====================================================
+   CTA ROW — call-to-action label | phone | collaborator
+   (The danocerebral logo lives in the brand header now)
+   ===================================================== */
+.cause__cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(0.4rem, 0.8vw, 0.65rem);
+    padding-top: clamp(0.35rem, 0.6dvh, 0.5rem);
+    border-top: 1px solid rgba(155, 93, 229, 0.12);
+}
+
+.cause__cta-url-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    text-decoration: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 5px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    min-width: 0;
+}
+
+.cause__cta-url-link:hover,
+.cause__cta-url-link:focus-visible {
+    background: rgba(155, 93, 229, 0.1);
+    transform: translateY(-1px);
+}
+
+.cause__cta-url-link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+.cause__cta-label {
+    font-size: clamp(0.7rem, 0.88vw, 0.82rem);
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cause__cta-url {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.6rem, 0.76vw, 0.7rem);
+    color: var(--color-purple);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+}
+
+.cause__cta-url-link:hover .cause__cta-url { color: rgba(196, 160, 245, 1); }
+
+.cause__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.65rem 0.4rem 0.55rem;
+    text-decoration: none;
+    color: var(--color-teal);
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.7rem, 0.88vw, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    background: rgba(0, 137, 123, 0.08);
+    border: 1px solid rgba(0, 137, 123, 0.25);
+    border-left: 3px solid rgba(0, 137, 123, 0.6);
+    border-radius: 0 5px 5px 0;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.cause__phone:hover,
+.cause__phone:focus-visible {
+    background: rgba(0, 137, 123, 0.15);
+    border-left-color: rgba(0, 200, 180, 0.9);
+    color: rgba(120, 220, 200, 1);
+}
+
+.cause__phone:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+.cause__phone svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    opacity: 0.8;
+}
+
+.cause__collab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
+}
+
+@media (max-width: 720px) { .cause__collab { margin-left: 0; } }
+
+.cause__collab-label {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: clamp(0.55rem, 0.7vw, 0.65rem);
+    color: rgba(155, 93, 229, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.cause__collab-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.45rem;
+    background: #fff;
+    border-radius: 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cause__collab-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
+}
+
+.cause__collab-link img {
+    display: block;
+    height: clamp(16px, 2.5dvh, 22px);
+    width: auto;
+    object-fit: contain;
+}
+
+/* =====================================================
+   SLIDE-NAV DOT
+   ===================================================== */
+.slide-nav__dot[data-slide="sc"] { --dot-color: var(--color-gold); }
+
+/* =====================================================
+   FOOTER SLIDE
    ===================================================== */
 .corpse__item--footer {
     justify-content: center;

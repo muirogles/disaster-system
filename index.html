@@ -53,9 +53,9 @@
         <button class="slide-nav__dot" data-slide="4" aria-label="Full corpse">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12h8M10 22l2-6 2 6"/></svg>
         </button>
-        <!-- Sponsors dot injected by event-config.js when the event has sponsors -->
+        <!-- Sponsors + cause dot injected by event-config.js when the event has them -->
         <button class="slide-nav__dot" data-slide="5" aria-label="Closing">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-4.35-9-8.5C1 8 4 4 8 4c2 0 3.5 1 4 2 0.5-1 2-2 4-2 4 0 7 4 5 8.5-3 4.15-9 8.5-9 8.5z"/></svg>
         </button>
     </nav>
 
@@ -924,7 +924,7 @@
             </div>
         </section>
 
-        <!-- Sponsors slide injected by event-config.js when the event has sponsors -->
+        <!-- Sponsors + cause slide injected by event-config.js when the event has them -->
 
         <!-- ===== FOOTER SLIDE ===== -->
         <section class="corpse__item corpse__item--footer">
@@ -1006,7 +1006,7 @@
                 // Select all target sections that should hide the FAB/UI element
                 // NOTE: sponsors / cause slides are injected by event-config.js, so we run
                 // this after DOMContentLoaded to pick them up.
-                var targets = document.querySelectorAll('.corpse__item--lower, .corpse__item--awakening, .corpse__item--full, .corpse__item--closing, .corpse__item--sponsors, .corpse__item--cause, .corpse__item--footer');
+                var targets = document.querySelectorAll('.corpse__item--lower, .corpse__item--awakening, .corpse__item--full, .corpse__item--closing, .corpse__item--sc, .corpse__item--footer');
 
                 if (!targets.length || !('IntersectionObserver' in window)) return;
 
@@ -1027,8 +1027,7 @@
                     // Hide lang-control on the closing-area slides (tools / sponsors / cause / footer)
                     var isClosingAreaVisible = Array.from(visibleSections).some(function(el) {
                         return el.classList.contains('corpse__item--closing')
-                            || el.classList.contains('corpse__item--sponsors')
-                            || el.classList.contains('corpse__item--cause')
+                            || el.classList.contains('corpse__item--sc')
                             || el.classList.contains('corpse__item--footer');
                     });
                     document.documentElement.classList.toggle('lang-hidden', isClosingAreaVisible);
