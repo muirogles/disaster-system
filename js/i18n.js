@@ -18,7 +18,8 @@ window.t = t;
 /* ── Load translations from JSON ── */
 async function loadTranslations(lang) {
     try {
-        const response = await fetch(`./i18n/${lang}.json`);
+        const base = window.BASE_PATH || './';
+        const response = await fetch(`${base}i18n/${lang}.json`);
         if (!response.ok) throw new Error(`Could not load ${lang}.json`);
         window.I18N = await response.json();
         I18N = window.I18N;
