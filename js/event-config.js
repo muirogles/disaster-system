@@ -22,7 +22,8 @@
             communityLabel: 'WTM Madrid',
             linkedin: 'https://linkedin.com/in/wtmmadrid',
             linkedinHandle: '/wtmmadrid',
-            hashtags: ['#DisasterSystem', '#WTMMadrid', '#IWD2026', '#BreakThePattern', '#WomenInTech', '#GDGMadrid']
+            hashtags: ['#DisasterSystem', '#WTMMadrid', '#IWD2026', '#BreakThePattern', '#WomenInTech', '#GDGMadrid'],
+            qr: BASE_PATH + 'img/qr/qr_disaster-system_wtm.png'
         },
         w4tt: {
             logo: BASE_PATH + 'img/w4tt.png',
@@ -33,6 +34,7 @@
             linkedin: 'https://es.linkedin.com/company/women-for-technical-talks-w4tt',
             linkedinHandle: '/w4tt',
             hashtags: ['#DisasterSystem', '#W4TT', '#AnfitrionasW4TT'],
+            qr: BASE_PATH + 'img/qr/qr_disaster-system_w4tt.png',
             sponsors: {
                 venue: [
                     { name: 'NTT DATA', file: 'sponsor-main_nttdata.png' }
@@ -80,7 +82,8 @@
             communityLabel: 'Guarandinga Tech',
             linkedin: 'https://www.linkedin.com/company/guarandinga-tech',
             linkedinHandle: '/guarandinga-tech',
-            hashtags: ['#DisasterSystem', '#GuarandingaTech', '#TenerifeSummerSessions']
+            hashtags: ['#DisasterSystem', '#GuarandingaTech', '#TenerifeSummerSessions'],
+            qr: BASE_PATH + 'img/qr/qr_disaster-system_guarandinga.png'
         }
     };
 
@@ -97,14 +100,14 @@
     document.documentElement.style.setProperty('--community-name', '"' + EVENT.communityLabel + '"');
 
     document.addEventListener('DOMContentLoaded', function () {
-        var logoImg = document.getElementById('event-logo');
-        if (logoImg) {
+        [document.getElementById('event-logo'), document.getElementById('event-logo-heart')].forEach(function (logoImg) {
+            if (!logoImg) return;
             logoImg.src = EVENT.logo;
             logoImg.alt = EVENT.logoAlt;
             if (EVENT.logoClass) {
                 logoImg.classList.add(EVENT.logoClass);
             }
-        }
+        });
 
         var linkedinLink = document.getElementById('event-linkedin');
         if (linkedinLink) {
@@ -129,6 +132,11 @@
         var communityLabelEl = document.getElementById('event-community-label');
         if (communityLabelEl) {
             communityLabelEl.textContent = EVENT.communityLabel;
+        }
+
+        var qrImg = document.getElementById('event-qr');
+        if (qrImg && EVENT.qr) {
+            qrImg.src = EVENT.qr;
         }
 
         renderSponsorsAndCause();
