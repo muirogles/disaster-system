@@ -166,12 +166,14 @@
         'venue    venue'
         'platinum platinum'
         'gold     silver';
-    gap: clamp(0.5rem, 1dvh, 0.75rem);
-    /* Desktop: rows expand to fill the column height so logos grow to match
-       the cause panel. Venue (one wide logo) gets less weight than the
-       multi-logo tiers. The gold+silver band shares one row track. */
-    grid-template-rows: 0.8fr 1fr 1fr;
-    align-content: stretch;
+    /* Each tier sizes to its CONTENT (well-proportioned cards, not stretched
+       boxes). The column fills its height for coherence with the cause card,
+       and any leftover space is spread EVENLY around the three bands so the
+       sponsors read as a balanced, rhythmic stack rather than edge-pinned
+       blocks with a big void in the middle. No tile balloons around its logo. */
+    grid-template-rows: auto auto auto;
+    align-content: space-evenly;
+    gap: clamp(0.4rem, 1dvh, 0.75rem);
     height: 100%;
     min-height: 0;
 }
@@ -204,7 +206,7 @@
     border-radius: 0 5px 5px 0;
     padding: clamp(0.4rem, 0.7dvh, 0.55rem) clamp(0.5rem, 0.9vw, 0.7rem);
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto;
     gap: clamp(0.3rem, 0.5dvh, 0.45rem);
 }
 
@@ -244,9 +246,7 @@
 .sponsors__tier--silver   .sponsors__tier-title { color: rgba(220, 220, 230, 0.9); border-bottom-color: rgba(210, 210, 225, 0.2); }
 .sponsors__tier--silver   .sponsors__tier-title::before { color: rgba(210, 210, 225, 0.55); }
 
-/* Logo strip — tiles are cards, images centered inside.
-   On desktop the strip fills its (stretched) tier row so the tiles grow
-   vertically to fill the column height, matching the cause panel. */
+/* Logo strip — proportioned cards in a row, logo art sized generously inside. */
 .sponsors__logos {
     list-style: none;
     margin: 0;
@@ -255,8 +255,6 @@
     gap: clamp(0.3rem, 0.5vw, 0.45rem);
     align-items: stretch;
     justify-items: stretch;
-    height: 100%;
-    min-height: 0;
 }
 
 .sponsors__tier--venue    .sponsors__logos { grid-template-columns: 1fr; justify-items: center; }
@@ -268,47 +266,43 @@
     .sponsors__tier--platinum .sponsors__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* ── Mobile / portrait — fewer columns, bigger logos ──
-   The slide scrolls naturally now, so tiers can be tall. Drop the dense
-   multi-column strips to 2-up (venue stays 1-up) so each logo reads large
-   instead of being a tiny thumbnail. */
+/* ── Mobile / portrait ──
+   The slide scrolls naturally, so logos read large. Per the design:
+   the VENUE logo spans the full width (it's the headline sponsor), and every
+   other tier shows its logos in a clean 2-column grid at all phone sizes. */
 @media (orientation: portrait), (max-width: 880px) {
+    .sponsors__tier--venue .sponsors__logos {
+        grid-template-columns: 1fr;   /* venue logo full width */
+    }
+
     .sponsors__tier--platinum .sponsors__logos,
     .sponsors__tier--gold     .sponsors__logos,
     .sponsors__tier--silver   .sponsors__logos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));   /* the rest: 2 columns */
         gap: clamp(0.5rem, 2vw, 0.875rem);
     }
 }
 
-@media (max-width: 420px) {
-    .sponsors__tier--platinum .sponsors__logos,
-    .sponsors__tier--gold     .sponsors__logos,
-    .sponsors__tier--silver   .sponsors__logos {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Tile: white card with the image scaled inside.
-   DESKTOP (default): the tile stretches to fill its tier row so the whole
-   sponsors column fills the height, staying coherent with the cause panel.
-   A min-height keeps short rows from collapsing the card too thin. */
+/* Tile: white card with a well-proportioned shape, logo art as the hero.
+   The card is sized by a flat aspect ratio (height follows the grid-driven
+   width) so logos sit in a comfortable horizontal card instead of a tall,
+   mostly-empty box. Tiles in a row stretch to equal height for tidiness. */
 .sponsors__logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(0.3rem, 0.6dvh, 0.5rem) clamp(0.3rem, 0.7vw, 0.5rem);
+    padding: clamp(0.4rem, 0.8dvh, 0.65rem) clamp(0.5rem, 1vw, 0.8rem);
     background: rgba(255, 255, 255, 0.96);
-    border-radius: 4px;
+    border-radius: 5px;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     min-width: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     overflow: hidden;
+    aspect-ratio: 5 / 3;
     width: 100%;
-    height: 100%;
-    min-height: clamp(40px, 6dvh, 72px);
+    height: auto;
     justify-self: stretch;
-    align-self: stretch;
+    align-self: center;   /* never stretch past the aspect ratio → no tall, empty cards */
 }
 
 .sponsors__logo:hover {
@@ -317,9 +311,12 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(155, 93, 229, 0.12);
 }
 
+/* Logo art is the hero — fill most of the card. object-fit:contain keeps each
+   logo's own aspect ratio intact, so wide marks stay wide and square marks
+   stay square; they just get as big as the card allows. */
 .sponsors__logo img {
-    max-width: 90%;
-    max-height: 82%;
+    max-width: 92%;
+    max-height: 84%;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -327,36 +324,38 @@
     mix-blend-mode: multiply;
 }
 
-/* On mobile/portrait the section scrolls naturally, so tiles aren't filling a
-   fixed column height — give them a fixed 16/9 card shape (height follows
-   width) and let the logo art fill more of the now-bigger tile. */
+/* On mobile/portrait the section scrolls naturally — give tiles a slightly
+   flatter card and let the logo art fill even more of the now-bigger tile. */
 @media (orientation: portrait), (max-width: 880px) {
     .sponsors__logo {
         aspect-ratio: 16 / 9;
-        height: auto;
-        min-height: 0;
         align-self: center;
     }
 
     .sponsors__logo img {
-        max-width: 88%;
-        max-height: 86%;
+        max-width: 90%;
+        max-height: 88%;
     }
 }
 
-/* Venue is the single wide NTT DATA logo — cap its width so it stays centered
-   and doesn't stretch edge-to-edge. On desktop it still fills its row height
-   (via the base tile rule); on mobile it gets the flatter 21/9 card below. */
+/* Venue — the headline NTT DATA logo. It's a single wide mark, so it gets a
+   flatter, more prominent card than the multi-logo tiers, centered in its row
+   and capped so it doesn't sprawl edge-to-edge. The logo art fills it boldly. */
 .sponsors__logo--venue {
-    max-width: clamp(180px, 60%, 340px);
+    aspect-ratio: 16 / 7;
+    max-width: clamp(220px, 70%, 380px);
     justify-self: center;
+    padding: clamp(0.6rem, 1.2dvh, 1rem) clamp(0.9rem, 1.8vw, 1.5rem);
 }
-.sponsors__logo--venue img { max-height: 82%; max-width: 100%; }
+.sponsors__logo--venue img {
+    max-height: 86%;
+    max-width: 100%;
+}
 
 @media (orientation: portrait), (max-width: 880px) {
     .sponsors__logo--venue {
         aspect-ratio: 21 / 9;
-        max-width: 78%;
+        max-width: 88%;
     }
 }
 
@@ -636,21 +635,30 @@
 }
 
 /* =====================================================
-   MANIFESTO — illustration (left, big) + quote/about (right)
-   The "atención universal e inclusiva" image visually
-   embodies the "una vida salvada merece ser vivida" line,
-   so it earns real space — it IS the emotional climax.
+   MANIFESTO — full-width band below the sponsors|brain row.
+   Illustration (left, big) + quote/about/CTA (right). The
+   "atención universal e inclusiva" image visually embodies the
+   "una vida salvada merece ser vivida" line, so it earns real
+   space — it IS the emotional climax. Spanning the full slide
+   width lets the figure breathe and gives the CTA room beside it.
    ===================================================== */
 .cause__manifesto {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: clamp(1rem, 2vw, 1.75rem);
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
     align-items: center;
-    padding: clamp(0.6rem, 1.2dvh, 1rem) 0;
-    border-top: 1px solid rgba(155, 93, 229, 0.1);
+    /* Own card framing now that it's a standalone full-width band, echoing
+       the .cause panel so the section still reads as one cohesive story. */
+    padding: clamp(1rem, 1.8dvh, 1.5rem) clamp(1rem, 1.6vw, 1.5rem);
+    background:
+        radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 179, 0, 0.05) 0%, transparent 70%),
+        rgba(8, 6, 18, 0.55);
+    border: 1px solid rgba(155, 93, 229, 0.12);
+    border-left: 2px solid rgba(255, 179, 0, 0.45);
+    border-radius: 10px;
 }
 
-@media (max-width: 720px) {
+@media (orientation: portrait), (max-width: 880px) {
     .cause__manifesto { grid-template-columns: 1fr; }
 }
 
@@ -658,17 +666,16 @@
     margin: 0;
     background: #fff;
     border-radius: 8px;
-    padding: clamp(0.5rem, 1vw, 0.8rem);
+    padding: clamp(0.6rem, 1.2vw, 1rem);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45),
                 0 0 32px rgba(255, 179, 0, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     width: 100%;
-    /* The slide scrolls naturally now, so the figure can be the emotional
-       climax it deserves — substantially larger than the old cramped cap. */
-    max-height: clamp(200px, 32dvh, 360px);
+    /* Full-width band gives the figure room to be the emotional climax. */
+    max-height: clamp(220px, 36dvh, 420px);
 }
 
 .cause__manifesto-figure img {
@@ -683,7 +690,7 @@
 .cause__manifesto-text {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.3rem, 0.6dvh, 0.45rem);
+    gap: clamp(0.5rem, 1dvh, 0.85rem);
     min-width: 0;
 }
 
