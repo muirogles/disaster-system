@@ -4,15 +4,18 @@
    ===================================================== */
 
 .corpse__item--sc {
-    --sc-pad-block: clamp(1rem, 2.5dvh, 1.75rem);
+    --sc-pad-block: clamp(1.5rem, 4dvh, 3rem);
     --sc-pad-inline: clamp(1rem, 2.5vw, 2rem);
     --sc-gap: clamp(0.75rem, 1.5vw, 1.25rem);
-    --sc-stack: clamp(0.5rem, 1.2dvh, 0.875rem);
+    --sc-stack: clamp(0.75rem, 1.5dvh, 1.25rem);
 
-    height: 100vh;
-    height: 100dvh;
-    min-height: 0;
-    overflow: hidden;
+    /* This slide scrolls naturally — it grows to fit its content instead of
+       being clamped to one viewport. Nothing gets cropped. Every OTHER slide
+       still snaps; we opt this one out of the snap below. */
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: visible;
     padding: var(--sc-pad-block) var(--sc-pad-inline);
     justify-content: center;
     background:
@@ -22,15 +25,24 @@
         #000;
 }
 
+/* This slide is taller than the viewport (it scrolls naturally). We still
+   want the nav dot / keyboard nav to land cleanly at its TOP, so we keep a
+   snap point at its start — but because the snap AREA is taller than the
+   viewport, `mandatory` snapping does NOT trap you: once you're inside, you
+   scroll through its full height freely, then snap resumes at the next slide.
+   `scroll-snap-stop: normal` (not `always`) keeps it from being a hard stop. */
+.corpse__item--sc {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
 .sc {
     width: 100%;
     max-width: min(1360px, 100%);
-    height: 100%;
     margin: 0 auto;
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: var(--sc-stack);
-    min-height: 0;
 }
 
 /* =====================================================
@@ -70,20 +82,23 @@
     display: grid;
     grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
     gap: var(--sc-gap);
-    min-height: 0;
+    /* Stretch both columns to equal height on desktop so the sponsors panel
+       matches the taller cause panel and its logos fill the full height —
+       keeping the two columns visually coherent rather than leaving the
+       sponsors side short with empty space below it. */
     align-items: stretch;
 }
 
 @media (orientation: portrait), (max-width: 880px) {
     .sc__split {
         grid-template-columns: 1fr;
-        grid-template-rows: minmax(0, 1fr) minmax(0, 1.3fr);
+        /* Stacked layout scrolls naturally — let each panel size to content. */
+        align-items: start;
     }
 }
 
 .sc__col {
     min-width: 0;
-    min-height: 0;
     display: flex;
     flex-direction: column;
 }
@@ -92,17 +107,17 @@
    SPONSORS COLUMN
    ===================================================== */
 .sc-block--sponsors {
+    /* Fill the stretched column height (desktop) so the tier grid below can
+       expand its rows to match the cause panel. Harmless when stacked. */
     flex: 1;
-    min-height: 0;
     display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
     gap: var(--sc-stack);
-    padding: clamp(0.75rem, 1.2dvh, 1rem) clamp(0.75rem, 1.2vw, 1rem);
+    padding: clamp(0.875rem, 1.4dvh, 1.25rem) clamp(0.875rem, 1.4vw, 1.25rem);
     background: rgba(8, 6, 18, 0.55);
     border: 1px solid rgba(155, 93, 229, 0.12);
     border-left: 2px solid rgba(255, 179, 0, 0.4);
     border-radius: 10px;
-    overflow: hidden;
 }
 
 .sc-block__head {
@@ -139,14 +154,47 @@
     text-align: right;
 }
 
-/* ── Tier rows — venue smaller relative weight, the rest equal ── */
+/* ── Tier rows ──
+   On desktop, venue + platinum span the full width, then gold and silver
+   sit side-by-side as two columns (gold left, silver right). The single-logo
+   venue and the wide platinum strip want full width; gold/silver each hold
+   three logos and pair up cleanly as a 2-col row with visual symmetry. */
 .sponsors__tiers {
     display: grid;
-    /* Venue no longer dominates — its single logo is naturally wide,
-       so it doesn't need the most height */
-    grid-template-rows: 0.9fr 1fr 1fr 1fr;
-    gap: clamp(0.3rem, 0.6dvh, 0.45rem);
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        'venue    venue'
+        'platinum platinum'
+        'gold     silver';
+    gap: clamp(0.5rem, 1dvh, 0.75rem);
+    /* Desktop: rows expand to fill the column height so logos grow to match
+       the cause panel. Venue (one wide logo) gets less weight than the
+       multi-logo tiers. The gold+silver band shares one row track. */
+    grid-template-rows: 0.8fr 1fr 1fr;
+    align-content: stretch;
+    height: 100%;
     min-height: 0;
+}
+
+.sponsors__tier--venue    { grid-area: venue; }
+.sponsors__tier--platinum { grid-area: platinum; }
+.sponsors__tier--gold     { grid-area: gold; }
+.sponsors__tier--silver   { grid-area: silver; }
+
+/* Narrow viewports — every tier stacks full-width so logos can grow large,
+   and the grid sizes to its content as the section scrolls naturally. */
+@media (orientation: portrait), (max-width: 880px) {
+    .sponsors__tiers {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'venue'
+            'platinum'
+            'gold'
+            'silver';
+        grid-template-rows: none;
+        align-content: start;
+        height: auto;
+    }
 }
 
 .sponsors__tier {
@@ -154,11 +202,10 @@
     border: 1px solid rgba(155, 93, 229, 0.08);
     border-left: 2px solid rgba(155, 93, 229, 0.3);
     border-radius: 0 5px 5px 0;
-    padding: clamp(0.3rem, 0.55dvh, 0.4rem) clamp(0.4rem, 0.75vw, 0.55rem);
+    padding: clamp(0.4rem, 0.7dvh, 0.55rem) clamp(0.5rem, 0.9vw, 0.7rem);
     display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
-    gap: clamp(0.18rem, 0.35dvh, 0.25rem);
-    min-height: 0;
+    grid-template-rows: auto 1fr;
+    gap: clamp(0.3rem, 0.5dvh, 0.45rem);
 }
 
 .sponsors__tier-title {
@@ -197,17 +244,19 @@
 .sponsors__tier--silver   .sponsors__tier-title { color: rgba(220, 220, 230, 0.9); border-bottom-color: rgba(210, 210, 225, 0.2); }
 .sponsors__tier--silver   .sponsors__tier-title::before { color: rgba(210, 210, 225, 0.55); }
 
-/* Logo strip — tiles are 16/9 cards, images centered inside */
+/* Logo strip — tiles are cards, images centered inside.
+   On desktop the strip fills its (stretched) tier row so the tiles grow
+   vertically to fill the column height, matching the cause panel. */
 .sponsors__logos {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: clamp(0.2rem, 0.4vw, 0.32rem);
-    align-items: center;
+    gap: clamp(0.3rem, 0.5vw, 0.45rem);
+    align-items: stretch;
     justify-items: stretch;
-    min-height: 0;
     height: 100%;
+    min-height: 0;
 }
 
 .sponsors__tier--venue    .sponsors__logos { grid-template-columns: 1fr; justify-items: center; }
@@ -219,26 +268,47 @@
     .sponsors__tier--platinum .sponsors__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* Tile: 16/9 card with white background, image scales inside */
+/* ── Mobile / portrait — fewer columns, bigger logos ──
+   The slide scrolls naturally now, so tiers can be tall. Drop the dense
+   multi-column strips to 2-up (venue stays 1-up) so each logo reads large
+   instead of being a tiny thumbnail. */
+@media (orientation: portrait), (max-width: 880px) {
+    .sponsors__tier--platinum .sponsors__logos,
+    .sponsors__tier--gold     .sponsors__logos,
+    .sponsors__tier--silver   .sponsors__logos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(0.5rem, 2vw, 0.875rem);
+    }
+}
+
+@media (max-width: 420px) {
+    .sponsors__tier--platinum .sponsors__logos,
+    .sponsors__tier--gold     .sponsors__logos,
+    .sponsors__tier--silver   .sponsors__logos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tile: white card with the image scaled inside.
+   DESKTOP (default): the tile stretches to fill its tier row so the whole
+   sponsors column fills the height, staying coherent with the cause panel.
+   A min-height keeps short rows from collapsing the card too thin. */
 .sponsors__logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(0.2rem, 0.5dvh, 0.35rem) clamp(0.3rem, 0.7vw, 0.5rem);
+    padding: clamp(0.3rem, 0.6dvh, 0.5rem) clamp(0.3rem, 0.7vw, 0.5rem);
     background: rgba(255, 255, 255, 0.96);
     border-radius: 4px;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     min-width: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     overflow: hidden;
-    /* The 16/9 ratio is enforced here — tile width is driven by the grid,
-       height follows. Tiles fit their tier row regardless of orientation. */
-    aspect-ratio: 16 / 9;
     width: 100%;
-    max-height: 100%;
-    height: auto;
+    height: 100%;
+    min-height: clamp(40px, 6dvh, 72px);
     justify-self: stretch;
-    align-self: center;
+    align-self: stretch;
 }
 
 .sponsors__logo:hover {
@@ -248,8 +318,8 @@
 }
 
 .sponsors__logo img {
-    max-width: 92%;
-    max-height: 78%;
+    max-width: 90%;
+    max-height: 82%;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -257,36 +327,79 @@
     mix-blend-mode: multiply;
 }
 
-/* Venue tile is wider — give it a flatter ratio so NTT DATA logo breathes */
-.sponsors__logo--venue {
-    aspect-ratio: 21 / 9;
-    max-width: 78%;
+/* On mobile/portrait the section scrolls naturally, so tiles aren't filling a
+   fixed column height — give them a fixed 16/9 card shape (height follows
+   width) and let the logo art fill more of the now-bigger tile. */
+@media (orientation: portrait), (max-width: 880px) {
+    .sponsors__logo {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        min-height: 0;
+        align-self: center;
+    }
+
+    .sponsors__logo img {
+        max-width: 88%;
+        max-height: 86%;
+    }
 }
-.sponsors__logo--venue img { max-height: 82%; max-width: 78%; }
+
+/* Venue is the single wide NTT DATA logo — cap its width so it stays centered
+   and doesn't stretch edge-to-edge. On desktop it still fills its row height
+   (via the base tile rule); on mobile it gets the flatter 21/9 card below. */
+.sponsors__logo--venue {
+    max-width: clamp(180px, 60%, 340px);
+    justify-self: center;
+}
+.sponsors__logo--venue img { max-height: 82%; max-width: 100%; }
+
+@media (orientation: portrait), (max-width: 880px) {
+    .sponsors__logo--venue {
+        aspect-ratio: 21 / 9;
+        max-width: 78%;
+    }
+}
 
 /* =====================================================
    CAUSE COLUMN — brain as hero
    ===================================================== */
 .cause {
-    flex: 1;
-    min-height: 0;
-    display: grid;
-    grid-template-rows:
-        auto                       /* brand header (logo + title) */
-        minmax(0, 1fr)             /* brain — hero block */
-        auto                       /* lead */
-        auto                       /* services */
-        auto                       /* manifesto (figure + quote + about) */
-        auto;                      /* cta */
+    display: flex;
+    flex-direction: column;
     gap: var(--sc-stack);
-    padding: clamp(0.75rem, 1.2dvh, 1rem) clamp(0.875rem, 1.4vw, 1.15rem);
+    padding: clamp(0.875rem, 1.4dvh, 1.25rem) clamp(1rem, 1.6vw, 1.4rem);
     background:
         radial-gradient(ellipse 90% 50% at 50% 35%, rgba(155, 93, 229, 0.12) 0%, transparent 70%),
         rgba(8, 6, 18, 0.55);
     border: 1px solid rgba(155, 93, 229, 0.12);
     border-left: 2px solid rgba(0, 137, 123, 0.55);
     border-radius: 10px;
-    overflow: hidden;
+}
+
+/* ── Cause split — brain (left) | lead + services (right) ──
+   On desktop the brain is the hero on the left while the lead paragraph and
+   service list stack in a column on the right, giving the section a clear
+   visual rhythm: one big illustration balanced by a tidy text column.
+   On narrow viewports it collapses to a single stack (brain on top). */
+.cause__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(1rem, 2vw, 1.75rem);
+    align-items: center;
+}
+
+@media (orientation: portrait), (max-width: 880px) {
+    .cause__split {
+        grid-template-columns: 1fr;
+        gap: var(--sc-stack);
+    }
+}
+
+.cause__intro {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 1.2dvh, 1rem);
+    min-width: 0;
 }
 
 /* ── Brand header — danocerebral logo anchors the whole cause section ── */
@@ -369,13 +482,21 @@
 .cause__brain-stage {
     position: relative;
     width: 100%;
-    height: 100%;
-    min-height: 0;
+    /* The slide scrolls naturally, so the stage no longer inherits a fixed
+       row height — give it an explicit, viewport-scaled height so the brain
+       stays a dominant hero without collapsing. */
+    height: clamp(220px, 34dvh, 380px);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: visible;
     pointer-events: none; /* brain is decorative, not interactive */
+}
+
+@media (orientation: portrait), (max-width: 880px) {
+    .cause__brain-stage {
+        height: clamp(200px, 30dvh, 320px);
+    }
 }
 
 /* The .head-wrap normally fills 100dvh — collapse to stage and act as a
@@ -441,24 +562,34 @@
 .cause__lead em     { color: var(--color-teal); font-style: italic; font-weight: 500; }
 
 /* =====================================================
-   SERVICES — 5 compact pill-cards in a row
+   SERVICES — compact pill-cards.
+   These now live in the right column of the cause split (beside the brain),
+   so they read as a tidy 2-up list rather than a wide 5-across strip.
    ===================================================== */
 .cause__services-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: clamp(0.25rem, 0.5vw, 0.4rem);
-    min-height: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.4rem, 0.7vw, 0.6rem);
 }
 
-@media (max-width: 1200px) {
-    .cause__services-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* With an odd service count (5), the last card would orphan in a 2-up grid —
+   let it span the full row so the list closes cleanly instead of leaving a gap. */
+.cause__services-list > .cause__service:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
 }
 
-@media (max-width: 720px) {
+/* When the split collapses (portrait / narrow), the cause panel is full-width
+   so services stay 2-up across the wider row, then drop to a single column on
+   phones where 2-up would get too cramped. */
+@media (orientation: portrait), (max-width: 880px) {
     .cause__services-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 520px) {
+    .cause__services-list { grid-template-columns: 1fr; }
 }
 
 .cause__service {
@@ -512,10 +643,10 @@
    ===================================================== */
 .cause__manifesto {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(1rem, 2vw, 1.75rem);
     align-items: center;
-    padding: clamp(0.45rem, 0.8dvh, 0.65rem) 0;
+    padding: clamp(0.6rem, 1.2dvh, 1rem) 0;
     border-top: 1px solid rgba(155, 93, 229, 0.1);
 }
 
@@ -527,7 +658,7 @@
     margin: 0;
     background: #fff;
     border-radius: 8px;
-    padding: clamp(0.4rem, 0.8vw, 0.6rem);
+    padding: clamp(0.5rem, 1vw, 0.8rem);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45),
                 0 0 32px rgba(255, 179, 0, 0.08);
     display: flex;
@@ -535,7 +666,9 @@
     justify-content: center;
     aspect-ratio: 4 / 3;
     width: 100%;
-    max-height: clamp(110px, 17dvh, 200px);
+    /* The slide scrolls naturally now, so the figure can be the emotional
+       climax it deserves — substantially larger than the old cramped cap. */
+    max-height: clamp(200px, 32dvh, 360px);
 }
 
 .cause__manifesto-figure img {

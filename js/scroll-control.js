@@ -31,42 +31,63 @@ function initScrollControl() {
         }, SCROLL_COOLDOWN);
     }
 
-    /* ── IntersectionObserver — track current slide for nav dots ──
-       Use multiple thresholds so we still pick the most-visible slide
-       even when slides have different heights (e.g. injected slides with
-       overflow:hidden + custom height). */
-    var observer = new IntersectionObserver(function (entries) {
-        // Track the visibility ratio for every slide we know about
-        entries.forEach(function (entry) {
-            entry.target.__visibility = entry.intersectionRatio;
-        });
+    /* ── Active-slide tracking for the nav dots ──
+       We can't rely on IntersectionObserver's intersectionRatio: that's the
+       fraction of the SLIDE that's visible, which breaks for slides taller
+       than the viewport (e.g. the sponsors/cause slide scrolls naturally and
+       can be 2–4× viewport height, so it never reaches a high ratio and the
+       dot never activates / pulses). Instead we measure how much of the
+       VIEWPORT each slide covers — that's reliable regardless of slide height.
 
-        // Pick the most visible slide across ALL slides (not just entries)
-        var best = null;
-        var bestRatio = 0;
-        slides.forEach(function (slide) {
-            var r = slide.__visibility || 0;
-            if (r > bestRatio) {
-                bestRatio = r;
-                best = slide;
+       IntersectionObserver still drives WHEN we recompute (it fires on every
+       threshold crossing + scroll), but the decision uses viewport coverage. */
+    function updateActiveSlide() {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var best = -1;
+        var bestCoverage = 0;
+
+        slides.forEach(function (slide, i) {
+            var rect = slide.getBoundingClientRect();
+            // Visible height of this slide within the viewport, clamped to [0, vh].
+            var visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+            if (visible < 0) visible = 0;
+            var coverage = visible / vh; // fraction of the SCREEN this slide fills
+            if (coverage > bestCoverage) {
+                bestCoverage = coverage;
+                best = i;
             }
         });
 
-        if (best && bestRatio > 0.3) {
-            var idx = slides.indexOf(best);
-            if (idx !== -1 && idx !== currentSlide) {
-                currentSlide = idx;
-                window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: idx } }));
-            }
+        // A slide needs to fill at least ~40% of the screen to claim the nav.
+        if (best !== -1 && bestCoverage > 0.4 && best !== currentSlide) {
+            currentSlide = best;
+            window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: best } }));
         }
+    }
+
+    var observer = new IntersectionObserver(function () {
+        updateActiveSlide();
     }, {
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
         rootMargin: "0px"
     });
 
     slides.forEach(function (slide) {
         observer.observe(slide);
     });
+
+    // IntersectionObserver fires sparsely while scrolling THROUGH a tall slide
+    // (no threshold is crossed mid-slide), so also recompute on scroll — but
+    // throttle to a rAF so it stays cheap.
+    var scrollTick = false;
+    window.addEventListener('scroll', function () {
+        if (scrollTick) return;
+        scrollTick = true;
+        window.requestAnimationFrame(function () {
+            scrollTick = false;
+            updateActiveSlide();
+        });
+    }, { passive: true });
 
     window.scrollControl = {
         goToSlide: goToSlide,

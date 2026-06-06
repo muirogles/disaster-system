@@ -299,9 +299,15 @@
                       '<h2 class="cause__title" id="cause-title" data-i18n="cause.title"></h2>' +
                     '</div>' +
                   '</header>' +
-                  brainHtml +
-                  '<p class="cause__lead" data-i18n-html="cause.lead"></p>' +
-                  '<ul class="cause__services-list">' + servicesHtml + '</ul>' +
+                  // Desktop: brain (left) | lead + services (right) as two columns.
+                  // On narrow viewports the split collapses to a single stack.
+                  '<div class="cause__split">' +
+                    brainHtml +
+                    '<div class="cause__intro">' +
+                      '<p class="cause__lead" data-i18n-html="cause.lead"></p>' +
+                      '<ul class="cause__services-list">' + servicesHtml + '</ul>' +
+                    '</div>' +
+                  '</div>' +
                   '<div class="cause__manifesto">' +
                     (cause.manifestoImg
                       ? '<figure class="cause__manifesto-figure">' +
