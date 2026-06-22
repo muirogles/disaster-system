@@ -288,6 +288,38 @@
             //   services list
             //   manifesto quote + about
             //   cta row (call + collaborator)
+            // CTA row — now lives inside the manifesto's text column (under the
+            // quote + about), so the call-to-action sits beside the manifesto
+            // illustration rather than in a separate band.
+            var ctaRowHtml =
+                '<div class="cause__cta-row">' +
+                  '<a class="cause__cta-url-link" href="' + cause.url + '" target="_blank" rel="noopener noreferrer">' +
+                    '<span class="cause__cta-label" data-i18n="cause.cta.label"></span>' +
+                    '<span class="cause__cta-url">danocerebralestatal.org →</span>' +
+                  '</a>' +
+                  phoneHtml +
+                  collabHtml +
+                '</div>';
+
+            // Manifesto band — pulled OUT of the .cause card so it can span the
+            // full slide width below the sponsors|brain row. Figure (left) +
+            // quote/about/CTA (right).
+            var manifestoHtml =
+                '<div class="cause__manifesto">' +
+                  (cause.manifestoImg
+                    ? '<figure class="cause__manifesto-figure">' +
+                        '<img src="' + assetBase + cause.manifestoImg + '" alt="' + cause.manifestoImgAlt + '" loading="lazy">' +
+                      '</figure>'
+                    : '') +
+                  '<div class="cause__manifesto-text">' +
+                    '<blockquote class="cause__quote" data-i18n="cause.manifesto"></blockquote>' +
+                    '<p class="cause__about" data-i18n-html="cause.about"></p>' +
+                    ctaRowHtml +
+                  '</div>' +
+                '</div>';
+
+            // Cause card (top-right of the split): brand header + brain + intro.
+            // Manifesto/CTA are appended separately as a full-width band below.
             var causeBand =
                 '<section class="cause" aria-labelledby="cause-title">' +
                   '<header class="cause__brand">' +
@@ -299,40 +331,33 @@
                       '<h2 class="cause__title" id="cause-title" data-i18n="cause.title"></h2>' +
                     '</div>' +
                   '</header>' +
-                  brainHtml +
-                  '<p class="cause__lead" data-i18n-html="cause.lead"></p>' +
-                  '<ul class="cause__services-list">' + servicesHtml + '</ul>' +
-                  '<div class="cause__manifesto">' +
-                    (cause.manifestoImg
-                      ? '<figure class="cause__manifesto-figure">' +
-                          '<img src="' + assetBase + cause.manifestoImg + '" alt="' + cause.manifestoImgAlt + '" loading="lazy">' +
-                        '</figure>'
-                      : '') +
-                    '<div class="cause__manifesto-text">' +
-                      '<blockquote class="cause__quote" data-i18n="cause.manifesto"></blockquote>' +
-                      '<p class="cause__about" data-i18n-html="cause.about"></p>' +
+                  // Desktop: brain (left) | lead + services (right) as two columns.
+                  // On narrow viewports the split collapses to a single stack.
+                  '<div class="cause__split">' +
+                    brainHtml +
+                    '<div class="cause__intro">' +
+                      '<p class="cause__lead" data-i18n-html="cause.lead"></p>' +
+                      '<ul class="cause__services-list">' + servicesHtml + '</ul>' +
                     '</div>' +
-                  '</div>' +
-                  '<div class="cause__cta-row">' +
-                    '<a class="cause__cta-url-link" href="' + cause.url + '" target="_blank" rel="noopener noreferrer">' +
-                      '<span class="cause__cta-label" data-i18n="cause.cta.label"></span>' +
-                      '<span class="cause__cta-url">danocerebralestatal.org →</span>' +
-                    '</a>' +
-                    phoneHtml +
-                    collabHtml +
                   '</div>' +
                 '</section>';
 
             blocks.push(causeBand);
+            blocks.push(manifestoHtml);
         }
 
         // 2-column split: sponsors (left, narrower) | cause (right, brain hero).
         // Bridge becomes a top strip that visually links sponsors → cause via
         // an explicit arrow that points from left column to right column.
-        var bridgeBlock  = blocks.filter(function (b) { return b.indexOf('sc-bridge')           !== -1; }).join('');
-        var sponsorsBlk  = blocks.filter(function (b) { return b.indexOf('sc-block--sponsors')  !== -1; }).join('');
-        var causeBlk     = blocks.filter(function (b) { return b.indexOf('class="cause"')       !== -1; }).join('');
+        var bridgeBlock    = blocks.filter(function (b) { return b.indexOf('sc-bridge')            !== -1; }).join('');
+        var sponsorsBlk    = blocks.filter(function (b) { return b.indexOf('sc-block--sponsors')   !== -1; }).join('');
+        var causeBlk       = blocks.filter(function (b) { return b.indexOf('<section class="cause"') !== -1; }).join('');
+        var manifestoBlk   = blocks.filter(function (b) { return b.indexOf('cause__manifesto')      !== -1; }).join('');
 
+        // Layout:
+        //   [bridge]
+        //   sc__split:  sponsors (left)  |  cause card: brand + brain + intro (right)
+        //   manifesto band (full width):  figure  |  quote + about + CTA
         var sectionHtml =
             '<section class="corpse__item corpse__item--sc" id="sponsorsCauseSection">' +
               '<div class="sc">' +
@@ -341,6 +366,7 @@
                   '<div class="sc__col sc__col--sponsors">' + sponsorsBlk + '</div>' +
                   '<div class="sc__col sc__col--cause">'    + causeBlk    + '</div>' +
                 '</div>' +
+                manifestoBlk +
               '</div>' +
             '</section>';
 
