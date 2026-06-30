@@ -17,7 +17,8 @@
         wtm: {
             logo: BASE_PATH + 'img/wtm.png',
             logoAlt: 'WTM Madrid',
-            logoClass: 'logo--wtm',
+            logoClass: 'heart__logo--wtm',
+            titleSystemClass: 'corpse__title--system-wtm',
             eventLabel: 'IWD2026 WTM Madrid',
             communityLabel: 'WTM Madrid',
             linkedin: 'https://linkedin.com/in/wtmmadrid',
@@ -28,7 +29,8 @@
         w4tt: {
             logo: BASE_PATH + 'img/w4tt.png',
             logoAlt: 'W4TT',
-            logoClass: 'logo--w4tt',
+            logoClass: 'heart__logo--w4tt',
+            titleSystemClass: 'corpse__title--system-w4tt',
             eventLabel: 'Anfitrionas hablemos de tecnología W4TT',
             communityLabel: 'W4TT',
             linkedin: 'https://es.linkedin.com/company/women-for-technical-talks-w4tt',
@@ -75,9 +77,10 @@
             }
         },
         guarandinga: {
-            logo: BASE_PATH + 'img/guarandingatech.jpg',
+            logo: BASE_PATH + 'img/guarandingatech.png',
             logoAlt: 'Guarandinga Tech',
-            logoClass: 'logo--guarandinga',
+            logoClass: 'heart__logo--guarandinga',
+            titleSystemClass: 'corpse__title--system-guarandinga',
             eventLabel: 'Guarandinga Tech',
             communityLabel: 'Guarandinga Tech',
             linkedin: 'https://www.linkedin.com/company/guarandinga-tech',
@@ -108,6 +111,11 @@
                 logoImg.classList.add(EVENT.logoClass);
             }
         });
+
+        var titleSystem = document.getElementById('full-corpse-title-system');
+        if (titleSystem && EVENT.titleSystemClass) {
+            titleSystem.classList.add(EVENT.titleSystemClass);
+        }
 
         var linkedinLink = document.getElementById('event-linkedin');
         if (linkedinLink) {

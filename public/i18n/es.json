@@ -80,6 +80,9 @@
     "corpse.upper": "Parte superior del cadáver exquisito",
     "corpse.middle": "Parte media del cadáver exquisito",
     "corpse.lower": "Parte inferior del cadáver exquisito",
+    "assembly.role.design": "Diseño",
+    "assembly.role.dev": "Desarrollo",
+    "assembly.role.scale": "Escalabilidad",
     "footer.license": "© 2026 — Licencia CC BY-NC-SA 4.0",
     "sponsors.nav.aria": "Patrocinadores y causa social",
     "sponsors.eyebrow": "// patrocinadores del evento",
@@ -111,6 +114,8 @@
     "lang.btn.text": "EN",
     "lang.btn.title": "Traducir al Inglés",
     "lang.btn.aria": "Traducir al Inglés",
+    "sound.btn.mute": "Silenciar sonido",
+    "sound.btn.unmute": "Activar sonido",
     "modal.content": {
         "brain": {
             "title": "🧠 Cerebro",
