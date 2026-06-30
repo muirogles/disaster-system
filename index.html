@@ -124,6 +124,20 @@
             </svg>
         </button>
 
+        <button class="sound-btn" id="soundBtn" type="button" aria-pressed="false"
+            data-i18n-title="sound.btn.mute" data-i18n-aria="sound.btn.mute">
+            <svg class="sound-btn__icon sound-btn__on" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+            <svg class="sound-btn__icon sound-btn__off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+        </button>
+
         <!-- TODO: config light theme -->
         <!-- <button class="theme-fab" id="themeBtn" type="button"
             aria-label="Toggle light/dark theme" title="Toggle theme">
@@ -291,6 +305,12 @@
                     <div class="blush"></div>
                 </div>
                 <div class="neck"></div>
+
+                <!-- Pen "Diseño": entry transition that draws the real head pieces in place -->
+                <div class="asm-cursor" aria-hidden="true">
+                    <svg class="asm-cursor__nib" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 2.5l14.5 8.7-6.1 1.1 3.5 6-2.7 1.5-3.5-6L6 18.7z"/></svg>
+                    <span class="asm-cursor__label" data-i18n="assembly.role.design">Diseño</span>
+                </div>
             </div>
         </section>
 
@@ -347,6 +367,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Caret "Desarrollo": entry transition that assembles the real trunk parts -->
+                <div class="asm-cursor" aria-hidden="true">
+                    <svg class="asm-cursor__nib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/></svg>
+                    <span class="asm-cursor__label" data-i18n="assembly.role.dev">Desarrollo</span>
                 </div>
             </div>
         </section>
@@ -419,6 +445,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Resize cursor "Escalabilidad": stretches the real leg parts to fit -->
+            <div class="asm-cursor" aria-hidden="true">
+                <svg class="asm-cursor__nib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9V5h4"/><path d="M5 5l6 6"/><path d="M19 15v4h-4"/><path d="M19 19l-6-6"/></svg>
+                <span class="asm-cursor__label" data-i18n="assembly.role.scale">Escalabilidad</span>
             </div>
         </section>
 
@@ -551,7 +583,7 @@
                             <div class="trunk__chest">
                                 <div class="heart-window">
                                     <div class="heart">
-                                        <img class="heart-wtm-logo" id="event-logo-heart"
+                                        <img class="heart__logo" id="event-logo-heart"
                                             src="" alt="" aria-hidden="true">
                                     </div>
                                 </div>
@@ -674,7 +706,7 @@
                     <div class="corpse__header-divider corpse__header-divider--philosophy" aria-hidden="true"><span>◆</span>
                     </div>
                     <h2 class="corpse__title corpse__title--disaster" id="full-corpse-title">
-                        <span class="dd">Disaster</span><span class="corpse__title--system">System</span>
+                        <span class="dd">Disaster</span><span class="corpse__title--system" id="full-corpse-title-system">System</span>
                     </h2>
                     <div class="corpse__header-divider" aria-hidden="true"><span>◆</span></div>
     
@@ -972,6 +1004,7 @@
         </div>
 
         <script src="js/scroll-control.js"></script>
+        <script src="js/assembly-observer.js"></script>
         <script type="module" src="js/i18n.js"></script>
         <script type="module" src="js/audio-synth.js"></script>
         <script type="module" src="js/visual-demos.js"></script>
@@ -996,6 +1029,29 @@
                     introRules.classList.remove('is-visible');
                     rulesBtn.setAttribute('title', t('intro.rules.btn.open'));
                     rulesBtn.setAttribute('aria-label', t('intro.rules.btn.open'));
+                });
+            }());
+
+            /* Sound toggle (mute / unmute) — drives AudioSynth's global mute and
+               reflects state on the button (icon + aria-pressed + labels). */
+            (function () {
+                var soundBtn = document.getElementById('soundBtn');
+                if (!soundBtn) return;
+
+                function syncSound(muted) {
+                    soundBtn.classList.toggle('is-muted', muted);
+                    soundBtn.setAttribute('aria-pressed', String(muted));
+                    var key = muted ? 'sound.btn.unmute' : 'sound.btn.mute';
+                    soundBtn.setAttribute('title', t(key));
+                    soundBtn.setAttribute('aria-label', t(key));
+                    // keep i18n in sync so a later language switch re-resolves it
+                    soundBtn.setAttribute('data-i18n-title', key);
+                    soundBtn.setAttribute('data-i18n-aria', key);
+                }
+
+                soundBtn.addEventListener('click', function () {
+                    var muted = window.AudioSynth ? AudioSynth.toggleMute() : !soundBtn.classList.contains('is-muted') ;
+                    syncSound(muted);
                 });
             }());
 
