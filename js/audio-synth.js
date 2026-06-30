@@ -9,6 +9,7 @@ const AudioSynth = (function () {
     let tensionLFO = null;
     let shockOsc = null;
     let shockGain = null;
+    let muted = false;   // global mute toggle (sound button)
 
     async function init() {
         if (!audioCtx) {
@@ -21,6 +22,7 @@ const AudioSynth = (function () {
 
     /* ── Musical Heartbeat ── */
     async function playTick(secondsLeft) {
+        if (muted) return;
         await init();
         const now = audioCtx.currentTime;
 
@@ -183,6 +185,7 @@ const AudioSynth = (function () {
 
     /* ── Tension Drone ── */
     async function startTension() {
+        if (muted) return;
         await init();
         const now = audioCtx.currentTime;
 
@@ -244,6 +247,7 @@ const AudioSynth = (function () {
 
     /* ── FULL ALARM ── */
     async function playAlarm() {
+        if (muted) return;
         await init();
         const now = audioCtx.currentTime;
 
@@ -369,6 +373,7 @@ const AudioSynth = (function () {
 
     /* ── Impact ── */
     async function playImpact() {
+        if (muted) return;
         await init();
         const now = audioCtx.currentTime;
 
@@ -391,6 +396,7 @@ const AudioSynth = (function () {
 
     /* ── Shock (UNCHANGED) ── */
     async function startShock() {
+        if (muted) return;
         await init();
 
         shockOsc = audioCtx.createOscillator();
@@ -414,8 +420,81 @@ const AudioSynth = (function () {
         }
     }
 
+    /* PROCESS-STEP CUES — short sounds fired as each piece is placed during
+       the section build transitions, one timbre per discipline so the audio
+       matches the visual: design = pencil + pad note (UX->UI); dev = keyboard
+       clicks (built in code); resize = elastic upward glide (responsive);
+       modular = blocky ticks (modular architecture); legacy = descending sweep
+       + noise (legacy cleanup). Gentle + short; play only when the context is
+       already running (a prior gesture), never forcing autoplay. */
+    let processIndex = {};
+    function resetProcessIndex(kind) { processIndex[kind] = 0; }
+    function noiseBurst(t, dur, freq, q, peak) {
+        const size = Math.floor(audioCtx.sampleRate * dur);
+        const buf = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < size; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / size);
+        const src = audioCtx.createBufferSource();
+        src.buffer = buf;
+        const bp = audioCtx.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.setValueAtTime(freq, t);
+        bp.Q.setValueAtTime(q, t);
+        const g = audioCtx.createGain();
+        g.gain.setValueAtTime(peak, t);
+        g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+        src.connect(bp); bp.connect(g); g.connect(audioCtx.destination);
+        src.start(t); src.stop(t + dur);
+    }
+    function tone(type, t, f0, f1, dur, peak, glideShape) {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(f0, t);
+        if (f1 && f1 !== f0) {
+            if (glideShape === 'exp') osc.frequency.exponentialRampToValueAtTime(f1, t + dur);
+            else osc.frequency.linearRampToValueAtTime(f1, t + dur);
+        }
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(peak, t + Math.min(0.03, dur * 0.3));
+        g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+        osc.connect(g); g.connect(audioCtx.destination);
+        osc.start(t); osc.stop(t + dur + 0.02);
+    }
+    async function playProcessStep(kind) {
+        if (muted) return;
+        await init();
+        if (!audioCtx || audioCtx.state !== 'running') return;
+        const now = audioCtx.currentTime;
+        const i = (processIndex[kind] = (processIndex[kind] || 0) + 1) - 1;
+        if (kind === 'design') {
+            const scale = [329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
+            const f = scale[i % scale.length];
+            tone('sine', now + 0.02, f, f, 0.5, 0.07);
+            tone('triangle', now + 0.02, f * 2, f * 2, 0.4, 0.025);
+            noiseBurst(now, 0.12, 1900, 0.8, 0.035);
+        } else if (kind === 'dev') {
+            const clicks = 2 + (i % 2);
+            for (let k = 0; k < clicks; k++) {
+                const t = now + k * 0.055;
+                tone('square', t, 1300 + Math.random() * 500, null, 0.03, 0.045);
+                noiseBurst(t, 0.02, 3200, 1.2, 0.02);
+            }
+            tone('square', now + clicks * 0.055 + 0.02, 880, null, 0.05, 0.04);
+        } else if (kind === 'resize') {
+            tone('triangle', now, 280, 560, 0.28, 0.07, 'exp');
+            tone('sine', now, 140, 280, 0.28, 0.04, 'exp');
+        } else if (kind === 'modular') {
+            for (let k = 0; k < 3; k++) tone('square', now + k * 0.05, 320 + k * 130, null, 0.05, 0.04);
+        } else if (kind === 'legacy') {
+            tone('sawtooth', now, 460, 120, 0.34, 0.06, 'exp');
+            noiseBurst(now + 0.04, 0.22, 900, 0.6, 0.04);
+        }
+    }
+
     /* ── Success (UNCHANGED) ── */
     async function playSuccess() {
+        if (muted) return;
         await init();
         const now = audioCtx.currentTime;
 
@@ -439,6 +518,43 @@ const AudioSynth = (function () {
         });
     }
 
+    /* AUTOPLAY UNLOCK — navigation here is driven by scroll/wheel, which
+       Chrome does NOT treat as an activating gesture. So a body section's
+       build can reach playProcessStep -> init() -> resume() with no qualifying
+       gesture, which Chrome blocks (the "AudioContext was not allowed to
+       start" warning) and the cues fall silent. Create + resume the context on
+       the first REAL gesture (pointerdown/keydown/touchstart) so it's already
+       'running' before any scroll-triggered build. Self-removes once running;
+       never forces autoplay. */
+    function unlockAudio() {
+        init().then(function () {
+            if (audioCtx && audioCtx.state === 'running') {
+                ['pointerdown', 'keydown', 'touchstart'].forEach(function (ev) {
+                    window.removeEventListener(ev, unlockAudio);
+                });
+            }
+        });
+    }
+    ['pointerdown', 'keydown', 'touchstart'].forEach(function (ev) {
+        window.addEventListener(ev, unlockAudio, { passive: true });
+    });
+
+    /* GLOBAL MUTE — driven by the sound toggle button. When muting, silence any
+       sustained drones already playing. When unmuting, the toggle click is a
+       valid gesture, so resume the context so later scroll-triggered cues work. */
+    function isMuted() { return muted; }
+    function setMuted(value) {
+        muted = !!value;
+        if (muted) {
+            stopTension();
+            stopShock();
+        } else {
+            init();
+        }
+        return muted;
+    }
+    function toggleMute() { return setMuted(!muted); }
+
     return {
         startTension,
         stopTension,
@@ -447,7 +563,12 @@ const AudioSynth = (function () {
         playImpact,
         startShock,
         stopShock,
-        playSuccess
+        playSuccess,
+        playProcessStep,
+        resetProcessIndex,
+        isMuted,
+        setMuted,
+        toggleMute
     };
 })();
 window.AudioSynth = AudioSynth;

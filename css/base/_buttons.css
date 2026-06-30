@@ -170,7 +170,7 @@
     to   { opacity: 1; transform: translateX(0); }
 }
 
-.lang-btn, .qr-btn {
+.lang-btn, .qr-btn, .sound-btn {
     background: rgba(8, 6, 18, 0.85);
     backdrop-filter: blur(16px);
     border: 1px solid rgba(155, 93, 229, 0.3);
@@ -200,12 +200,23 @@
     text-transform: none;
 }
 
-.lang-btn:hover, .qr-btn:hover {
+.lang-btn:hover, .qr-btn:hover, .sound-btn:hover {
     background: rgba(155, 93, 229, 0.1);
     border-color: rgba(155, 93, 229, 0.55);
     color: rgba(196, 160, 245, 0.98);
     transform: translateY(-3px);
     box-shadow: 0 8px 28px rgba(155,93,229,0.2);
+}
+
+/* Sound toggle: show the speaker-on icon by default, the muted icon when
+   AudioSynth is muted (.is-muted on the button). */
+.sound-btn__icon { display: block; }
+.sound-btn__off { display: none; }
+.sound-btn.is-muted .sound-btn__on { display: none; }
+.sound-btn.is-muted .sound-btn__off { display: block; }
+.sound-btn.is-muted {
+    border-color: rgba(255, 99, 132, 0.4);
+    color: rgba(255, 99, 132, 0.85);
 }
 
 .qr-btn:hover {
@@ -215,7 +226,7 @@
     box-shadow: 0 8px 28px rgba(255, 179, 0, 0.15);
 }
 
-.lang-btn:focus-visible, .qr-btn:focus-visible {
+.lang-btn:focus-visible, .qr-btn:focus-visible, .sound-btn:focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 3px;
     box-shadow: 0 0 0 5px var(--focus-glow);
@@ -433,7 +444,7 @@ html.lang-hidden .lang-control {
         width: clamp(1.5rem, 2.5vw, 3rem);
         height: clamp(1.5rem, 2.5vw, 3rem);
     }
-    .lang-btn, .qr-btn {
+    .lang-btn, .qr-btn, .sound-btn {
         width: clamp(3.5rem, 4vw, 6rem);
         height: clamp(3.5rem, 4vw, 6rem);
         border-width: clamp(0.0625rem, 0.15vw, 0.25rem);

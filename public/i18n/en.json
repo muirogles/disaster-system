@@ -80,6 +80,9 @@
     "corpse.upper": "Upper part of the exquisite corpse",
     "corpse.middle": "Middle part of the exquisite corpse",
     "corpse.lower": "Lower part of the exquisite corpse",
+    "assembly.role.design": "Design",
+    "assembly.role.dev": "Development",
+    "assembly.role.scale": "Scalability",
     "footer.license": "© 2026 — CC BY-NC-SA 4.0 License",
     "sponsors.nav.aria": "Sponsors and social cause",
     "sponsors.eyebrow": "// event sponsors",
@@ -111,6 +114,8 @@
     "lang.btn.text": "ES",
     "lang.btn.title": "Translate to Spanish",
     "lang.btn.aria": "Translate to Spanish",
+    "sound.btn.mute": "Mute sound",
+    "sound.btn.unmute": "Unmute sound",
     "modal.content": {
         "brain": {
             "title": "🧠 Brain",

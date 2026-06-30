@@ -1,0 +1,326 @@
+/* =====================================================
+   ENTRY TRANSITIONS — each corpse section assembles its OWN
+   real pieces on scroll-enter, and every piece is first
+   "redrawn" in the transition as a draft of its discipline's
+   real process, then resolves into the untouched real piece:
+
+     • HEAD  (.corpse__item--upper)  "Diseño" — UX wireframe
+       (dashed box + skeleton) → UI (the real piece).
+     • TRUNK (.corpse__item--middle) "Desarrollo" — a DOM/code
+       node (dev-tools outline + tag) → rendered piece.
+     • LEGS  (.corpse__item--lower)  "Escalabilidad" — a
+       responsive resize frame (brackets + breakpoint, widens)
+       → fitted piece.
+
+   The draft is a transient overlay sized to the piece's own
+   footprint (NOT a floating tooltip). It and the hidden/armed
+   state exist ONLY while the section is mid-build; settle()
+   removes every helper class + draft, so the assembled creature
+   is byte-for-byte the original (modal, hit-testing untouched).
+   ===================================================== */
+
+/* ── Reveal — pieces are hidden while armed and fade in at their
+   final spot as their draft dissolves (opacity only, so each
+   piece's own transform/rotation is never overridden). ── */
+.asm-armed { opacity: 0; will-change: opacity; }
+.asm-drawn { animation: asmReveal 0.5s ease both; }
+@keyframes asmReveal { from { opacity: 0; } to { opacity: 1; } }
+/* Brain keeps its native neon pulse alongside the reveal. */
+.corpse__item--upper .brain.asm-drawn {
+    animation: asmReveal 0.5s ease both, brainPulseGlow 3.2s ease-in-out infinite;
+}
+
+/* =====================================================
+   CURSORS — one labelled pointer per discipline, driven by JS
+   with transform + opacity only. Idle = invisible and
+   non-interactive, so the real section keeps full hit-testing.
+   ===================================================== */
+.corpse__item--upper .asm-cursor,
+.corpse__item--middle .asm-cursor,
+.corpse__item--lower .asm-cursor {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+.corpse__item--upper  .asm-cursor { --asm-accent: var(--color-purple); }
+.corpse__item--middle .asm-cursor { --asm-accent: var(--color-blue); }
+.corpse__item--lower  .asm-cursor { --asm-accent: var(--color-teal); }
+
+/* Trunk cursor needs a positioned ancestor (arms anchor to
+   .trunk__body, so .trunk itself has none of its own). */
+.corpse__item--middle .trunk { position: relative; }
+
+.asm-cursor__nib {
+    width: clamp(20px, 2.4vmax, 32px);
+    height: clamp(20px, 2.4vmax, 32px);
+    flex: 0 0 auto;
+    color: var(--asm-accent);
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6));
+}
+
+.asm-cursor__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.3em 0.7em;
+    border-radius: 6px;
+    font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace;
+    font-size: var(--demo-fs-xs);
+    font-weight: 600;
+    white-space: nowrap;
+    color: #fff;
+    background: var(--btn-bg);
+    border: 1px solid color-mix(in srgb, var(--asm-accent) 55%, transparent);
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.45),
+        0 0 18px color-mix(in srgb, var(--asm-accent) 30%, transparent);
+}
+.asm-cursor__label::before {
+    content: '';
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--asm-accent);
+    box-shadow: 0 0 8px var(--asm-accent);
+}
+/* Desarrollo / Escalabilidad use a square marker (a build/cell). */
+.corpse__item--middle .asm-cursor__label::before,
+.corpse__item--lower .asm-cursor__label::before { border-radius: 2px; }
+
+/* Per-discipline cursor "working" tick (JS adds .is-sketching). */
+.corpse__item--upper  .asm-cursor.is-sketching .asm-cursor__nib { animation: asmNibSketch 0.26s ease-in-out 2; }
+.corpse__item--middle .asm-cursor.is-sketching .asm-cursor__nib { animation: asmCaretType 0.22s ease-in-out 2; }
+.corpse__item--lower  .asm-cursor.is-sketching .asm-cursor__nib { animation: asmScaleTick 0.24s ease-in-out 2; }
+@keyframes asmNibSketch { 0%,100% { rotate: 0deg; } 25% { rotate: -7deg; translate: -1px 1px; } 75% { rotate: 6deg; translate: 1px -1px; } }
+@keyframes asmCaretType { 0%,100% { translate: 0 0; scale: 1; } 50% { translate: 0 -2px; scale: 1.12; } }
+@keyframes asmScaleTick { 0%,100% { scale: 1; } 50% { scale: 1.18; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .corpse__item--upper .asm-cursor,
+    .corpse__item--middle .asm-cursor,
+    .corpse__item--lower .asm-cursor { display: none; }
+}
+
+/* =====================================================
+   "DURING BUILD" LOCK — while a section is assembling, keep the
+   "toca cada parte" hint hidden and the parts non-clickable, so
+   nobody opens a modal mid-build. Driven by .is-assembling,
+   which JS keeps from first paint until settle().
+   ===================================================== */
+.corpse__item.is-assembling .part-hint {
+    opacity: 0 !important;
+    animation: none !important;
+}
+.corpse__item--upper.is-assembling  .head-wrap,
+.corpse__item--middle.is-assembling .trunk,
+.corpse__item--lower.is-assembling  .legs {
+    pointer-events: none;
+}
+
+/* Freeze the creature's native motion only on pieces that are still ARMED
+   (hidden, waiting) WHILE a section assembles, so each process draft lands on
+   a stable piece position instead of a swaying one. Revealed pieces are never
+   targeted here, so their reveal animation runs normally. Resumes on settle. */
+.corpse__item.is-assembling .asm-armed,
+.corpse__item.is-assembling .asm-armed * {
+    animation-play-state: paused !important;
+}
+
+/* =====================================================
+   PROCESS DRAFTS — a transient "redraw" of each piece in its
+   discipline's process, sized by JS to that piece's footprint.
+   Lives only during the build; removed as the real piece fades
+   in. pointer-events:none; never touches the real elements.
+   ===================================================== */
+.asm-draft {
+    position: absolute;
+    z-index: 39;
+    box-sizing: border-box;
+    pointer-events: none;
+    border-radius: 6px;
+    animation: asmDraftLife var(--asm-life, 760ms) ease both;
+}
+@keyframes asmDraftLife {
+    0%   { opacity: 0; }
+    16%  { opacity: 1; }
+    66%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ── DISEÑO — UX wireframe: dashed placeholder + skeleton bars ── */
+.asm-draft--design {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 9px;
+    padding: 14px;
+    border: 1.6px dashed color-mix(in srgb, var(--color-purple) 72%, #fff 12%);
+    background:
+        repeating-linear-gradient(45deg,
+            color-mix(in srgb, var(--color-purple) 6%, transparent) 0 6px,
+            transparent 6px 12px);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--color-purple) 18%, transparent);
+}
+.asm-draft--design .asm-draft__bar {
+    display: block;
+    height: 8px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--color-purple) 38%, #fff);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-purple) 30%, transparent);
+}
+.asm-draft--design .asm-draft__bar:nth-child(1) { width: 60%; }
+.asm-draft--design .asm-draft__bar:nth-child(2) { width: 92%; }
+.asm-draft--design .asm-draft__bar:nth-child(3) { width: 44%; }
+
+/* ── DESARROLLO — the piece is written as code, then renders.
+   A mini editor: rows of syntax-coloured tokens type in left→
+   right with a blinking caret. No concept words needed — the
+   typing-code look carries the process. ── */
+.asm-draft--dev {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px 12px;
+    overflow: hidden;
+    background: #0d1326;
+    border: 1px solid color-mix(in srgb, var(--color-blue) 80%, transparent);
+    border-radius: 4px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), inset 0 0 0 1px color-mix(in srgb, var(--color-blue) 16%, transparent);
+}
+.asm-draft--dev .asm-draft__row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.asm-draft--dev .asm-draft__tok {
+    height: 6px;
+    border-radius: 2px;
+    transform-origin: left center;
+    animation: asmType 0.26s ease both;
+}
+.asm-draft--dev .asm-draft__tok--kw  { background: var(--color-blue); }
+.asm-draft--dev .asm-draft__tok--str { background: var(--iris-green, #00cc44); }
+.asm-draft--dev .asm-draft__tok--txt { background: rgba(205, 214, 244, 0.45); }
+.asm-draft--dev .asm-draft__caret {
+    width: 5px;
+    height: 11px;
+    flex: 0 0 auto;
+    background: var(--color-blue);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-blue) 60%, transparent);
+    animation: asmCaretBlink 0.5s steps(1) infinite;
+}
+@keyframes asmType { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes asmCaretBlink { 50% { opacity: 0; } }
+
+/* ── ESCALABILIDAD · piernas — responsive resize frame: brackets
+   + side handles, the frame widens (scaleX) as it lands. Reads
+   "responsive / resize" with no text. (No centre arrow — it
+   collided with the cursor.) ── */
+.asm-draft--resize {
+    animation: asmDraftLife var(--asm-life, 760ms) ease both,
+               asmResizeWiden var(--asm-life, 760ms) cubic-bezier(0.3, 0.9, 0.3, 1) both;
+    transform-origin: center;
+}
+@keyframes asmResizeWiden {
+    0%   { transform: scaleX(0.6); }
+    60%  { transform: scaleX(1.05); }
+    100% { transform: scaleX(1); }
+}
+.asm-draft--resize .asm-draft__br {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border: 2px solid var(--color-teal);
+    filter: drop-shadow(0 0 5px color-mix(in srgb, var(--color-teal) 50%, transparent));
+}
+.asm-draft--resize .asm-draft__br.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; border-top-left-radius: 4px; }
+.asm-draft--resize .asm-draft__br.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; border-top-right-radius: 4px; }
+.asm-draft--resize .asm-draft__br.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; border-bottom-left-radius: 4px; }
+.asm-draft--resize .asm-draft__br.br { bottom: 0; right: 0; border-left: 0; border-top: 0; border-bottom-right-radius: 4px; }
+.asm-draft--resize .asm-draft__handle {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 22px;
+    transform: translateY(-50%);
+    background: var(--color-teal);
+    border-radius: 3px;
+    box-shadow: 0 0 7px color-mix(in srgb, var(--color-teal) 55%, transparent);
+}
+.asm-draft--resize .asm-draft__handle.l { left: -5px; }
+.asm-draft--resize .asm-draft__handle.r { right: -5px; }
+
+/* ── ESCALABILIDAD · pies — modular block grid: little cells pop
+   in one by one (modular architecture / BEM foundation). ── */
+.asm-draft--modular {
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--color-teal) 12%, #000 35%);
+    border: 1px solid color-mix(in srgb, var(--color-teal) 45%, transparent);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--color-teal) 22%, transparent);
+}
+.asm-draft--modular .asm-draft__grid {
+    position: absolute;
+    inset: 9px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+}
+.asm-draft--modular .asm-draft__cell {
+    min-width: 0;
+    min-height: 0;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--color-teal) 80%, #fff 5%);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-teal) 55%, transparent);
+    transform-origin: center;
+    animation: asmCellPop 0.34s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+@keyframes asmCellPop { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
+
+/* ── ESCALABILIDAD · cola — legacy code struck through (legacy /
+   bundle / dead code being cleaned out). ── */
+.asm-draft--legacy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px 12px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--color-teal) 6%, #000 10%);
+    border: 1px dashed color-mix(in srgb, var(--color-teal) 45%, transparent);
+}
+.asm-draft--legacy .asm-draft__old {
+    position: relative;
+    height: 6px;
+    width: 100%;
+    border-radius: 2px;
+    background: rgba(205, 214, 244, 0.28);
+}
+.asm-draft--legacy .asm-draft__old--short { width: 58%; }
+.asm-draft--legacy .asm-draft__strike {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left center;
+    background: var(--color-teal);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-teal) 60%, transparent);
+    animation: asmStrike 0.4s ease forwards;
+}
+.asm-draft--legacy .asm-draft__old:nth-child(2) .asm-draft__strike { animation-delay: 0.16s; }
+.asm-draft--legacy .asm-draft__old:nth-child(3) .asm-draft__strike { animation-delay: 0.32s; }
+@keyframes asmStrike { to { transform: translateY(-50%) scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .asm-draft { display: none; }
+}
