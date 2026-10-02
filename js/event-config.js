@@ -1,5 +1,5 @@
 (function () {
-    var EVENT_SLUGS = ['wtm', 'w4tt', 'guarandinga'];
+    var EVENT_SLUGS = ['wtm', 'w4tt', 'guarandinga', 'edd'];
 
     function resolveBasePath() {
         var path = window.location.pathname.replace(/\/+$/, '');
@@ -87,6 +87,18 @@
             linkedinHandle: '/guarandinga-tech',
             hashtags: ['#DisasterSystem', '#GuarandingaTech', '#TenerifeSummerSessions'],
             qr: BASE_PATH + 'img/qr/qr_disaster-system_guarandinga.png'
+        },
+        edd: {
+            logo: BASE_PATH + 'img/edd.png',
+            logoAlt: 'Extremadura Digital Day',
+            logoClass: 'heart__logo--edd',
+            titleSystemClass: 'corpse__title--system-edd',
+            eventLabel: 'Extremadura Digital Day',
+            communityLabel: 'EDD',
+            linkedin: 'https://es.linkedin.com/company/extremaduradigitalday',
+            linkedinHandle: 'Extremadura Digital Day',
+            hashtags: ['#DisasterSystem', '#EDD26', '#ExtremaduraDigitalDay'],
+            qr: BASE_PATH + 'img/qr/qr_disaster-system_edd.png'
         }
     };
 

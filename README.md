@@ -3,7 +3,7 @@
 > *The exquisite corpse between design and development.*  
 > *El cadáver exquisito entre diseño y desarrollo.*
 
-🔗 **Live demo / Demo en vivo:** [![Preview](img/preview.PNG)](https://muirogles.github.io/disaster-system/)
+🔗 **Live demo / Demo en vivo:** [![Preview](public/img/social-preview.png)](https://muirogles.github.io/disaster-system/)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/muirogles/disaster-system?style=social)](https://github.com/muirogles/disaster-system)
 [![GitHub](https://img.shields.io/github/license/muirogles/disaster-system)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
@@ -60,6 +60,7 @@ The landing is one codebase serving multiple talk editions. The active event is 
 | `/disaster-system/` or `/disaster-system/wtm` | WTM Madrid (default) | — |
 | `/disaster-system/w4tt` | W4TT | Sponsors + Cause |
 | `/disaster-system/guarandinga` | Guarandinga Tech | — |
+| `/disaster-system/edd` | Extremadura Digital Day | — |
 
 All event configuration lives in [`js/event-config.js`](js/event-config.js) as a single `EVENTS` object. Each entry declares branding (`logo`, `eventLabel`, `linkedin`, `hashtags`) and may optionally include:
 
@@ -93,7 +94,7 @@ This project uses **Vite** for a modern development experience.
 3. Open `http://localhost:5173/disaster-system/`
 
 #### Deployment
-Deployment is **automatic** via **GitHub Actions**. Simply push your changes to the `main` or `develop` branch. Ensure your repository settings under **Settings > Pages** are set to **"GitHub Actions"** as the source.
+Deployment is **automatic** via **GitHub Actions** when changes are pushed to the `master` branch; you can also trigger it manually from the Actions tab. Ensure your repository settings under **Settings > Pages** are set to **"GitHub Actions"** as the source.
 
 **Timer:** Press **Space** or click the clock FAB to start · press again to stop.
 
@@ -149,6 +150,7 @@ La landing es un único código que sirve para varias ediciones. El evento activ
 | `/disaster-system/` o `/disaster-system/wtm` | WTM Madrid (por defecto) | — |
 | `/disaster-system/w4tt` | W4TT | Sponsors + Causa |
 | `/disaster-system/guarandinga` | Guarandinga Tech | — |
+| `/disaster-system/edd` | Extremadura Digital Day | — |
 
 Toda la configuración de eventos vive en [`js/event-config.js`](js/event-config.js) dentro del objeto `EVENTS`. Cada entrada declara el branding (`logo`, `eventLabel`, `linkedin`, `hashtags`) y opcionalmente:
 
@@ -173,7 +175,7 @@ Este proyecto utiliza **Vite** para una experiencia de desarrollo moderna.
 3. Abre `http://localhost:5173/disaster-system/`
 
 #### Despliegue
-El despliegue es **automático** mediante **GitHub Actions**. Solo tienes que hacer `push` de tus cambios. Asegúrate de que en **Settings > Pages** el origen sea **"GitHub Actions"**.
+El despliegue es **automático** mediante **GitHub Actions** al hacer `push` a la rama `master`; también puedes iniciarlo manualmente desde la pestaña Actions. Asegúrate de que en **Settings > Pages** el origen sea **"GitHub Actions"**.
 
 **Cronómetro:** Pulsa **Espacio** o el FAB del reloj para iniciar · pulsa de nuevo para detener.
 
