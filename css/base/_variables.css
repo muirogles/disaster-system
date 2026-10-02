@@ -143,9 +143,7 @@
     --trunk-width: 30%;
     --trunk-height: auto;
     --trunk-min-height: 40vh;
-    --trunk-min-height: 40dvh;
     --trunk-max-height: 80vh;
-    --trunk-max-height: 80dvh;
     --trunk-aspect-ratio: 1/2;
     --trunk-collar-width: 40%;
     --trunk-collar-height: 5%;
@@ -206,7 +204,6 @@
     /* ─── Legs ─── */
     --legs-width: 100%;
     --legs-height: 90vh;
-    --legs-height: 90dvh;
     --leg-width: 12%;
     --leg-height: 100%;
     --leg-thigh-width: 100%;
@@ -258,7 +255,6 @@
     
     /* corpse */
     --corpse-padding-block: 8vh;
-    --corpse-padding-block: 8dvh;
 
     /* =====================================================
        DEMO TYPOGRAPHY & SPACING TOKENS
@@ -286,4 +282,13 @@
     --demo-pad-md: 1rem;     /* 16px */
     --demo-pad-lg: 1.5rem;   /* 24px */
     --demo-pad-xl: 2rem;     /* 32px */
+}
+
+@supports (height: 1dvh) {
+    :root {
+        --trunk-min-height: 40dvh;
+        --trunk-max-height: 80dvh;
+        --legs-height: 90dvh;
+        --corpse-padding-block: 8dvh;
+    }
 }

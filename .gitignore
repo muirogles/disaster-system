@@ -14,6 +14,7 @@ dist-ssr
 
 # Superpowers docs (internal planning, not project code)
 docs/superpowers/
+context/
 
 # Editor directories and files
 .vscode/*
