@@ -20,6 +20,9 @@
     width: 50%;
     pointer-events: none;
     z-index: 0;
+    /* Fade grid out at the top/bottom so it never ends in a hard edge */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 85%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 85%, transparent);
 }
 
 /* LEFT: clean 8px grid — design tool canvas */
@@ -245,7 +248,7 @@
 .intro__title-dd {
     display: flex;
     align-items: center;
-    gap: 1em;
+    gap: 0.4em;
     white-space: nowrap;
     position: relative;
 }
@@ -379,18 +382,15 @@
         linear-gradient(var(--color-purple), var(--color-purple)) 100% 100% / 5px 5px no-repeat;
 }
 
-/* ---- "o" connector ---- */
+/* ---- "o" connector — in flow so the flex gap spaces it evenly ---- */
 .intro__title-o {
     display: inline-block;
     font-size: 0.5em;
     font-weight: 500;
-    color: rgba(255,255,255,0.22);
-    vertical-align: middle;
+    color: rgba(255,255,255,0.4);
     font-style: italic;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    /* optical balance: the Design selection box extends past its text */
+    margin-left: 0.3em;
 }
 
 /* ---- DISASTER SYSTEM — chaotic, glitchy ---- */
@@ -547,7 +547,7 @@
 /* Connector words — dim, comment-style secondary tokens */
 .intro__sub-el {
     font-weight: 300;
-    color: rgba(0,220,60,0.45);
+    color: rgba(0,220,60,0.7);
     font-size: 0.85em;
     letter-spacing: 0.08em;
     position: relative;
@@ -572,7 +572,7 @@
     content: 'fn ';
     text-transform: none;
     font-weight: 300;
-    color: rgba(0,255,85,0.45);
+    color: rgba(0,255,85,0.7);
     font-size: 0.78em;
     letter-spacing: 0.04em;
     text-shadow: none;
@@ -590,6 +590,7 @@
 
 /* "diseño" — JSX / component tag: <diseño/> */
 .intro__sub-design {
+    white-space: nowrap;
     color: var(--color-purple);
     font-weight: 600;
     position: relative;
@@ -603,20 +604,21 @@
 
 .intro__sub-design::before {
     content: '<';
-    color: rgba(155,93,229,0.55);
+    color: rgba(155,93,229,0.75);
     font-weight: 300;
     text-shadow: none;
 }
 
 .intro__sub-design::after {
     content: '/>';
-    color: rgba(155,93,229,0.55);
+    color: rgba(155,93,229,0.75);
     font-weight: 300;
     text-shadow: none;
 }
 
 /* "desarrollo" — const declaration with block cursor */
 .intro__sub-dev {
+    white-space: nowrap;
     font-weight: 600;
     color: var(--color-gold);
     position: relative;
@@ -635,7 +637,7 @@
     content: 'const ';
     text-transform: none;
     font-weight: 300;
-    color: rgba(255,179,0,0.45);
+    color: rgba(255,179,0,0.7);
     font-size: 0.78em;
     letter-spacing: 0.04em;
     text-shadow: none;
@@ -755,20 +757,33 @@
     }
 
     .intro__title {
-        font-size: clamp(1.5rem, 9vw, 2.6rem);
+        font-size: clamp(2.2rem, 12vw, 3.2rem);
+        margin-bottom: 0.5em;
     }
 
     .intro__title-dd {
         white-space: normal;
         text-align: center;
         flex-direction: column;
-        gap: 0.125em;
+        gap: 0.2em;
+    }
+
+    /* Stacked layout: drop the floating ¿ ? and keep "o" as its own small line */
+    .intro__title-q {
+        display: none;
+    }
+
+    .intro__title-o {
+        font-size: 0.4em;
+        line-height: 1;
+        margin-left: 0;
     }
 
     .intro__subtitle {
         font-size: clamp(0.85rem, 3.2vw, 1.1rem);
         padding: 2.2em 0.8em 0.8em;
         max-width: 94%;
+        margin-top: 1.5rem;
     }
 
     .intro__sub-cadaver {
@@ -777,5 +792,35 @@
 
     .intro__deco {
         display: none;
+    }
+}
+
+/* =====================================================
+   REDUCED MOTION — keep the static look, stop the loops
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .intro__deco,
+    .intro__title-system,
+    .intro__title-disaster,
+    .intro__subtitle,
+    .intro__sub-cadaver,
+    .intro__scroll-hint,
+    .intro__scroll-arrow {
+        animation: none;
+    }
+
+    .intro__deco {
+        opacity: 0.5;
+    }
+
+    .intro__title-system::before,
+    .intro__subtitle::after,
+    .intro__bolt {
+        animation: none;
+        display: none;
+    }
+
+    .intro__sub-dev::after {
+        animation: none;
     }
 }
