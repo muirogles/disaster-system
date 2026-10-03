@@ -400,3 +400,65 @@ a.modal__tool-name:hover .modal__tool-link-icon {
     line-height: 1.4;
     color: var(--md-text-dim);
 }
+
+/* =====================================================
+   BOTTOM-SHEET MODAL (phones + portrait tablets)
+   The sheet is only ~50% of the screen, so a fixed header (title +
+   subtitle + concept) left too little room for the demos. Here the whole
+   sheet scrolls and only the title row (with the close button) stays
+   pinned; subtitle and concept scroll away with the content.
+   ===================================================== */
+@media (max-width: 600px), (orientation: portrait) and (min-width: 601px) {
+    .modal {
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+    }
+
+    /* Accent strip stays above the pinned title band */
+    .modal::before {
+        z-index: 14;
+    }
+
+    .modal__body {
+        overflow: visible;
+    }
+
+    /* The header box is only as tall as its content, so a sticky title
+       inside it could never stay pinned. Dissolving it lets the title and
+       close button stick to the scrolling sheet itself. */
+    .modal__header {
+        display: contents;
+    }
+
+    .modal__header::after {
+        display: none;
+    }
+
+    .modal__close {
+        z-index: 13;
+    }
+
+    .modal__title {
+        position: sticky;
+        top: 2px;   /* below the accent strip */
+        z-index: 12;
+        margin-top: 0;
+        padding-top: clamp(0.5rem, 2vw, 1rem);
+        padding-bottom: 0.4em;
+    }
+
+    /* Band behind the pinned title: full sheet width and up over the sheet
+       padding, so scrolled content never shows around it. Drawn with a
+       box-shadow (which never adds scrollable width) clipped to the area
+       above and beside the title. */
+    .modal__title {
+        background: rgba(6, 8, 20, 0.97);
+        box-shadow:
+            0 0 0 100vmax rgba(6, 8, 20, 0.97),
+            0 1px 0 100vmax rgba(255, 255, 255, 0.06);
+        -webkit-clip-path: inset(-3rem -100vmax -1px -100vmax);
+        clip-path: inset(-3rem -100vmax -1px -100vmax);
+    }
+}

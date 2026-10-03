@@ -2,10 +2,19 @@
     GLASSES — Tin
     ===================================================== */
 
-:root {
+/* Frame thickness — viewport fallback (original behavior) */
+@supports not (container-type: inline-size) {
     @media (orientation: portrait) {
-        --glasses-border-width: 1vmax;
+        :root { --glasses-border-width: 1vmax; }
     }
+}
+
+/* Relative to the head (.head is a container) — keeps the frame
+   proportional to the face at every viewport size */
+@supports (container-type: inline-size) {
+    /* Set on :root so the derived lens/bridge/wing tokens pick it up;
+       cqw resolves where it is used, inside .head */
+    :root { --glasses-border-width: 2.2cqw; }
 }
 
 .glasses {
@@ -86,19 +95,23 @@
     position: absolute;
     top: 38%;
     width: 5vw;
+    width: 17.8cqw;
     height: 0.5vh;
+    height: 1.1cqw;
     background: linear-gradient(to right, var(--glasses-color-base), var(--glasses-color-dark));
     border-radius: 2px;
 }
 
 .glasses__arm--l {
     left: -4.5vw;
+    left: -16cqw;
     transform: rotate(5deg);
     background: linear-gradient(to left, var(--glasses-color-base), var(--glasses-color-dark));
 }
 
 .glasses__arm--r {
     right: -4.5vw;
+    right: -16cqw;
     transform: rotate(-5deg);
 }
 

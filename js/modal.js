@@ -177,6 +177,7 @@ function openModal(partKey, isRefresh = false) {
             requestAnimationFrame(() => {
                 modalBody.classList.remove('modal__body--transitioning');
                 modalBody.scrollTo({ top: 0, behavior: 'smooth' });
+                modal.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }, 200);
         return;
@@ -201,6 +202,7 @@ function openModal(partKey, isRefresh = false) {
 
     /* Reset scroll before opening — prevents stale scroll from previous section */
     modalBody.scrollTop = 0;
+    modal.scrollTop = 0;   /* bottom-sheet layout scrolls the whole panel */
 
     /* Open modal */
     modal.classList.add('open');

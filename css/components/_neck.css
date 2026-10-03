@@ -33,3 +33,14 @@
     position: relative;
     top: calc(var(--neck-overlapping) * -1);
 }
+
+/* Container-query sizing: neck width follows the head width (same formula
+   as .head in _head.css) so it never gets squeezed on narrow screens.
+   Height comes from the 2:1 aspect ratio. Fallback: the rule above. */
+@supports (container-type: inline-size) {
+    .neck {
+        width: calc(min(calc(var(--head-height-cq) * 3 / 4), var(--head-max-width-cq)) * 0.533);
+        height: auto;
+        max-width: none;
+    }
+}

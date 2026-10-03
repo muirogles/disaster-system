@@ -34,10 +34,6 @@
         inset  0 -8px 18px rgba(0,0,0,.32),
         6px 12px 32px rgba(0,0,0,.65);
     z-index: 1;
-
-    @media (orientation: portrait) {
-        --trunk-width: 50%;
-    }
 }
 
 /* Vertical center seam */
@@ -83,7 +79,7 @@
 /* ---------- CHEST WITH HEART WINDOW ---------- */
 .trunk__chest {
     width: 100%;
-    padding: 2vmax;
+    padding: 6.5%;  /* of the trunk width */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +91,7 @@
     height: auto;
     background: #0c0406;
     border-radius: 50% 50% 40% 40% / 38% 38% 38% 38%;
-    border: 0.3vmax solid var(--trunk-dark);
+    border: calc(var(--fig) * 0.48) solid var(--trunk-dark);
     box-shadow:
         inset 0 0 48px rgba(210,18,32,.6),
         inset 0 0 18px rgba(210,18,32,.3),
@@ -112,20 +108,20 @@
 .heart-window::before {
     content: '';
     position: absolute;
-    left: -0.45vmax; top: 22%;
-    width: 0.65vmax; height: 0.65vmax;
+    left: calc(var(--fig) * -0.72); top: 22%;
+    width: calc(var(--fig) * 1.04); height: calc(var(--fig) * 1.04);
     background: var(--trunk-c4);
     border-radius: 50%;
-    box-shadow: 0 0.9vmax 0 var(--trunk-c4), 0 1.8vmax 0 var(--trunk-c4);
+    box-shadow: 0 calc(var(--fig) * 1.44) 0 var(--trunk-c4), 0 calc(var(--fig) * 2.88) 0 var(--trunk-c4);
 }
 
 /* Right latch */
 .heart-window::after {
     content: '';
     position: absolute;
-    right: -0.45vmax; top: 50%;
+    right: calc(var(--fig) * -0.72); top: 50%;
     transform: translateY(-50%);
-    width: 0.55vmax; height: 0.4vmax;
+    width: calc(var(--fig) * 0.88); height: calc(var(--fig) * 0.64);
     background: var(--trunk-dark);
     border-radius: 2px;
     box-shadow: 0 0 3px rgba(0,0,0,.5);
@@ -173,13 +169,13 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2vmax;
+    padding: 6.5%;  /* of the trunk width */
 }
 
 .bolt {
     display: block;
-    width: 1.4vw;
-    height: 1.4vw;
+    width: calc(var(--fig) * 2.24);
+    height: calc(var(--fig) * 2.24);
     border-radius: 50%;
     background: radial-gradient(circle at 32% 28%, var(--trunk-c1), var(--trunk-dark));
     box-shadow:
