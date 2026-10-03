@@ -117,7 +117,7 @@ function buildVisualDemo(visual) {
                     <div class="visual-demo__side-title visual-demo__side-title--success">${getDemo('spacing', 'solution')}</div>
                     <div class="visual-demo__spacing-blocks visual-demo__spacing-blocks--big">
                         <div class="visual-demo__spacing-block visual-demo__spacing-block--ok" style="height:32px"><span>32px (8x4)</span></div>
-                        <div class="visual-demo__spacing-block visual-demo__spacing-block--ok" style="height:16px"><span>16px (8x2)</span></div>
+                        <div class="visual-demo__spacing-block visual-demo__spacing-block--ok" style="height:24px"><span>24px (8x3)</span></div>
                         <div class="visual-demo__spacing-block visual-demo__spacing-block--ok" style="height:16px"><span>16px (8x2)</span></div>
                         <div class="visual-demo__spacing-block visual-demo__spacing-block--ok" style="height:8px"><span>8px (8x1)</span></div>
                     </div>
@@ -368,7 +368,7 @@ function buildVisualDemo(visual) {
                             <div class="visual-demo__overflow-card visual-demo__overflow-card--ok">
                                 <div class="visual-demo__overflow-card-header">Producto</div>
                                 <div class="visual-demo__overflow-card-body">
-                                    <div class="visual-demo__overflow-text visual-demo__overflow-text--fit">Konfigurationseinstellungen f\u00fcr erweiterte Benutzeroptionen</div>
+                                    <div class="visual-demo__overflow-text visual-demo__overflow-text--fit" lang="de">Konfigurationseinstellungen f\u00fcr erweiterte Benutzeroptionen</div>
                                 </div>
                                 <div class="visual-demo__overflow-card-footer">
                                     <div class="visual-demo__overflow-price">19,99\u20ac</div>

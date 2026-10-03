@@ -41,11 +41,11 @@
     }
 }
 
-/* Each part lives inside a 100dvh wrapper */
+/* Each part is sized in figure units (see --fig) so head, trunk and legs
+   keep the same proportions at every viewport aspect ratio */
 .fc-part {
     width: 100%;
-    height: 100vh; /* fallback */
-    height: 100dvh;
+    height: calc(var(--fig) * 100);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,12 +73,12 @@
 }
 
 .fc-part:nth-child(2) {
-    height: 80vh; /* fallback */
-    height: 80dvh;
+    height: calc(var(--fig) * 80);
     z-index: 2;
 }
 
 .fc-part .head-wrap {
+    height: 100%;
     overflow: visible;
 }
 
@@ -414,11 +414,22 @@
     transition: opacity 1.8s ease;
 }
 
+/* Smile: one clean row of upper teeth over a curved opening */
 .corpse__item--full[data-theme="design"] .full-corpse .mouth__inner {
-    height: 20%;
+    height: 34%;
+    width: 90%;
+    margin-top: -3%;
+    background:
+        repeating-linear-gradient(90deg,
+            transparent 0, transparent calc(12.5% - 1px),
+            rgba(150,130,120,0.18) calc(12.5% - 1px), rgba(150,130,120,0.18) 12.5%) 0 0 / 100% 75% no-repeat,
+        /* All teeth: only a hint of shadow where the lower lip meets them */
+        linear-gradient(to bottom, #fffaf4 0%, #f1e9de 78%, #d9c4bb 92%, #b98a86 100%);
+    border-radius: 4% 4% 50% 50% / 8% 8% 100% 100%;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
 }
 .corpse__item--full[data-theme="design"] .full-corpse .tooth {
-    height: 90%;
+    display: none;
 }
 
 /* ── Hide brain entirely — hair covers the top ── */
@@ -427,67 +438,79 @@
     pointer-events: none;
 }
 
-/* ── Dark blonde flowing hair — elegant, coordinated silhouette ── */
+/* ── Hair (from the reference portrait): long, straight, side part,
+      forehead visible, falling to mid-shoulder, ears partly visible.
+      Light-brown → dark-blonde with caramel highlights. All sizes are
+      percentages of the head, so it scales with the face. ── */
 .corpse__item--full[data-theme="design"] .full-corpse .hair__top {
+    width: 100%;
     background:
-        /* Glossy shine streak — well-kept hair */
-        linear-gradient(108deg,
-            transparent 0%, transparent 36%,
-            rgba(245,210,130,0.32) 48%, rgba(245,210,130,0.42) 52%,
-            rgba(245,210,130,0.28) 58%, transparent 70%, transparent 100%),
-        /* Crown volume highlight */
-        radial-gradient(ellipse 58% 42% at 40% 22%, rgba(232,198,118,0.5) 0%, transparent 62%),
-        /* Side shadow for depth */
-        radial-gradient(ellipse 30% 55% at 92% 60%, rgba(60,38,8,0.35) 0%, transparent 70%),
-        /* Base blonde gradient with warm flow */
-        linear-gradient(165deg,
-            #7a5214 0%, #a07428 16%,
-            #b88c38 38%, #9a6e22 60%,
-            #7a5214 82%, #6a4410 100%);
-    /* Smooth side-swept silhouette — soft crown, elegant fringe */
+        /* Side part (viewer's left, as in the photo) */
+        linear-gradient(90deg,
+            transparent 37.3%, rgba(70,42,20,0.75) 37.6%,
+            rgba(70,42,20,0.75) 38.4%, transparent 38.7%) 0 0 / 100% 62% no-repeat,
+        /* Glossy crown shine either side of the part */
+        radial-gradient(ellipse 16% 22% at 26% 26%, rgba(242,212,156,0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 26% 26% at 60% 24%, rgba(242,212,156,0.5) 0%, transparent 70%),
+        /* Darker roots near the part */
+        radial-gradient(ellipse 9% 36% at 38% 18%, rgba(80,52,28,0.5) 0%, transparent 70%),
+        linear-gradient(180deg, #8a6440 0%, #a87e52 40%, #b99062 70%, #9a7248 100%);
+    /* Rounded crown with an arched forehead opening; side part — the
+       larger side sweeps a little further across the forehead */
     clip-path: polygon(
-        0%  100%,  0%  68%,
-        3%   42%,  9%  22%,
-        18%   9%, 30%   2%,
-        44%   0%, 54%   5%,
-        62%   2%, 74%   0%,
-        86%   4%, 94%  15%,
-        99%  34%, 100% 58%,
-        100% 100%
+        2% 100%,  0% 80%,  2% 58%,  7% 38%, 15% 22%, 26% 11%,
+        38% 5%,  50% 3%,  62% 5%,  74% 11%, 85% 22%, 93% 38%,
+        98% 58%, 100% 80%, 98% 100%,
+        85% 100%, 83% 82%, 79% 73%, 72% 67%, 62% 63%, 52% 61%, 41% 59.5%,
+        38% 63%,
+        35% 60%, 28% 63%, 21% 70%, 17% 80%, 15% 100%
     );
-    filter: drop-shadow(0 -0.25vmax 0.75vmax rgba(0,0,0,0.45));
+    filter: drop-shadow(0 0.25vmax 0.4vmax rgba(90,45,20,0.35));
+    filter: drop-shadow(0 0.9cqw 1.4cqw rgba(90,45,20,0.35));
+    /* Melt the crown into the side curtains instead of ending in a step */
+    -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
 }
 
 .corpse__item--full[data-theme="design"] .full-corpse .hair__side {
-    height: 175%;
+    /* Tucked under the crown (no bump sticking out) and aligned with its
+       outer edge, so crown and curtains read as one continuous shape */
+    top: 34%;
+    width: 22%;
+    height: 162%;   /* ends at mid-shoulder */
+    clip-path: none;
 }
 
-/* Left curtain — smooth flowing cascade, no jagged edges */
+/* Curtains: same palette as the crown; right is an exact mirror of left */
 .corpse__item--full[data-theme="design"] .full-corpse .hair__side--l {
+    inset-inline-start: 0;
     background:
-        linear-gradient(105deg,
-            transparent 0%, transparent 55%,
-            rgba(240,205,128,0.22) 68%, transparent 82%),
-        linear-gradient(160deg,
-            #a07428 0%, #8a6218 26%,
-            #7a5214 56%, #6a4410 82%,
-            rgba(90,60,10,0.15) 100%);
-    clip-path: none;
-    border-radius: 30% 70% 85% 55% / 12% 20% 72% 82%;
+        /* Smooth sheen down the curtain + slightly darker ends */
+        radial-gradient(ellipse 30% 40% at 60% 30%, rgba(240,212,160,0.4) 0%, transparent 70%),
+        linear-gradient(to bottom, transparent 55%, rgba(90,60,30,0.22) 100%),
+        linear-gradient(90deg, #8a6440 0%, #a87e52 40%, #b99062 75%, #a87e52 100%);
+    /* Solid, softly rounded tips (no fade) */
+    border-radius: 30% 60% 45% 55% / 6% 10% 10% 12%;
 }
 
-/* Right curtain — mirrored smooth cascade */
 .corpse__item--full[data-theme="design"] .full-corpse .hair__side--r {
+    inset-inline-end: 0;
     background:
-        linear-gradient(255deg,
-            transparent 0%, transparent 55%,
-            rgba(240,205,128,0.22) 68%, transparent 82%),
-        linear-gradient(200deg,
-            #a07428 0%, #8a6218 26%,
-            #7a5214 56%, #6a4410 82%,
-            rgba(90,60,10,0.15) 100%);
-    clip-path: none;
-    border-radius: 70% 30% 55% 85% / 20% 12% 82% 72%;
+        radial-gradient(ellipse 30% 40% at 40% 30%, rgba(240,212,160,0.4) 0%, transparent 70%),
+        linear-gradient(to bottom, transparent 55%, rgba(90,60,30,0.22) 100%),
+        linear-gradient(270deg, #8a6440 0%, #a87e52 40%, #b99062 75%, #a87e52 100%);
+    border-radius: 60% 30% 55% 45% / 10% 6% 12% 10%;
+}
+
+/* ── Ears partly visible, as in the photo: the hair covers the top, the
+      lower part of the ear peeks out in front of it ── */
+.corpse__item--full[data-theme="design"] .full-corpse .ear {
+    z-index: 4;
+    /* Sit on the hair edge (not sticking out past it) */
+    --ear-overlapping: 11%;   /* of the head width (works in every browser) */
+    /* Top of the ear fades softly under the hair */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 25%, #000 60%);
+    mask-image: linear-gradient(to bottom, transparent 25%, #000 60%);
 }
 
 /* ── Ears: warm skin-tone, remove green tragus tint ── */
@@ -498,18 +521,291 @@
         radial-gradient(circle 20% at 75% 48%, rgba(232,180,140,0.2) 0%, transparent 60%);
 }
 
-/* ── Nose: softer, more rounded shape ── */
-.corpse__item--full[data-theme="design"] .full-corpse .nose {
-    border-radius: 38% 38% 50% 50% / 30% 30% 55% 55%;
+/* =====================================================
+   REANIMATED FACE — realistic portrait (design theme only)
+   Sizes in cqw (percent of head width; .head is a container) with a
+   px / viewport fallback declared first for browsers without
+   container queries.
+   ===================================================== */
+
+/* ── Face shape: oval, softly tapered chin ── */
+.corpse__item--full[data-theme="design"] .full-corpse .head {
+    /* Widest at the cheekbones, tapering to a soft, slightly pointed chin */
+    border-radius: 47% 47% 50% 50% / 40% 40% 62% 62%;
+    background:
+        /* Forehead + nose-bridge highlight */
+        radial-gradient(ellipse 34% 22% at 50% 14%, rgba(255,238,224,0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 6% 20% at 50% 46%, rgba(255,238,224,0.35) 0%, transparent 70%),
+        /* Nose-side shading */
+        radial-gradient(ellipse 4% 12% at 43% 49%, rgba(140,75,50,0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 4% 12% at 57% 49%, rgba(140,75,50,0.14) 0%, transparent 70%),
+        /* Rosy smiling cheeks */
+        radial-gradient(ellipse 15% 10% at 26% 59%, rgba(230,118,112,0.32) 0%, transparent 70%),
+        radial-gradient(ellipse 15% 10% at 74% 59%, rgba(230,118,112,0.32) 0%, transparent 70%),
+        /* Cheekbone light */
+        radial-gradient(ellipse 18% 8% at 25% 51%, rgba(255,236,220,0.38) 0%, transparent 70%),
+        radial-gradient(ellipse 18% 8% at 75% 51%, rgba(255,236,220,0.38) 0%, transparent 70%),
+        /* Contour under the cheekbones */
+        radial-gradient(ellipse 12% 14% at 10% 70%, rgba(130,65,45,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 12% 14% at 90% 70%, rgba(130,65,45,0.18) 0%, transparent 70%),
+        /* Temple shading */
+        radial-gradient(ellipse 10% 16% at 6% 34%, rgba(130,65,45,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 10% 16% at 94% 34%, rgba(130,65,45,0.25) 0%, transparent 70%),
+        /* Jawline shading — emphasises the taper toward the chin */
+        radial-gradient(ellipse 14% 20% at 16% 84%, rgba(130,65,45,0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 14% 20% at 84% 84%, rgba(130,65,45,0.22) 0%, transparent 70%),
+        /* Jaw shadow */
+        radial-gradient(ellipse 50% 18% at 50% 100%, rgba(120,60,40,0.3) 0%, transparent 70%),
+        linear-gradient(180deg, var(--head-skin-light) 0%, var(--head-bg) 45%, var(--head-bg) 80%, var(--head-skin-dark) 100%);
     box-shadow:
-        inset 0 4px 10px rgba(0,0,0,0.18),
-        inset 0 -2px 6px rgba(255,220,190,0.1),
-        2px 5px 12px rgba(0,0,0,0.3);
+        inset 6px 0 20px rgba(120,60,40,0.16),
+        inset -6px 0 20px rgba(120,60,40,0.16),
+        inset 0 -14px 30px rgba(120,60,40,0.3),
+        8px 18px 50px rgba(0,0,0,0.6);
+    box-shadow:
+        inset 1.5cqw 0 5cqw rgba(120,60,40,0.16),
+        inset -1.5cqw 0 5cqw rgba(120,60,40,0.16),
+        inset 0 -3.5cqw 7.5cqw rgba(120,60,40,0.3),
+        2cqw 4.5cqw 12cqw rgba(0,0,0,0.6);
 }
 
-/* ── Mouth: softer lip shape, gentler scar color ── */
+.corpse__item--full[data-theme="design"] .full-corpse .head::before {
+    /* Smooth skin: no texture lines */
+    opacity: 0;
+}
+
+/* ── Eyes ── */
+
+/* Soft warm eyeshadow / socket */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__shadow {
+    background:
+        radial-gradient(ellipse 55% 32% at 50% 38%, rgba(150,95,80,0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 45% at 50% 50%, rgba(140,80,60,0.12) 0%, transparent 70%);
+}
+
+/* Almond shape with a single eyeliner along the upper lash line */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__white {
+    aspect-ratio: 1.5 / 1;
+    border-radius: 62% 58% 50% 54% / 90% 90% 62% 62%;
+    background: radial-gradient(circle at 50% 45%, var(--sclera-c1) 0%, var(--sclera-c2) 55%, var(--sclera-c4) 100%);
+    box-shadow:
+        inset 0 3px 0 #2e1c12;
+    box-shadow:
+        inset 0 1cqw 0 #2e1c12;
+}
+
+/* Hazel iris: amber ring around the pupil fading to green, fine fibres */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__iris {
+    /* Circle inside a 1.5:1 box (46% of width = 69% of height) */
+    width: 46%;
+    height: 69%;
+    top: 54%;  /* upper edge of the eye slightly covers the iris */
+    background:
+        repeating-conic-gradient(from 0deg, rgba(255,240,200,0.07) 0deg 3deg, transparent 3deg 8deg),
+        radial-gradient(circle at 50% 50%,
+            #2a1a0c 0%, #2a1a0c 24%,
+            #a87a34 30%, #b98f45 38%,
+            #7d8f4a 50%, #5e7a3c 64%,
+            #3f5a2a 78%, #1d2a12 92%, #121a0a 100%);
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.6);
+    box-shadow: inset 0 0 0.5cqw rgba(0,0,0,0.6);
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .eye__pupil {
+    width: 22%;
+    height: 22%;
+    top: 54%;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .eye__shine {
+    top: 28%;
+    left: 30%;
+    width: 11%;
+    height: 14%;
+}
+
+/* Upper lid — smooth, no crease */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__lid,
+.corpse__item--full[data-theme="design"] .full-corpse .eye--l .eye__lid {
+    /* Sits above the eye (not over it) so the eyeliner on the eye's top
+       edge stays fully visible */
+    top: -30%;
+    height: 32%;
+    background:
+        linear-gradient(to bottom, var(--lid-c1) 0%, var(--lid-c3) 60%, transparent 100%);
+    box-shadow: none;
+}
+
+/* Smiling lower lid — eyes narrow slightly when smiling */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__white::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    bottom: -10%;
+    height: 22%;
+    background: var(--lid-c3);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    z-index: 4;
+}
+
+/* Cat-eye wing — one small tapered stroke continuing the eyeliner past
+   the outer corner. Drawn for the right eye, mirrored for the left. */
+.corpse__item--full[data-theme="design"] .full-corpse .eye__lashes {
+    position: absolute;
+    top: 34%;
+    right: -12%;
+    left: auto;
+    width: 16%;
+    height: 22%;
+    border: 0;
+    background: #2e1c12;
+    -webkit-clip-path: polygon(0% 45%, 100% 0%, 0% 100%);
+    clip-path: polygon(0% 45%, 100% 0%, 0% 100%);
+    opacity: 1;
+    filter: none;
+    transform: none;
+    z-index: 5;
+    pointer-events: none;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .eye--l .eye__lashes {
+    right: auto;
+    left: -12%;
+    transform: scaleX(-1);
+}
+
+/* Eyebrows (reference portrait): medium brown, fuller and straighter at
+   the inner end, rising to a soft angled arch at ~2/3, tapering down to
+   a fine tail. Drawn for the right eye (inner end on the left) and
+   mirrored for the left eye. */
+.corpse__item--full[data-theme="design"] .full-corpse .eye::before {
+    content: '';
+    position: absolute;
+    top: -84%;
+    left: -2%;
+    width: 112%;
+    height: 56%;
+    background:
+        /* Hair-stroke texture */
+        repeating-linear-gradient(70deg,
+            transparent 0%, transparent 4%,
+            rgba(40,24,12,0.18) 4%, rgba(40,24,12,0.18) 6%),
+        linear-gradient(90deg, #5a3d27 0%, #6e4c32 55%, #7e5a3e 100%);
+    -webkit-clip-path: polygon(
+        0% 40%, 20% 32%, 42% 23%, 62% 14%, 70% 14%,
+        86% 32%, 100% 68%,
+        97% 74%, 84% 44%, 68% 32%, 44% 40%, 20% 50%, 2% 70%
+    );
+    clip-path: polygon(
+        0% 40%, 20% 32%, 42% 23%, 62% 14%, 70% 14%,
+        86% 32%, 100% 68%,
+        97% 74%, 84% 44%, 68% 32%, 44% 40%, 20% 50%, 2% 70%
+    );
+    z-index: 5;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .eye--l::before {
+    left: auto;
+    right: -2%;
+    transform: scaleX(-1);
+}
+
+/* ── Nose: slim, rounded tip with a highlight, subtle nostrils ── */
+.corpse__item--full[data-theme="design"] .full-corpse .nose {
+    width: 15%;
+    border-radius: 40% 40% 50% 50% / 30% 30% 60% 60%;
+    background:
+        radial-gradient(ellipse 26% 22% at 50% 52%, rgba(255,236,222,0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 50% at 22% 55%, var(--head-skin-light) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 50% at 80% 55%, var(--head-skin-dark) 0%, transparent 60%),
+        linear-gradient(to bottom, var(--head-bg) 0%, var(--head-bg) 55%, var(--head-skin-dark) 100%);
+    box-shadow:
+        inset 0 -2px 6px rgba(120,60,40,0.2),
+        2px 4px 8px rgba(120,60,40,0.22);
+    box-shadow:
+        inset 0 -0.5cqw 1.5cqw rgba(120,60,40,0.2),
+        0.5cqw 1cqw 2cqw rgba(120,60,40,0.22);
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .nose::before,
+.corpse__item--full[data-theme="design"] .full-corpse .nose::after {
+    height: 16%;
+    opacity: 0.3;
+}
+
+/* ── Mouth: wide, warm, open smile ── */
 .corpse__item--full[data-theme="design"] .full-corpse .mouth {
+    top: 68%;
+    width: 42%;
     border-radius: 0 0 48% 48% / 0 0 60% 60%;
+}
+
+
+/* Upper lip (reference portrait): thinner than the lower lip, with a
+   clear "M" cupid's bow; the bottom edge curves down over the teeth. */
+.corpse__item--full[data-theme="design"] .full-corpse .lip--upper {
+    height: 22%;
+    background:
+        /* Light catching the two peaks of the bow */
+        radial-gradient(ellipse 10% 30% at 40% 20%, rgba(255,215,210,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 10% 30% at 60% 20%, rgba(255,215,210,0.35) 0%, transparent 70%),
+        linear-gradient(to bottom, var(--lip-color-base) 0%, var(--lip-color-dark) 100%);
+    border-radius: 0;
+    -webkit-clip-path: polygon(
+        0% 78%, 6% 60%, 18% 38%, 31% 16%, 42% 4%, 50% 24%,
+        58% 4%, 69% 16%, 82% 38%, 94% 60%, 100% 78%,
+        88% 88%, 70% 97%, 50% 100%, 30% 97%, 12% 88%
+    );
+    clip-path: polygon(
+        0% 78%, 6% 60%, 18% 38%, 31% 16%, 42% 4%, 50% 24%,
+        58% 4%, 69% 16%, 82% 38%, 94% 60%, 100% 78%,
+        88% 88%, 70% 97%, 50% 100%, 30% 97%, 12% 88%
+    );
+    box-shadow: none;
+    position: relative;
+    z-index: 2;
+}
+
+/* The bow is now cut into the shape — drop the old gloss + notch */
+.corpse__item--full[data-theme="design"] .full-corpse .lip--upper::before,
+.corpse__item--full[data-theme="design"] .full-corpse .lip--upper::after {
+    display: none;
+}
+
+/* Lower lip (reference portrait): a full crescent that hugs the bottom
+   of the teeth and tapers to meet the upper lip at the corners. Absolutely
+   positioned over the mouth box; its inner edge follows the teeth curve. */
+.corpse__item--full[data-theme="design"] .full-corpse .lip--lower {
+    position: absolute;
+    top: 16%;
+    left: 0;
+    width: 100%;
+    height: 62%;
+    margin: 0;
+    border-radius: 0;
+    background:
+        /* Gloss highlight */
+        radial-gradient(ellipse 18% 14% at 50% 80%, rgba(255,235,235,0.45) 0%, transparent 70%),
+        linear-gradient(to bottom,
+            var(--lip-color-dark) 0%, var(--lip-color-dark) 55%,
+            var(--lip-color-base) 75%, var(--lip-color-highlight) 100%);
+    -webkit-clip-path: polygon(
+        0% 0%, 5% 2%, 15% 26%, 25% 38%, 35% 45%, 50% 48%,
+        65% 45%, 75% 38%, 85% 26%, 95% 2%, 100% 0%,
+        97% 18%, 92% 40%, 84% 62%, 74% 80%, 62% 93%, 50% 98%,
+        38% 93%, 26% 80%, 16% 62%, 8% 40%, 3% 18%
+    );
+    clip-path: polygon(
+        0% 0%, 5% 2%, 15% 26%, 25% 38%, 35% 45%, 50% 48%,
+        65% 45%, 75% 38%, 85% 26%, 95% 2%, 100% 0%,
+        97% 18%, 92% 40%, 84% 62%, 74% 80%, 62% 93%, 50% 98%,
+        38% 93%, 26% 80%, 16% 62%, 8% 40%, 3% 18%
+    );
+    box-shadow: none;
+    z-index: 3;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .lip--lower::before {
+    display: none;
 }
 
 /* ── Subtle eye blink animation on reanimated ── */
@@ -519,13 +815,6 @@
 .corpse__item--full[data-theme="design"] .full-corpse .eye--r .eye__lid {
     animation-delay: 0.08s;
 } */
-
-/* ── Feminine: more pronounced lashes ── */
-.corpse__item--full[data-theme="design"] .full-corpse .eye__lashes {
-    opacity: 1;
-    filter: drop-shadow(0 -1px 2px rgba(60,20,80,0.6));
-    transform: scaleX(1.08);
-}
 
 /* ── Trunk: soft lavender-purple blouse ── */
 .corpse__item--full[data-theme="design"] .full-corpse .trunk__body {
@@ -585,7 +874,7 @@
 }
 .corpse__item--full[data-theme="design"] .full-corpse .finger {
     border-radius: 40% 40% 28% 28% / 50% 50% 50% 50%;
-    background: linear-gradient(to bottom, #e0b090, #c88060, #a86040);
+    background: linear-gradient(to bottom, var(--hand-c1), var(--hand-c2), var(--hand-c3));
     box-shadow: 1px 2px 6px rgba(0,0,0,.3), inset 0 1px 3px rgba(255,255,255,.25);
 }
 
@@ -687,6 +976,170 @@
 /* Hide tail */
 .corpse__item--full[data-theme="design"] .full-corpse .tail {
     opacity: 0;
+}
+
+/* =====================================================
+   REANIMATED BODY SHAPES — organic silhouette (design theme only)
+   Same outfit and pose; only the shapes change. Percent / --fig units
+   keep it proportional at every viewport.
+   ===================================================== */
+
+/* ── Torso: rounded shoulders, soft waist taper ── */
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__body {
+    border-radius: 34% 34% 20% 20% / 12% 12% 7% 7%;
+    background:
+        /* Waist taper — shadow pulls the sides in */
+        radial-gradient(ellipse 16% 24% at 0% 64%, rgba(70,40,120,0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 16% 24% at 100% 64%, rgba(70,40,120,0.45) 0%, transparent 70%),
+        /* Bust volume */
+        radial-gradient(ellipse 22% 12% at 30% 34%, rgba(230,215,255,0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 22% 12% at 70% 34%, rgba(230,215,255,0.18) 0%, transparent 70%),
+        linear-gradient(155deg,
+            #c8aee8 0%, #b498d8 15%, #9a7dc4 38%,
+            #8568b0 62%, #9a7dc4 80%, #b298d8 100%);
+}
+
+/* ── Layering: chin and hair in front of the body, neck behind the
+      neckline. The trunk part stops being its own stacking context, so
+      .head (z 2) paints above .trunk__body (z 1) while the neck (z auto)
+      stays below it — no floating neck gap. ── */
+.corpse__item--full[data-theme="design"] .fc-part:nth-child(2) {
+    z-index: auto;
+}
+
+/* Neck slides further under the neckline so the chin sits close to the
+   shoulders (only a short stretch of neck shows) */
+.corpse__item--full[data-theme="design"] .full-corpse .neck {
+    aspect-ratio: 2 / 1.2;
+}
+.corpse__item--full[data-theme="design"] .fc-part .head-wrap .neck {
+    margin-bottom: calc(var(--fig) * -9);
+}
+
+/* ── Neck: clean skin (no zombie veins), soft shadow under the jaw ── */
+.corpse__item--full[data-theme="design"] .full-corpse .neck {
+    background:
+        linear-gradient(to bottom, rgba(120,60,40,0.35) 0%, transparent 35%),
+        radial-gradient(ellipse 60% 80% at 40% 60%, var(--head-skin-light) 0%, transparent 60%),
+        /* Soft side shading (rounded column, not a flat slab) */
+        linear-gradient(to right, rgba(120,60,40,0.28) 0%, transparent 22%, transparent 78%, rgba(120,60,40,0.32) 100%),
+        linear-gradient(to bottom, var(--head-skin-dark) 0%, var(--head-bg) 45%, var(--head-bg) 100%);
+    /* Natural silhouette: narrow under the jaw, slightly concave sides,
+       flaring into the shoulders at the neckline */
+    -webkit-clip-path: polygon(
+        16% 0%, 84% 0%, 83% 40%, 85% 62%, 90% 80%, 100% 100%,
+        0% 100%, 10% 80%, 15% 62%, 17% 40%
+    );
+    clip-path: polygon(
+        16% 0%, 84% 0%, 83% 40%, 85% 62%, 90% 80%, 100% 100%,
+        0% 100%, 10% 80%, 15% 62%, 17% 40%
+    );
+    border-radius: 0;
+}
+
+/* Rounded neckline */
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__collar {
+    width: 34%;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Jeans waistband follows the hem curve */
+.corpse__item--full[data-theme="design"] .full-corpse .trunk__waist {
+    border-radius: 0 0 30% 30% / 0 0 60% 60%;
+}
+
+/* ── Arms: one continuous sleeve — pieces touch (no gaps) and share the
+      same width, so shoulder, elbow and forearm read as a bent arm rather
+      than separate balls and blocks ── */
+.corpse__item--full[data-theme="design"] .full-corpse .arm {
+    gap: 0;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .arm__shoulder {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .arm__upper {
+    border-radius: 30% 30% 40% 40% / 14% 14% 18% 18%;
+    box-shadow: inset -2px 0 6px rgba(60,30,100,0.25);
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .arm__elbow {
+    width: 88%;
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .arm__lower {
+    width: 88%;
+    border-radius: 40% 40% 46% 46% / 16% 16% 22% 22%;
+    box-shadow: inset -2px 0 6px rgba(60,30,100,0.25);
+}
+
+/* ── Jeans: hips cover the tops of the thighs; legs closer together;
+      knees and ankles blend into one tapered leg ── */
+.corpse__item--full[data-theme="design"] .full-corpse .legs {
+    gap: calc(var(--fig) * 2.5);
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .pubis {
+    width: calc(var(--fig) * 45);
+    height: 22%;
+    border-radius: 30% 30% 46% 46% / 24% 24% 60% 60%;
+    box-shadow: 0 calc(var(--fig) * 0.6) calc(var(--fig) * 1.5) rgba(0,0,0,0.45);
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .leg {
+    --leg-width: calc(var(--fig) * 20);   /* ≈ 0.44 head widths */
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .leg__thigh {
+    border-radius: 40% 40% 30% 30% / 10% 10% 10% 10%;
+}
+
+/* Knee: same width as where thigh and shin meet, overlapping both */
+.corpse__item--full[data-theme="design"] .full-corpse .leg__joint {
+    width: 82%;
+    margin: calc(var(--fig) * -1.6) 0;
+    border-radius: 45%;
+    /* Blend from the thigh's bottom colour into the shin's top colour */
+    background: linear-gradient(to bottom, var(--leg-c5), var(--leg-c2));
+    box-shadow: none;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .leg__joint::before,
+.corpse__item--full[data-theme="design"] .full-corpse .leg__joint::after {
+    display: none;
+}
+
+.corpse__item--full[data-theme="design"] .full-corpse .leg__shin {
+    width: 78%;
+    border-radius: 30% 30% 36% 36% / 6% 6% 10% 10%;
+}
+
+/* Ankle tucked into the shoe */
+.corpse__item--full[data-theme="design"] .full-corpse .leg__ankle {
+    width: 60%;
+    margin: calc(var(--fig) * -0.8) 0;
+    background: linear-gradient(to bottom, var(--leg-c4), #1a1a1a);
+}
+
+/* ── Shoes: rounded toe, thin sole ── */
+.corpse__item--full[data-theme="design"] .full-corpse .leg--l .foot__heel {
+    border-radius: 60% 20% 18% 18% / 70% 30% 25% 25%;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .leg--r .foot__heel {
+    border-radius: 20% 60% 18% 18% / 30% 70% 25% 25%;
+}
+.corpse__item--full[data-theme="design"] .full-corpse .foot__heel {
+    box-shadow:
+        inset 0 -3px 0 #050505,
+        inset 0 2px 4px rgba(255,255,255,0.12);
+    box-shadow:
+        inset 0 calc(var(--fig) * -0.35) 0 #050505,
+        inset 0 calc(var(--fig) * 0.25) calc(var(--fig) * 0.5) rgba(255,255,255,0.12);
 }
 
 /* Full-corpse reveal animation after shock */
@@ -1953,4 +2406,52 @@ a.closing__tool-name:hover::before {
     border-left-color: rgba(90, 173, 219, 0.88);
     color: rgba(210, 235, 255, 0.95);
     box-shadow: 0 0 28px rgba(90, 173, 219, 0.2);
+}
+
+/* =====================================================
+   PHONES (portrait ≤600px) — whole creature + whole card on one screen,
+   no overlap and no scrolling (scrolling would jump to the next slide).
+   · the card keeps its content and style, along the bottom beside the
+     fixed sound / QR / EN buttons
+   · js/full-body-fit.js sizes the figure (--fc-zoom) to the space between
+     the slide-nav icons and the card, and positions it (--fc-pad-top);
+     it re-fits when the card grows after reanimation
+   ===================================================== */
+@media (max-width: 600px) and (orientation: portrait) {
+    .corpse__item--full {
+        padding-top: var(--fc-pad-top, 4.5rem);
+    }
+
+    .corpse__item--full .full-corpse {
+        align-self: center;   /* figure centred: tail and arms on screen */
+        zoom: var(--fc-zoom, 0.30);
+    }
+
+    .corpse__item--full .corpse__header {
+        top: auto;
+        bottom: 1.5rem;
+        /* starts right of the fixed sound / QR / EN buttons
+           (left 1.5rem + 3.5rem wide + 0.75rem gap) */
+        left: 5.75rem;
+        right: 1rem;
+        max-width: none;
+    }
+
+    /* Helmet stays centred on the head */
+    .corpse__item--full .helmet {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .corpse__item--full .helmet--drop {
+        top: calc(var(--fc-pad-top, 4.5rem) - 1.5rem);
+    }
+}
+
+@supports not (zoom: 0.30) {
+    @media (max-width: 600px) and (orientation: portrait) {
+        .corpse__item--full .full-corpse {
+            transform: scale(var(--fc-zoom, 0.30));
+        }
+    }
 }

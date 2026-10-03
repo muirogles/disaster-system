@@ -174,11 +174,11 @@
    ===================================================== */
 .corpse__item--full[data-theme="design"] {
 
-    /* ── Skin: warm Mediterranean human ── */
-    --head-bg:          #c8855c;
-    --head-skin-light:  #e8a880;
-    --head-skin-dark:   #9a5535;
-    --head-skin-shadow: #7a3820;
+    /* ── Skin: light warm human (matches the reference portrait) ── */
+    --head-bg:          #dfa781;
+    --head-skin-light:  #f3cbab;
+    --head-skin-dark:   #bb7b58;
+    --head-skin-shadow: #96583c;
 
     /* ── Eyes: natural hazel-green ── */
     --iris-green:      #5E8A4A;
@@ -190,14 +190,14 @@
     --sclera-c2:       #f0ece4;
     --sclera-c3:       #e8e0d8;
     --sclera-c4:       #e0d8cc;
-    --lid-c1:          #c08060;
-    --lid-c2:          #a87050;
-    --lid-c3:          #bc7858;
+    --lid-c1:          #c98d6c;
+    --lid-c2:          #d49a78;
+    --lid-c3:          #dda882;
 
-    /* ── Lips: natural rose ── */
-    --lip-color-base:      #c0607a;
-    --lip-color-dark:      #903045;
-    --lip-color-highlight: #e090a0;
+    /* ── Lips: coral-rose (reference portrait) ── */
+    --lip-color-base:      #cc6670;
+    --lip-color-dark:      #a2424e;
+    --lip-color-highlight: #e8979a;
 
     /* ── Teeth: clean white ── */
     --tooth-c1: #f0ede8;
@@ -226,9 +226,9 @@
     --collar-c2:  #07111e;
 
     /* ── Hands: human skin ── */
-    --hand-c1: #e8a880;
-    --hand-c2: #c8855c;
-    --hand-c3: #9a5535;
+    --hand-c1: #f3cbab;
+    --hand-c2: #dfa781;
+    --hand-c3: #bb7b58;
 
     /* ── Legs: dark denim jeans ── */
     --leg-c1:         #2a3a58;

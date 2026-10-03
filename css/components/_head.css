@@ -17,10 +17,11 @@
 /* ---- MAIN HEAD — organic oval/egg shape ---- */
 .head {
     position: relative;
-    width: var(--head-width);
-    aspect-ratio: var(--head-aspect-ratio);
-    max-width: var(--head-max-width);
+    /* Fallback sizing (no container queries): height-driven */
+    width: auto;
     height: var(--head-height);
+    max-width: var(--head-max-width);
+    aspect-ratio: var(--head-aspect-ratio);
     background:
         /* Forehead highlight */
         radial-gradient(ellipse 55% 35% at 42% 18%, rgba(180,200,160,0.2) 0%, transparent 60%),
@@ -51,6 +52,26 @@
         8px 18px 50px rgba(0,0,0,0.75),
         0 0 80px rgba(60,100,40,0.10);
     z-index: 2;
+}
+
+/* Container-query sizing (Chrome 105+, Safari 16+, Firefox 110+).
+   Head width = the smaller of "--head-height-cq × 3/4" (the aspect ratio)
+   and --head-max-width-cq; height follows the aspect ratio, so narrow
+   screens shrink the head instead of squeezing the face.
+   .head is itself an inline-size container: facial features are sized in
+   cqw (percent of head width) so proportions never depend on the viewport.
+   Each cqw declaration is preceded by a viewport-unit fallback. */
+@supports (container-type: inline-size) {
+    .head-wrap {
+        container-type: size;
+    }
+
+    .head {
+        width: min(calc(var(--head-height-cq) * 3 / 4), var(--head-max-width-cq));
+        height: auto;
+        max-width: none;
+        container-type: inline-size;
+    }
 }
 
 /* Skin texture: micro imperfections, pores, tiny veins */
@@ -88,6 +109,7 @@
     content: '';
     position: absolute;
     inset: -0.3vmax;
+    inset: -1.1cqw;
     border-radius: inherit;
     animation: headElectric 4.5s ease-in-out infinite 0.8s;
     pointer-events: none;
@@ -100,6 +122,7 @@
     top: 60%;
     width: 20%;
     height: 0.8vh;
+    height: 1.8cqw;
     z-index: 9;
     /* Raised scar tissue — puffy, inflamed */
     background:
@@ -126,6 +149,7 @@
     content: '';
     position: absolute;
     inset: -1vh -0.2%;
+    inset: -2.2cqw -0.2%;
     background:
         /* Individual stitch dots — top row */
         radial-gradient(circle 2px at 10% 15%, #0e200e 70%, transparent 71%),
@@ -195,6 +219,7 @@
         88%  0%,  94% 14%, 98% 32%, 100% 52%, 98% 70%, 95% 90%, 88% 100%
     );
     filter: drop-shadow(0 -0.3vmax 1vmax rgba(0,0,0,0.9));
+    filter: drop-shadow(0 -1.1cqw 3.6cqw rgba(0,0,0,0.9));
     transition: clip-path 1.8s ease, background 1.8s ease, filter 1.8s ease;
 }
 

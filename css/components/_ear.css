@@ -13,7 +13,7 @@
     /* Component-scoped layout tokens */
     --ear-width: 20%;
     --ear-height: 15%;
-    --ear-overlapping: 2vmax;
+    --ear-overlapping: 2vmax; /* fallback; 7cqw where supported (below) */
     --ear-position-x: calc((var(--ear-width) * -1) + var(--ear-overlapping));
     --ear-position-y: 40%;
     --ear-l-border-radius: 50% 15% 15% 50% / 45% 12% 12% 45%;
@@ -35,10 +35,18 @@
         inset 0 -4px 10px rgba(0, 0, 0, 0.35),
         3px 5px 14px rgba(0, 0, 0, 0.55);
     z-index: 4;
+}
 
+/* Fallback (no container queries): original viewport-based overlap */
+@supports not (container-type: inline-size) {
     @media (min-width: 100rem) {
-        --ear-overlapping: 1vmax;
+        .ear { --ear-overlapping: 1vmax; }
     }
+}
+
+/* Overlap relative to the head so ears stay attached at every viewport */
+@supports (container-type: inline-size) {
+    .ear { --ear-overlapping: 7cqw; }
 }
 
 /* Inner ear detail — helix/anti-helix ridge */
@@ -50,6 +58,7 @@
     height: 70%;
     border-radius: 50% 50% 45% 45% / 50% 50% 50% 50%;
     border: clamp(1px, 0.18vmax, 2.5px) solid rgba(0, 0, 0, 0.18);
+    border: clamp(1px, 0.6cqw, 2.5px) solid rgba(0, 0, 0, 0.18);
     background:
         /* Anti-helix inner shadow */
         radial-gradient(ellipse 70% 55% at 50% 45%, rgba(0, 0, 0, 0.2) 0%, transparent 55%),
