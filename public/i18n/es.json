@@ -695,7 +695,7 @@
     "visual.demo.negative.label.error": "Parche que rompe en otro contexto",
     "visual.demo.negative.label.solution": "Layout limpio desde el padre ✓",
     "visual.demo.shadow.label.error": "overflow:hidden corta box-shadow ✂",
-    "visual.demo.shadow.label.solution": "Espacio mínimo = tamaño de la sombra ✓",
+    "visual.demo.shadow.label.solution": "Espacio mínimo = tamaño de sombra ✓",
     "visual.demo.specificity.label.error": "Imposible de sobreescribir",
     "visual.demo.specificity.label.solution": "Predecible y mantenible ✓",
     "visual.demo.deadcode.label.error": "100+ líneas muertas",

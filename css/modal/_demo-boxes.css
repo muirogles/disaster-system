@@ -1182,7 +1182,7 @@
     padding: clamp(12px, 2vw, 20px) clamp(16px, 3vw, 28px);
     font-size: clamp(1rem, 1.4vw, 1.25rem);
     border-radius: 10px;
-    gap: 12px;
+    gap: 8px;
 }
 
 .visual-demo__toast--silent {
@@ -2116,4 +2116,101 @@
     background: rgba(68,204,102,0.12);
     border: 1px solid rgba(68,204,102,0.2);
     color: #66dd88;
+}
+
+/* =====================================================
+   LAYOUT FIXES — no overlaps at any modal width
+   ===================================================== */
+
+/* File rows ("Monolito" / "Modular + tokens"): the note drops below the
+   filename when there is no room, instead of being squeezed beside it. */
+.visual-demo__file--big {
+    flex-wrap: wrap;
+    row-gap: 2px;
+}
+.visual-demo__file--big .visual-demo__file-status {
+    white-space: nowrap;
+}
+
+/* "Solo 1 línea": a nowrap line must not widen the card. width:0 removes it
+   from the min-content size; min-width:100% still fills the card. */
+.visual-demo__clamp-text--single {
+    width: 0;
+    min-width: 100%;
+}
+
+/* Touch targets: the finger label sits above the circle, not on the icon */
+.visual-demo__touch-demo {
+    padding-top: calc(16px + 1.4em);
+}
+.visual-demo__touch-finger span {
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+/* pointer-events: label at the top, button at the bottom — never stacked */
+.visual-demo__pe-demo {
+    min-height: 110px;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+.visual-demo__pe-overlay {
+    overflow-wrap: anywhere;
+}
+
+/* Scroll lock: "Modal abierto" on one line, body bar below it */
+.visual-demo__scroll-demo--big {
+    height: clamp(104px, 13vw, 120px);
+}
+.visual-demo__scroll-modal--big {
+    white-space: nowrap;
+    padding: 8px 12px;
+}
+
+/* "Contenedor flexible": the flexible card fills narrow phones instead of
+   forcing a 120px minimum wider than the screen */
+.visual-demo__phone-screen .visual-demo__overflow-card--ok {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* "Propiedades lógicas": compact card so avatar + text fit narrow phones */
+.visual-demo__phone-screen .visual-demo__rtl-card--big {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    gap: 8px;
+}
+.visual-demo__phone-screen .visual-demo__rtl-card--big .visual-demo__rtl-avatar {
+    width: 36px;
+    height: 36px;
+}
+.visual-demo__phone-screen .visual-demo__rtl-card--big .visual-demo__rtl-text {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+/* pointer-events: button text may wrap on narrow phones */
+.visual-demo__pe-btn {
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Mid-size screens: phone mockups were ~123px wide at 768px, too narrow for
+   their content. Larger minimum; desktop still hits the same 180×320 cap. */
+.visual-demo__phone {
+    width: clamp(150px, 20vw, 180px);
+    height: clamp(250px, 33vw, 320px);
+}
+
+/* Long German word hyphenates instead of breaking mid-syllable */
+.visual-demo__overflow-text--fit {
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }

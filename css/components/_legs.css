@@ -8,8 +8,8 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    gap: 4vw;
-    padding-top: 2vh;
+    gap: calc(var(--fig) * 6.4);
+    padding-top: calc(var(--fig) * 2);
     width: var(--legs-width);
     height: var(--legs-height);
     position: relative;
@@ -17,7 +17,6 @@
 
 
     @media (orientation: portrait) {
-        --leg-width: 20%;
         top: 5vh;
 
         .full-corpse & {
@@ -54,10 +53,6 @@
         0 6px 22px rgba(0,0,0,.60),
         inset 0 2px 8px rgba(255,255,255,.10),
         inset 0 -4px 12px rgba(0,0,0,.35);
-
-    @media (orientation: portrait) {
-        --pubis-width: 50%;
-    }
 }
 
 /* Dorsal ridge on pubis (connects to tail crest) */
@@ -99,8 +94,10 @@
     transform: rotate(90deg);
     transform-origin: top left;
     top: 0;
-    left: 38%;
-    width: 12%;
+    /* Anchored to the hips (centre of the legs), not to the viewport width,
+       so the tail stays attached at every aspect ratio */
+    left: calc(50% - var(--fig) * 19.2);
+    width: calc(var(--fig) * 19.2);
     height: 60%;
     z-index: 0;
     background:
@@ -172,10 +169,6 @@
     cursor: pointer;
     width: var(--leg-width);
     height: var(--leg-height);
-
-    @media (orientation: portrait) {
-        --leg-width: 20%;
-    }
 }
 
 /* ---- THIGH ---- */
@@ -215,8 +208,8 @@
     content: '';
     position: absolute;
     top: 6%; bottom: 10%;
-    left: -0.6vw;
-    width: 0.8vw;
+    left: calc(var(--fig) * -0.96);
+    width: calc(var(--fig) * 1.28);
     background: var(--leg-ridge);
     clip-path: polygon(
         100% 0%,   50%  0%,   0%   6%,  50%  11%,
@@ -245,7 +238,7 @@
         inset 0 -3px 8px rgba(0,0,0,.30);
     position: relative;
     z-index: 2;
-    margin: -0.2vh 0;
+    margin: calc(var(--fig) * -0.2) 0;
 }
 
 /* Bony bumps on knee */
@@ -303,7 +296,7 @@
     box-shadow: 0 3px 12px rgba(0,0,0,.5), inset 0 2px 6px rgba(255,255,255,.08);
     position: relative;
     z-index: 2;
-    margin: -0.1vh 0;
+    margin: calc(var(--fig) * -0.1) 0;
 }
 
 /* ---- FOOT ---- */
@@ -312,7 +305,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -0.1vh;
+    margin-top: calc(var(--fig) * -0.1);
     cursor: pointer;
     width: var(--foot-width);
     height: var(--foot-height);
@@ -349,8 +342,8 @@
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: 0.25vmax;
-    margin-top: -1.2vh;
+    gap: calc(var(--fig) * 0.4);
+    margin-top: calc(var(--fig) * -1.2);
     position: relative;
     z-index: 2;
     height: var(--foot-toes-height);
@@ -381,11 +374,11 @@
     background: var(--scale-tile);
 }
 
-/* Toe size variations — vmax keeps proportions on all screens */
-.toe--1 .toe__seg { width: 2.5vmax; height: 5vmax; }
-.toe--2 .toe__seg { width: 3.3vmax; height: 8vmax; }
-.toe--3 .toe__seg { width: 2.5vmax; height: 6.5vmax; }
-.toe--4 .toe__seg { width: 1.6vmax; height: 3.3vmax; }
+/* Toe size variations — figure units keep proportions on all screens */
+.toe--1 .toe__seg { width: calc(var(--fig) * 4); height: calc(var(--fig) * 8); }
+.toe--2 .toe__seg { width: calc(var(--fig) * 5.28); height: calc(var(--fig) * 12.8); }
+.toe--3 .toe__seg { width: calc(var(--fig) * 4); height: calc(var(--fig) * 10.4); }
+.toe--4 .toe__seg { width: calc(var(--fig) * 2.56); height: calc(var(--fig) * 5.28); }
 
 /* Toe angles — spreading outward */
 .toe--1 { transform: rotate(-22deg); transform-origin: bottom center; }
@@ -393,34 +386,34 @@
 .toe--3 { transform: rotate( 8deg);  transform-origin: bottom center; }
 .toe--4 { transform: rotate(22deg);  transform-origin: bottom center; }
 
-/* ---- CLAWS — vmax keeps triangle proportions on all screens ---- */
+/* ---- CLAWS — figure units keep triangle proportions on all screens ---- */
 .toe__claw {
     width: 0;
     height: 0;
-    border-left:  0.4vmax solid transparent;
-    border-right: 0.4vmax solid transparent;
-    border-top:   1.3vmax solid var(--claw-c);
+    border-left:  calc(var(--fig) * 0.64) solid transparent;
+    border-right: calc(var(--fig) * 0.64) solid transparent;
+    border-top:   calc(var(--fig) * 2.08) solid var(--claw-c);
     filter: drop-shadow(0 3px 4px rgba(0,0,0,.55));
     position: relative;
-    margin-top: -0.15vmax;
+    margin-top: calc(var(--fig) * -0.24);
 }
 
 .toe__claw::before {
     content: '';
     position: absolute;
-    top: -1.3vmax;
-    left: -0.3vmax;
+    top: calc(var(--fig) * -2.08);
+    left: calc(var(--fig) * -0.48);
     width: 0;
     height: 0;
-    border-left:  0.3vmax solid transparent;
-    border-right: 0.3vmax solid transparent;
-    border-top:   1vmax solid var(--claw-hl);
+    border-left:  calc(var(--fig) * 0.48) solid transparent;
+    border-right: calc(var(--fig) * 0.48) solid transparent;
+    border-top:   calc(var(--fig) * 1.6) solid var(--claw-hl);
 }
 
 /* Mirrored left leg */
 .leg--l .leg__thigh::after {
     left: auto;
-    right: -0.6vw;
+    right: calc(var(--fig) * -0.96);
     transform: scaleX(-1);
 }
 .leg--l .toe--1 { transform: rotate( 22deg); transform-origin: bottom center; }
@@ -442,4 +435,16 @@
 }
 .leg--r .leg__thigh, .leg--r .leg__shin, .leg--r .foot__heel {
     animation-delay: 2s;
+}
+
+/* Portrait phones, standalone legs slide: published spacing and tail anchor */
+@media (max-width: 600px) and (orientation: portrait) {
+    .corpse__item--lower .legs {
+        gap: 4vw;
+        padding-top: 2vh;
+    }
+
+    .corpse__item--lower .tail {
+        left: 38%;
+    }
 }

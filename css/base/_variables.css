@@ -2,6 +2,13 @@
    ROOT CUSTOM PROPERTIES
    ===================================================== */
 :root {
+    /* ─── Figure unit ───
+       1% of the figure's height, capped on narrow screens so the head
+       (45 units wide) never exceeds 70% of the width. Every body part is
+       sized in --fig, so the creature keeps the same proportions at any
+       viewport aspect ratio. Upgraded to dvh below where supported. */
+    --fig: min(1vh, 1.5556vw);
+
     --bg: #000;
     /* Bride of Frankenstein skin — pale green-grey */
     --head-bg: #8a9a7a;
@@ -104,14 +111,16 @@
     --head-aspect-ratio: 3/4;
     --head-max-width: 70%;
     --head-height: 60%;
-    --head-width: auto;
+    /* Container-query versions — used only where supported (see _head.css) */
+    --head-max-width-cq: 70cqw;   /* of .head-wrap (size container) */
+    --head-height-cq: 60cqh;      /* of .head-wrap; head width = this × 3/4 */
     --head-border-radius: 45% 45% 42% 42% / 48% 48% 40% 40%;
 
     /* ─── Glasses ─── */
     --glasses-color-base:    #6a1b9a;
     --glasses-height: 20%;
     --glasses-polygon-color: #d4a017;
-    --glasses-border-width: 1vmin;
+    --glasses-border-width: 1vmin; /* fallback; 2.2cqw where container queries exist (_glasses.css) */
     --glasses-width: 90%;
     --glasses-height: 25%;
     --glasses-lens-width: calc(50% - var(--glasses-border-width));
@@ -140,11 +149,11 @@
     --glasses-z-index: 9;   
 
     /* ─── Trunk ─── */
-    --trunk-width: 30%;
+    --trunk-width: calc(var(--fig) * 48);   /* ≈ 1.07 head widths */
     --trunk-height: auto;
-    --trunk-min-height: 40vh;
-    --trunk-max-height: 80vh;
-    --trunk-aspect-ratio: 1/2;
+    --trunk-min-height: 0;
+    --trunk-max-height: none;
+    --trunk-aspect-ratio: 48/80;            /* height = 80 fig */
     --trunk-collar-width: 40%;
     --trunk-collar-height: 5%;
     --trunk-waist-width: 80%;
@@ -180,17 +189,17 @@
     --arm-lower-aspect-ratio: 3/5;
     --arm-lower-margin-block-start: calc(var(--arm-lower-width) * -1.15);
     --arm-lower-margin-inline-start: calc(var(--arm-gap) * -2);
-    --arm-gap: 1vmax;
+    --arm-gap: calc(var(--fig) * 1.6);
     --arm-rotation: 45deg;
 
     /* ─── Hands ─── */
     --hand-width: 100%;
     --hand-margin-inline-start: calc((var(--hand-width) * -3) + var(--hand-gap));
     --hand-margin-block-start: calc((var(--hand-width) * -1.5) - var(--hand-gap));
-    --hand-gap: 0.5vmax;
+    --hand-gap: calc(var(--fig) * 0.8);
     --hand-fingers-width: 80%;
     --hand-fingers-height: auto;
-    --hand-fingers-gap: 0.25vmax;
+    --hand-fingers-gap: calc(var(--fig) * 0.4);
     --hand-fingers-aspect-ratio: 2/1;
     --hand-palm-width: 100%;
     --hand-palm-height: auto;
@@ -203,8 +212,8 @@
 
     /* ─── Legs ─── */
     --legs-width: 100%;
-    --legs-height: 90vh;
-    --leg-width: 12%;
+    --legs-height: calc(var(--fig) * 90);
+    --leg-width: calc(var(--fig) * 21.6);   /* ≈ 0.48 head widths */
     --leg-height: 100%;
     --leg-thigh-width: 100%;
     --leg-thigh-height: 30%;
@@ -250,7 +259,7 @@
     --claw-hl: rgba(90,130,20,.55);
 
     /* Pubis */
-    --pubis-width: 25%;
+    --pubis-width: calc(var(--fig) * 40);
     --pubis-height: 20%;
     
     /* corpse */
@@ -284,11 +293,65 @@
     --demo-pad-xl: 2rem;     /* 32px */
 }
 
+/* Standalone part slides show the trunk (with arms) or the legs on their
+   own, so they need more horizontal room than the head: cap the figure
+   unit at 1vw there. Tokens derived from --fig are re-declared because a
+   custom property resolves var() where it is declared, not where used. */
+.corpse__item--middle,
+.corpse__item--lower {
+    --fig: min(1vh, 1vw);
+    --trunk-width: calc(var(--fig) * 48);
+    --arm-gap: calc(var(--fig) * 1.6);
+    --arm-lower-margin-inline-start: calc(var(--arm-gap) * -2);
+    --hand-gap: calc(var(--fig) * 0.8);
+    --hand-margin-inline-start: calc((var(--hand-width) * -3) + var(--hand-gap));
+    --hand-margin-block-start: calc((var(--hand-width) * -1.5) - var(--hand-gap));
+    --hand-fingers-gap: calc(var(--fig) * 0.4);
+    --legs-height: calc(var(--fig) * 90);
+    --leg-width: calc(var(--fig) * 21.6);
+    --pubis-width: calc(var(--fig) * 40);
+}
+
+/* Portrait phones: trunk and legs slides go back to the published sizing
+   (fill the screen height). --fig = 0.625vh makes every converted value
+   (1vmax = 1.6 fig) equal the original vmax value on a portrait screen. */
+@media (max-width: 600px) and (orientation: portrait) {
+    .corpse__item--middle,
+    .corpse__item--lower {
+        --fig: 0.625vh;
+        --trunk-width: 50%;
+        --trunk-aspect-ratio: 1/2;
+        --trunk-min-height: 40vh;
+        --trunk-max-height: 80vh;
+        --legs-height: 90vh;
+        --leg-width: 20%;
+        --pubis-width: 50%;
+    }
+
+    /* Head slide: proportional face, but filling more of the width */
+    .corpse__item--upper {
+        --head-max-width-cq: 78cqw;
+    }
+}
+
 @supports (height: 1dvh) {
+    .corpse__item--middle,
+    .corpse__item--lower {
+        --fig: min(1dvh, 1vw);
+    }
+
+    @media (max-width: 600px) and (orientation: portrait) {
+        .corpse__item--middle,
+        .corpse__item--lower {
+            --fig: 0.625dvh;
+            --trunk-min-height: 40dvh;
+            --trunk-max-height: 80dvh;
+            --legs-height: 90dvh;
+        }
+    }
+
     :root {
-        --trunk-min-height: 40dvh;
-        --trunk-max-height: 80dvh;
-        --legs-height: 90dvh;
+        --fig: min(1dvh, 1.5556vw);
         --corpse-padding-block: 8dvh;
     }
 }

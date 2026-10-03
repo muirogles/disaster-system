@@ -273,6 +273,14 @@
                 }, draftAt + HOLD));
             });
 
+            // One build per section, to avoid cognitive overload: it counts as
+            // played once the first piece has actually been drawn on screen.
+            // From then on, leaving mid-build (abort) just shows the finished
+            // section and re-entering never replays it. A glance shorter than
+            // that (e.g. scrolling past) is aborted before this fires, so the
+            // build still plays on the first real visit.
+            timers.push(setTimeout(function () { hasPlayed = true; }, START + MOVE));
+
             var done = START + steps.length * STEP + 200;
             timers.push(setTimeout(function () {
                 if (cursor) {
@@ -280,11 +288,7 @@
                     cursor.style.opacity = '0';
                 }
             }, done));
-            // Mark "played" only when the build runs to completion. abort()
-            // clears timers, so an interrupted build leaves hasPlayed false and
-            // can replay (with sound) on the next entry — matching the old
-            // behaviour, while a fully-finished build never replays.
-            timers.push(setTimeout(function () { hasPlayed = true; settle(); }, done + 400));
+            timers.push(setTimeout(settle, done + 400));
         }
 
         function abort() {
