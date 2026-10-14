@@ -1,5 +1,5 @@
 (function () {
-    var EVENT_SLUGS = ['wtm', 'w4tt', 'guarandinga', 'edd'];
+    var EVENT_SLUGS = ['wtm', 'w4tt', 'guarandinga', 'edd', 'biznaga'];
 
     function resolveBasePath() {
         var path = window.location.pathname.replace(/\/+$/, '');
@@ -96,9 +96,21 @@
             eventLabel: 'Extremadura Digital Day',
             communityLabel: 'EDD',
             linkedin: 'https://es.linkedin.com/company/extremaduradigitalday',
-            linkedinHandle: 'Extremadura Digital Day',
+            linkedinHandle: '/edd',
             hashtags: ['#DisasterSystem', '#EDD26', '#ExtremaduraDigitalDay'],
             qr: BASE_PATH + 'img/qr/qr_disaster-system_edd.png'
+        },
+        biznaga: {
+            logo: BASE_PATH + 'img/biznaga.png',
+            logoAlt: 'Biznaga Fest',
+            logoClass: 'heart__logo--biznaga',
+            titleSystemClass: 'corpse__title--system-biznaga',
+            eventLabel: 'Biznaga Fest',
+            communityLabel: 'Biznaga Fest',
+            linkedin: 'https://linkedin.com/company/biznagafest',
+            linkedinHandle: '/biznagafest',
+            hashtags: ['#DisasterSystem', '#Biznaga', '#BiznagaFest2026', '#MalagaTech'],
+            qr: BASE_PATH + 'img/qr/qr_disaster-system_biznaga.png'
         }
     };
 
