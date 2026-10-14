@@ -473,20 +473,20 @@ function buildVisualDemo(visual) {
                     <div class="visual-demo__side-title visual-demo__side-title--error">${getDemo('zindex', 'error')}</div>
                     <div class="visual-demo__zindex-stack visual-demo__zindex-stack--chaos">
                         <div class="visual-demo__zindex-layer visual-demo__zindex-layer--bad" style="background:#ff4444;top:10px;left:5px;z-index:4">
-                            <span class="visual-demo__zindex-num">z: 999</span>
-                            <span class="visual-demo__zindex-name">header</span>
+                            <span class="visual-demo__zindex-num">z: 999999</span>
+                            <span class="visual-demo__zindex-name">dropdown</span>
                         </div>
                         <div class="visual-demo__zindex-layer visual-demo__zindex-layer--bad" style="background:#cc3333;top:30px;left:25px;z-index:3">
-                            <span class="visual-demo__zindex-num">z: 9999</span>
-                            <span class="visual-demo__zindex-name">modal</span>
-                        </div>
-                        <div class="visual-demo__zindex-layer visual-demo__zindex-layer--bad" style="background:#993333;top:50px;left:45px;z-index:2">
                             <span class="visual-demo__zindex-num">z: 99999</span>
                             <span class="visual-demo__zindex-name">tooltip</span>
                         </div>
+                        <div class="visual-demo__zindex-layer visual-demo__zindex-layer--bad" style="background:#993333;top:50px;left:45px;z-index:2">
+                            <span class="visual-demo__zindex-num">z: 9999</span>
+                            <span class="visual-demo__zindex-name">modal</span>
+                        </div>
                         <div class="visual-demo__zindex-layer visual-demo__zindex-layer--bad" style="background:#662222;top:70px;left:65px;z-index:1">
-                            <span class="visual-demo__zindex-num">z: 999999</span>
-                            <span class="visual-demo__zindex-name">dropdown</span>
+                            <span class="visual-demo__zindex-num">z: 999</span>
+                            <span class="visual-demo__zindex-name">header</span>
                         </div>
                     </div>
                     <div class="visual-demo__label visual-demo__label--error">${getDemo('zindex', 'label.error')}</div>
