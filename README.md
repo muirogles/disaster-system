@@ -61,6 +61,7 @@ The landing is one codebase serving multiple talk editions. The active event is 
 | `/disaster-system/w4tt` | W4TT | Sponsors + Cause |
 | `/disaster-system/guarandinga` | Guarandinga Tech | — |
 | `/disaster-system/edd` | Extremadura Digital Day | — |
+| `/disaster-system/biznaga` | Biznaga Fest | — |
 
 All event configuration lives in [`js/event-config.js`](js/event-config.js) as a single `EVENTS` object. Each entry declares branding (`logo`, `eventLabel`, `linkedin`, `hashtags`) and may optionally include:
 
@@ -71,8 +72,8 @@ The bridge line *"100 % de las entradas va a esta causa →"* visually connects 
 
 **Adding a new event:**
 
-1. Drop the event logo in `public/img/<slug>.png` (also update `BASE_PATH` if needed).
-2. Add an entry to `EVENTS` in [`js/event-config.js`](js/event-config.js) with the slug as key.
+1. Drop the event logo in `public/img/<slug>.png`.
+2. Add the slug to `EVENT_SLUGS` and an entry to `EVENTS` in [`js/event-config.js`](js/event-config.js). Event-specific `qr`, `sponsors` and `cause` are optional.
 3. Push, deploy, and share `https://muirogles.github.io/disaster-system/<slug>`.
 
 ### Tech Stack
@@ -151,6 +152,7 @@ La landing es un único código que sirve para varias ediciones. El evento activ
 | `/disaster-system/w4tt` | W4TT | Sponsors + Causa |
 | `/disaster-system/guarandinga` | Guarandinga Tech | — |
 | `/disaster-system/edd` | Extremadura Digital Day | — |
+| `/disaster-system/biznaga` | Biznaga Fest | — |
 
 Toda la configuración de eventos vive en [`js/event-config.js`](js/event-config.js) dentro del objeto `EVENTS`. Cada entrada declara el branding (`logo`, `eventLabel`, `linkedin`, `hashtags`) y opcionalmente:
 
@@ -162,7 +164,7 @@ El puente *"el 100 % de las entradas va a esta causa →"* conecta visualmente l
 **Para añadir un nuevo evento:**
 
 1. Sube el logo del evento a `public/img/<slug>.png`.
-2. Añade una entrada a `EVENTS` en [`js/event-config.js`](js/event-config.js) usando el slug como clave.
+2. Añade el slug a `EVENT_SLUGS` y una entrada a `EVENTS` en [`js/event-config.js`](js/event-config.js). `qr`, `sponsors` y `cause` específicos del evento son opcionales.
 3. Push, deploy y comparte `https://muirogles.github.io/disaster-system/<slug>`.
 
 ### Desarrollo y Despliegue
@@ -214,7 +216,7 @@ disaster-system/
 ## Credits / Créditos
 
 **Speaker & creator / Ponente y creadora:** [María Rogles López](https://linkedin.com/in/mariarogles)  
-**Event / Evento:** [Women Techmakers Madrid](https://linkedin.com/in/wtmmadrid) × Celonis — International Women's Day 2026
+**Original event / Evento original:** [Women Techmakers Madrid](https://linkedin.com/in/wtmmadrid) × Celonis — International Women's Day 2026
 
 ---
 
