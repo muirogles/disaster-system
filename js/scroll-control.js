@@ -36,20 +36,56 @@ function initScrollControl() {
        fraction of the SLIDE that's visible, which breaks for slides taller
        than the viewport (e.g. the sponsors/cause slide scrolls naturally and
        can be 2–4× viewport height, so it never reaches a high ratio and the
-       dot never activates / pulses). Instead we measure how much of the
-       VIEWPORT each slide covers — that's reliable regardless of slide height.
+       dot never activates / pulses). Instead we calculate how much of the
+       VIEWPORT each slide covers from cached document bounds, reliable
+       regardless of slide height and without geometry reads on scroll.
 
        IntersectionObserver still drives WHEN we recompute (it fires on every
        threshold crossing + scroll), but the decision uses viewport coverage. */
+    var slideBounds = [];
+    var measureFrame = 0;
+
+    function measureSlides() {
+        measureFrame = 0;
+        slideBounds = slides.map(function (slide) {
+            var rect = slide.getBoundingClientRect();
+            return {
+                slide: slide,
+                top: rect.top + window.scrollY,
+                bottom: rect.bottom + window.scrollY,
+                left: rect.left + window.scrollX,
+                right: rect.right + window.scrollX
+            };
+        });
+        updateActiveSlide();
+    }
+
+    function scheduleMeasure() {
+        if (measureFrame) return;
+        measureFrame = window.requestAnimationFrame(measureSlides);
+    }
+
     function updateActiveSlide() {
         var vh = window.innerHeight || document.documentElement.clientHeight;
+        var vw = window.innerWidth || document.documentElement.clientWidth;
+        var scrollTop = window.scrollY;
+        var scrollLeft = window.scrollX;
         var best = -1;
         var bestCoverage = 0;
 
-        slides.forEach(function (slide, i) {
-            var rect = slide.getBoundingClientRect();
+        slideBounds.forEach(function (bounds, i) {
+            var top = bounds.top - scrollTop;
+            var bottom = bounds.bottom - scrollTop;
+            var left = bounds.left - scrollLeft;
+            var right = bounds.right - scrollLeft;
+            var offscreen = bottom <= 1 || top >= vh - 1 ||
+                right <= 1 || left >= vw - 1;
+            if (bounds.slide.classList.contains('is-offscreen') !== offscreen) {
+                bounds.slide.classList.toggle('is-offscreen', offscreen);
+            }
+
             // Visible height of this slide within the viewport, clamped to [0, vh].
-            var visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+            var visible = Math.min(bottom, vh) - Math.max(top, 0);
             if (visible < 0) visible = 0;
             var coverage = visible / vh; // fraction of the SCREEN this slide fills
             if (coverage > bestCoverage) {
@@ -72,9 +108,15 @@ function initScrollControl() {
         rootMargin: "0px"
     });
 
+    measureSlides();
     slides.forEach(function (slide) {
         observer.observe(slide);
     });
+    if ('ResizeObserver' in window) {
+        var resizeObserver = new ResizeObserver(scheduleMeasure);
+        slides.forEach(function (slide) { resizeObserver.observe(slide); });
+    }
+    window.addEventListener('resize', scheduleMeasure, { passive: true });
 
     // IntersectionObserver fires sparsely while scrolling THROUGH a tall slide
     // (no threshold is crossed mid-slide), so also recompute on scroll — but

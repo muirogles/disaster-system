@@ -9,7 +9,7 @@ const AudioSynth = (function () {
     let tensionLFO = null;
     let shockOsc = null;
     let shockGain = null;
-    let muted = false;   // global mute toggle (sound button)
+    let muted = true;   // sound is opt-in via the sound button
 
     async function init() {
         if (!audioCtx) {

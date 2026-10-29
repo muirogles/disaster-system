@@ -22,7 +22,7 @@
 /* ── Reveal — pieces are hidden while armed and fade in at their
    final spot as their draft dissolves (opacity only, so each
    piece's own transform/rotation is never overridden). ── */
-.asm-armed { opacity: 0; will-change: opacity; }
+.asm-armed { opacity: 0; }
 .asm-drawn { animation: asmReveal 0.5s ease both; }
 @keyframes asmReveal { from { opacity: 0; } to { opacity: 1; } }
 /* Brain keeps its native neon pulse alongside the reveal. */
@@ -47,7 +47,6 @@
     gap: 0.45em;
     opacity: 0;
     pointer-events: none;
-    will-change: transform, opacity;
 }
 .corpse__item--upper  .asm-cursor { --asm-accent: var(--color-purple); }
 .corpse__item--middle .asm-cursor { --asm-accent: var(--color-blue); }
