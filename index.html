@@ -124,14 +124,14 @@
             </svg>
         </button>
 
-        <button class="sound-btn" id="soundBtn" type="button" aria-pressed="false"
-            data-i18n-title="sound.btn.mute" data-i18n-aria="sound.btn.mute">
-            <svg class="sound-btn__icon sound-btn__on" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        <button class="sound-btn sound-btn--muted" id="soundBtn" type="button" aria-pressed="true"
+            data-i18n-title="sound.btn.unmute" data-i18n-aria="sound.btn.unmute">
+            <svg class="sound-btn__icon sound-btn__icon--on" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
                 <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
             </svg>
-            <svg class="sound-btn__icon sound-btn__off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            <svg class="sound-btn__icon sound-btn__icon--off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
                 <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
@@ -1040,7 +1040,7 @@
                 if (!soundBtn) return;
 
                 function syncSound(muted) {
-                    soundBtn.classList.toggle('is-muted', muted);
+                    soundBtn.classList.toggle('sound-btn--muted', muted);
                     soundBtn.setAttribute('aria-pressed', String(muted));
                     var key = muted ? 'sound.btn.unmute' : 'sound.btn.mute';
                     soundBtn.setAttribute('title', t(key));
@@ -1051,7 +1051,7 @@
                 }
 
                 soundBtn.addEventListener('click', function () {
-                    var muted = window.AudioSynth ? AudioSynth.toggleMute() : !soundBtn.classList.contains('is-muted') ;
+                    var muted = window.AudioSynth ? AudioSynth.toggleMute() : !soundBtn.classList.contains('sound-btn--muted');
                     syncSound(muted);
                 });
             }());

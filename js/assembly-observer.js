@@ -88,11 +88,15 @@
         }
 
         var curX = 0, curY = 0, rafId = null;
-        function cancelTween() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
+        function cancelTween() {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            if (cursor) cursor.style.willChange = '';
+        }
         function easeInOut(p) { return p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
         function tweenTo(tx, ty, dur) {
             if (!cursor) return;
             cancelTween();
+            cursor.style.willChange = 'transform, opacity';
             cursor.style.transition = 'none';
             var sx = curX, sy = curY, dx = tx - sx, dy = ty - sy, t0 = null;
             function frame(now) {
@@ -102,7 +106,10 @@
                 curX = sx + dx * e; curY = sy + dy * e;
                 cursor.style.transform = 'translate(' + curX + 'px,' + curY + 'px)';
                 if (p < 1) { rafId = requestAnimationFrame(frame); }
-                else { curX = tx; curY = ty; rafId = null; }
+                else {
+                    curX = tx; curY = ty; rafId = null;
+                    cursor.style.willChange = '';
+                }
             }
             rafId = requestAnimationFrame(frame);
         }

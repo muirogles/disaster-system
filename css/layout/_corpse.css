@@ -25,6 +25,16 @@
    }
 }
 
+/* Offscreen slides do not need to keep their ambient animations running. */
+.corpse__item.is-offscreen,
+.corpse__item.is-offscreen *,
+.corpse__item.is-offscreen::before,
+.corpse__item.is-offscreen::after,
+.corpse__item.is-offscreen *::before,
+.corpse__item.is-offscreen *::after {
+   animation-play-state: paused !important;
+}
+
 .corpse__item:focus,
 .corpse__item:focus-visible {
    outline: none;
